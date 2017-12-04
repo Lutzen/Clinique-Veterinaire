@@ -4,7 +4,7 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 
-import cliniqueVeterinaire.dal.Settings;
+import fr.eni.cliniqueVeterinaire.dal.Settings;
 
 
 
