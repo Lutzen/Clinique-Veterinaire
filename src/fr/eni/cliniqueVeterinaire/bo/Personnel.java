@@ -6,9 +6,6 @@ private String pass;
 private String role;
 
 
-void personnel() {
-	
-}
 
 
 
@@ -31,4 +28,12 @@ public void setRole(String role) {
 	this.role = role;
 }
 
+
+
+public Personnel(String nom, String pass, String role) {
+	super();
+	this.nom = nom;
+	this.pass = pass;
+	this.role = role;
+}
 }
