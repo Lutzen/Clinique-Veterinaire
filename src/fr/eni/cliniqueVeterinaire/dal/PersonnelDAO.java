@@ -10,7 +10,9 @@ public interface PersonnelDAO {
 	
 	List<Personnel> selectByNom(String nom) throws DALException;
 	
-	void deletePersonnel(Personnel personne);
+	void delete(Personnel personne);
 	
-	void updatePass(Personnel personne);
+	void update(Personnel personne);
+	
+	void selectAll();
 }
