@@ -1,64 +1,66 @@
 package fr.eni.cliniqueVeterinaire.bll;
 
-import java.sql.Date;
 import java.util.List;
 
+import fr.eni.cliniqueVeterinaire.bo.Animal;
+import fr.eni.cliniqueVeterinaire.bo.Client;
+import fr.eni.cliniqueVeterinaire.bo.Personnel;
 import fr.eni.cliniqueVeterinaire.bo.Rdv;
 import fr.eni.cliniqueVeterinaire.dal.DAOFactory;
 import fr.eni.cliniqueVeterinaire.dal.RdvDAO;
 
-public class RdvManager {
+public class AnimalManager {
 
-		private static RdvManager rdvManager = null;
-		public RdvDAO rdvDAO = DAOFactory.getRdvDAO();
+		private static AnimalManager animalManager = null;
+		public AnimalDAO animalDAO = DAOFactory.getAnimalDAO();
 
-		private RdvManager() {
+		private AnimalManager() {
 
 		}
 
-		public static RdvManager getInstance() {
+		public static AnimalManager getInstance() {
 		
-				if (rdvManager == null)
-					rdvManager = new RdvManager();
+				if (animalManager == null)
+					animalManager = new AnimalManager();
 
-				return rdvManager;
+				return animalManager;
 		
 
 		}
 
-		public List<Rdv> getAgenda(int codeVeto) throws BLLException {
+		public List<Personnel> getAnimalList(Client client) throws BLLException {
 			try {
-				return rdvDAO.selectById(codeVeto);
+				return AnimalDAO.selectByClient(client);
 			} catch (Exception e) {
-				throw new BLLException("getAgenda", e);
+				throw new BLLException("getAnimalList", e);
 			}
 
 		}
 
-		public int addRdv(Rdv rdv) throws BLLException {
+		public int addAnimal(Animal animal) throws BLLException {
 			try {
-				return rdvDAO.insert(rdv);
+				return AnimalDAO.insert(animal);
 			} catch (Exception e) {
-				throw new BLLException("addRdv", e);
+				throw new BLLException("addAnimal", e);
 			}
 
 		}
 
-		public void updateRdv(Rdv rdv) throws BLLException {
+		public void updatePersonnel(Animal animal) throws BLLException {
 			try {
-				rdvDAO.update(rdv);
+				AnimalDAO.update(animal);
 
-			} catch (Exception e) {
-				throw new BLLException("updateArticle", e);
+			} catch (Exception e) { 
+				throw new BLLException("updateAnimal", e);
 			}
 
 		}
 
-		public void deleteRdv(Rdv rdv) throws BLLException {
+		public void deleteAnimal(Animal animal) throws BLLException {
 			try {
-				rdvDAO.delete(rdv);
+				AnimalDAO.delete(animal);
 			} catch (Exception e) {
-				throw new BLLException("deleteRdv", e);
+				throw new BLLException("deleteAnimal", e);
 			}
 
 		}
@@ -88,12 +90,12 @@ public class RdvManager {
 //				
 //			} catch (Exception e) {
 //				throw new BLLException("validerArticle", e);
-//
+	//
 //			}
-//
+	//
 //		}
 
-	
+
 		
 		public static boolean empty( String s ) {
 			  // Null-safe, short-circuit evaluation.
@@ -101,4 +103,6 @@ public class RdvManager {
 			}
 
 	}
+
+
 
