@@ -1,4 +1,4 @@
-package fr.eni.cliniqueVeterinaire.dal;
+package cliniqueVeterinaire.dal;
 
 public class DALException extends Exception {
 	//Constructeurs
