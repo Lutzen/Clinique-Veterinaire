@@ -2,10 +2,10 @@ package fr.eni.cliniqueVeterinaire.dal;
 
 import java.util.List;
 
-import cliniqueVeterinaire.bo.Animal;
-import cliniqueVeterinaire.bo.Client;
-import cliniqueVeterinaire.bo.Personnel;
-import cliniqueVeterinaire.bo.Rdv;
+import fr.eni.cliniqueVeterinaire.bo.Animal;
+import fr.eni.cliniqueVeterinaire.bo.Client;
+import fr.eni.cliniqueVeterinaire.bo.Personnel;
+import fr.eni.cliniqueVeterinaire.bo.Rdv;
 
 //import cliniqueVeterinaire.bo.Article;
 
