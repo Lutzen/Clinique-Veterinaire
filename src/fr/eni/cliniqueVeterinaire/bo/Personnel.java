@@ -1,4 +1,4 @@
-package cliniqueVeterinaire.bo;
+package fr.eni.cliniqueVeterinaire.bo;
 
 public class Personnel {
 private String nom;

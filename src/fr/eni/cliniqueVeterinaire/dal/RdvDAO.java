@@ -1,4 +1,4 @@
-package cliniqueVeterinaire.dal;
+package fr.eni.cliniqueVeterinaire.dal;
 
 import java.util.List;
 
