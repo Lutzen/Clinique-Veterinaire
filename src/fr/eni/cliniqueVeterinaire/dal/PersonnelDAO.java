@@ -16,4 +16,6 @@ public interface PersonnelDAO {
 	void update(Personnel personne,String pass)throws DALException;
 	
 	List<Personnel> selectAll()throws DALException;
+	
+	void insert(Personnel personne)throws DALException;
 }

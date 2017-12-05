@@ -19,7 +19,6 @@ public class PersonnelDAOJdbcImpl implements PersonnelDAO {
 		personnel.setNom(resultSet.getString("Nom"));
 		personnel.setPass(resultSet.getString("MotPasse"));
 		personnel.setRole(resultSet.getString("Role"));
-		
 		return personnel;
 	}
 	
@@ -44,7 +43,6 @@ public class PersonnelDAOJdbcImpl implements PersonnelDAO {
 		openConnection();
 
 		String sql = "SELECT * FROM Personnels WHERE Nom=?";
-		//Personnel personnel = new Personnel("", "", "");
 		PreparedStatement statement = null;
 
 		try {
@@ -119,6 +117,31 @@ public class PersonnelDAOJdbcImpl implements PersonnelDAO {
 		} catch (SQLException e) {
 			throw new DALException("Erreur à la récupération de tous le personnel", e);
 		}
+	}
+
+	@Override
+	public void insert(Personnel personne) throws DALException {
+		openConnection();
+
+		String sql = "INSERT INTO Personnels ([Nom],[MotPasse],[Role])"
+				+ " VALUES " + "(?,?,?)";
+		PreparedStatement statement = null;
+		try {
+			statement = connection.prepareStatement(sql);
+			FillStatementFromPersonnel(statement, personne);
+			statement.executeUpdate();
+		} catch (SQLException e) {
+			throw new DALException("Erreur à l'insertion d'un membre du personnel : " + personne, e);
+		} finally {
+			try {
+				if (statement != null)
+					statement.close();
+			} catch (SQLException e) {
+				throw new DALException("Erreur à l'insertion d'un membre du personnel: " + personne, e);
+			}
+		}
+
+		
 	}
 
 }

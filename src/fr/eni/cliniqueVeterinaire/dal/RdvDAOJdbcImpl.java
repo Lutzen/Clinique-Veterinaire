@@ -60,7 +60,7 @@ public class RdvDAOJdbcImpl implements RdvDAO {
 	public List<Rdv> selectById(int codeveto) throws DALException {
 		openConnection();
 
-		String sql = "SELECT * FROM Agendas where codeVeto=?";
+		String sql = "SELECT * FROM Agendas where CodeVeto=?";
 		List<Rdv> rdv = new LinkedList<>();
 
 		try {
