@@ -26,7 +26,7 @@ public class ClientManager {
 
 	}
 
-	public List<Client> getClientList(Client client) throws BLLException {
+	public List<Client> getClientList() throws BLLException {
 		try {
 			return clientDAO.selectAll();
 		} catch (Exception e) {

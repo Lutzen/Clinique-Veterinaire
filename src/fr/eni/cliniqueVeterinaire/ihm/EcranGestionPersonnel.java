@@ -1,5 +1,6 @@
 package fr.eni.cliniqueVeterinaire.ihm;
 
+import java.awt.BorderLayout;
 import java.awt.EventQueue;
 
 import javax.swing.JFrame;
@@ -88,7 +89,7 @@ public class EcranGestionPersonnel {
 			btnSuppr = new JButton("Supprimer");
 			btnSuppr.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent arg0) {
-					personnelManager.deletePersonnel(txt);
+//					personnelManager.deletePersonnel();
 				}
 
 			});
@@ -105,6 +106,7 @@ public class EcranGestionPersonnel {
 		return btnReinit;
 	}
 
+	
 	private JList<Personnel> getList() {
 		if (list == null) {
 			DefaultListModel<Personnel> model = new DefaultListModel<Personnel>();
@@ -119,9 +121,10 @@ public class EcranGestionPersonnel {
 
 				e.printStackTrace();
 			}
-
+			list.setBounds(10, 45, 414, 205);
+			
 		}
-		list.setBounds(10, 45, 414, 205);
 		return list;
+
 	}
 }
