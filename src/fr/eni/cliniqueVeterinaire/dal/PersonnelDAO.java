@@ -1,18 +1,19 @@
 package fr.eni.cliniqueVeterinaire.dal;
 
-import java.util.List;
 
+
+import java.util.List;
 
 import fr.eni.cliniqueVeterinaire.bo.Personnel;
 
 
 public interface PersonnelDAO {
 	
-	List<Personnel> selectByNom(String nom) throws DALException;
+	Personnel selectByNom(String nom) throws DALException;
 	
-	void delete(Personnel personne);
+	void delete(Personnel personne) throws DALException;
 	
-	void update(Personnel personne);
+	void update(Personnel personne,String pass)throws DALException;
 	
-	void selectAll();
+	List<Personnel> selectAll()throws DALException;
 }
