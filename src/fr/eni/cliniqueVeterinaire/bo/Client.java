@@ -1,6 +1,8 @@
 package fr.eni.cliniqueVeterinaire.bo;
 
 public class Client {
+
+private String codeClient;
 private String nomClient;
 private String prenomClient;
 private String adresse1;
@@ -9,7 +11,7 @@ private String codePostal;
 private String ville;
 private String numTel;
 private String assurance;
-private String eMail;
+private String Email;
 private String remarque;
 
 
@@ -62,11 +64,11 @@ public String getAssurance() {
 public void setAssurance(String assurance) {
 	this.assurance = assurance;
 }
-public String geteMail() {
-	return eMail;
+public String getEmail() {
+	return Email;
 }
-public void seteMail(String eMail) {
-	this.eMail = eMail;
+public void setEmail(String eMail) {
+	this.Email = eMail;
 }
 public String getRemarque() {
 	return remarque;
@@ -87,9 +89,13 @@ public Client(String nomClient, String prenomClient, String adresse1, String adr
 	this.ville = ville;
 	this.numTel = numTel;
 	this.assurance = assurance;
-	this.eMail = eMail;
+	this.Email = eMail;
 	this.remarque = remarque;
 }
+public String getCodeClient() {
+	return codeClient;
+}
+
 
 
 }
