@@ -28,9 +28,9 @@ public class AnimalManager {
 
 		}
 
-		public List<Personnel> getAnimalList(Client client) throws BLLException {
+		public List<Personnel> getAnimalList(Animal animal) throws BLLException {
 			try {
-				return AnimalDAO.selectByClient(client);
+				return AnimalDAO.selectByClient(animal);
 			} catch (Exception e) {
 				throw new BLLException("getAnimalList", e);
 			}
