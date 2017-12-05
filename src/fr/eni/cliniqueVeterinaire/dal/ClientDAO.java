@@ -13,7 +13,9 @@ public interface ClientDAO {
 	
 	void delete(Client client) throws DALException;
 	
-//	void update(Client client)throws DALException;
+	void insert(Client client)  throws DALException;
+	
+	void update(Client client)throws DALException;
 	
 
 
