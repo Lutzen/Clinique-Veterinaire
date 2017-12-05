@@ -15,7 +15,7 @@ public interface RdvDAO {
 
 	void insert(Rdv rdv) throws DALException;
 
-	void update(Rdv rdv) throws DALException;
+	void update(Rdv oldRdv,Rdv newRdv) throws DALException;
 
 	void delete(Rdv rdv) throws DALException;
 
