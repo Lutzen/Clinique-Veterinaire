@@ -3,9 +3,12 @@ package fr.eni.cliniqueVeterinaire.bll;
 import java.util.List;
 
 import fr.eni.cliniqueVeterinaire.bo.Personnel;
-import fr.eni.cliniqueVeterinaire.bo.Rdv;
 import fr.eni.cliniqueVeterinaire.dal.DAOFactory;
-import fr.eni.cliniqueVeterinaire.dal.RdvDAO;
+import fr.eni.cliniqueVeterinaire.dal.PersonnelDAO;
+
+
+
+
 
 public class PersonnelManager {
 	private static PersonnelManager personnelManager = null;
@@ -24,6 +27,16 @@ public class PersonnelManager {
 	
 
 	}
+	public Personnel getPersonnelByNom(String nom) throws BLLException {
+		try {
+			return PersonnelDAO.selectByNom(nom);
+		} catch (Exception e) {
+			throw new BLLException("getPersonnelList", e);
+		}
+
+	}
+	
+
 
 	public List<Personnel> getPersonnelList() throws BLLException {
 		try {
@@ -34,18 +47,18 @@ public class PersonnelManager {
 
 	}
 
-	public int addPersonnel(Personnel personnel) throws BLLException {
+	public void addPersonnel(Personnel personnel) throws BLLException {
 		try {
-			return PersonnelDAO.insert(personnel);
+			PersonnelDAO.insert(personnel);
 		} catch (Exception e) {
 			throw new BLLException("addPersonnel", e);
 		}
 
 	}
 
-	public void updatePersonnel(Personnel personnel) throws BLLException {
+	public void updatePersonnel(Personnel personnel, String mdp) throws BLLException {
 		try {
-			PersonnelDAO.update(personnel);
+			PersonnelDAO.update(personnel, mdp);
 
 		} catch (Exception e) {
 			throw new BLLException("updatePersonnel", e);
@@ -94,10 +107,10 @@ public class PersonnelManager {
 
 
 	
-	public static boolean empty( String s ) {
-		  // Null-safe, short-circuit evaluation.
-		  return s == null || s.trim().isEmpty();
-		}
+//	public static boolean empty( String s ) {
+//		  // Null-safe, short-circuit evaluation.
+//		  return s == null || s.trim().isEmpty();
+//		}
 
 }
 

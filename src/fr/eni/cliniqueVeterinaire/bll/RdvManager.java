@@ -35,18 +35,18 @@ public class RdvManager {
 
 		}
 
-		public int addRdv(Rdv rdv) throws BLLException {
+		public void addRdv(Rdv rdv) throws BLLException {
 			try {
-				return rdvDAO.insert(rdv);
+				rdvDAO.insert(rdv);
 			} catch (Exception e) {
 				throw new BLLException("addRdv", e);
 			}
 
 		}
 
-		public void updateRdv(Rdv rdv) throws BLLException {
+		public void updateRdv(Rdv rdv, Rdv newRdv) throws BLLException {
 			try {
-				rdvDAO.update(rdv);
+				rdvDAO.update(rdv, newRdv);
 
 			} catch (Exception e) {
 				throw new BLLException("updateArticle", e);

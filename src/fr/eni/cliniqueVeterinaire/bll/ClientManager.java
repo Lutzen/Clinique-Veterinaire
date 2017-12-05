@@ -2,16 +2,15 @@ package fr.eni.cliniqueVeterinaire.bll;
 
 import java.util.List;
 
-import fr.eni.cliniqueVeterinaire.bo.Animal;
 import fr.eni.cliniqueVeterinaire.bo.Client;
-import fr.eni.cliniqueVeterinaire.bo.Personnel;
+import fr.eni.cliniqueVeterinaire.dal.ClientDAO;
 import fr.eni.cliniqueVeterinaire.dal.DAOFactory;
 
 public class ClientManager {
 
 	
 	private static ClientManager clientManager = null;
-	public clientDAO clientDAO = DAOFactory.getClientDAO();
+	public ClientDAO clientDAO = DAOFactory.getClientDAO();
 
 	private ClientManager() {
 
@@ -29,16 +28,28 @@ public class ClientManager {
 
 	public List<Client> getClientList(Client client) throws BLLException {
 		try {
-			return clientDAO.selectByClient(client);
+			return clientDAO.selectAll();
+		} catch (Exception e) {
+			throw new BLLException("getClientList", e);
+		}
+
+	}
+	
+	
+	
+	
+	public Client getClientByName(String nom) throws BLLException {
+		try {
+			return clientDAO.selectByNom(nom);
 		} catch (Exception e) {
 			throw new BLLException("getClientList", e);
 		}
 
 	}
 
-	public int addClient(Client client) throws BLLException {
+	public void addClient(Client client) throws BLLException {
 		try {
-			return clientDAO.insert(client);
+			clientDAO.insert(client);
 		} catch (Exception e) {
 			throw new BLLException("addClient", e);
 		}
@@ -96,10 +107,10 @@ public class ClientManager {
 
 
 	
-	public static boolean empty( String s ) {
-		  // Null-safe, short-circuit evaluation.
-		  return s == null || s.trim().isEmpty();
-		}
+//	public static boolean empty( String s ) {
+//		  // Null-safe, short-circuit evaluation.
+//		  return s == null || s.trim().isEmpty();
+//		}
 
 }
 
