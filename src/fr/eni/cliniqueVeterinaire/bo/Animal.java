@@ -1,6 +1,7 @@
 package fr.eni.cliniqueVeterinaire.bo;
 
 public class Animal {
+private String codeAnimal;	
 private String nomAnimal;
 private String sexe;
 private String couleur;
@@ -73,6 +74,10 @@ public Animal(String nomAnimal, String sexe, String couleur, String race, String
 	this.tatouage = tatouage;
 	this.antecedents = antecedents;
 }
+public String getCodeAnimal() {
+	return codeAnimal;
+}
+
 
 
 

@@ -42,7 +42,7 @@ public class PersonnelDAOJdbcImpl implements PersonnelDAO {
 	public Personnel selectByNom(String nom) throws DALException {
 		openConnection();
 
-		String sql = "SELECT * FROM Personnels WHERE Nom=?";
+		String sql = "SELECT * FROM Personnels WHERE Nom=? and Archive=0";
 		PreparedStatement statement = null;
 		
 
@@ -69,7 +69,7 @@ public class PersonnelDAOJdbcImpl implements PersonnelDAO {
 	public void delete(Personnel personne) throws DALException {
 		openConnection();
 
-		String sql = "UPDATE Personnel SET Archive=?,"
+		String sql = "UPDATE Personnels SET Archive=?,"
 				+ " WHERE Nom=?,MotPasse=?,Role=?";
 
 		try {
@@ -89,7 +89,7 @@ public class PersonnelDAOJdbcImpl implements PersonnelDAO {
 	public void update(Personnel personne,String pass) throws DALException {
 		openConnection();
 
-		String sql = "UPDATE Personnel SET MotPasse=?,"
+		String sql = "UPDATE Personnels SET MotPasse=?,"
 				+ " WHERE Nom=?,MotPasse=?,Role=?";
 
 		try {
@@ -108,7 +108,7 @@ public class PersonnelDAOJdbcImpl implements PersonnelDAO {
 	public List<Personnel> selectAll() throws DALException {
 		openConnection();
 
-		String sql = "SELECT Nom,MotPasse,Role FROM Personnels";
+		String sql = "SELECT Nom,MotPasse,Role FROM Personnels WHERE Archive=0";
 		List<Personnel> personnels = new LinkedList<>();
 
 		try {
