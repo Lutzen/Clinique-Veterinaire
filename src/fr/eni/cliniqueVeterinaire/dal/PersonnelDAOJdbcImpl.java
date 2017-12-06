@@ -127,8 +127,7 @@ public class PersonnelDAOJdbcImpl implements PersonnelDAO {
 	public void insert(Personnel personne) throws DALException {
 		openConnection();
 
-		String sql = "INSERT INTO Personnels ([Nom],[MotPasse],[Role])"
-				+ " VALUES " + "(?,?,?)";
+		String sql = "INSERT INTO Personnels VALUES (?,?,?,0)";
 		PreparedStatement statement = null;
 		try {
 			statement = connection.prepareStatement(sql);
