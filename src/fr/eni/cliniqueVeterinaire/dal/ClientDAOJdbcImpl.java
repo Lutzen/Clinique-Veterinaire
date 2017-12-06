@@ -175,28 +175,28 @@ private Connection connection = null;
 	}
 
 	@Override
-	public Client selectByClient(String client) throws DALException {
+	public Client selectByCode(Long coderClient) throws DALException {
 		openConnection();
 
-		String sql = "SELECT * FROM Animaux WHERE CodeClient=? and Archive=0";
+		String sql = "SELECT * FROM Clients WHERE CodeClient=? and Archive=0";
 		PreparedStatement statement = null;
 		
 
 		try {
 			statement = connection.prepareStatement(sql);
-			statement.setString(1, client);
+			statement.setLong(1, coderClient);
 			ResultSet resultSet = statement.executeQuery();
 			if(resultSet.next()) {
 				  return getClientFromResultset(resultSet);
 			}
 		} catch (SQLException e) {
-			throw new DALException("Erreur à la récupération par code client du client", e);
+			throw new DALException("Erreur à la récupération par code  du client", e);
 		} finally {
 			try {
 				if (statement != null)
 					statement.close();
 			} catch (SQLException e) {
-				throw new DALException("Erreur à la récupération par code client du client", e);
+				throw new DALException("Erreur à la récupération par code du client", e);
 			}
 		}
 		return null;

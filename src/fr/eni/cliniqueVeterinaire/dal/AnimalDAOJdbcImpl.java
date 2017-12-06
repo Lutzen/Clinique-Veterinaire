@@ -54,7 +54,7 @@ public class AnimalDAOJdbcImpl implements AnimalDAO {
 	}
 
 	@Override
-	public List<Animal> selectByClient(int codeClient) throws DALException {
+	public List<Animal> selectByClient(Long codeClient) throws DALException {
 		openConnection();
 
 		String sql = "SELECT * FROM Animaux WHERE CodeClient=? and Archive=0";
@@ -161,7 +161,7 @@ public class AnimalDAOJdbcImpl implements AnimalDAO {
 	}
 
 	@Override
-	public Animal selectByCode(int codeAnimal) throws DALException {
+	public Animal selectByCode(Long codeAnimal) throws DALException {
 		openConnection();
 
 		String sql = "SELECT * FROM Animaux WHERE CodeAnimal=? and Archive=0";

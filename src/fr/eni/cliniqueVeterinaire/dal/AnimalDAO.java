@@ -8,7 +8,7 @@ import fr.eni.cliniqueVeterinaire.bo.Animal;
 public interface AnimalDAO {
 	
 
-	List<Animal> selectByClient(int codeClient) throws DALException;
+	List<Animal> selectByClient(Long codeClient) throws DALException;
 	
 	void delete(Animal animal) throws DALException;
 	
@@ -16,6 +16,6 @@ public interface AnimalDAO {
 	
 	void update(Animal animal)throws DALException;
 	
-	Animal selectByCode(int codeAnimal) throws DALException;
+	Animal selectByCode(Long codeAnimal) throws DALException;
 
 }
