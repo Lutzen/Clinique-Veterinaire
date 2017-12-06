@@ -151,7 +151,7 @@ public class PersonnelDAOJdbcImpl implements PersonnelDAO {
 	public List<Personnel> selectByRole(String role) throws DALException {
 		openConnection();
 
-		String sql = "SELECT Nom,MotPasse,Role FROM Personnels WHERE role='?' and Archive=0";
+		String sql = "SELECT Nom,MotPasse,Role FROM Personnels WHERE Role=? and Archive=0";
 		PreparedStatement statement = null;
 		List<Personnel> personnels = new LinkedList<>();
 
