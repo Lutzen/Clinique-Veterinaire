@@ -1,6 +1,7 @@
 package fr.eni.cliniqueVeterinaire.ihm;
 
 import java.awt.EventQueue;
+import java.util.List;
 
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -9,6 +10,13 @@ import javax.swing.JButton;
 import javax.swing.ImageIcon;
 import javax.swing.JFormattedTextField;
 import javax.swing.JTextArea;
+
+import fr.eni.cliniqueVeterinaire.bll.BLLException;
+import fr.eni.cliniqueVeterinaire.bll.PersonnelManager;
+import fr.eni.cliniqueVeterinaire.bll.RdvManager;
+import fr.eni.cliniqueVeterinaire.bo.Personnel;
+
+import javax.swing.JTable;
 
 public class EcranRdv {
 
@@ -30,9 +38,12 @@ public class EcranRdv {
 	private JComboBox cBHeures;
 	private JLabel lblH;
 	private JComboBox cBMinutes;
-	private JTextArea textArea;
 	private JButton btnValider;
 	private JButton btnSupprimer;
+	private JTable table;
+	private RdvManager rdvManager = RdvManager.getInstance();
+	private PersonnelManager personnelManager = PersonnelManager.getInstance();
+
 
 	/**
 	 * Launch the application.
@@ -83,9 +94,9 @@ public class EcranRdv {
 		frmPriseDeRendezvous.getContentPane().add(getCBHeures());
 		frmPriseDeRendezvous.getContentPane().add(getLblH());
 		frmPriseDeRendezvous.getContentPane().add(getCBMinutes());
-		frmPriseDeRendezvous.getContentPane().add(getTextArea());
 		frmPriseDeRendezvous.getContentPane().add(getBtnValider());
 		frmPriseDeRendezvous.getContentPane().add(getBtnSupprimer());
+		frmPriseDeRendezvous.getContentPane().add(getTable());
 	}
 
 	private JLabel getLblPour() {
@@ -95,6 +106,7 @@ public class EcranRdv {
 		}
 		return lblPour;
 	}
+
 	private JLabel getLblClient() {
 		if (lblClient == null) {
 			lblClient = new JLabel("Client");
@@ -102,6 +114,7 @@ public class EcranRdv {
 		}
 		return lblClient;
 	}
+
 	private JComboBox getCBClients() {
 		if (cBClients == null) {
 			cBClients = new JComboBox();
@@ -109,6 +122,7 @@ public class EcranRdv {
 		}
 		return cBClients;
 	}
+
 	private JLabel getLblAnimal() {
 		if (lblAnimal == null) {
 			lblAnimal = new JLabel("Animal");
@@ -116,6 +130,7 @@ public class EcranRdv {
 		}
 		return lblAnimal;
 	}
+
 	private JComboBox getCBAnimaux() {
 		if (cBAnimaux == null) {
 			cBAnimaux = new JComboBox();
@@ -123,22 +138,27 @@ public class EcranRdv {
 		}
 		return cBAnimaux;
 	}
+
 	private JButton getBtnNewButton() {
 		if (btnNewButton == null) {
 			btnNewButton = new JButton("");
-			btnNewButton.setIcon(new ImageIcon(EcranRdv.class.getResource("/com/sun/javafx/scene/control/skin/modena/HTMLEditor-Indent-Black-rtl.png")));
+			btnNewButton.setIcon(new ImageIcon(EcranRdv.class
+					.getResource("/com/sun/javafx/scene/control/skin/modena/HTMLEditor-Indent-Black-rtl.png")));
 			btnNewButton.setBounds(171, 50, 36, 23);
 		}
 		return btnNewButton;
 	}
+
 	private JButton getButton() {
 		if (button == null) {
 			button = new JButton("");
-			button.setIcon(new ImageIcon(EcranRdv.class.getResource("/com/sun/javafx/scene/control/skin/modena/HTMLEditor-Indent-Black-rtl.png")));
+			button.setIcon(new ImageIcon(EcranRdv.class
+					.getResource("/com/sun/javafx/scene/control/skin/modena/HTMLEditor-Indent-Black-rtl.png")));
 			button.setBounds(171, 99, 36, 23);
 		}
 		return button;
 	}
+
 	private JLabel getLblPar() {
 		if (lblPar == null) {
 			lblPar = new JLabel("Par");
@@ -146,6 +166,7 @@ public class EcranRdv {
 		}
 		return lblPar;
 	}
+
 	private JLabel getLblVtrinaire() {
 		if (lblVtrinaire == null) {
 			lblVtrinaire = new JLabel("V\u00E9t\u00E9rinaire");
@@ -153,13 +174,28 @@ public class EcranRdv {
 		}
 		return lblVtrinaire;
 	}
+
 	private JComboBox getCBVetos() {
 		if (cBVetos == null) {
-			cBVetos = new JComboBox();
-			cBVetos.setBounds(256, 51, 131, 20);
+			try {
+				List<Personnel> personnel =personnelManager.getPersonnelByRole("vet");
+				cBVetos = new JComboBox(new String[] {});;
+				for (int i = 0; i < personnel.size(); i++) {
+					cBVetos.addItem(personnel.get(i).getNom());
+
+				}
+				cBVetos.setBounds(256, 51, 131, 20);
+				
+			} catch (BLLException e) {
+				
+				e.printStackTrace();
+			}
+			
 		}
 		return cBVetos;
 	}
+
+
 	private JLabel getLblQuand() {
 		if (lblQuand == null) {
 			lblQuand = new JLabel("Quand");
@@ -167,6 +203,7 @@ public class EcranRdv {
 		}
 		return lblQuand;
 	}
+
 	private JLabel getLblDate() {
 		if (lblDate == null) {
 			lblDate = new JLabel("Date");
@@ -174,6 +211,7 @@ public class EcranRdv {
 		}
 		return lblDate;
 	}
+
 	private JFormattedTextField getFormattedTextField() {
 		if (formattedTextField == null) {
 			formattedTextField = new JFormattedTextField();
@@ -182,6 +220,7 @@ public class EcranRdv {
 		}
 		return formattedTextField;
 	}
+
 	private JLabel getLblHeure() {
 		if (lblHeure == null) {
 			lblHeure = new JLabel("Heure");
@@ -189,6 +228,7 @@ public class EcranRdv {
 		}
 		return lblHeure;
 	}
+
 	private JComboBox getCBHeures() {
 		if (cBHeures == null) {
 			cBHeures = new JComboBox();
@@ -196,6 +236,7 @@ public class EcranRdv {
 		}
 		return cBHeures;
 	}
+
 	private JLabel getLblH() {
 		if (lblH == null) {
 			lblH = new JLabel("h");
@@ -203,6 +244,7 @@ public class EcranRdv {
 		}
 		return lblH;
 	}
+
 	private JComboBox getCBMinutes() {
 		if (cBMinutes == null) {
 			cBMinutes = new JComboBox();
@@ -210,13 +252,7 @@ public class EcranRdv {
 		}
 		return cBMinutes;
 	}
-	private JTextArea getTextArea() {
-		if (textArea == null) {
-			textArea = new JTextArea();
-			textArea.setBounds(10, 129, 561, 322);
-		}
-		return textArea;
-	}
+
 	private JButton getBtnValider() {
 		if (btnValider == null) {
 			btnValider = new JButton("Valider");
@@ -224,6 +260,7 @@ public class EcranRdv {
 		}
 		return btnValider;
 	}
+
 	private JButton getBtnSupprimer() {
 		if (btnSupprimer == null) {
 			btnSupprimer = new JButton("Supprimer");
@@ -231,4 +268,20 @@ public class EcranRdv {
 		}
 		return btnSupprimer;
 	}
+
+	private JTable getTable() {
+		if (table == null) {
+
+			try {
+				Personnel personnel =personnelManager.getPersonnelByNom((String) cBVetos.getSelectedItem());
+				table = new JTable(new TableRdv(rdvManager.getAgenda(personnel.getCodePers())));
+				table.setBounds(10, 133, 561, 318);
+			} catch (Exception e) {
+			}
+
+		}
+		return table;
+
+	}
+
 }

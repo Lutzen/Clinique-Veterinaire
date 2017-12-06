@@ -161,7 +161,7 @@ public class EcranGestionPersonnel {
 
 			try {
 
-				list = new JTable(new ModeleStatique(personnelManager.getPersonnelList()));
+				list = new JTable(new TablePersonnel(personnelManager.getPersonnelList()));
 				list.setBounds(10, 45, 414, 205);
 			} catch (Exception e) {
 			}

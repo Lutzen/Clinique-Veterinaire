@@ -6,10 +6,12 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JTextField;
 
+import fr.eni.cliniqueVeterinaire.bll.BLLException;
 import fr.eni.cliniqueVeterinaire.bll.PersonnelManager;
 import fr.eni.cliniqueVeterinaire.bo.Personnel;
 
 import javax.swing.JList;
+import javax.swing.JOptionPane;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import java.awt.event.ActionListener;
@@ -72,6 +74,8 @@ public class EcranAjoutPersonnel {
 		frmAjoutEmploy.getContentPane().add(getTxtMdp());
 		frmAjoutEmploy.getContentPane().add(getBtnValider());
 		frmAjoutEmploy.getContentPane().add(getComboBox());
+		frmAjoutEmploy.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+
 	}
 
 	private JLabel getLblNom() {
@@ -131,9 +135,33 @@ public class EcranAjoutPersonnel {
 			btnValider = new JButton("Valider");
 			btnValider.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
+					try {
 					Personnel personnel = new Personnel();
-					
+					personnel.setNom(txtNom.getText()+ " " + txtPrenom.getText());
+					personnel.setPass(txtMdp.getText());
+					switch ((String)comboBox.getSelectedItem()) {
+					case "Vétérinaire":
+						personnel.setRole("vet");
+						break;
+					case "Secrétaire":
+						personnel.setRole("sec");
+						break;
+					case "Assistant":
+						personnel.setRole("ast");
+						break;
+					case "Stagiaire":
+						personnel.setRole("sta");
+						break;
+					default:
+						break;
+					}
 					personnelManager.addPersonnel(personnel);
+					JOptionPane.showMessageDialog(null, "Personnel ajouté avec succès");
+					frmAjoutEmploy.dispose();
+					} catch (BLLException e1) {
+						// TODO Auto-generated catch block
+						e1.printStackTrace();
+					}
 				}
 			});
 			btnValider.setBounds(128, 122, 89, 23);

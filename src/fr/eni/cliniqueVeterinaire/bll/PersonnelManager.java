@@ -36,6 +36,15 @@ public class PersonnelManager {
 
 	}
 	
+	public List<Personnel> getPersonnelByRole(String role) throws BLLException {
+		try {
+			return personnelDAO.selectByRole(role);
+		} catch (Exception e) {
+			throw new BLLException("getPersonnelByRole", e);
+		}
+
+	}
+	
 
 
 	public List<Personnel> getPersonnelList() throws BLLException {

@@ -28,8 +28,16 @@ public class AnimalManager {
 		
 
 		}
+		public Animal getAnimalByCode(Long code) throws BLLException {
+			try {
+				return animalDAO.selectByCode(code);
+			} catch (Exception e) {
+				throw new BLLException("getAnimalByCode", e);
+			}
 
-		public List<Personnel> getAnimalList(int codeClient) throws BLLException {
+		}
+
+		public List<Animal> getAnimalList(Long codeClient) throws BLLException {
 			try {
 				return animalDAO.selectByClient(codeClient);
 			} catch (Exception e) {

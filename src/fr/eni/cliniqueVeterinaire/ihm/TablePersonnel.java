@@ -1,23 +1,23 @@
 package fr.eni.cliniqueVeterinaire.ihm;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import javax.swing.table.AbstractTableModel;
 
 import fr.eni.cliniqueVeterinaire.bo.Personnel;
 
-public class ModeleStatique extends AbstractTableModel {
+public class TablePersonnel extends AbstractTableModel {
 	/**
 		 * 
 		 */
+	
 	private static final long serialVersionUID = 1L;
 
 	private final List<Personnel> donnees;
 	
 	private final String[] entetes = { "Nom", "Role" };
 
-	public ModeleStatique(List<Personnel> donnees) {
+	public TablePersonnel(List<Personnel> donnees) {
 		super();
 		this.donnees = donnees;
 	}

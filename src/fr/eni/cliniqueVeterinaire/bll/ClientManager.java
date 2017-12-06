@@ -2,6 +2,7 @@ package fr.eni.cliniqueVeterinaire.bll;
 
 import java.util.List;
 
+import fr.eni.cliniqueVeterinaire.bo.Animal;
 import fr.eni.cliniqueVeterinaire.bo.Client;
 import fr.eni.cliniqueVeterinaire.dal.ClientDAO;
 import fr.eni.cliniqueVeterinaire.dal.DAOFactory;
@@ -35,7 +36,14 @@ public class ClientManager {
 
 	}
 	
-	
+	public Client getClientByCode(Long code) throws BLLException {
+		try {
+			return clientDAO.selectByCode(code);
+		} catch (Exception e) {
+			throw new BLLException("getClientByCode", e);
+		}
+
+	}
 	
 	
 	public Client getClientByName(String nom) throws BLLException {
