@@ -158,7 +158,7 @@ public class PersonnelDAOJdbcImpl implements PersonnelDAO {
 		try {
 			statement = connection.prepareStatement(sql);
 			statement.setString(1, role);
-			ResultSet resultSet = statement.executeQuery(sql);
+			ResultSet resultSet = statement.executeQuery();
 			while (resultSet.next()) {
 				personnels.add(getPersonnelFromResultset(resultSet));
 			}
