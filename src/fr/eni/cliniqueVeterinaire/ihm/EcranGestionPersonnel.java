@@ -1,33 +1,20 @@
 package fr.eni.cliniqueVeterinaire.ihm;
 
-import java.awt.BorderLayout;
+
 import java.awt.EventQueue;
 
 import javax.swing.JFrame;
-import com.jgoodies.forms.layout.FormLayout;
-import com.jgoodies.forms.layout.ColumnSpec;
-import com.jgoodies.forms.layout.RowSpec;
 
 import fr.eni.cliniqueVeterinaire.bll.BLLException;
 import fr.eni.cliniqueVeterinaire.bll.PersonnelManager;
 import fr.eni.cliniqueVeterinaire.bo.Personnel;
 
-import com.jgoodies.forms.layout.FormSpecs;
 
-import javax.swing.DefaultListModel;
 import javax.swing.JButton;
-import javax.swing.JSeparator;
-import javax.swing.JPanel;
-import javax.swing.JScrollPane;
 import javax.swing.JTable;
-import javax.swing.table.DefaultTableModel;
 
 import java.awt.event.ActionListener;
-import java.util.Arrays;
-import java.util.Iterator;
-import java.util.Vector;
 import java.awt.event.ActionEvent;
-import javax.swing.JList;
 
 public class EcranGestionPersonnel {
 
