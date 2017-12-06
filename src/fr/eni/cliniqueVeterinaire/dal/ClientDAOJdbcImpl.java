@@ -175,7 +175,7 @@ private Connection connection = null;
 	}
 
 	@Override
-	public Client selectByCode(Long coderClient) throws DALException {
+	public Client selectByCode(Long codeClient) throws DALException {
 		openConnection();
 
 		String sql = "SELECT * FROM Clients WHERE CodeClient=? and Archive=0";
@@ -184,19 +184,19 @@ private Connection connection = null;
 
 		try {
 			statement = connection.prepareStatement(sql);
-			statement.setLong(1, coderClient);
+			statement.setLong(1, codeClient);
 			ResultSet resultSet = statement.executeQuery();
 			if(resultSet.next()) {
 				  return getClientFromResultset(resultSet);
 			}
 		} catch (SQLException e) {
-			throw new DALException("Erreur à la récupération par code  du client", e);
+			throw new DALException("Erreur à la récupération par code  du client"+ codeClient, e);
 		} finally {
 			try {
 				if (statement != null)
 					statement.close();
 			} catch (SQLException e) {
-				throw new DALException("Erreur à la récupération par code du client", e);
+				throw new DALException("Erreur à la récupération par code du client"+ codeClient, e);
 			}
 		}
 		return null;

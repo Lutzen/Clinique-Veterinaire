@@ -18,4 +18,6 @@ public interface PersonnelDAO {
 	List<Personnel> selectAll()throws DALException;
 	
 	void insert(Personnel personne)throws DALException;
+	
+	List<Personnel> selectbyRole(String role)throws DALException;
 }

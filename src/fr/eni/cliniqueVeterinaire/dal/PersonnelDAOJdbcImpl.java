@@ -147,4 +147,25 @@ public class PersonnelDAOJdbcImpl implements PersonnelDAO {
 		
 	}
 
+	@Override
+	public List<Personnel> selectbyRole(String role) throws DALException {
+		openConnection();
+
+		String sql = "SELECT Nom,MotPasse,Role FROM Personnels WHERE role=? and Archive=0";
+		PreparedStatement statement = null;
+		List<Personnel> personnels = new LinkedList<>();
+
+		try {
+			statement = connection.prepareStatement(sql);
+			statement.setString(1, role);
+			ResultSet resultSet = statement.executeQuery(sql);
+			while (resultSet.next()) {
+				personnels.add(getPersonnelFromResultset(resultSet));
+			}
+			return personnels;
+		} catch (SQLException e) {
+			throw new DALException("Erreur à la récupération du personnel dont le role est:"+ role, e);
+		}
+	}
+
 }
