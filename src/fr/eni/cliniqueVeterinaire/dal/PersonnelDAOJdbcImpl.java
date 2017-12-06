@@ -69,7 +69,7 @@ public class PersonnelDAOJdbcImpl implements PersonnelDAO {
 	public void delete(Personnel personne) throws DALException {
 		openConnection();
 
-		String sql = "UPDATE Personnels SET Archive=?,"
+		String sql = "UPDATE Personnels SET Archive=?"
 				+ " WHERE Nom=?,MotPasse=?,Role=?";
 
 		try {
@@ -89,7 +89,7 @@ public class PersonnelDAOJdbcImpl implements PersonnelDAO {
 	public void update(Personnel personne,String pass) throws DALException {
 		openConnection();
 
-		String sql = "UPDATE Personnels SET MotPasse=?,"
+		String sql = "UPDATE Personnels SET MotPasse=?"
 				+ " WHERE Nom=?,MotPasse=?,Role=?";
 
 		try {

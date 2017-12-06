@@ -106,7 +106,7 @@ private Connection connection = null;
 	public void delete(Client client) throws DALException {
 		openConnection();
 
-		String sql = "UPDATE Personnel SET Archive=?,"
+		String sql = "UPDATE Personnel SET Archive=?"
 				+ " WHERE CodeClient=?,NomClient=?,PrenomClient=?,Adresse1=?,Adresse2=?,CodePostal=?,Ville=?";
 
 		try {

@@ -85,7 +85,7 @@ public class AnimalDAOJdbcImpl implements AnimalDAO {
 	public void delete(Animal animal) throws DALException {
 		openConnection();
 
-		String sql = "UPDATE Animaux SET Archive=?,"
+		String sql = "UPDATE Animaux SET Archive=?"
 				+ " WHERE CodeAnimal=?,NomAnimal=?,Sexe=?,Couleur=?,Race=?,Espece=?,CodeClient=?,Tatouage=?,Antecedents=?";
 
 		try {
@@ -135,7 +135,7 @@ public class AnimalDAOJdbcImpl implements AnimalDAO {
 	public void update(Animal animal) throws DALException {
 		openConnection();
 
-		String sql = "UPDATE Personnels SET NomAnimal=?,Sexe=?,Couleur=?,Race=?,Espece=?,CodeClient=?,Tatouage=?,Antecedents=?,"
+		String sql = "UPDATE Personnels SET NomAnimal=?,Sexe=?,Couleur=?,Race=?,Espece=?,CodeClient=?,Tatouage=?,Antecedents=?"
 				+ " WHERE CodeAnimal=?";
 
 		try {
