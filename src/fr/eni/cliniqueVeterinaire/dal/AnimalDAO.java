@@ -15,5 +15,7 @@ public interface AnimalDAO {
 	void insert(Animal animal)  throws DALException;
 	
 	void update(Animal animal)throws DALException;
+	
+	Animal selectByCode(int codeAnimal) throws DALException;
 
 }

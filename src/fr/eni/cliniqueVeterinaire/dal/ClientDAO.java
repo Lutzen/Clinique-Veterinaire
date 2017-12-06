@@ -17,6 +17,8 @@ public interface ClientDAO {
 	
 	void update(Client client)throws DALException;
 	
+	Client selectByClient(String client) throws DALException;
+	
 
 
 }

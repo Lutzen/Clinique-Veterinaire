@@ -15,4 +15,7 @@ public class DAOFactory {
 	public static PersonnelDAO getPersonnelDAO() {
 		return new PersonnelDAOJdbcImpl();
 	}
+	public static RaceDAO getRaceDAO() {
+		return new RaceDAOJdbcImpl();
+	}
 }

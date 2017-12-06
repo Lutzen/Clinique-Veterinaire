@@ -174,6 +174,34 @@ private Connection connection = null;
 		
 	}
 
+	@Override
+	public Client selectByClient(String client) throws DALException {
+		openConnection();
+
+		String sql = "SELECT * FROM Animaux WHERE CodeClient=? and Archive=0";
+		PreparedStatement statement = null;
+		
+
+		try {
+			statement = connection.prepareStatement(sql);
+			statement.setString(1, client);
+			ResultSet resultSet = statement.executeQuery();
+			if(resultSet.next()) {
+				  return getClientFromResultset(resultSet);
+			}
+		} catch (SQLException e) {
+			throw new DALException("Erreur à la récupération par code client du client", e);
+		} finally {
+			try {
+				if (statement != null)
+					statement.close();
+			} catch (SQLException e) {
+				throw new DALException("Erreur à la récupération par code client du client", e);
+			}
+		}
+		return null;
+	}
+
 
 	
 

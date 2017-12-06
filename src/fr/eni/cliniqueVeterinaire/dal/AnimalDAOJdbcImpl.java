@@ -160,6 +160,35 @@ public class AnimalDAOJdbcImpl implements AnimalDAO {
 		
 	}
 
+	@Override
+	public Animal selectByCode(int codeAnimal) throws DALException {
+		openConnection();
+
+		String sql = "SELECT * FROM Animaux WHERE CodeAnimal=? and Archive=0";
+		PreparedStatement statement = null;
+		
+
+		try {
+			statement = connection.prepareStatement(sql);
+			statement.setLong(1, codeAnimal);
+			ResultSet resultSet = statement.executeQuery();
+			if(resultSet.next()) {
+				  return getAnimalFromResultset(resultSet);
+			}
+		} catch (SQLException e) {
+			throw new DALException("Erreur à la récupération par code client de l'animal", e);
+		} finally {
+			try {
+				if (statement != null)
+					statement.close();
+			} catch (SQLException e) {
+				throw new DALException("Erreur à la récupération par code client de l'animal", e);
+			}
+		}
+		return null;
+		
+	}
+
 }
 
 
