@@ -88,7 +88,7 @@ public class AnimalDAOJdbcImpl implements AnimalDAO {
 		openConnection();
 
 		String sql = "UPDATE Animaux SET Archive=?"
-				+ " WHERE CodeAnimal=?,NomAnimal=?,Sexe=?,Couleur=?,Race=?,Espece=?,CodeClient=?,Tatouage=?,Antecedents=?";
+				+ " WHERE CodeAnimal=? and NomAnimal=? and Sexe=? and Couleur=? and Race=? and Espece=? and CodeClient=? and Tatouage=? and Antecedents=?";
 
 		try {
 			PreparedStatement statement = connection.prepareStatement(sql);

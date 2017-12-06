@@ -109,7 +109,7 @@ public class RdvDAOJdbcImpl implements RdvDAO {
 		openConnection();
 
 		String sql = "UPDATE Agendas SET CodeVeto=?,dateRdv=?,CodeAnimal=?"
-				+ " WHERE CodeVeto=?,dateRdv=?,CodeAnimal=?";
+				+ " WHERE CodeVeto=? and dateRdv=? and CodeAnimal=?";
 
 		try {
 			PreparedStatement statement = connection.prepareStatement(sql);
@@ -130,7 +130,7 @@ public class RdvDAOJdbcImpl implements RdvDAO {
 	public void delete(Rdv rdv) throws DALException {
 		openConnection();
 
-		String sql = "DELETE FROM Agendas WHERE CodeVeto=?,dateRdv=?,CodeAnimal=?";
+		String sql = "DELETE FROM Agendas WHERE CodeVeto=? and dateRdv=? and CodeAnimal=?";
 
 		try {
 			PreparedStatement statement = connection.prepareStatement(sql);

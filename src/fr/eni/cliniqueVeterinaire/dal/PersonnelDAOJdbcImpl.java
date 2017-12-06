@@ -70,7 +70,7 @@ public class PersonnelDAOJdbcImpl implements PersonnelDAO {
 		openConnection();
 
 		String sql = "UPDATE Personnels SET Archive=?"
-				+ " WHERE Nom=?,MotPasse=?,Role=?";
+				+ " WHERE Nom=? and MotPasse=? and Role=?";
 
 		try {
 			PreparedStatement statement = connection.prepareStatement(sql);
@@ -90,7 +90,7 @@ public class PersonnelDAOJdbcImpl implements PersonnelDAO {
 		openConnection();
 
 		String sql = "UPDATE Personnels SET MotPasse=?"
-				+ " WHERE Nom=?,MotPasse=?,Role=?";
+				+ " WHERE Nom=? and MotPasse=? and Role=?";
 
 		try {
 			PreparedStatement statement = connection.prepareStatement(sql);

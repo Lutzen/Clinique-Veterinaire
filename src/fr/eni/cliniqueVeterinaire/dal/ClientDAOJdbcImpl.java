@@ -107,7 +107,7 @@ private Connection connection = null;
 		openConnection();
 
 		String sql = "UPDATE Personnel SET Archive=?"
-				+ " WHERE CodeClient=?,NomClient=?,PrenomClient=?,Adresse1=?,Adresse2=?,CodePostal=?,Ville=?";
+				+ " WHERE CodeClient=? and NomClient=? and PrenomClient=? and Adresse1=? and Adresse2=? and CodePostal=? and Ville=?";
 
 		try {
 			PreparedStatement statement = connection.prepareStatement(sql);
@@ -156,7 +156,7 @@ private Connection connection = null;
 		openConnection();
 
 		String sql = "UPDATE Clients SET NomClient=?,PrenomClient=?,Adresse1=?,Adresse2=?,CodePostal=?,Ville=?"
-				+ " WHERE Nom=?,MotPasse=?,Role=?";
+				+ " WHERE Nom=? and MotPasse=? and Role=?";
 
 		try {
 			PreparedStatement statement = connection.prepareStatement(sql);
