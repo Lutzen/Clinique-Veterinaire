@@ -28,7 +28,9 @@ public void setRole(String role) {
 	this.role = role;
 }
 
-
+public Personnel() {
+	
+}
 
 public Personnel(String nom, String pass, String role) {
 	super();

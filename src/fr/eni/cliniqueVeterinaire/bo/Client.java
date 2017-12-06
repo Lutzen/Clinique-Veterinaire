@@ -77,6 +77,9 @@ public void setRemarque(String remarque) {
 	this.remarque = remarque;
 }
 
+public Client() {
+	
+}
 
 public Client(String nomClient, String prenomClient, String adresse1, String adresse2, String codePostal, String ville,
 		String numTel, String assurance, String eMail, String remarque) {

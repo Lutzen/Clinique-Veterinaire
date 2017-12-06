@@ -6,6 +6,7 @@ import fr.eni.cliniqueVeterinaire.bo.Animal;
 import fr.eni.cliniqueVeterinaire.bo.Client;
 import fr.eni.cliniqueVeterinaire.bo.Personnel;
 import fr.eni.cliniqueVeterinaire.bo.Rdv;
+import fr.eni.cliniqueVeterinaire.dal.AnimalDAO;
 import fr.eni.cliniqueVeterinaire.dal.DAOFactory;
 import fr.eni.cliniqueVeterinaire.dal.RdvDAO;
 
@@ -37,9 +38,9 @@ public class AnimalManager {
 
 		}
 
-		public int addAnimal(Animal animal) throws BLLException {
+		public void addAnimal(Animal animal) throws BLLException {
 			try {
-				return animalDAO.insert(animal);
+				animalDAO.insert(animal);
 			} catch (Exception e) {
 				throw new BLLException("addAnimal", e);
 			}

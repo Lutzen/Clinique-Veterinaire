@@ -27,6 +27,10 @@ public void setCodeAnimal(long codeAnimal) {
 	this.codeAnimal = codeAnimal;
 }
 
+public Rdv() {
+	
+}
+
 public Rdv(long codeVeto, Date dateRdv, long codeAnimal) {
 	super();
 	this.codeVeto = codeVeto;

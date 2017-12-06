@@ -20,8 +20,12 @@ import javax.swing.JSeparator;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
+import javax.swing.table.DefaultTableModel;
+
 import java.awt.event.ActionListener;
+import java.util.Arrays;
 import java.util.Iterator;
+import java.util.Vector;
 import java.awt.event.ActionEvent;
 import javax.swing.JList;
 
@@ -33,7 +37,7 @@ public class EcranGestionPersonnel {
 	private JButton btnReinit;
 
 	private PersonnelManager personnelManager = PersonnelManager.getInstance();
-	private JList list;
+	private JTable list;
 
 	public static void main() {
 		EventQueue.invokeLater(new Runnable() {
@@ -41,6 +45,8 @@ public class EcranGestionPersonnel {
 				try {
 					EcranGestionPersonnel window = new EcranGestionPersonnel();
 					window.frmGestionDuPersonnel.setVisible(true);
+					window.frmGestionDuPersonnel.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
@@ -88,10 +94,20 @@ public class EcranGestionPersonnel {
 		if (btnSuppr == null) {
 			btnSuppr = new JButton("Supprimer");
 			btnSuppr.addActionListener(new ActionListener() {
-				public void actionPerformed(ActionEvent arg0) {
-//					personnelManager.deletePersonnel();
-				}
 
+				public void actionPerformed(ActionEvent arg0) {
+					try {
+						String nom = (String) list.getValueAt(list.getSelectedRow(), 0);
+
+						Personnel personnel = personnelManager.getPersonnelByNom(nom);
+						personnelManager.deletePersonnel(personnel);
+
+					} catch (BLLException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
+
+				}
 			});
 			btnSuppr.setBounds(109, 11, 89, 23);
 		}
@@ -101,30 +117,57 @@ public class EcranGestionPersonnel {
 	private JButton getBtnReinit() {
 		if (btnReinit == null) {
 			btnReinit = new JButton("Reinitialiser");
+			btnReinit.addActionListener(new ActionListener() {
+				public void actionPerformed(ActionEvent e) {
+					try {
+						String nom = (String) list.getValueAt(list.getSelectedRow(), 0);
+						Personnel personnel = personnelManager.getPersonnelByNom(nom);
+						EcranInitPass.main(personnel);
+
+					} catch (BLLException e1) {
+						// TODO Auto-generated catch block
+						e1.printStackTrace();
+					}
+				}
+			});
 			btnReinit.setBounds(208, 11, 89, 23);
 		}
 		return btnReinit;
 	}
 
-	
-	private JList<Personnel> getList() {
+	// private JList getList() {
+	// if (list == null) {
+	// DefaultListModel model = new DefaultListModel();
+	// list = new JList(model);
+	// try {
+	// for (Personnel personnel : personnelManager.getPersonnelList()) {
+	// model.addElement(personnel.getNom() + "\t"+ personnel.getRole());
+	//
+	//
+	// }
+	// } catch (BLLException e) {
+	//
+	// e.printStackTrace();
+	// }
+	// list.setBounds(10, 45, 414, 205);
+	//
+	// }
+	// return list;
+	//
+	// }
+
+	private JTable getList() {
 		if (list == null) {
-			DefaultListModel<Personnel> model = new DefaultListModel<Personnel>();
-			list = new JList<Personnel>(model);
+
 			try {
-				for (Personnel personnel : personnelManager.getPersonnelList()) {
-					model.addElement(personnel);
 
-					
-				}
-			} catch (BLLException e) {
-
-				e.printStackTrace();
+				list = new JTable(new ModeleStatique(personnelManager.getPersonnelList()));
+				list.setBounds(10, 45, 414, 205);
+			} catch (Exception e) {
 			}
-			list.setBounds(10, 45, 414, 205);
-			
+
 		}
 		return list;
-
 	}
+
 }

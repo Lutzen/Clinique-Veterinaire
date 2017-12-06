@@ -62,6 +62,9 @@ public void setAntecedents(String antecedents) {
 	this.antecedents = antecedents;
 }
 
+public Animal() {
+	
+}
 public Animal(String nomAnimal, String sexe, String couleur, String race, String espece, Long codeClient,
 		String tatouage, String antecedents) {
 	super();

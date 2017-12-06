@@ -33,7 +33,7 @@ public class EcranConnexion {
 	private JLabel lblNom;
 	private JLabel lblMotDePasse;
 	private JButton btnValider;
-	
+
 	private PersonnelManager personnelManager = PersonnelManager.getInstance();
 
 	/**
@@ -73,9 +73,10 @@ public class EcranConnexion {
 		frmConnexion.getContentPane().add(getLblNom());
 		frmConnexion.getContentPane().add(getLblMotDePasse());
 		frmConnexion.getContentPane().add(getBtnValider());
+		frmConnexion.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+
 	}
 
-	
 	private JTextField getTxtNom() {
 		if (txtNom == null) {
 			txtNom = new JTextField();
@@ -84,6 +85,7 @@ public class EcranConnexion {
 		}
 		return txtNom;
 	}
+
 	private JTextField getTxtMotDePasse() {
 		if (txtMotDePasse == null) {
 			txtMotDePasse = new JTextField();
@@ -92,6 +94,7 @@ public class EcranConnexion {
 		}
 		return txtMotDePasse;
 	}
+
 	private JLabel getLblNom() {
 		if (lblNom == null) {
 			lblNom = new JLabel("Nom");
@@ -99,6 +102,7 @@ public class EcranConnexion {
 		}
 		return lblNom;
 	}
+
 	private JLabel getLblMotDePasse() {
 		if (lblMotDePasse == null) {
 			lblMotDePasse = new JLabel("Mot de passe");
@@ -106,28 +110,31 @@ public class EcranConnexion {
 		}
 		return lblMotDePasse;
 	}
+
 	private JButton getBtnValider() {
 		if (btnValider == null) {
 			btnValider = new JButton("Valider");
 			btnValider.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
-					 
+
 					try {
-						Personnel personnel = personnelManager.getPersonnelByNom(getTxtNom().getText());
-						if(getTxtMotDePasse().getText().equals(personnel.getPass()))
-						{
-							if(personnel.getRole().equals("adm"))
+						Personnel personnel;
+
+						personnel = personnelManager.getPersonnelByNom(getTxtNom().getText());
+
+						if (getTxtMotDePasse().getText().equals(personnel.getPass())) {
+							if (personnel.getRole().equals("adm"))
 								EcranGestionPersonnel.main();
-							if(personnel.getRole().equals("sec"))
+							if (personnel.getRole().equals("sec"))
 								EcranRdv.main();
-							if(personnel.getRole().equals("vet"))
+							if (personnel.getRole().equals("vet"))
 								EcranAgenda.main();
-						}else
-							JOptionPane.showMessageDialog(null, "Nom ou Mot de passe incorrect");
+						} else
+							JOptionPane.showMessageDialog(null, "Mot de passe incorrect");
 					} catch (BLLException e1) {
 						e1.printStackTrace();
 					}
-					
+
 				}
 			});
 			btnValider.setBounds(177, 73, 89, 23);

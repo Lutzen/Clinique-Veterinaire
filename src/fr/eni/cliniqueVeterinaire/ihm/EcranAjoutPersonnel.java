@@ -5,8 +5,17 @@ import java.awt.EventQueue;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JTextField;
+
+import fr.eni.cliniqueVeterinaire.bll.PersonnelManager;
+import fr.eni.cliniqueVeterinaire.bo.Personnel;
+
 import javax.swing.JList;
 import javax.swing.JButton;
+import javax.swing.JComboBox;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
+
+
 
 public class EcranAjoutPersonnel {
 
@@ -18,8 +27,9 @@ public class EcranAjoutPersonnel {
 	private JTextField txtNom;
 	private JTextField txtPrenom;
 	private JTextField txtMdp;
-	private JList listRole;
 	private JButton btnValider;
+	private JComboBox comboBox;
+	private PersonnelManager personnelManager = PersonnelManager.getInstance();
 
 	/**
 	 * Launch the application.
@@ -60,8 +70,8 @@ public class EcranAjoutPersonnel {
 		frmAjoutEmploy.getContentPane().add(getTxtNom());
 		frmAjoutEmploy.getContentPane().add(getTxtPrenom());
 		frmAjoutEmploy.getContentPane().add(getTxtMdp());
-		frmAjoutEmploy.getContentPane().add(getListRole());
 		frmAjoutEmploy.getContentPane().add(getBtnValider());
+		frmAjoutEmploy.getContentPane().add(getComboBox());
 	}
 
 	private JLabel getLblNom() {
@@ -116,18 +126,26 @@ public class EcranAjoutPersonnel {
 		}
 		return txtMdp;
 	}
-	private JList getListRole() {
-		if (listRole == null) {
-			listRole = new JList();
-			listRole.setBounds(97, 60, 120, 15);
-		}
-		return listRole;
-	}
 	private JButton getBtnValider() {
 		if (btnValider == null) {
 			btnValider = new JButton("Valider");
+			btnValider.addActionListener(new ActionListener() {
+				public void actionPerformed(ActionEvent e) {
+					Personnel personnel = new Personnel();
+					
+					personnelManager.addPersonnel(personnel);
+				}
+			});
 			btnValider.setBounds(128, 122, 89, 23);
 		}
 		return btnValider;
 	}
+	private JComboBox getComboBox() {
+		if (comboBox == null) {
+			comboBox = new JComboBox(new String[] { "Vétérinaire", "Secrétaire", "Assistant", "Stagiaire"});
+			comboBox.setBounds(97, 58, 120, 20);
+		}
+		return comboBox;
+	}
+	
 }
