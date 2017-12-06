@@ -108,7 +108,7 @@ public class PersonnelDAOJdbcImpl implements PersonnelDAO {
 	public List<Personnel> selectAll() throws DALException {
 		openConnection();
 
-		String sql = "SELECT Nom,MotPasse FROM Personnels";
+		String sql = "SELECT Nom,MotPasse,Role FROM Personnels";
 		List<Personnel> personnels = new LinkedList<>();
 
 		try {

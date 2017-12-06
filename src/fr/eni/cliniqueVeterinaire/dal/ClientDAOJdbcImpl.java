@@ -86,7 +86,9 @@ private Connection connection = null;
 			statement = connection.prepareStatement(sql);
 			statement.setString(1, nom);
 			ResultSet resultSet = statement.executeQuery();
+			if(resultSet.next()) {
 			return getClientFromResultset(resultSet);
+			}
 		} catch (SQLException e) {
 			throw new DALException("Erreur à la récupération du client", e);
 		} finally {
@@ -97,6 +99,7 @@ private Connection connection = null;
 				throw new DALException("Erreur à la récupération du client", e);
 			}
 		}
+		return null;
 	}
 
 	@Override
