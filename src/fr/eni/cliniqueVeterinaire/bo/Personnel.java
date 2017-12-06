@@ -4,7 +4,7 @@ public class Personnel {
 private String nom;
 private String pass;
 private String role;
-private String codePers;
+private int codePers;
 
 
 
@@ -39,7 +39,7 @@ public Personnel(String nom, String pass, String role) {
 	this.pass = pass;
 	this.role = role;
 }
-public String getCodePers() {
+public int getCodePers() {
 	return codePers;
 }
 
