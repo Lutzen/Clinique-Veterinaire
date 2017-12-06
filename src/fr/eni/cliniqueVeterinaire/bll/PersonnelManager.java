@@ -29,9 +29,9 @@ public class PersonnelManager {
 	}
 	public Personnel getPersonnelByNom(String nom) throws BLLException {
 		try {
-			return PersonnelDAO.selectByNom(nom);
+			return personnelDAO.selectByNom(nom);
 		} catch (Exception e) {
-			throw new BLLException("getPersonnelList", e);
+			throw new BLLException("getPersonnelByNom", e);
 		}
 
 	}
@@ -40,7 +40,7 @@ public class PersonnelManager {
 
 	public List<Personnel> getPersonnelList() throws BLLException {
 		try {
-			return PersonnelDAO.selectAll();
+			return personnelDAO.selectAll();
 		} catch (Exception e) {
 			throw new BLLException("getPersonnelList", e);
 		}
@@ -49,7 +49,7 @@ public class PersonnelManager {
 
 	public void addPersonnel(Personnel personnel) throws BLLException {
 		try {
-			PersonnelDAO.insert(personnel);
+			personnelDAO.insert(personnel);
 		} catch (Exception e) {
 			throw new BLLException("addPersonnel", e);
 		}
@@ -58,7 +58,7 @@ public class PersonnelManager {
 
 	public void updatePersonnel(Personnel personnel, String mdp) throws BLLException {
 		try {
-			PersonnelDAO.update(personnel, mdp);
+			personnelDAO.update(personnel, mdp);
 
 		} catch (Exception e) {
 			throw new BLLException("updatePersonnel", e);
@@ -68,7 +68,7 @@ public class PersonnelManager {
 
 	public void deletePersonnel(Personnel personnel) throws BLLException {
 		try {
-			PersonnelDAO.delete(personnel);
+			personnelDAO.delete(personnel);
 		} catch (Exception e) {
 			throw new BLLException("deletePersonnel", e);
 		}

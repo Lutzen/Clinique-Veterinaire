@@ -44,12 +44,15 @@ public class PersonnelDAOJdbcImpl implements PersonnelDAO {
 
 		String sql = "SELECT * FROM Personnels WHERE Nom=?";
 		PreparedStatement statement = null;
+		
 
 		try {
 			statement = connection.prepareStatement(sql);
 			statement.setString(1, nom);
 			ResultSet resultSet = statement.executeQuery();
-			return getPersonnelFromResultset(resultSet);
+			if(resultSet.next()) {
+				return getPersonnelFromResultset(resultSet);
+			}			
 		} catch (SQLException e) {
 			throw new DALException("Erreur à la récupération de la personne", e);
 		} finally {
@@ -60,6 +63,7 @@ public class PersonnelDAOJdbcImpl implements PersonnelDAO {
 				throw new DALException("Erreur à la récupération de la personne", e);
 			}
 		}
+		return null;
 	}
 	
 	public void delete(Personnel personne) throws DALException {

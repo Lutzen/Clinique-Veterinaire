@@ -30,7 +30,7 @@ public class AnimalManager {
 
 		public List<Personnel> getAnimalList(int codeClient) throws BLLException {
 			try {
-				return AnimalDAO.selectByClient(codeClient);
+				return animalDAO.selectByClient(codeClient);
 			} catch (Exception e) {
 				throw new BLLException("getAnimalList", e);
 			}
@@ -39,7 +39,7 @@ public class AnimalManager {
 
 		public int addAnimal(Animal animal) throws BLLException {
 			try {
-				return AnimalDAO.insert(animal);
+				return animalDAO.insert(animal);
 			} catch (Exception e) {
 				throw new BLLException("addAnimal", e);
 			}
@@ -48,7 +48,7 @@ public class AnimalManager {
 
 		public void updatePersonnel(Animal animal) throws BLLException {
 			try {
-				AnimalDAO.update(animal);
+				animalDAO.update(animal);
 
 			} catch (Exception e) { 
 				throw new BLLException("updateAnimal", e);
@@ -58,7 +58,7 @@ public class AnimalManager {
 
 		public void deleteAnimal(Animal animal) throws BLLException {
 			try {
-				AnimalDAO.delete(animal);
+				animalDAO.delete(animal);
 			} catch (Exception e) {
 				throw new BLLException("deleteAnimal", e);
 			}

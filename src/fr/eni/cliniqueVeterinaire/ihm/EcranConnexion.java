@@ -111,16 +111,16 @@ public class EcranConnexion {
 			btnValider = new JButton("Valider");
 			btnValider.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
-					Personnel personnel;
+					 
 					try {
-						personnel = personnelManager.getPersonnelByNom(getTxtNom().getText());
-						if(getTxtMotDePasse().getText()== personnel.getPass())
+						Personnel personnel = personnelManager.getPersonnelByNom(getTxtNom().getText());
+						if(getTxtMotDePasse().getText().equals(personnel.getPass()))
 						{
-							if(personnel.getRole()=="adm")
+							if(personnel.getRole().equals("adm"))
 								EcranGestionPersonnel.main();
-							if(personnel.getRole()=="sec")
+							if(personnel.getRole().equals("sec"))
 								EcranRdv.main();
-							if(personnel.getRole()=="vet")
+							if(personnel.getRole().equals("vet"))
 								EcranAgenda.main();
 						}else
 							JOptionPane.showMessageDialog(null, "Nom ou Mot de passe incorrect");
