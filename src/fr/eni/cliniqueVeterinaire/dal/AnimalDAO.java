@@ -1,12 +1,14 @@
 package fr.eni.cliniqueVeterinaire.dal;
 
+import java.util.List;
+
 import fr.eni.cliniqueVeterinaire.bo.Animal;
 
 
 public interface AnimalDAO {
 	
 
-	Animal selectByClient(int codeClient) throws DALException;
+	List<Animal> selectByClient(int codeClient) throws DALException;
 	
 	void delete(Animal animal) throws DALException;
 	

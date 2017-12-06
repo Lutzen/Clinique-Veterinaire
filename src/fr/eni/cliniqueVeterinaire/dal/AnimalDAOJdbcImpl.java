@@ -4,10 +4,11 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.LinkedList;
+import java.util.List;
 
 import fr.eni.cliniqueVeterinaire.bo.Animal;
-import fr.eni.cliniqueVeterinaire.bo.Client;
-import fr.eni.cliniqueVeterinaire.bo.Personnel;
+
 
 public class AnimalDAOJdbcImpl implements AnimalDAO {
 	
@@ -53,20 +54,22 @@ public class AnimalDAOJdbcImpl implements AnimalDAO {
 	}
 
 	@Override
-	public Animal selectByClient(int codeClient) throws DALException {
+	public List<Animal> selectByClient(int codeClient) throws DALException {
 		openConnection();
 
 		String sql = "SELECT * FROM Animaux WHERE CodeClient=? and Archive=0";
 		PreparedStatement statement = null;
+		List<Animal> animal = new LinkedList<>();
 		
 
 		try {
 			statement = connection.prepareStatement(sql);
 			statement.setLong(1, codeClient);
 			ResultSet resultSet = statement.executeQuery();
-			if(resultSet.next()) {
-				return getAnimalFromResultset(resultSet);
-			}			
+			while(resultSet.next()) {
+				 animal.add(getAnimalFromResultset(resultSet));
+			}
+			return animal;
 		} catch (SQLException e) {
 			throw new DALException("Erreur à la récupération par code client de l'animal", e);
 		} finally {
@@ -77,7 +80,6 @@ public class AnimalDAOJdbcImpl implements AnimalDAO {
 				throw new DALException("Erreur à la récupération par code client de l'animal", e);
 			}
 		}
-		return null;
 	}
 
 
