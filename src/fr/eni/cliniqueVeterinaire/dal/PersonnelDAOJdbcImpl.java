@@ -148,7 +148,7 @@ public class PersonnelDAOJdbcImpl implements PersonnelDAO {
 	}
 
 	@Override
-	public List<Personnel> selectbyRole(String role) throws DALException {
+	public List<Personnel> selectByRole(String role) throws DALException {
 		openConnection();
 
 		String sql = "SELECT Nom,MotPasse,Role FROM Personnels WHERE role=? and Archive=0";
