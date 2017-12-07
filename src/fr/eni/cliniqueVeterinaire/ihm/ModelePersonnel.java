@@ -54,8 +54,12 @@ public class ModelePersonnel extends AbstractTableModel {
 		return result;
 	}
 	
-	public void setData() throws BLLException{
-		this.donnees = personnelManager.getPersonnelList();
+	public void setData() {
+		try {
+			this.donnees = personnelManager.getPersonnelList();
+		} catch (BLLException e) {
+			e.printStackTrace();
+		}
 		super.fireTableDataChanged();
 		
 		}

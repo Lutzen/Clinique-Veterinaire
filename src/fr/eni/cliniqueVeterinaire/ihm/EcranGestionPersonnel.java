@@ -1,6 +1,5 @@
 package fr.eni.cliniqueVeterinaire.ihm;
 
-import java.awt.EventQueue;
 import javax.swing.JFrame;
 import fr.eni.cliniqueVeterinaire.bll.BLLException;
 import fr.eni.cliniqueVeterinaire.bll.PersonnelManager;
@@ -9,7 +8,6 @@ import javax.swing.JButton;
 import javax.swing.JTable;
 import javax.swing.SwingUtilities;
 
-import com.sun.xml.internal.bind.v2.schemagen.xmlschema.List;
 
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
@@ -25,43 +23,22 @@ public class EcranGestionPersonnel extends JFrame {
 	JTable list;
 	private ModelePersonnel modelPersonnel;
 
-	public static void main() {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					EcranGestionPersonnel window = new EcranGestionPersonnel();
-					window.frmGestionDuPersonnel.setVisible(true);
-					window.frmGestionDuPersonnel.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}
 
-	/**
-	 * Create the application.
-	 */
+
 	public EcranGestionPersonnel() {
-		initialize();
+		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+		setTitle("Gestion du Personnel");
+		setBounds(100, 100, 450, 300);
+		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		getContentPane().setLayout(null);
+		getContentPane().add(getBtnAjouter());
+		getContentPane().add(getBtnSuppr());
+		getContentPane().add(getBtnReinit());
+		getContentPane().add(getList());
 	}
 
-	/**
-	 * Initialize the contents of the frame.
-	 * 
-	 */
-	private void initialize() {
-		frmGestionDuPersonnel = new JFrame();
-		frmGestionDuPersonnel.setTitle("Gestion du Personnel");
-		frmGestionDuPersonnel.setBounds(100, 100, 450, 300);
-		frmGestionDuPersonnel.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		frmGestionDuPersonnel.getContentPane().setLayout(null);
-		frmGestionDuPersonnel.getContentPane().add(getBtnAjouter());
-		frmGestionDuPersonnel.getContentPane().add(getBtnSuppr());
-		frmGestionDuPersonnel.getContentPane().add(getBtnReinit());
-		frmGestionDuPersonnel.getContentPane().add(getList());
-	}
+
 
 	private JButton getBtnAjouter() {
 		if (btnAjouter == null) {
@@ -95,6 +72,7 @@ public class EcranGestionPersonnel extends JFrame {
 
 						Personnel personnel = personnelManager.getPersonnelByNom(nom);
 						personnelManager.deletePersonnel(personnel);
+						mettreAJour();
 
 					} catch (BLLException e) {
 						// TODO Auto-generated catch block
@@ -104,6 +82,8 @@ public class EcranGestionPersonnel extends JFrame {
 				}
 			});
 			btnSuppr.setBounds(109, 11, 89, 23);
+			
+
 		}
 		return btnSuppr;
 	}
@@ -129,7 +109,7 @@ public class EcranGestionPersonnel extends JFrame {
 		return btnReinit;
 	}
 
-	public void mettreAJour() throws BLLException {
+	public void mettreAJour() {
 		getModelPersonnel().setData();
 	}
 
@@ -148,9 +128,13 @@ public class EcranGestionPersonnel extends JFrame {
 		return list;
 	}
 
-	private ModelePersonnel getModelPersonnel() throws BLLException {
+	private ModelePersonnel getModelPersonnel()  {
 		if (modelPersonnel == null) {
-			modelPersonnel = new ModelePersonnel();
+			try {
+				modelPersonnel = new ModelePersonnel();
+			} catch (BLLException e) {
+				e.printStackTrace();
+			}
 		}
 		return modelPersonnel;
 	}
