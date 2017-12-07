@@ -21,20 +21,23 @@ import fr.eni.cliniqueVeterinaire.bll.BLLException;
 import fr.eni.cliniqueVeterinaire.bll.PersonnelManager;
 import fr.eni.cliniqueVeterinaire.bll.RdvManager;
 import fr.eni.cliniqueVeterinaire.bo.Personnel;
+import fr.eni.cliniqueVeterinaire.bo.Rdv;
 
 import javax.swing.ScrollPaneConstants;
 import javax.swing.SwingUtilities;
+import com.toedter.calendar.JDateChooser;
 
 public class EcranAgenda extends JFrame {
 
 	private JLabel lblVeto;
 	private JLabel lblDate;
-	private JFormattedTextField formattedTextField;
 	private JButton btnDossierMedical;
 	private JComboBox comboBoxVeto;
 	private PersonnelManager personnelManager = PersonnelManager.getInstance();
 	private RdvManager rdvManager = RdvManager.getInstance();
-	private JTable table;
+	private JTable list;
+	//private JList list;
+	private ModeleRdv modeleRdv;
 
 	/**
 	 * Launch the application.
@@ -48,18 +51,22 @@ public class EcranAgenda extends JFrame {
 
 		setTitle("Agenda");
 		setBounds(100, 100, 454, 390);
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		getContentPane().setLayout(null);
 		getContentPane().add(getLblVeto());
 		getContentPane().add(getLblDate());
-		getContentPane().add(getFormattedTextField());
 		getContentPane().add(getBtnDossierMedical());
 		getContentPane().add(getComboBoxVeto());
 		
-		JScrollPane scrollPane = new JScrollPane();
-		scrollPane.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
-		scrollPane.setBounds(10, 39, 418, 271);
-		getContentPane().add(scrollPane);
+//		JScrollPane scrollPane = new JScrollPane();
+//		scrollPane.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
+//		scrollPane.setBounds(10, 39, 418, 271);
+//		getContentPane().add(scrollPane);
+//		scrollPane.setRowHeaderView(getList());
+		
+		JDateChooser dateChooser = new JDateChooser();
+		dateChooser.setBounds(250, 8, 124, 20);
+		getContentPane().add(dateChooser);
 		
 	}
 
@@ -83,6 +90,16 @@ public class EcranAgenda extends JFrame {
 		}
 		return comboBoxVeto;
 	}
+	
+//	private JList getList() {
+//		if (list == null) {
+//			List<Rdv> rdv = rdvManager.getAgenda(2);
+//			list = new JList(new String[]{});
+//			for (int i = 0; i < rdv.size(); i++) {
+//				list.addItem(rdv.get(i).getDateRdv());
+//		}
+//		return list;
+//	}
 
 	private JLabel getLblVeto() {
 		if (lblVeto == null) {
@@ -94,18 +111,9 @@ public class EcranAgenda extends JFrame {
 	private JLabel getLblDate() {
 		if (lblDate == null) {
 			lblDate = new JLabel("Date");
-			lblDate.setBounds(196, 11, 32, 14);
+			lblDate.setBounds(208, 11, 32, 14);
 		}
 		return lblDate;
-	}
-	private JFormattedTextField getFormattedTextField() {
-		if (formattedTextField == null) {
-			formattedTextField = new JFormattedTextField();
-			formattedTextField.setToolTipText("JJ/MM/AAAA");
-			formattedTextField.setText("  /  /    ");
-			formattedTextField.setBounds(238, 8, 46, 20);
-		}
-		return formattedTextField;
 	}
 	private JButton getBtnDossierMedical() {
 		if (btnDossierMedical == null) {
@@ -129,18 +137,37 @@ public class EcranAgenda extends JFrame {
 		}
 		return btnDossierMedical;
 	}
-//	private JTable getTable() {
-//		if (table == null) {
-//
-//			try {
-//				Personnel personnel =personnelManager.getPersonnelByNom((String) comboBoxVeto.getSelectedItem());
-//				table = new JTable(new TableRdv(rdvManager.getAgenda(personnel.getCodePers())));
-//				table.setBounds(10, 133, 561, 318);
-//			} catch (Exception e) {
-//			}
-//
-//		}
-//		return table;
-//
-//	}
+	
+	
+	public void mettreAJour() {
+		getModelRdv().setData();
+	}
+	
+	
+	public JTable getList() {
+		// if (list == null) {
+
+		try {
+
+			list = new JTable(getModelRdv());
+
+			list.setBounds(10, 39, 418, 271);
+		} catch (Exception e) {
+		}
+
+		// }
+		return list;
+	}
+
+	private ModeleRdv getModelRdv()  {
+		if (modeleRdv == null) {
+			try {
+				modeleRdv = new ModeleRdv();
+			} catch (BLLException e) {
+				e.printStackTrace();
+			}
+		}
+		return modeleRdv;
+	}
+
 }

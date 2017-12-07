@@ -6,15 +6,23 @@ import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JTextField;
 import java.awt.event.ActionListener;
+import java.util.List;
 import java.awt.event.ActionEvent;
 import javax.swing.JTextPane;
+
+import fr.eni.cliniqueVeterinaire.bll.BLLException;
+import fr.eni.cliniqueVeterinaire.bll.ClientManager;
+import fr.eni.cliniqueVeterinaire.bll.PersonnelManager;
+import fr.eni.cliniqueVeterinaire.bo.Client;
+import fr.eni.cliniqueVeterinaire.bo.Personnel;
+
+import javax.swing.JComboBox;
 
 public class EcranDossierMedical extends JFrame {
 
 	private JButton btnValider;
 	private JButton btnAnnuler;
 	private JLabel lblClient;
-	private JTextField textField;
 	private JLabel lblAnimal;
 	private JTextField textField_1;
 	private JTextField textField_2;
@@ -24,6 +32,8 @@ public class EcranDossierMedical extends JFrame {
 	private JTextField textField_6;
 	private JLabel lblAntcdentsconsultations;
 	private JTextPane textPane;
+	private JComboBox comboBoxClient;
+	private ClientManager clientManager = ClientManager.getInstance();
 
 
 
@@ -34,12 +44,11 @@ public class EcranDossierMedical extends JFrame {
 		
 		setTitle("Dossier Medical");
 		setBounds(100, 100, 577, 360);
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		getContentPane().setLayout(null);
 		getContentPane().add(getBtnValider());
 		getContentPane().add(getBtnAnnuler());
 		getContentPane().add(getLblClient());
-		getContentPane().add(getTextField());
 		getContentPane().add(getLblAnimal());
 		getContentPane().add(getTextField_1());
 		getContentPane().add(getTextField_2());
@@ -49,8 +58,28 @@ public class EcranDossierMedical extends JFrame {
 		getContentPane().add(getTextField_6());
 		getContentPane().add(getLblAntcdentsconsultations());
 		getContentPane().add(getTextPane());
+		getContentPane().add(getComboBoxClient());
 
 	}
+//	private JComboBox getComboBoxClient() {
+//		if (comboBoxClient == null) {
+//			try {
+//				List<Client> client =clientManager.getClientList();
+//				comboBoxClient= new JComboBox(new String[]{});
+//				for (int i = 0; i < client.size(); i++) {
+//					comboBoxClient.addItem(client.get(i).getNomClient());
+//
+//				}
+//				comboBoxClient.setBounds(54, 51, 133, 20);
+//				
+//			} catch (BLLException e) {
+//				
+//				e.printStackTrace();
+//			}
+//			
+//		}
+//		return comboBoxClient;
+//	}
 
 
 	private JButton getBtnValider() {
@@ -78,14 +107,6 @@ public class EcranDossierMedical extends JFrame {
 			lblClient.setBounds(10, 54, 34, 14);
 		}
 		return lblClient;
-	}
-	private JTextField getTextField() {
-		if (textField == null) {
-			textField = new JTextField();
-			textField.setBounds(54, 51, 169, 20);
-			textField.setColumns(10);
-		}
-		return textField;
 	}
 	protected static void do_btnAnnuler_actionPerformed(ActionEvent arg0) {
 	}
@@ -157,5 +178,12 @@ public class EcranDossierMedical extends JFrame {
 			textPane.setBounds(217, 82, 334, 227);
 		}
 		return textPane;
+	}
+	private JComboBox getComboBoxClient() {
+		if (comboBoxClient == null) {
+			comboBoxClient = new JComboBox();
+			comboBoxClient.setBounds(54, 51, 133, 20);
+		}
+		return comboBoxClient;
 	}
 }
