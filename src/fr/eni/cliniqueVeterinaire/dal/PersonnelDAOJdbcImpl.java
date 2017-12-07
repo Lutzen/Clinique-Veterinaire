@@ -15,7 +15,8 @@ public class PersonnelDAOJdbcImpl implements PersonnelDAO {
 	private Connection connection = null;
 	
 	private Personnel getPersonnelFromResultset(ResultSet resultSet) throws SQLException {
-		Personnel personnel = new Personnel("", "", "");
+		Personnel personnel = new Personnel();
+		personnel.setCodePers(resultSet.getInt("CodePers"));
 		personnel.setNom(resultSet.getString("Nom"));
 		personnel.setPass(resultSet.getString("MotPasse"));
 		personnel.setRole(resultSet.getString("Role"));
