@@ -80,8 +80,7 @@ public class ModeleRdv extends AbstractTableModel{
 	public void setData(int codeVeto) {
 		try {
 			this.donnees = rdvManager.getAgenda(codeVeto);
-			System.out.println("liste:"+ donnees);
-			System.out.println("size " +donnees.size());
+	
 		} catch (BLLException e) {
 			e.printStackTrace();
 		}

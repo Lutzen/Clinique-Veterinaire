@@ -10,6 +10,8 @@ import javax.swing.JTextArea;
 import javax.swing.JButton;
 import javax.swing.ImageIcon;
 import java.awt.event.ActionListener;
+import java.awt.event.ItemEvent;
+import java.awt.event.ItemListener;
 import java.util.List;
 import java.awt.event.ActionEvent;
 import javax.swing.JScrollPane;
@@ -35,6 +37,9 @@ public class EcranAgenda extends JFrame {
 	private PersonnelManager personnelManager = PersonnelManager.getInstance();
 	private RdvManager rdvManager = RdvManager.getInstance();
 	private JTable table;
+	private Personnel personnel;
+	private ModeleRdv modeleRdv;
+	private JTable table_1;
 
 	/**
 	 * Launch the application.
@@ -55,11 +60,7 @@ public class EcranAgenda extends JFrame {
 		getContentPane().add(getFormattedTextField());
 		getContentPane().add(getBtnDossierMedical());
 		getContentPane().add(getComboBoxVeto());
-		
-		JScrollPane scrollPane = new JScrollPane();
-		scrollPane.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
-		scrollPane.setBounds(10, 39, 418, 271);
-		getContentPane().add(scrollPane);
+		getContentPane().add(getTable());
 		
 	}
 
@@ -71,6 +72,11 @@ public class EcranAgenda extends JFrame {
 				comboBoxVeto= new JComboBox(new String[]{});
 				for (int i = 0; i < personnel.size(); i++) {
 					comboBoxVeto.addItem(personnel.get(i).getNom());
+					comboBoxVeto.addItemListener(new ItemListener() {
+						public void itemStateChanged(ItemEvent e) {
+							mettreAJour();
+
+						}});
 
 				}
 				comboBoxVeto.setBounds(79, 8, 97, 20);
@@ -129,18 +135,46 @@ public class EcranAgenda extends JFrame {
 		}
 		return btnDossierMedical;
 	}
-//	private JTable getTable() {
-//		if (table == null) {
-//
-//			try {
-//				Personnel personnel =personnelManager.getPersonnelByNom((String) comboBoxVeto.getSelectedItem());
-//				table = new JTable(new TableRdv(rdvManager.getAgenda(personnel.getCodePers())));
-//				table.setBounds(10, 133, 561, 318);
-//			} catch (Exception e) {
-//			}
-//
-//		}
-//		return table;
-//
-//	}
+	private JTable getTable() {
+		if (table == null) {
+
+			try {
+				table = new JTable(getModeleRdv());
+				comboBoxVeto.setSelectedIndex(0);
+				table.setBounds(10, 36, 418, 273);
+			} catch (Exception e) {
+			}
+
+		}
+		return table;
+
+	}
+
+	public void mettreAJour() {
+
+		try {
+			personnel = personnelManager.getPersonnelByNom((String) comboBoxVeto.getSelectedItem());
+			modeleRdv.setData(personnel.getCodePers());
+
+		} catch (BLLException e) {
+
+			e.printStackTrace();
+		}
+	}
+
+	private ModeleRdv getModeleRdv() {
+		if (modeleRdv == null) {
+			try {
+				personnel = personnelManager.getPersonnelByNom((String) comboBoxVeto.getSelectedItem());
+				
+				System.out.println(personnel);
+				modeleRdv = new ModeleRdv(personnel.getCodePers());
+			} catch (BLLException e) {
+				e.printStackTrace();
+			}
+
+		}
+		return modeleRdv;
+	}
+
 }

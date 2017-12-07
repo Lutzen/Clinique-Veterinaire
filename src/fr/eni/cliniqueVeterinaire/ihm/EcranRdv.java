@@ -165,7 +165,6 @@ public class EcranRdv extends JFrame {
 					cBVetos.addItem(personnel.get(i).getNom());
 					cBVetos.addItemListener(new ItemListener() {
 						public void itemStateChanged(ItemEvent e) {
-							System.out.println("iciiii");
 							mettreAJour();
 
 						}

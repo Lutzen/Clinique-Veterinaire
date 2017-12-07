@@ -4,6 +4,9 @@ import java.awt.EventQueue;
 import javax.swing.JFrame;
 import javax.swing.JTextField;
 import javax.swing.SwingUtilities;
+
+import com.sun.corba.se.impl.oa.poa.ActiveObjectMap.Key;
+
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import fr.eni.cliniqueVeterinaire.bll.BLLException;
@@ -12,6 +15,8 @@ import fr.eni.cliniqueVeterinaire.bo.Personnel;
 import javax.swing.JButton;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
 
 public class EcranConnexion {
 
@@ -102,6 +107,15 @@ public class EcranConnexion {
 	private JButton getBtnValider() {
 		if (btnValider == null) {
 			btnValider = new JButton("Valider");
+			btnValider.addKeyListener(new KeyAdapter() {
+				@Override
+				public void keyPressed(KeyEvent e) {
+				if(e.getKeyCode()==KeyEvent.VK_ENTER)
+				{
+					btnValider.doClick();
+				}
+				}
+			});
 			btnValider.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
 
@@ -155,5 +169,6 @@ public class EcranConnexion {
 		}
 		return btnValider;
 	}
+
 
 }
