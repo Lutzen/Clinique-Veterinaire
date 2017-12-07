@@ -26,12 +26,12 @@ import fr.eni.cliniqueVeterinaire.bo.Personnel;
 
 import javax.swing.ScrollPaneConstants;
 import javax.swing.SwingUtilities;
+import com.toedter.calendar.JDateChooser;
 
 public class EcranAgenda extends JFrame {
 
 	private JLabel lblVeto;
 	private JLabel lblDate;
-	private JFormattedTextField formattedTextField;
 	private JButton btnDossierMedical;
 	private JComboBox comboBoxVeto;
 	private PersonnelManager personnelManager = PersonnelManager.getInstance();
@@ -40,6 +40,7 @@ public class EcranAgenda extends JFrame {
 	private Personnel personnel;
 	private ModeleRdv modeleRdv;
 	private JTable table_1;
+	private JDateChooser dateChooser;
 
 	
 	/**
@@ -58,10 +59,12 @@ public class EcranAgenda extends JFrame {
 		getContentPane().setLayout(null);
 		getContentPane().add(getLblVeto());
 		getContentPane().add(getLblDate());
-		getContentPane().add(getFormattedTextField());
 		getContentPane().add(getBtnDossierMedical());
 		getContentPane().add(getComboBoxVeto());
 		getContentPane().add(getTable());
+		getContentPane().add(getDateChooser());
+		
+
 		
 	}
 
@@ -104,15 +107,6 @@ public class EcranAgenda extends JFrame {
 			lblDate.setBounds(196, 11, 32, 14);
 		}
 		return lblDate;
-	}
-	private JFormattedTextField getFormattedTextField() {
-		if (formattedTextField == null) {
-			formattedTextField = new JFormattedTextField();
-			formattedTextField.setToolTipText("JJ/MM/AAAA");
-			formattedTextField.setText("  /  /    ");
-			formattedTextField.setBounds(238, 8, 46, 20);
-		}
-		return formattedTextField;
 	}
 	private JButton getBtnDossierMedical() {
 		if (btnDossierMedical == null) {
@@ -177,5 +171,11 @@ public class EcranAgenda extends JFrame {
 		}
 		return modeleRdv;
 	}
-
+	private JDateChooser getDateChooser() {
+		if (dateChooser == null) {
+			dateChooser = new JDateChooser();
+			dateChooser.setBounds(238, 8, 124, 20);
+		}
+		return dateChooser;
+	}
 }

@@ -16,7 +16,7 @@ public class ClientDAOJdbcImpl implements ClientDAO {
 private Connection connection = null;
 	
 	private Client getClientFromResultset(ResultSet resultSet) throws SQLException {
-		Client client = new Client("", "", "", "", "", "", "", "", "", "");
+		Client client = new Client();
 		client.setNomClient(resultSet.getString("NomClient"));
 		client.setPrenomClient(resultSet.getString("PrenomClient"));
 		client.setAdresse1(resultSet.getString("Adresse1"));
