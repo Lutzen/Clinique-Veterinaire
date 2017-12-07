@@ -19,9 +19,8 @@ import java.awt.event.ActionEvent;
 
 
 
-public class EcranAjoutPersonnel {
+public class EcranAjoutPersonnel extends JFrame {
 
-	private JFrame frmAjoutEmploy;
 	private JLabel lblNom;
 	private JLabel lblPrenom;
 	private JLabel lblPoste;
@@ -32,50 +31,29 @@ public class EcranAjoutPersonnel {
 	private JButton btnValider;
 	private JComboBox comboBox;
 	private PersonnelManager personnelManager = PersonnelManager.getInstance();
-
-	/**
-	 * Launch the application.
-	 */
-	public static void main() {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					EcranAjoutPersonnel window = new EcranAjoutPersonnel();
-					window.frmAjoutEmploy.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}
+	
+	private EcranGestionPersonnel ecranGestion;
 
 	/**
 	 * Create the application.
 	 */
-	public EcranAjoutPersonnel() {
-		initialize();
-	}
-
-	/**
-	 * Initialize the contents of the frame.
-	 */
-	private void initialize() {
-		frmAjoutEmploy = new JFrame();
-		frmAjoutEmploy.setTitle("Ajout d'un employ\u00E9");
-		frmAjoutEmploy.setBounds(100, 100, 261, 195);
-		frmAjoutEmploy.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		frmAjoutEmploy.getContentPane().setLayout(null);
-		frmAjoutEmploy.getContentPane().add(getLblNom());
-		frmAjoutEmploy.getContentPane().add(getLblPrenom());
-		frmAjoutEmploy.getContentPane().add(getLblPoste());
-		frmAjoutEmploy.getContentPane().add(getLblMotDePasse());
-		frmAjoutEmploy.getContentPane().add(getTxtNom());
-		frmAjoutEmploy.getContentPane().add(getTxtPrenom());
-		frmAjoutEmploy.getContentPane().add(getTxtMdp());
-		frmAjoutEmploy.getContentPane().add(getBtnValider());
-		frmAjoutEmploy.getContentPane().add(getComboBox());
-		frmAjoutEmploy.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-
+	public EcranAjoutPersonnel(EcranGestionPersonnel ecranGestion) {
+		setTitle("Ajout d'un employé");
+		setBounds(100, 100, 261, 195);
+		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		getContentPane().setLayout(null);
+		getContentPane().add(getLblNom());
+		getContentPane().add(getLblPrenom());
+		getContentPane().add(getLblPoste());
+		getContentPane().add(getLblMotDePasse());
+		getContentPane().add(getTxtNom());
+		getContentPane().add(getTxtPrenom());
+		getContentPane().add(getTxtMdp());
+		getContentPane().add(getBtnValider());
+		getContentPane().add(getComboBox());
+		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+		
+		this.ecranGestion = ecranGestion;
 	}
 
 	private JLabel getLblNom() {
@@ -157,7 +135,10 @@ public class EcranAjoutPersonnel {
 					}
 					personnelManager.addPersonnel(personnel);
 					JOptionPane.showMessageDialog(null, "Personnel ajouté avec succès");
-					frmAjoutEmploy.dispose();
+
+					ecranGestion.mettreAJour();
+					
+					dispose();
 					} catch (BLLException e1) {
 						// TODO Auto-generated catch block
 						e1.printStackTrace();

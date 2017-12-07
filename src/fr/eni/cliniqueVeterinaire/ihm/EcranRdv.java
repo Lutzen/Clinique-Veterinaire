@@ -179,7 +179,7 @@ public class EcranRdv {
 		if (cBVetos == null) {
 			try {
 				List<Personnel> personnel =personnelManager.getPersonnelByRole("vet");
-				cBVetos = new JComboBox(new String[] {});;
+				cBVetos = new JComboBox(new String[] {});
 				for (int i = 0; i < personnel.size(); i++) {
 					cBVetos.addItem(personnel.get(i).getNom());
 

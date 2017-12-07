@@ -2,29 +2,29 @@ package fr.eni.cliniqueVeterinaire.ihm;
 
 
 import java.awt.EventQueue;
-
 import javax.swing.JFrame;
-
 import fr.eni.cliniqueVeterinaire.bll.BLLException;
 import fr.eni.cliniqueVeterinaire.bll.PersonnelManager;
 import fr.eni.cliniqueVeterinaire.bo.Personnel;
-
-
 import javax.swing.JButton;
 import javax.swing.JTable;
+import javax.swing.SwingUtilities;
+
+import com.sun.xml.internal.bind.v2.schemagen.xmlschema.List;
 
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 
 public class EcranGestionPersonnel {
 
-	private JFrame frmGestionDuPersonnel;
+	static JFrame frmGestionDuPersonnel;
 	private JButton btnAjouter;
 	private JButton btnSuppr;
 	private JButton btnReinit;
 
 	private PersonnelManager personnelManager = PersonnelManager.getInstance();
-	private JTable list;
+	JTable list;
+	private TablePersonnel modelPersonnel;
 
 	public static void main() {
 		EventQueue.invokeLater(new Runnable() {
@@ -69,7 +69,15 @@ public class EcranGestionPersonnel {
 			btnAjouter = new JButton("Ajouter");
 			btnAjouter.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
-					EcranAjoutPersonnel.main();
+					SwingUtilities.invokeLater(new Runnable() {
+						
+						@Override
+						public void run() {
+							EcranAjoutPersonnel frame = new EcranAjoutPersonnel(EcranGestionPersonnel.this);
+							frame.setVisible(true);
+						}
+					});
+					
 				}
 			});
 			btnAjouter.setBounds(10, 11, 89, 23);
@@ -122,39 +130,32 @@ public class EcranGestionPersonnel {
 		return btnReinit;
 	}
 
-	// private JList getList() {
-	// if (list == null) {
-	// DefaultListModel model = new DefaultListModel();
-	// list = new JList(model);
-	// try {
-	// for (Personnel personnel : personnelManager.getPersonnelList()) {
-	// model.addElement(personnel.getNom() + "\t"+ personnel.getRole());
-	//
-	//
-	// }
-	// } catch (BLLException e) {
-	//
-	// e.printStackTrace();
-	// }
-	// list.setBounds(10, 45, 414, 205);
-	//
-	// }
-	// return list;
-	//
-	// }
+	
+	public void mettreAJour() throws BLLException {
+		getModelPersonnel().setData();
+	}
 
-	private JTable getList() {
-		if (list == null) {
+	public JTable getList() {
+//		if (list == null) {
 
 			try {
 
-				list = new JTable(new TablePersonnel(personnelManager.getPersonnelList()));
+				list = new JTable(getModelPersonnel());
+				
 				list.setBounds(10, 45, 414, 205);
 			} catch (Exception e) {
 			}
 
-		}
+//		}
 		return list;
 	}
+	
+	private TablePersonnel getModelPersonnel() throws BLLException {
+		if(modelPersonnel == null) {
+			modelPersonnel = new TablePersonnel();
+		}
+		return modelPersonnel;
+	}
+	
 
 }

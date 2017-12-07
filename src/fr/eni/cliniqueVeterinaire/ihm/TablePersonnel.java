@@ -4,6 +4,8 @@ import java.util.List;
 
 import javax.swing.table.AbstractTableModel;
 
+import fr.eni.cliniqueVeterinaire.bll.BLLException;
+import fr.eni.cliniqueVeterinaire.bll.PersonnelManager;
 import fr.eni.cliniqueVeterinaire.bo.Personnel;
 
 public class TablePersonnel extends AbstractTableModel {
@@ -13,13 +15,15 @@ public class TablePersonnel extends AbstractTableModel {
 	
 	private static final long serialVersionUID = 1L;
 
-	private final List<Personnel> donnees;
+	private PersonnelManager personnelManager = PersonnelManager.getInstance();
+	
+	private  List<Personnel> donnees;
 	
 	private final String[] entetes = { "Nom", "Role" };
 
-	public TablePersonnel(List<Personnel> donnees) {
+	public TablePersonnel() throws BLLException {
 		super();
-		this.donnees = donnees;
+		setData();
 	}
 
 	public int getRowCount() {
@@ -49,4 +53,11 @@ public class TablePersonnel extends AbstractTableModel {
 			
 		return result;
 	}
+	
+	public void setData() throws BLLException{
+		this.donnees = personnelManager.getPersonnelList();
+		super.fireTableDataChanged();
+		
+		}
+		
 }
