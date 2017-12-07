@@ -17,56 +17,29 @@ import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 
-public class EcranInitPass {
+public class EcranInitPass extends JFrame{
 
-	private JFrame frame;
 	private JLabel lblNouveauMotDe;
 	private JTextField txtNewPass;
 	private JButton btnNewButton;
 	private PersonnelManager personnelManager = PersonnelManager.getInstance();
 	private static Personnel personne;
 	private JLabel lblNom;
+	
 
-	/**
-	 * Launch the application.
-	 */
-	public static void main(Personnel personnel) {
+
+	public EcranInitPass(Personnel personnel) {
 		personne = personnel;
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					EcranInitPass window = new EcranInitPass();
-					window.frame.setVisible(true);
-					window.frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-
-					
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
+		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+		setBounds(100, 100, 186, 162);
+		getContentPane().setLayout(null);
+		getContentPane().add(getLblNouveauMotDe());
+		getContentPane().add(getTxtNewPass());
+		getContentPane().add(getBtnValider());
+		getContentPane().add(getLblNom());
+		
 	}
 
-	/**
-	 * Create the application.
-	 */
-	public EcranInitPass() {
-		initialize();
-	}
-
-	/**
-	 * Initialize the contents of the frame.
-	 */
-	private void initialize() {
-		frame = new JFrame();
-		frame.setBounds(100, 100, 186, 162);
-		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		frame.getContentPane().setLayout(null);
-		frame.getContentPane().add(getLblNouveauMotDe());
-		frame.getContentPane().add(getTxtNewPass());
-		frame.getContentPane().add(getBtnValider());
-		frame.getContentPane().add(getLblNom());
-	}
 	private JLabel getLblNouveauMotDe() {
 		if (lblNouveauMotDe == null) {
 			lblNouveauMotDe = new JLabel("Nouveau mot de passe pour");
@@ -90,7 +63,7 @@ public class EcranInitPass {
 					try {
 						personnelManager.updatePersonnel(personne, getTxtNewPass().getText());
 						JOptionPane.showMessageDialog(null, "Mot de passe modifié");
-						frame.dispose();
+						dispose();
 					} catch (BLLException e1) {
 						// TODO Auto-generated catch block
 						e1.printStackTrace();

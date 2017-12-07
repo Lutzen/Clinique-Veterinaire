@@ -7,6 +7,7 @@ import javax.swing.table.AbstractTableModel;
 import fr.eni.cliniqueVeterinaire.bll.AnimalManager;
 import fr.eni.cliniqueVeterinaire.bll.BLLException;
 import fr.eni.cliniqueVeterinaire.bll.ClientManager;
+import fr.eni.cliniqueVeterinaire.bll.RdvManager;
 import fr.eni.cliniqueVeterinaire.bo.Animal;
 import fr.eni.cliniqueVeterinaire.bo.Client;
 import fr.eni.cliniqueVeterinaire.bo.Rdv;
@@ -18,13 +19,14 @@ public class ModeleRdv extends AbstractTableModel{
 	private static final long serialVersionUID = 1L;
 	private AnimalManager animalManager = AnimalManager.getInstance();
 	private ClientManager clientManager = ClientManager.getInstance();
-	private final List<Rdv> donnees;
-	
+	private  List<Rdv> donnees;
+	private RdvManager rdvManager = RdvManager.getInstance();
 	private final String[] entetes = { "Heure", "Client","Animal","Espece" };
 
-	public ModeleRdv(List<Rdv> donnees) {
+	public ModeleRdv(int codeVeto) {
 		super();
-		this.donnees = donnees;
+		setData(codeVeto);
+	
 	}
 
 	public int getRowCount() {
@@ -72,6 +74,18 @@ public class ModeleRdv extends AbstractTableModel{
 	
 		return null;
 	
+		
+	}
+	
+	public void setData(int codeVeto) {
+		try {
+			this.donnees = rdvManager.getAgenda(codeVeto);
+			System.out.println("liste:"+ donnees);
+			System.out.println("size " +donnees.size());
+		} catch (BLLException e) {
+			e.printStackTrace();
+		}
+		fireTableDataChanged();
 		
 	}
 

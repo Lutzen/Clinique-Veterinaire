@@ -17,6 +17,10 @@ import fr.eni.cliniqueVeterinaire.bll.RdvManager;
 import fr.eni.cliniqueVeterinaire.bo.Personnel;
 
 import javax.swing.JTable;
+import java.awt.event.ActionListener;
+import java.awt.event.ItemEvent;
+import java.awt.event.ItemListener;
+import java.awt.event.ActionEvent;
 
 public class EcranRdv extends JFrame {
 
@@ -33,7 +37,7 @@ public class EcranRdv extends JFrame {
 	private JComboBox cBVetos;
 	private JLabel lblQuand;
 	private JLabel lblDate;
-	private JFormattedTextField formattedTextField;
+	private JFormattedTextField txtDate;
 	private JLabel lblHeure;
 	private JComboBox cBHeures;
 	private JLabel lblH;
@@ -41,8 +45,9 @@ public class EcranRdv extends JFrame {
 	private JButton btnValider;
 	private JButton btnSupprimer;
 	private JTable table;
-	private RdvManager rdvManager = RdvManager.getInstance();
 	private PersonnelManager personnelManager = PersonnelManager.getInstance();
+	private ModeleRdv modeleRdv;
+	private Personnel personnel;
 
 	/**
 	 * Create the application.
@@ -65,7 +70,7 @@ public class EcranRdv extends JFrame {
 		getContentPane().add(getCBVetos());
 		getContentPane().add(getLblQuand());
 		getContentPane().add(getLblDate());
-		getContentPane().add(getFormattedTextField());
+		getContentPane().add(getTxtDate());
 		getContentPane().add(getLblHeure());
 		getContentPane().add(getCBHeures());
 		getContentPane().add(getLblH());
@@ -158,6 +163,13 @@ public class EcranRdv extends JFrame {
 				cBVetos = new JComboBox(new String[] {});
 				for (int i = 0; i < personnel.size(); i++) {
 					cBVetos.addItem(personnel.get(i).getNom());
+					cBVetos.addItemListener(new ItemListener() {
+						public void itemStateChanged(ItemEvent e) {
+							System.out.println("iciiii");
+							mettreAJour();
+
+						}
+					});
 
 				}
 				cBVetos.setBounds(256, 51, 131, 20);
@@ -187,13 +199,13 @@ public class EcranRdv extends JFrame {
 		return lblDate;
 	}
 
-	private JFormattedTextField getFormattedTextField() {
-		if (formattedTextField == null) {
-			formattedTextField = new JFormattedTextField();
-			formattedTextField.setText("  /  /    ");
-			formattedTextField.setBounds(428, 51, 92, 20);
+	private JFormattedTextField getTxtDate() {
+		if (txtDate == null) {
+			txtDate = new JFormattedTextField();
+			txtDate.setText("  /  /    ");
+			txtDate.setBounds(428, 51, 92, 20);
 		}
-		return formattedTextField;
+		return txtDate;
 	}
 
 	private JLabel getLblHeure() {
@@ -248,8 +260,8 @@ public class EcranRdv extends JFrame {
 		if (table == null) {
 
 			try {
-				Personnel personnel = personnelManager.getPersonnelByNom((String) cBVetos.getSelectedItem());
-				table = new JTable(new ModeleRdv(rdvManager.getAgenda(personnel.getCodePers())));
+				table = new JTable(getModeleRdv());
+				cBVetos.setSelectedIndex(0);
 				table.setBounds(10, 133, 561, 318);
 			} catch (Exception e) {
 			}
@@ -257,6 +269,33 @@ public class EcranRdv extends JFrame {
 		}
 		return table;
 
+	}
+
+	public void mettreAJour() {
+
+		try {
+			personnel = personnelManager.getPersonnelByNom((String) cBVetos.getSelectedItem());
+			modeleRdv.setData(personnel.getCodePers());
+
+		} catch (BLLException e) {
+
+			e.printStackTrace();
+		}
+	}
+
+	private ModeleRdv getModeleRdv() {
+		if (modeleRdv == null) {
+			try {
+				personnel = personnelManager.getPersonnelByNom((String) cBVetos.getSelectedItem());
+				
+				System.out.println(personnel);
+				modeleRdv = new ModeleRdv(personnel.getCodePers());
+			} catch (BLLException e) {
+				e.printStackTrace();
+			}
+
+		}
+		return modeleRdv;
 	}
 
 }

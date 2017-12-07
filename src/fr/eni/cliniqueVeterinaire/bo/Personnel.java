@@ -1,6 +1,10 @@
 package fr.eni.cliniqueVeterinaire.bo;
 
 public class Personnel {
+@Override
+	public String toString() {
+		return "Personnel [nom=" + nom + ", pass=" + pass + ", role=" + role + ", codePers=" + codePers + "]";
+	}
 private String nom;
 private String pass;
 private String role;
@@ -10,6 +14,12 @@ private int codePers;
 
 
 
+public int getCodePers() {
+	return codePers;
+}
+public void setCodePers(int codePers) {
+	this.codePers = codePers;
+}
 public String getNom() {
 	return nom;
 }
@@ -39,8 +49,6 @@ public Personnel(String nom, String pass, String role) {
 	this.pass = pass;
 	this.role = role;
 }
-public int getCodePers() {
-	return codePers;
-}
+
 
 }

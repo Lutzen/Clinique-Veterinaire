@@ -1,13 +1,14 @@
 package fr.eni.cliniqueVeterinaire.ihm;
 
 import javax.swing.JFrame;
+import javax.swing.JOptionPane;
+
 import fr.eni.cliniqueVeterinaire.bll.BLLException;
 import fr.eni.cliniqueVeterinaire.bll.PersonnelManager;
 import fr.eni.cliniqueVeterinaire.bo.Personnel;
 import javax.swing.JButton;
 import javax.swing.JTable;
 import javax.swing.SwingUtilities;
-
 
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
@@ -23,22 +24,16 @@ public class EcranGestionPersonnel extends JFrame {
 	JTable list;
 	private ModelePersonnel modelPersonnel;
 
-
-
-
 	public EcranGestionPersonnel() {
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		setTitle("Gestion du Personnel");
 		setBounds(100, 100, 450, 300);
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		getContentPane().setLayout(null);
 		getContentPane().add(getBtnAjouter());
 		getContentPane().add(getBtnSuppr());
 		getContentPane().add(getBtnReinit());
 		getContentPane().add(getList());
 	}
-
-
 
 	private JButton getBtnAjouter() {
 		if (btnAjouter == null) {
@@ -68,12 +63,15 @@ public class EcranGestionPersonnel extends JFrame {
 
 				public void actionPerformed(ActionEvent arg0) {
 					try {
-						String nom = (String) list.getValueAt(list.getSelectedRow(), 0);
-
-						Personnel personnel = personnelManager.getPersonnelByNom(nom);
-						personnelManager.deletePersonnel(personnel);
-						mettreAJour();
-
+						if (list.getSelectedRow() == -1)
+							JOptionPane.showMessageDialog(null, "Selectionnez un personnel");
+						else {
+							JOptionPane.showMessageDialog(null, "Personnel supprimé avec succès");
+							String nom = (String) list.getValueAt(list.getSelectedRow(), 0);
+							Personnel personnel = personnelManager.getPersonnelByNom(nom);
+							personnelManager.deletePersonnel(personnel);
+							mettreAJour();
+						}
 					} catch (BLLException e) {
 						// TODO Auto-generated catch block
 						e.printStackTrace();
@@ -82,7 +80,6 @@ public class EcranGestionPersonnel extends JFrame {
 				}
 			});
 			btnSuppr.setBounds(109, 11, 89, 23);
-			
 
 		}
 		return btnSuppr;
@@ -94,9 +91,20 @@ public class EcranGestionPersonnel extends JFrame {
 			btnReinit.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
 					try {
-						String nom = (String) list.getValueAt(list.getSelectedRow(), 0);
-						Personnel personnel = personnelManager.getPersonnelByNom(nom);
-						EcranInitPass.main(personnel);
+						if (list.getSelectedRow() == -1)
+							JOptionPane.showMessageDialog(null, "Selectionnez un personnel");
+						else {
+							String nom = (String) list.getValueAt(list.getSelectedRow(), 0);
+							Personnel personne = personnelManager.getPersonnelByNom(nom);
+							SwingUtilities.invokeLater(new Runnable() {
+
+								@Override
+								public void run() {
+									EcranInitPass frame = new EcranInitPass(personne);
+									frame.setVisible(true);
+								}
+							});
+						}
 
 					} catch (BLLException e1) {
 						// TODO Auto-generated catch block
@@ -128,7 +136,7 @@ public class EcranGestionPersonnel extends JFrame {
 		return list;
 	}
 
-	private ModelePersonnel getModelPersonnel()  {
+	private ModelePersonnel getModelPersonnel() {
 		if (modelPersonnel == null) {
 			try {
 				modelPersonnel = new ModelePersonnel();
