@@ -1,6 +1,5 @@
 package fr.eni.cliniqueVeterinaire.ihm;
 
-
 import java.awt.EventQueue;
 import javax.swing.JFrame;
 import fr.eni.cliniqueVeterinaire.bll.BLLException;
@@ -15,7 +14,7 @@ import com.sun.xml.internal.bind.v2.schemagen.xmlschema.List;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 
-public class EcranGestionPersonnel {
+public class EcranGestionPersonnel extends JFrame {
 
 	static JFrame frmGestionDuPersonnel;
 	private JButton btnAjouter;
@@ -24,7 +23,7 @@ public class EcranGestionPersonnel {
 
 	private PersonnelManager personnelManager = PersonnelManager.getInstance();
 	JTable list;
-	private TablePersonnel modelPersonnel;
+	private ModelePersonnel modelPersonnel;
 
 	public static void main() {
 		EventQueue.invokeLater(new Runnable() {
@@ -70,14 +69,14 @@ public class EcranGestionPersonnel {
 			btnAjouter.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
 					SwingUtilities.invokeLater(new Runnable() {
-						
+
 						@Override
 						public void run() {
 							EcranAjoutPersonnel frame = new EcranAjoutPersonnel(EcranGestionPersonnel.this);
 							frame.setVisible(true);
 						}
 					});
-					
+
 				}
 			});
 			btnAjouter.setBounds(10, 11, 89, 23);
@@ -130,32 +129,30 @@ public class EcranGestionPersonnel {
 		return btnReinit;
 	}
 
-	
 	public void mettreAJour() throws BLLException {
 		getModelPersonnel().setData();
 	}
 
 	public JTable getList() {
-//		if (list == null) {
+		// if (list == null) {
 
-			try {
+		try {
 
-				list = new JTable(getModelPersonnel());
-				
-				list.setBounds(10, 45, 414, 205);
-			} catch (Exception e) {
-			}
+			list = new JTable(getModelPersonnel());
 
-//		}
+			list.setBounds(10, 45, 414, 205);
+		} catch (Exception e) {
+		}
+
+		// }
 		return list;
 	}
-	
-	private TablePersonnel getModelPersonnel() throws BLLException {
-		if(modelPersonnel == null) {
-			modelPersonnel = new TablePersonnel();
+
+	private ModelePersonnel getModelPersonnel() throws BLLException {
+		if (modelPersonnel == null) {
+			modelPersonnel = new ModelePersonnel();
 		}
 		return modelPersonnel;
 	}
-	
 
 }

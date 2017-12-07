@@ -18,7 +18,7 @@ import fr.eni.cliniqueVeterinaire.bo.Personnel;
 
 import javax.swing.JTable;
 
-public class EcranRdv {
+public class EcranRdv extends JFrame {
 
 	private JFrame frmPriseDeRendezvous;
 	private JLabel lblPour;
@@ -44,59 +44,35 @@ public class EcranRdv {
 	private RdvManager rdvManager = RdvManager.getInstance();
 	private PersonnelManager personnelManager = PersonnelManager.getInstance();
 
-
-	/**
-	 * Launch the application.
-	 */
-	public static void main() {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					EcranRdv window = new EcranRdv();
-					window.frmPriseDeRendezvous.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}
-
 	/**
 	 * Create the application.
 	 */
 	public EcranRdv() {
-		initialize();
-	}
 
-	/**
-	 * Initialize the contents of the frame.
-	 */
-	private void initialize() {
-		frmPriseDeRendezvous = new JFrame();
-		frmPriseDeRendezvous.setTitle("Prise de rendez-vous");
-		frmPriseDeRendezvous.setBounds(100, 100, 597, 534);
-		frmPriseDeRendezvous.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		frmPriseDeRendezvous.getContentPane().setLayout(null);
-		frmPriseDeRendezvous.getContentPane().add(getLblPour());
-		frmPriseDeRendezvous.getContentPane().add(getLblClient());
-		frmPriseDeRendezvous.getContentPane().add(getCBClients());
-		frmPriseDeRendezvous.getContentPane().add(getLblAnimal());
-		frmPriseDeRendezvous.getContentPane().add(getCBAnimaux());
-		frmPriseDeRendezvous.getContentPane().add(getBtnNewButton());
-		frmPriseDeRendezvous.getContentPane().add(getButton());
-		frmPriseDeRendezvous.getContentPane().add(getLblPar());
-		frmPriseDeRendezvous.getContentPane().add(getLblVtrinaire());
-		frmPriseDeRendezvous.getContentPane().add(getCBVetos());
-		frmPriseDeRendezvous.getContentPane().add(getLblQuand());
-		frmPriseDeRendezvous.getContentPane().add(getLblDate());
-		frmPriseDeRendezvous.getContentPane().add(getFormattedTextField());
-		frmPriseDeRendezvous.getContentPane().add(getLblHeure());
-		frmPriseDeRendezvous.getContentPane().add(getCBHeures());
-		frmPriseDeRendezvous.getContentPane().add(getLblH());
-		frmPriseDeRendezvous.getContentPane().add(getCBMinutes());
-		frmPriseDeRendezvous.getContentPane().add(getBtnValider());
-		frmPriseDeRendezvous.getContentPane().add(getBtnSupprimer());
-		frmPriseDeRendezvous.getContentPane().add(getTable());
+		setTitle("Prise de rendez-vous");
+		setBounds(100, 100, 597, 534);
+		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		getContentPane().setLayout(null);
+		getContentPane().add(getLblPour());
+		getContentPane().add(getLblClient());
+		getContentPane().add(getCBClients());
+		getContentPane().add(getLblAnimal());
+		getContentPane().add(getCBAnimaux());
+		getContentPane().add(getBtnNewButton());
+		getContentPane().add(getButton());
+		getContentPane().add(getLblPar());
+		getContentPane().add(getLblVtrinaire());
+		getContentPane().add(getCBVetos());
+		getContentPane().add(getLblQuand());
+		getContentPane().add(getLblDate());
+		getContentPane().add(getFormattedTextField());
+		getContentPane().add(getLblHeure());
+		getContentPane().add(getCBHeures());
+		getContentPane().add(getLblH());
+		getContentPane().add(getCBMinutes());
+		getContentPane().add(getBtnValider());
+		getContentPane().add(getBtnSupprimer());
+		getContentPane().add(getTable());
 	}
 
 	private JLabel getLblPour() {
@@ -178,23 +154,22 @@ public class EcranRdv {
 	private JComboBox getCBVetos() {
 		if (cBVetos == null) {
 			try {
-				List<Personnel> personnel =personnelManager.getPersonnelByRole("vet");
+				List<Personnel> personnel = personnelManager.getPersonnelByRole("vet");
 				cBVetos = new JComboBox(new String[] {});
 				for (int i = 0; i < personnel.size(); i++) {
 					cBVetos.addItem(personnel.get(i).getNom());
 
 				}
 				cBVetos.setBounds(256, 51, 131, 20);
-				
+
 			} catch (BLLException e) {
-				
+
 				e.printStackTrace();
 			}
-			
+
 		}
 		return cBVetos;
 	}
-
 
 	private JLabel getLblQuand() {
 		if (lblQuand == null) {
@@ -273,8 +248,8 @@ public class EcranRdv {
 		if (table == null) {
 
 			try {
-				Personnel personnel =personnelManager.getPersonnelByNom((String) cBVetos.getSelectedItem());
-				table = new JTable(new TableRdv(rdvManager.getAgenda(personnel.getCodePers())));
+				Personnel personnel = personnelManager.getPersonnelByNom((String) cBVetos.getSelectedItem());
+				table = new JTable(new ModeleRdv(rdvManager.getAgenda(personnel.getCodePers())));
 				table.setBounds(10, 133, 561, 318);
 			} catch (Exception e) {
 			}

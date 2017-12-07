@@ -3,6 +3,7 @@ package fr.eni.cliniqueVeterinaire.ihm;
 import java.awt.EventQueue;
 import javax.swing.JFrame;
 import javax.swing.JTextField;
+import javax.swing.SwingUtilities;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import fr.eni.cliniqueVeterinaire.bll.BLLException;
@@ -110,12 +111,38 @@ public class EcranConnexion {
 						personnel = personnelManager.getPersonnelByNom(getTxtNom().getText());
 
 						if (getTxtMotDePasse().getText().equals(personnel.getPass())) {
-							if (personnel.getRole().equals("adm"))
-								EcranGestionPersonnel.main();
-							if (personnel.getRole().equals("sec"))
-								EcranRdv.main();
-							if (personnel.getRole().equals("vet"))
-								EcranAgenda.main();
+							if (personnel.getRole().equals("adm")) {
+								SwingUtilities.invokeLater(new Runnable() {
+
+									@Override
+									public void run() {
+										EcranGestionPersonnel frame = new EcranGestionPersonnel();
+										frame.setVisible(true);
+									}
+								});
+							}
+							if (personnel.getRole().equals("sec")) {
+								SwingUtilities.invokeLater(new Runnable() {
+
+									@Override
+									public void run() {
+										EcranRdv frame = new EcranRdv();
+										frame.setVisible(true);
+									}
+								});
+							}
+
+							if (personnel.getRole().equals("vet")) {
+								SwingUtilities.invokeLater(new Runnable() {
+
+									@Override
+									public void run() {
+										EcranAgenda frame = new EcranAgenda();
+										frame.setVisible(true);
+									}
+								});
+							}
+						
 						} else
 							JOptionPane.showMessageDialog(null, "Mot de passe incorrect");
 					} catch (BLLException e1) {

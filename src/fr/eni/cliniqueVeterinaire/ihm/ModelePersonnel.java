@@ -8,7 +8,7 @@ import fr.eni.cliniqueVeterinaire.bll.BLLException;
 import fr.eni.cliniqueVeterinaire.bll.PersonnelManager;
 import fr.eni.cliniqueVeterinaire.bo.Personnel;
 
-public class TablePersonnel extends AbstractTableModel {
+public class ModelePersonnel extends AbstractTableModel {
 	/**
 		 * 
 		 */
@@ -21,7 +21,7 @@ public class TablePersonnel extends AbstractTableModel {
 	
 	private final String[] entetes = { "Nom", "Role" };
 
-	public TablePersonnel() throws BLLException {
+	public ModelePersonnel() throws BLLException {
 		super();
 		setData();
 	}

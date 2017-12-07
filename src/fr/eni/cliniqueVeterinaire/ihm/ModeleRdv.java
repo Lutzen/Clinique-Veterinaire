@@ -11,7 +11,7 @@ import fr.eni.cliniqueVeterinaire.bo.Animal;
 import fr.eni.cliniqueVeterinaire.bo.Client;
 import fr.eni.cliniqueVeterinaire.bo.Rdv;
 
-public class TableRdv extends AbstractTableModel{
+public class ModeleRdv extends AbstractTableModel{
 	/**
 	 * 
 	 */
@@ -22,7 +22,7 @@ public class TableRdv extends AbstractTableModel{
 	
 	private final String[] entetes = { "Heure", "Client","Animal","Espece" };
 
-	public TableRdv(List<Rdv> donnees) {
+	public ModeleRdv(List<Rdv> donnees) {
 		super();
 		this.donnees = donnees;
 	}
