@@ -42,13 +42,15 @@ public void setRole(String role) {
 public Personnel() {
 	
 }
-
-public Personnel(String nom, String pass, String role) {
+public Personnel(String nom, String pass, String role, int codePers) {
 	super();
 	this.nom = nom;
 	this.pass = pass;
 	this.role = role;
+	this.codePers = codePers;
 }
+
+
 
 
 }
