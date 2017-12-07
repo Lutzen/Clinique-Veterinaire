@@ -1,6 +1,5 @@
 package fr.eni.cliniqueVeterinaire.ihm;
 
-import java.awt.EventQueue;
 
 import javax.swing.JFrame;
 import javax.swing.JButton;
@@ -10,9 +9,8 @@ import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import javax.swing.JTextPane;
 
-public class EcranDossierMedical {
+public class EcranDossierMedical extends JFrame {
 
-	private JFrame frmDossierMedical;
 	private JButton btnValider;
 	private JButton btnAnnuler;
 	private JLabel lblClient;
@@ -27,52 +25,33 @@ public class EcranDossierMedical {
 	private JLabel lblAntcdentsconsultations;
 	private JTextPane textPane;
 
-	/**
-	 * Launch the application.
-	 */
-	public static void main() {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					EcranDossierMedical window = new EcranDossierMedical();
-					window.frmDossierMedical.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}
+
 
 	/**
 	 * Create the application.
 	 */
 	public EcranDossierMedical() {
-		initialize();
+		
+		setTitle("Dossier Medical");
+		setBounds(100, 100, 577, 360);
+		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		getContentPane().setLayout(null);
+		getContentPane().add(getBtnValider());
+		getContentPane().add(getBtnAnnuler());
+		getContentPane().add(getLblClient());
+		getContentPane().add(getTextField());
+		getContentPane().add(getLblAnimal());
+		getContentPane().add(getTextField_1());
+		getContentPane().add(getTextField_2());
+		getContentPane().add(getTextField_3());
+		getContentPane().add(getTextField_4());
+		getContentPane().add(getTextField_5());
+		getContentPane().add(getTextField_6());
+		getContentPane().add(getLblAntcdentsconsultations());
+		getContentPane().add(getTextPane());
+
 	}
 
-	/**
-	 * Initialize the contents of the frame.
-	 */
-	public void initialize() {
-		frmDossierMedical = new JFrame();
-		frmDossierMedical.setTitle("Dossier Medical");
-		frmDossierMedical.setBounds(100, 100, 577, 360);
-		frmDossierMedical.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		frmDossierMedical.getContentPane().setLayout(null);
-		frmDossierMedical.getContentPane().add(getBtnValider());
-		frmDossierMedical.getContentPane().add(getBtnAnnuler());
-		frmDossierMedical.getContentPane().add(getLblClient());
-		frmDossierMedical.getContentPane().add(getTextField());
-		frmDossierMedical.getContentPane().add(getLblAnimal());
-		frmDossierMedical.getContentPane().add(getTextField_1());
-		frmDossierMedical.getContentPane().add(getTextField_2());
-		frmDossierMedical.getContentPane().add(getTextField_3());
-		frmDossierMedical.getContentPane().add(getTextField_4());
-		frmDossierMedical.getContentPane().add(getTextField_5());
-		frmDossierMedical.getContentPane().add(getTextField_6());
-		frmDossierMedical.getContentPane().add(getLblAntcdentsconsultations());
-		frmDossierMedical.getContentPane().add(getTextPane());
-	}
 
 	private JButton getBtnValider() {
 		if (btnValider == null) {

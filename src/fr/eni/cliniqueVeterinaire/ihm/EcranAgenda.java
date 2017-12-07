@@ -10,71 +10,86 @@ import javax.swing.JTextArea;
 import javax.swing.JButton;
 import javax.swing.ImageIcon;
 import java.awt.event.ActionListener;
+import java.util.List;
 import java.awt.event.ActionEvent;
+import javax.swing.JScrollPane;
+import javax.swing.JTable;
+import javax.swing.JComboBox;
+import javax.swing.border.BevelBorder;
 
-public class EcranAgenda {
+import fr.eni.cliniqueVeterinaire.bll.BLLException;
+import fr.eni.cliniqueVeterinaire.bll.PersonnelManager;
+import fr.eni.cliniqueVeterinaire.bll.RdvManager;
+import fr.eni.cliniqueVeterinaire.bo.Personnel;
 
-	private JFrame frmAgenda;
-	private JLabel lblNewLabel;
-	private JList list;
+import javax.swing.ScrollPaneConstants;
+import javax.swing.SwingUtilities;
+
+public class EcranAgenda extends JFrame {
+
+	private JLabel lblVeto;
 	private JLabel lblDate;
 	private JFormattedTextField formattedTextField;
-	private JTextArea textArea;
 	private JButton btnDossierMedical;
+	private JComboBox comboBoxVeto;
+	private PersonnelManager personnelManager = PersonnelManager.getInstance();
+	private RdvManager rdvManager = RdvManager.getInstance();
+	private JTable table;
 
 	/**
 	 * Launch the application.
 	 */
-	public static void main() {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					EcranAgenda window = new EcranAgenda();
-					window.frmAgenda.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}
+
 
 	/**
 	 * Create the application.
 	 */
 	public EcranAgenda() {
-		initialize();
+
+		setTitle("Agenda");
+		setBounds(100, 100, 454, 390);
+		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		getContentPane().setLayout(null);
+		getContentPane().add(getLblVeto());
+		getContentPane().add(getLblDate());
+		getContentPane().add(getFormattedTextField());
+		getContentPane().add(getBtnDossierMedical());
+		getContentPane().add(getComboBoxVeto());
+		
+		JScrollPane scrollPane = new JScrollPane();
+		scrollPane.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
+		scrollPane.setBounds(10, 39, 418, 271);
+		getContentPane().add(scrollPane);
+		
 	}
 
-	/**
-	 * Initialize the contents of the frame.
-	 */
-	private void initialize() {
-		frmAgenda = new JFrame();
-		frmAgenda.setTitle("Agenda");
-		frmAgenda.setBounds(100, 100, 454, 390);
-		frmAgenda.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		frmAgenda.getContentPane().setLayout(null);
-		frmAgenda.getContentPane().add(getLblNewLabel());
-		frmAgenda.getContentPane().add(getList());
-		frmAgenda.getContentPane().add(getLblDate());
-		frmAgenda.getContentPane().add(getFormattedTextField());
-		frmAgenda.getContentPane().add(getTextArea());
-		frmAgenda.getContentPane().add(getBtnDossierMedical());
+	
+	private JComboBox getComboBoxVeto() {
+		if (comboBoxVeto == null) {
+			try {
+				List<Personnel> personnel =personnelManager.getPersonnelByRole("vet");
+				comboBoxVeto= new JComboBox(new String[]{});
+				for (int i = 0; i < personnel.size(); i++) {
+					comboBoxVeto.addItem(personnel.get(i).getNom());
+
+				}
+				comboBoxVeto.setBounds(79, 8, 97, 20);
+				
+			} catch (BLLException e) {
+				
+				e.printStackTrace();
+			}
+			
+		}
+		return comboBoxVeto;
 	}
 
-	private JLabel getLblNewLabel() {
-		if (lblNewLabel == null) {
-			lblNewLabel = new JLabel("V\u00E9t\u00E9rinaire");
-			lblNewLabel.setBounds(10, 11, 59, 14);
+	private JLabel getLblVeto() {
+		if (lblVeto == null) {
+			lblVeto = new JLabel("Vétérinaire");
+			lblVeto.setBounds(10, 11, 59, 14);
 		}
-		return lblNewLabel;
-	}
-	private JList getList() {
-		if (list == null) {
-			list = new JList();
-			list.setBounds(79, 10, 107, 14);
-		}
-		return list;
+		return lblVeto;
 	}
 	private JLabel getLblDate() {
 		if (lblDate == null) {
@@ -92,19 +107,19 @@ public class EcranAgenda {
 		}
 		return formattedTextField;
 	}
-	private JTextArea getTextArea() {
-		if (textArea == null) {
-			textArea = new JTextArea();
-			textArea.setBounds(10, 38, 418, 272);
-		}
-		return textArea;
-	}
 	private JButton getBtnDossierMedical() {
 		if (btnDossierMedical == null) {
 			btnDossierMedical = new JButton("Dossier Medical");
 			btnDossierMedical.addActionListener(new ActionListener(){	@Override
 			public void actionPerformed(ActionEvent e) {
-				EcranDossierMedical.main();
+				SwingUtilities.invokeLater(new Runnable() {
+					
+					@Override
+					public void run() {
+						EcranDossierMedical frame = new EcranDossierMedical();
+						frame.setVisible(true);
+					}
+				});
 			}
 			});
 			
@@ -114,7 +129,18 @@ public class EcranAgenda {
 		}
 		return btnDossierMedical;
 	}
-
-
-
+//	private JTable getTable() {
+//		if (table == null) {
+//
+//			try {
+//				Personnel personnel =personnelManager.getPersonnelByNom((String) comboBoxVeto.getSelectedItem());
+//				table = new JTable(new TableRdv(rdvManager.getAgenda(personnel.getCodePers())));
+//				table.setBounds(10, 133, 561, 318);
+//			} catch (Exception e) {
+//			}
+//
+//		}
+//		return table;
+//
+//	}
 }
