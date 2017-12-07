@@ -80,10 +80,16 @@ public void setRemarque(String remarque) {
 public Client() {
 	
 }
-
-public Client(String nomClient, String prenomClient, String adresse1, String adresse2, String codePostal, String ville,
-		String numTel, String assurance, String eMail, String remarque) {
+public String getCodeClient() {
+	return codeClient;
+}
+public void setCodeClient(String codeClient) {
+	this.codeClient = codeClient;
+}
+public Client(String codeClient, String nomClient, String prenomClient, String adresse1, String adresse2,
+		String codePostal, String ville, String numTel, String assurance, String email, String remarque) {
 	super();
+	this.codeClient = codeClient;
 	this.nomClient = nomClient;
 	this.prenomClient = prenomClient;
 	this.adresse1 = adresse1;
@@ -92,12 +98,12 @@ public Client(String nomClient, String prenomClient, String adresse1, String adr
 	this.ville = ville;
 	this.numTel = numTel;
 	this.assurance = assurance;
-	this.Email = eMail;
+	Email = email;
 	this.remarque = remarque;
 }
-public String getCodeClient() {
-	return codeClient;
-}
+
+
+
 
 
 

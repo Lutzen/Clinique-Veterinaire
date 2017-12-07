@@ -11,9 +11,13 @@ import javax.swing.ImageIcon;
 import javax.swing.JFormattedTextField;
 import javax.swing.JTextArea;
 
+import fr.eni.cliniqueVeterinaire.bll.AnimalManager;
 import fr.eni.cliniqueVeterinaire.bll.BLLException;
+import fr.eni.cliniqueVeterinaire.bll.ClientManager;
 import fr.eni.cliniqueVeterinaire.bll.PersonnelManager;
 import fr.eni.cliniqueVeterinaire.bll.RdvManager;
+import fr.eni.cliniqueVeterinaire.bo.Animal;
+import fr.eni.cliniqueVeterinaire.bo.Client;
 import fr.eni.cliniqueVeterinaire.bo.Personnel;
 
 import javax.swing.JTable;
@@ -46,8 +50,11 @@ public class EcranRdv extends JFrame {
 	private JButton btnSupprimer;
 	private JTable table;
 	private PersonnelManager personnelManager = PersonnelManager.getInstance();
+	private AnimalManager animalManager = AnimalManager.getInstance();
+	private ClientManager clientManager = ClientManager.getInstance();
 	private ModeleRdv modeleRdv;
 	private Personnel personnel;
+	private Animal animal;
 
 	/**
 	 * Create the application.
@@ -98,8 +105,26 @@ public class EcranRdv extends JFrame {
 
 	private JComboBox getCBClients() {
 		if (cBClients == null) {
-			cBClients = new JComboBox();
-			cBClients.setBounds(30, 51, 131, 20);
+			
+		
+			try {
+				cBClients = new JComboBox();
+				List<Client> clients = clientManager.getClientList();
+				cBClients = new JComboBox(new String[] {});
+				for (int i = 0; i < clients.size(); i++) {
+					cBClients.addItem(clients.get(i).getNomClient());
+					cBClients.addItemListener(new ItemListener() {
+						public void itemStateChanged(ItemEvent e) {
+							mettreAJour();
+
+						}
+					});
+
+				}
+				cBClients.setBounds(30, 51, 131, 20);			} catch (BLLException e) {
+
+				e.printStackTrace();
+			}
 		}
 		return cBClients;
 	}
@@ -114,8 +139,27 @@ public class EcranRdv extends JFrame {
 
 	private JComboBox getCBAnimaux() {
 		if (cBAnimaux == null) {
-			cBAnimaux = new JComboBox();
-			cBAnimaux.setBounds(30, 100, 131, 20);
+			try {
+				cBAnimaux = new JComboBox();
+				List<Animal> animaux = animalManager.getAnimalList(codeClient);
+				cBAnimaux = new JComboBox(new String[] {});
+				for (int i = 0; i < animaux.size(); i++) {
+					cBAnimaux.addItem(animaux.get(i).getNomAnimal());
+					cBAnimaux.addItemListener(new ItemListener() {
+						public void itemStateChanged(ItemEvent e) {
+							mettreAJour();
+
+						}
+					});
+
+				}
+				cBAnimaux.setBounds(30, 100, 131, 20);
+			} catch (BLLException e) {
+
+				e.printStackTrace();
+			}
+
+		
 		}
 		return cBAnimaux;
 	}
