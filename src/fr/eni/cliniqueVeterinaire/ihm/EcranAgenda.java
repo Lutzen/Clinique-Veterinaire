@@ -41,6 +41,7 @@ public class EcranAgenda extends JFrame {
 	private ModeleRdv modeleRdv;
 	private JTable table_1;
 
+	
 	/**
 	 * Launch the application.
 	 */
