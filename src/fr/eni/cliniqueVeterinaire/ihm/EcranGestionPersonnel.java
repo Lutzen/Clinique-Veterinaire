@@ -2,6 +2,7 @@ package fr.eni.cliniqueVeterinaire.ihm;
 
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
+import javax.swing.JScrollPane;
 
 import fr.eni.cliniqueVeterinaire.bll.BLLException;
 import fr.eni.cliniqueVeterinaire.bll.PersonnelManager;
@@ -19,6 +20,7 @@ public class EcranGestionPersonnel extends JFrame {
 	private JButton btnAjouter;
 	private JButton btnSuppr;
 	private JButton btnReinit;
+	private JScrollPane scrollPane;
 
 	private PersonnelManager personnelManager = PersonnelManager.getInstance();
 	JTable list;
@@ -33,6 +35,7 @@ public class EcranGestionPersonnel extends JFrame {
 		getContentPane().add(getBtnSuppr());
 		getContentPane().add(getBtnReinit());
 		getContentPane().add(getList());
+		getContentPane().add(getScrollPane());
 	}
 
 	private JButton getBtnAjouter() {
@@ -145,6 +148,14 @@ public class EcranGestionPersonnel extends JFrame {
 			}
 		}
 		return modelPersonnel;
+	}
+	
+	private JScrollPane getScrollPane() {
+		if (scrollPane == null) {
+			scrollPane = new JScrollPane(list);
+			scrollPane.setBounds(10, 45, 414, 205);
+		}
+		return scrollPane;
 	}
 
 }

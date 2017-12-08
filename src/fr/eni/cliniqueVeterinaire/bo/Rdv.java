@@ -1,6 +1,6 @@
 package fr.eni.cliniqueVeterinaire.bo;
 
-import java.sql.Date;
+import java.util.Date;
 
 public class Rdv {
 	private int codeVeto;

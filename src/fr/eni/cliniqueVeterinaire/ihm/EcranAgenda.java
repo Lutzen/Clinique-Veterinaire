@@ -20,6 +20,7 @@ import javax.swing.JComboBox;
 import javax.swing.border.BevelBorder;
 
 import fr.eni.cliniqueVeterinaire.bll.BLLException;
+import fr.eni.cliniqueVeterinaire.bll.ClientManager;
 import fr.eni.cliniqueVeterinaire.bll.PersonnelManager;
 import fr.eni.cliniqueVeterinaire.bll.RdvManager;
 import fr.eni.cliniqueVeterinaire.bo.Personnel;
@@ -36,6 +37,7 @@ public class EcranAgenda extends JFrame {
 	private JComboBox comboBoxVeto;
 	private PersonnelManager personnelManager = PersonnelManager.getInstance();
 	private RdvManager rdvManager = RdvManager.getInstance();
+	private ClientManager clientManager = ClientManager.getInstance();
 	private JTable table;
 	private Personnel personnel;
 	private ModeleRdv modeleRdv;
@@ -123,6 +125,9 @@ public class EcranAgenda extends JFrame {
 					
 					@Override
 					public void run() {
+						int row = table.getSelectedRow();
+						String nom = (String) table.getValueAt(row, 1);
+						//Client client =c
 						EcranDossierMedical frame = new EcranDossierMedical();
 						frame.setVisible(true);
 					}

@@ -19,7 +19,7 @@ public class RdvDAOJdbcImpl implements RdvDAO {
 	private Rdv getRdvFromResultset(ResultSet resultSet) throws SQLException {
 		Rdv rdv = new Rdv(0, null, 0);
 		rdv.setCodeVeto(resultSet.getInt("CodeVeto"));
-		rdv.setDateRdv(resultSet.getDate("DateRdv"));
+		rdv.setDateRdv(resultSet.getTimestamp("DateRdv"));
 		rdv.setCodeAnimal(resultSet.getInt("CodeAnimal"));
 		
 		return rdv;
@@ -27,7 +27,9 @@ public class RdvDAOJdbcImpl implements RdvDAO {
 
 	private void FillStatementFromRdv(PreparedStatement statement, Rdv rdv) throws SQLException {
 		statement.setLong(1, rdv.getCodeVeto());
-		statement.setDate(2, rdv.getDateRdv());
+		statement.setTimestamp (2,new java.sql.Timestamp(rdv.getDateRdv().getTime()));
+		//java.sql.Timestamp  sqlDate = new java.sql.Timestamp(rdv.getDateRdv().getTime());
+		//statement.setTimestamp(2, sqlDate);
 		statement.setLong(3, rdv.getCodeAnimal());
 
 
@@ -118,10 +120,10 @@ public class RdvDAOJdbcImpl implements RdvDAO {
 			FillStatementFromRdv(statement, newRdv);
 			FillStatementFromRdv(statement, oldRdv);
 			statement.setLong(1, newRdv.getCodeVeto());
-			statement.setDate(2, newRdv.getDateRdv());
+			statement.setTimestamp (2,new java.sql.Timestamp(newRdv.getDateRdv().getTime()));
 			statement.setLong(3, newRdv.getCodeAnimal());
 			statement.setLong(4, oldRdv.getCodeVeto());
-			statement.setDate(5, oldRdv.getDateRdv());
+			statement.setTimestamp(5,new java.sql.Timestamp( oldRdv.getDateRdv().getTime()));
 			statement.setLong(6, oldRdv.getCodeAnimal());
 			statement.executeUpdate();
 		} catch (SQLException e) {
@@ -137,7 +139,7 @@ public class RdvDAOJdbcImpl implements RdvDAO {
 		try {
 			PreparedStatement statement = connection.prepareStatement(sql);
 			statement.setLong(1, rdv.getCodeVeto());
-			statement.setDate(2, rdv.getDateRdv());
+			statement.setTimestamp (2,new java.sql.Timestamp(rdv.getDateRdv().getTime()));
 			statement.setLong(3, rdv.getCodeAnimal());
 			statement.executeUpdate();
 		} catch (SQLException e) {
