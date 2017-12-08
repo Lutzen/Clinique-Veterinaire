@@ -5,10 +5,16 @@ import java.awt.EventQueue;
 import javax.swing.JFrame;
 import javax.swing.JButton;
 import javax.swing.JLabel;
+import javax.swing.JScrollPane;
+import javax.swing.JTable;
 import javax.swing.JTextField;
+
+import fr.eni.cliniqueVeterinaire.bll.AnimalManager;
+import fr.eni.cliniqueVeterinaire.bll.BLLException;
+
 import javax.swing.JComboBox;
 
-public class EcranAnimaux {
+public class EcranAnimaux extends JFrame{
 
 	private JFrame frmAnimaux;
 	private JButton btnAnnuler;
@@ -28,57 +34,33 @@ public class EcranAnimaux {
 	private JComboBox cBRace;
 	private JTextField txtTatouage;
 	private JLabel lblTatouage;
+	private AnimalManager animalManager = AnimalManager.getInstance();
 
-	/**
-	 * Launch the application.
-	 */
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					EcranAnimaux window = new EcranAnimaux();
-					window.frmAnimaux.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}
-
-	/**
-	 * Create the application.
-	 */
+	
 	public EcranAnimaux() {
-		initialize();
+		setTitle("Animaux");
+		setBounds(100, 100, 496, 271);
+		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+		getContentPane().setLayout(null);
+		getContentPane().add(getBtnAnnuler());
+		getContentPane().add(getBtnValider());
+		getContentPane().add(getLblClient());
+		getContentPane().add(getTxtClient());
+		getContentPane().add(getLblCode());
+		getContentPane().add(getTxtCode());
+		getContentPane().add(getTxtNom());
+		getContentPane().add(getTxtCouleur());
+		getContentPane().add(getLblNom());
+		getContentPane().add(getLblCouleur());
+		getContentPane().add(getCBSexe());
+		getContentPane().add(getLblEspce());
+		getContentPane().add(getCBEspece());
+		getContentPane().add(getLblRace());
+		getContentPane().add(getCBRace());
+		getContentPane().add(getTxtTatouage());
+		getContentPane().add(getLblTatouage());
 	}
 
-	/**
-	 * Initialize the contents of the frame.
-	 */
-	private void initialize() {
-		frmAnimaux = new JFrame();
-		frmAnimaux.setTitle("Animaux");
-		frmAnimaux.setBounds(100, 100, 496, 271);
-		frmAnimaux.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		frmAnimaux.getContentPane().setLayout(null);
-		frmAnimaux.getContentPane().add(getBtnAnnuler());
-		frmAnimaux.getContentPane().add(getBtnValider());
-		frmAnimaux.getContentPane().add(getLblClient());
-		frmAnimaux.getContentPane().add(getTxtClient());
-		frmAnimaux.getContentPane().add(getLblCode());
-		frmAnimaux.getContentPane().add(getTxtCode());
-		frmAnimaux.getContentPane().add(getTxtNom());
-		frmAnimaux.getContentPane().add(getTxtCouleur());
-		frmAnimaux.getContentPane().add(getLblNom());
-		frmAnimaux.getContentPane().add(getLblCouleur());
-		frmAnimaux.getContentPane().add(getCBSexe());
-		frmAnimaux.getContentPane().add(getLblEspce());
-		frmAnimaux.getContentPane().add(getCBEspece());
-		frmAnimaux.getContentPane().add(getLblRace());
-		frmAnimaux.getContentPane().add(getCBRace());
-		frmAnimaux.getContentPane().add(getTxtTatouage());
-		frmAnimaux.getContentPane().add(getLblTatouage());
-	}
 
 	private JButton getBtnAnnuler() {
 		if (btnAnnuler == null) {
@@ -204,4 +186,5 @@ public class EcranAnimaux {
 		}
 		return lblTatouage;
 	}
+
 }

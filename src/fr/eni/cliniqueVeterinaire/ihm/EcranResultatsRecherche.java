@@ -1,55 +1,40 @@
 package fr.eni.cliniqueVeterinaire.ihm;
 
-import java.awt.EventQueue;
-
 import javax.swing.JFrame;
+import javax.swing.JScrollPane;
 import javax.swing.JTextField;
-import javax.swing.JButton;
-import javax.swing.JTextArea;
-import javax.swing.JList;
 
-public class EcranResultatsRecherche {
+import com.sun.corba.se.impl.ior.iiop.JavaSerializationComponent;
+
+import fr.eni.cliniqueVeterinaire.bll.BLLException;
+import fr.eni.cliniqueVeterinaire.bll.ClientManager;
+import fr.eni.cliniqueVeterinaire.bo.Client;
+
+import javax.swing.JButton;
+import javax.swing.JTable;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
+
+public class EcranResultatsRecherche extends JFrame {
 
 	private JFrame frmResultatsDeLa;
 	private JTextField txtRechercher;
 	private JButton btnRechercher;
-	private JList listResultats;
+	private JTable table;
+	private ClientManager clientManager = ClientManager.getInstance();
+	private JScrollPane scrollPane;
+	private Client client;
+	private ModeleClient modeleClient;
 
-	/**
-	 * Launch the application.
-	 */
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					EcranResultatsRecherche window = new EcranResultatsRecherche();
-					window.frmResultatsDeLa.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}
-
-	/**
-	 * Create the application.
-	 */
-	public EcranResultatsRecherche() {
-		initialize();
-	}
-
-	/**
-	 * Initialize the contents of the frame.
-	 */
-	private void initialize() {
-		frmResultatsDeLa = new JFrame();
-		frmResultatsDeLa.setTitle("Resultats de la recherche");
-		frmResultatsDeLa.setBounds(100, 100, 450, 300);
-		frmResultatsDeLa.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		frmResultatsDeLa.getContentPane().setLayout(null);
-		frmResultatsDeLa.getContentPane().add(getTxtRechercher());
-		frmResultatsDeLa.getContentPane().add(getBtnRechercher());
-		frmResultatsDeLa.getContentPane().add(getListResultats());
+	public EcranResultatsRecherche() throws IHMException {
+		setTitle("Resultats de la recherche");
+		setBounds(100, 100, 450, 300);
+		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+		getContentPane().setLayout(null);
+		getContentPane().add(getTxtRechercher());
+		getContentPane().add(getBtnRechercher());
+		getContentPane().add(getTable());
+		getContentPane().add(getScrollPane());
 	}
 
 	private JTextField getTxtRechercher() {
@@ -60,18 +45,65 @@ public class EcranResultatsRecherche {
 		}
 		return txtRechercher;
 	}
-	private JButton getBtnRechercher() {
+
+	private JButton getBtnRechercher()  {
 		if (btnRechercher == null) {
 			btnRechercher = new JButton("Rechercher");
+			btnRechercher.addActionListener(new ActionListener() {
+				public void actionPerformed(ActionEvent e) {
+					try {
+						mettreAJour();
+					} catch (IHMException e1) {
+						e1.printStackTrace();
+
+					}
+				}
+			});
 			btnRechercher.setBounds(272, 10, 89, 23);
 		}
 		return btnRechercher;
 	}
-	private JList getListResultats() {
-		if (listResultats == null) {
-			listResultats = new JList();
-			listResultats.setBounds(10, 42, 414, 208);
+
+	private JTable getTable() throws IHMException {
+		if (table == null) {
+			try {
+				table = new JTable(getModeleClient());
+			} catch (IHMException e) {
+				e.printStackTrace();
+				throw new IHMException("Erreur à l'appel getTable ", e);
+
+			}
+			table.setBounds(10, 45, 414, 205);
 		}
-		return listResultats;
+		return table;
+	}
+
+	public void mettreAJour() throws IHMException {
+
+		modeleClient.setData(btnRechercher.getText());
+	}
+
+	private ModeleClient getModeleClient() throws IHMException {
+		if (modeleClient == null) {
+			try {
+
+				modeleClient = new ModeleClient();
+			} catch (BLLException e) {
+
+				e.printStackTrace();
+				throw new IHMException("Erreur à l'appel getModeleClient de la table", e);
+
+			}
+
+		}
+		return modeleClient;
+	}
+
+	private JScrollPane getScrollPane() {
+		if (scrollPane == null) {
+			scrollPane = new JScrollPane(table);
+			scrollPane.setBounds(10, 45, 414, 205);
+		}
+		return scrollPane;
 	}
 }

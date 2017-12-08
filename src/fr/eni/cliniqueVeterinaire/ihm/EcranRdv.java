@@ -11,6 +11,7 @@ import javax.swing.JButton;
 import javax.swing.ImageIcon;
 import javax.swing.JFormattedTextField;
 import javax.swing.JTextArea;
+import javax.swing.SwingUtilities;
 
 import fr.eni.cliniqueVeterinaire.bll.AnimalManager;
 import fr.eni.cliniqueVeterinaire.bll.BLLException;
@@ -35,8 +36,8 @@ public class EcranRdv extends JFrame {
 	private JComboBox cBClients;
 	private JLabel lblAnimal;
 	private JComboBox cBAnimaux;
-	private JButton btnNewButton;
-	private JButton button;
+	private JButton btnAjoutClient;
+	private JButton btnAjoutAnimal;
 	private JLabel lblPar;
 	private JLabel lblVtrinaire;
 	private JComboBox cBVetos;
@@ -72,8 +73,8 @@ public class EcranRdv extends JFrame {
 		getContentPane().add(getCBClients());
 		getContentPane().add(getLblAnimal());
 		getContentPane().add(getCBAnimaux());
-		getContentPane().add(getBtnNewButton());
-		getContentPane().add(getButton());
+		getContentPane().add(getBtnAjoutClient());
+		getContentPane().add(getBtnAjoutAnimal());
 		getContentPane().add(getLblPar());
 		getContentPane().add(getLblVtrinaire());
 		getContentPane().add(getCBVetos());
@@ -178,24 +179,57 @@ public class EcranRdv extends JFrame {
 	
 	
 	
-	private JButton getBtnNewButton() {
-		if (btnNewButton == null) {
-			btnNewButton = new JButton("");
-			btnNewButton.setIcon(new ImageIcon(EcranRdv.class
+	private JButton getBtnAjoutClient() {
+		if (btnAjoutClient == null) {
+			btnAjoutClient = new JButton("");
+			btnAjoutClient.addActionListener(new ActionListener() {
+				
+					public void actionPerformed(ActionEvent e) {
+						SwingUtilities.invokeLater(new Runnable() {
+
+							@Override
+							public void run() {
+								EcranClient frame;
+								try {
+									frame = new EcranClient();
+									frame.setVisible(true);
+								} catch (IHMException e) {
+									e.printStackTrace();
+									
+								}
+								
+							}
+						});
+					}
+			});
+			btnAjoutClient.setIcon(new ImageIcon(EcranRdv.class
 					.getResource("/com/sun/javafx/scene/control/skin/modena/HTMLEditor-Indent-Black-rtl.png")));
-			btnNewButton.setBounds(171, 50, 36, 23);
+			btnAjoutClient.setBounds(171, 50, 36, 23);
 		}
-		return btnNewButton;
+		return btnAjoutClient;
 	}
 
-	private JButton getButton() {
-		if (button == null) {
-			button = new JButton("");
-			button.setIcon(new ImageIcon(EcranRdv.class
+	private JButton getBtnAjoutAnimal() {
+		if (btnAjoutAnimal == null) {
+			btnAjoutAnimal = new JButton("");
+			btnAjoutAnimal.addActionListener(new ActionListener() {
+				public void actionPerformed(ActionEvent e) {
+					SwingUtilities.invokeLater(new Runnable() {
+
+						@Override
+						public void run() {
+							EcranAnimaux frame = new EcranAnimaux();
+							frame.setVisible(true);
+						}
+					});
+				}
+			});
+			btnAjoutAnimal.setIcon(new ImageIcon(EcranRdv.class
 					.getResource("/com/sun/javafx/scene/control/skin/modena/HTMLEditor-Indent-Black-rtl.png")));
-			button.setBounds(171, 99, 36, 23);
+			
+			btnAjoutAnimal.setBounds(171, 99, 36, 23);
 		}
-		return button;
+		return btnAjoutAnimal;
 	}
 
 	private JLabel getLblPar() {
@@ -334,7 +368,6 @@ public class EcranRdv extends JFrame {
 
 		}
 		return table;
-
 	}
 
 	public void mettreAJour() {
@@ -370,5 +403,6 @@ public class EcranRdv extends JFrame {
 		}
 		return scrollPane;
 	}
+
 
 }

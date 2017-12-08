@@ -9,7 +9,7 @@ import java.awt.event.ActionEvent;
 import javax.swing.JTextField;
 import javax.swing.JLabel;
 
-public class EcranAjoutClient {
+public class EcranAjoutClient extends JFrame {
 
 	private JFrame frmAjoutDunClient;
 	private JButton btnAnnuler;
@@ -28,53 +28,26 @@ public class EcranAjoutClient {
 	private JLabel lblCodePostal;
 	private JLabel lblVille;
 
-	/**
-	 * Launch the application.
-	 */
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					EcranAjoutClient window = new EcranAjoutClient();
-					window.frmAjoutDunClient.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}
-
-	/**
-	 * Create the application.
-	 */
 	public EcranAjoutClient() {
-		initialize();
-	}
-
-	/**
-	 * Initialize the contents of the frame.
-	 */
-	private void initialize() {
-		frmAjoutDunClient = new JFrame();
-		frmAjoutDunClient.setTitle("Ajout d'un client");
-		frmAjoutDunClient.setBounds(100, 100, 346, 305);
-		frmAjoutDunClient.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		frmAjoutDunClient.getContentPane().setLayout(null);
-		frmAjoutDunClient.getContentPane().add(getBtnAnnuler());
-		frmAjoutDunClient.getContentPane().add(getBtnValider());
-		frmAjoutDunClient.getContentPane().add(getTxtCode());
-		frmAjoutDunClient.getContentPane().add(getTxtNom());
-		frmAjoutDunClient.getContentPane().add(getTxtPrenom());
-		frmAjoutDunClient.getContentPane().add(getTxtAdresse());
-		frmAjoutDunClient.getContentPane().add(getTxtAdresse2());
-		frmAjoutDunClient.getContentPane().add(getTxtCodePostal());
-		frmAjoutDunClient.getContentPane().add(getTxtVille());
-		frmAjoutDunClient.getContentPane().add(getLblCode());
-		frmAjoutDunClient.getContentPane().add(getLblNom());
-		frmAjoutDunClient.getContentPane().add(getLblPrnom());
-		frmAjoutDunClient.getContentPane().add(getLblAdresse());
-		frmAjoutDunClient.getContentPane().add(getLblCodePostal());
-		frmAjoutDunClient.getContentPane().add(getLblVille());
+		setTitle("Ajout d'un client");
+		setBounds(100, 100, 346, 305);
+		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+		getContentPane().setLayout(null);
+		getContentPane().add(getBtnAnnuler());
+		getContentPane().add(getBtnValider());
+		getContentPane().add(getTxtCode());
+		getContentPane().add(getTxtNom());
+		getContentPane().add(getTxtPrenom());
+		getContentPane().add(getTxtAdresse());
+		getContentPane().add(getTxtAdresse2());
+		getContentPane().add(getTxtCodePostal());
+		getContentPane().add(getTxtVille());
+		getContentPane().add(getLblCode());
+		getContentPane().add(getLblNom());
+		getContentPane().add(getLblPrnom());
+		getContentPane().add(getLblAdresse());
+		getContentPane().add(getLblCodePostal());
+		getContentPane().add(getLblVille());
 	}
 
 	private JButton getBtnAnnuler() {
@@ -84,6 +57,7 @@ public class EcranAjoutClient {
 		}
 		return btnAnnuler;
 	}
+
 	private JButton getBtnValider() {
 		if (btnValider == null) {
 			btnValider = new JButton("Valider");
@@ -96,8 +70,10 @@ public class EcranAjoutClient {
 		}
 		return btnValider;
 	}
+
 	protected static void do_btnValider_actionPerformed(ActionEvent e) {
 	}
+
 	private JTextField getTxtCode() {
 		if (txtCode == null) {
 			txtCode = new JTextField();
@@ -106,6 +82,7 @@ public class EcranAjoutClient {
 		}
 		return txtCode;
 	}
+
 	private JTextField getTxtNom() {
 		if (txtNom == null) {
 			txtNom = new JTextField();
@@ -114,6 +91,7 @@ public class EcranAjoutClient {
 		}
 		return txtNom;
 	}
+
 	private JTextField getTxtPrenom() {
 		if (txtPrenom == null) {
 			txtPrenom = new JTextField();
@@ -122,6 +100,7 @@ public class EcranAjoutClient {
 		}
 		return txtPrenom;
 	}
+
 	private JTextField getTxtAdresse() {
 		if (txtAdresse == null) {
 			txtAdresse = new JTextField();
@@ -130,6 +109,7 @@ public class EcranAjoutClient {
 		}
 		return txtAdresse;
 	}
+
 	private JTextField getTxtAdresse2() {
 		if (txtAdresse2 == null) {
 			txtAdresse2 = new JTextField();
@@ -138,6 +118,7 @@ public class EcranAjoutClient {
 		}
 		return txtAdresse2;
 	}
+
 	private JTextField getTxtCodePostal() {
 		if (txtCodePostal == null) {
 			txtCodePostal = new JTextField();
@@ -146,6 +127,7 @@ public class EcranAjoutClient {
 		}
 		return txtCodePostal;
 	}
+
 	private JTextField getTxtVille() {
 		if (txtVille == null) {
 			txtVille = new JTextField();
@@ -154,6 +136,7 @@ public class EcranAjoutClient {
 		}
 		return txtVille;
 	}
+
 	private JLabel getLblCode() {
 		if (lblCode == null) {
 			lblCode = new JLabel("Code");
@@ -161,6 +144,7 @@ public class EcranAjoutClient {
 		}
 		return lblCode;
 	}
+
 	private JLabel getLblNom() {
 		if (lblNom == null) {
 			lblNom = new JLabel("Nom");
@@ -168,6 +152,7 @@ public class EcranAjoutClient {
 		}
 		return lblNom;
 	}
+
 	private JLabel getLblPrnom() {
 		if (lblPrnom == null) {
 			lblPrnom = new JLabel("Pr\u00E9nom");
@@ -175,6 +160,7 @@ public class EcranAjoutClient {
 		}
 		return lblPrnom;
 	}
+
 	private JLabel getLblAdresse() {
 		if (lblAdresse == null) {
 			lblAdresse = new JLabel("Adresse");
@@ -182,6 +168,7 @@ public class EcranAjoutClient {
 		}
 		return lblAdresse;
 	}
+
 	private JLabel getLblCodePostal() {
 		if (lblCodePostal == null) {
 			lblCodePostal = new JLabel("Code postal");
@@ -189,6 +176,7 @@ public class EcranAjoutClient {
 		}
 		return lblCodePostal;
 	}
+
 	private JLabel getLblVille() {
 		if (lblVille == null) {
 			lblVille = new JLabel("Ville");

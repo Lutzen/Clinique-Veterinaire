@@ -7,10 +7,20 @@ import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import javax.swing.JTextField;
+import javax.swing.SwingUtilities;
+
+import fr.eni.cliniqueVeterinaire.bll.AnimalManager;
+import fr.eni.cliniqueVeterinaire.bll.BLLException;
+import fr.eni.cliniqueVeterinaire.bll.ClientManager;
+import fr.eni.cliniqueVeterinaire.bo.Animal;
+import fr.eni.cliniqueVeterinaire.bo.Client;
+
 import javax.swing.JLabel;
+import javax.swing.JScrollPane;
+import javax.swing.JTable;
 import javax.swing.JTextArea;
 
-public class EcranClient {
+public class EcranClient extends JFrame {
 
 	private JFrame frmClients;
 	private JButton btnRechercher;
@@ -31,74 +41,78 @@ public class EcranClient {
 	private JLabel txtAdresse;
 	private JLabel txtCodePostal;
 	private JLabel txtVille;
-	private JTextArea textArea;
 	private JButton btnEditer;
 	private JButton btnSupprimer_1;
 	private JButton btnAjouter_1;
+	private JTable table;
+	private AnimalManager animalManager = AnimalManager.getInstance();
+	private ClientManager clientManager = ClientManager.getInstance();
+	private Client client;
+	private Animal animal;
+	private JScrollPane scrollPane;
+	private ModeleAnimaux modeleAnimaux;
 
-	/**
-	 * Launch the application.
-	 */
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					EcranClient window = new EcranClient();
-					window.frmClients.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}
+	public EcranClient() throws IHMException {
+		setTitle("Clients");
+		setBounds(100, 100, 622, 377);
+		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		getContentPane().setLayout(null);
+		getContentPane().add(getBtnRechercher());
+		getContentPane().add(getBtnAjouter());
+		getContentPane().add(getBtnSupprimer());
+		getContentPane().add(getBtnValider());
+		getContentPane().add(getBtnAnnuler());
+		getContentPane().add(getTxtCode());
+		getContentPane().add(getTxtNom());
+		getContentPane().add(getTextField_2());
+		getContentPane().add(getTextField_3());
+		getContentPane().add(getTextField_4());
+		getContentPane().add(getTextField_5());
+		getContentPane().add(getTextField_6());
+		getContentPane().add(getLblCode());
+		getContentPane().add(getLblNom());
+		getContentPane().add(getTxtPrenom());
+		getContentPane().add(getTxtAdresse());
+		getContentPane().add(getTxtCodePostal());
+		getContentPane().add(getTxtVille());
+		getContentPane().add(getBtnEditer());
+		getContentPane().add(getBtnSupprimer_1());
+		getContentPane().add(getBtnAjouter_1());
+		getContentPane().add(getTable());
+		getContentPane().add(getScrollPane());
 
-	/**
-	 * Create the application.
-	 */
-	public EcranClient() {
-		initialize();
-	}
-
-	/**
-	 * Initialize the contents of the frame.
-	 */
-	private void initialize() {
-		frmClients = new JFrame();
-		frmClients.setTitle("Clients");
-		frmClients.setBounds(100, 100, 622, 377);
-		frmClients.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		frmClients.getContentPane().setLayout(null);
-		frmClients.getContentPane().add(getBtnRechercher());
-		frmClients.getContentPane().add(getBtnAjouter());
-		frmClients.getContentPane().add(getBtnSupprimer());
-		frmClients.getContentPane().add(getBtnValider());
-		frmClients.getContentPane().add(getBtnAnnuler());
-		frmClients.getContentPane().add(getTxtCode());
-		frmClients.getContentPane().add(getTxtNom());
-		frmClients.getContentPane().add(getTextField_2());
-		frmClients.getContentPane().add(getTextField_3());
-		frmClients.getContentPane().add(getTextField_4());
-		frmClients.getContentPane().add(getTextField_5());
-		frmClients.getContentPane().add(getTextField_6());
-		frmClients.getContentPane().add(getLblCode());
-		frmClients.getContentPane().add(getLblNom());
-		frmClients.getContentPane().add(getTxtPrenom());
-		frmClients.getContentPane().add(getTxtAdresse());
-		frmClients.getContentPane().add(getTxtCodePostal());
-		frmClients.getContentPane().add(getTxtVille());
-		frmClients.getContentPane().add(getTextArea());
-		frmClients.getContentPane().add(getBtnEditer());
-		frmClients.getContentPane().add(getBtnSupprimer_1());
-		frmClients.getContentPane().add(getBtnAjouter_1());
 	}
 
 	private JButton getBtnRechercher() {
 		if (btnRechercher == null) {
 			btnRechercher = new JButton("Rechercher");
+			btnRechercher.addActionListener(new ActionListener() {
+				public void actionPerformed(ActionEvent e) {
+						SwingUtilities.invokeLater(new Runnable() {
+
+							@Override
+							public void run() {
+								EcranResultatsRecherche frame;
+								try {
+									frame = new EcranResultatsRecherche();
+									frame.setVisible(true);
+
+								} catch (IHMException e) {
+									// TODO Auto-generated catch block
+									e.printStackTrace();
+								}
+								
+							}
+						});
+					
+				}
+			});
 			btnRechercher.setBounds(10, 11, 89, 23);
+			
 		}
 		return btnRechercher;
 	}
+
 	private JButton getBtnAjouter() {
 		if (btnAjouter == null) {
 			btnAjouter = new JButton("Ajouter");
@@ -106,6 +120,7 @@ public class EcranClient {
 		}
 		return btnAjouter;
 	}
+
 	private JButton getBtnSupprimer() {
 		if (btnSupprimer == null) {
 			btnSupprimer = new JButton("Supprimer");
@@ -113,6 +128,7 @@ public class EcranClient {
 		}
 		return btnSupprimer;
 	}
+
 	private JButton getBtnValider() {
 		if (btnValider == null) {
 			btnValider = new JButton("Valider");
@@ -125,6 +141,7 @@ public class EcranClient {
 		}
 		return btnValider;
 	}
+
 	private JButton getBtnAnnuler() {
 		if (btnAnnuler == null) {
 			btnAnnuler = new JButton("Annuler");
@@ -132,8 +149,10 @@ public class EcranClient {
 		}
 		return btnAnnuler;
 	}
+
 	protected static void do_btnValider_actionPerformed(ActionEvent e) {
 	}
+
 	private JTextField getTxtCode() {
 		if (txtCode == null) {
 			txtCode = new JTextField();
@@ -142,6 +161,7 @@ public class EcranClient {
 		}
 		return txtCode;
 	}
+
 	private JTextField getTxtNom() {
 		if (txtNom == null) {
 			txtNom = new JTextField();
@@ -150,6 +170,7 @@ public class EcranClient {
 		}
 		return txtNom;
 	}
+
 	private JTextField getTextField_2() {
 		if (textField_2 == null) {
 			textField_2 = new JTextField();
@@ -158,6 +179,7 @@ public class EcranClient {
 		}
 		return textField_2;
 	}
+
 	private JTextField getTextField_3() {
 		if (textField_3 == null) {
 			textField_3 = new JTextField();
@@ -166,6 +188,7 @@ public class EcranClient {
 		}
 		return textField_3;
 	}
+
 	private JTextField getTextField_4() {
 		if (textField_4 == null) {
 			textField_4 = new JTextField();
@@ -174,6 +197,7 @@ public class EcranClient {
 		}
 		return textField_4;
 	}
+
 	private JTextField getTextField_5() {
 		if (textField_5 == null) {
 			textField_5 = new JTextField();
@@ -182,6 +206,7 @@ public class EcranClient {
 		}
 		return textField_5;
 	}
+
 	private JTextField getTextField_6() {
 		if (textField_6 == null) {
 			textField_6 = new JTextField();
@@ -190,6 +215,7 @@ public class EcranClient {
 		}
 		return textField_6;
 	}
+
 	private JLabel getLblCode() {
 		if (lblCode == null) {
 			lblCode = new JLabel("Code");
@@ -197,6 +223,7 @@ public class EcranClient {
 		}
 		return lblCode;
 	}
+
 	private JLabel getLblNom() {
 		if (lblNom == null) {
 			lblNom = new JLabel("Nom");
@@ -204,6 +231,7 @@ public class EcranClient {
 		}
 		return lblNom;
 	}
+
 	private JLabel getTxtPrenom() {
 		if (txtPrenom == null) {
 			txtPrenom = new JLabel("Pr\u00E9nom");
@@ -211,6 +239,7 @@ public class EcranClient {
 		}
 		return txtPrenom;
 	}
+
 	private JLabel getTxtAdresse() {
 		if (txtAdresse == null) {
 			txtAdresse = new JLabel("Adresse");
@@ -218,6 +247,7 @@ public class EcranClient {
 		}
 		return txtAdresse;
 	}
+
 	private JLabel getTxtCodePostal() {
 		if (txtCodePostal == null) {
 			txtCodePostal = new JLabel("Code postal");
@@ -225,6 +255,7 @@ public class EcranClient {
 		}
 		return txtCodePostal;
 	}
+
 	private JLabel getTxtVille() {
 		if (txtVille == null) {
 			txtVille = new JLabel("Ville");
@@ -232,13 +263,7 @@ public class EcranClient {
 		}
 		return txtVille;
 	}
-	private JTextArea getTextArea() {
-		if (textArea == null) {
-			textArea = new JTextArea();
-			textArea.setBounds(283, 64, 313, 229);
-		}
-		return textArea;
-	}
+
 	private JButton getBtnEditer() {
 		if (btnEditer == null) {
 			btnEditer = new JButton("Editer");
@@ -246,6 +271,7 @@ public class EcranClient {
 		}
 		return btnEditer;
 	}
+
 	private JButton getBtnSupprimer_1() {
 		if (btnSupprimer_1 == null) {
 			btnSupprimer_1 = new JButton("Supprimer");
@@ -253,6 +279,7 @@ public class EcranClient {
 		}
 		return btnSupprimer_1;
 	}
+
 	private JButton getBtnAjouter_1() {
 		if (btnAjouter_1 == null) {
 			btnAjouter_1 = new JButton("Ajouter");
@@ -260,4 +287,59 @@ public class EcranClient {
 		}
 		return btnAjouter_1;
 	}
+
+	private JTable getTable() throws IHMException {
+		if (table == null) {
+
+			try {
+				table = new JTable(getModeleAnimaux());
+				table.setBounds(10, 133, 561, 318);
+
+			} catch (Exception e) {
+				throw new IHMException("Erreur à la recupération de la table", e);
+			}
+
+		}
+		return table;
+
+	}
+
+	public void mettreAJour() throws IHMException {
+
+		try {
+			// client = clientManager.getClientByCode(Integer.parseInt(txtCode.getText()));
+			client = clientManager.getClientByCode(1);
+			modeleAnimaux.setData(client.getCodeClient());
+
+		} catch (BLLException e) {
+			e.printStackTrace();
+			throw new IHMException("Erreur à la mise à jour de la table", e);
+
+		}
+	}
+
+	private ModeleAnimaux getModeleAnimaux() throws IHMException {
+		if (modeleAnimaux == null) {
+			try {
+
+				modeleAnimaux = new ModeleAnimaux(0);
+			} catch (BLLException e) {
+
+				e.printStackTrace();
+				throw new IHMException("Erreur à l'appel getModeleAnimaux de la table", e);
+
+			}
+
+		}
+		return modeleAnimaux;
+	}
+
+	private JScrollPane getScrollPane() {
+		if (scrollPane == null) {
+			scrollPane = new JScrollPane(table);
+			scrollPane.setBounds(266, 45, 330, 248);
+		}
+		return scrollPane;
+	}
+
 }
