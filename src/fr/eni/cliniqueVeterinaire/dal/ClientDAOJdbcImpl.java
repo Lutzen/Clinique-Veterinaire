@@ -17,7 +17,7 @@ private Connection connection = null;
 	
 	private Client getClientFromResultset(ResultSet resultSet) throws SQLException {
 		Client client = new Client();
-		client.setCodeClient(resultSet.getString("CodeClient"));
+		client.setCodeClient(resultSet.getInt("CodeClient"));
 		client.setNomClient(resultSet.getString("NomClient"));
 		client.setPrenomClient(resultSet.getString("PrenomClient"));
 		client.setAdresse1(resultSet.getString("Adresse1"));
@@ -114,7 +114,7 @@ private Connection connection = null;
 			PreparedStatement statement = connection.prepareStatement(sql);
 			FillStatementFromClient(statement, client);
 			statement.setInt(1, 1);
-			statement.setString(2, client.getCodeClient());
+			statement.setInt(2, client.getCodeClient());
 			statement.setString(3, client.getNomClient());
 			statement.setString(4, client.getPrenomClient());
 			statement.setString(5, client.getAdresse1());
@@ -176,7 +176,7 @@ private Connection connection = null;
 	}
 
 	@Override
-	public Client selectByCode(Long codeClient) throws DALException {
+	public Client selectByCode(int codeClient) throws DALException {
 		openConnection();
 
 		String sql = "SELECT * FROM Clients WHERE CodeClient=? and Archive=0";

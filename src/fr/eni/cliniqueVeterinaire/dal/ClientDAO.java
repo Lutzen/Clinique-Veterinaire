@@ -17,7 +17,7 @@ public interface ClientDAO {
 	
 	void update(Client client)throws DALException;
 	
-	Client selectByCode(Long codeClient) throws DALException;
+	Client selectByCode(int codeClient) throws DALException;
 	
 
 
