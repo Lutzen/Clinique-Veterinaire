@@ -71,7 +71,7 @@ public class RdvDAOJdbcImpl implements RdvDAO {
 			ResultSet resultSet = statement.executeQuery();
 			while (resultSet.next()) {
 				rdv.add(getRdvFromResultset(resultSet));
-				System.out.println(rdv);
+				//System.out.println(rdv);
 			}
 			return rdv;
 		} catch (SQLException e) {
