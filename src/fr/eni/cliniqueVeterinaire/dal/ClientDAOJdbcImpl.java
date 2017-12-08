@@ -60,7 +60,7 @@ private Connection connection = null;
 
 				openConnection();
 
-				String sql = "SELECT CodeClient,NomClient,PrenomClient,Adresse1,Adresse2,CodePostal,Ville,NumTel FROM Clients WHERE Archive=0 ";
+				String sql = "SELECT * FROM Clients WHERE Archive=0 ";
 				List<Client> client = new LinkedList<>();
 
 				try {
@@ -80,7 +80,7 @@ private Connection connection = null;
 	public Client selectByNom(String nom) throws DALException {
 		openConnection();
 
-		String sql = "SELECT * FROM Clients WHERE Nom=? and Archive=0";
+		String sql = "SELECT * FROM Clients WHERE NomClient=? and Archive=0";
 		PreparedStatement statement = null;
 
 		try {
