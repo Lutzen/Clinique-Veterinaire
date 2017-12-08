@@ -60,7 +60,7 @@ public class RdvDAOJdbcImpl implements RdvDAO {
 	public List<Rdv> selectById(int codeveto) throws DALException {
 		openConnection();
 
-		String sql = "SELECT * FROM Agendas where CodeVeto=?";
+		String sql = "SELECT * FROM Agendas where CodeVeto=? order by DateRdv ASC";
 		List<Rdv> rdv = new LinkedList<>();
 
 		try {
@@ -88,7 +88,7 @@ public class RdvDAOJdbcImpl implements RdvDAO {
 	public List<Rdv> selectAll() throws DALException {
 		openConnection();
 
-		String sql = "SELECT * FROM Agendas";
+		String sql = "SELECT * FROM Agendas order by DateRdv ASC";
 		List<Rdv> rdv = new LinkedList<>();
 
 		try {
