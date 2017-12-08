@@ -9,8 +9,11 @@ import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.JTextField;
 
+import com.sun.corba.se.impl.logging.OMGSystemException;
+
 import fr.eni.cliniqueVeterinaire.bll.AnimalManager;
 import fr.eni.cliniqueVeterinaire.bll.BLLException;
+import fr.eni.cliniqueVeterinaire.bll.ClientManager;
 
 import javax.swing.JComboBox;
 
@@ -35,9 +38,12 @@ public class EcranAnimaux extends JFrame{
 	private JTextField txtTatouage;
 	private JLabel lblTatouage;
 	private AnimalManager animalManager = AnimalManager.getInstance();
+	private ClientManager clientManager = ClientManager.getInstance();
+	private String nomClient;
 
 	
-	public EcranAnimaux() {
+	public EcranAnimaux(String nomClient) {
+		this.nomClient = nomClient;
 		setTitle("Animaux");
 		setBounds(100, 100, 496, 271);
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
@@ -86,6 +92,7 @@ public class EcranAnimaux extends JFrame{
 	private JTextField getTxtClient() {
 		if (txtClient == null) {
 			txtClient = new JTextField();
+			txtClient.setText(nomClient);
 			txtClient.setBounds(10, 30, 244, 20);
 			txtClient.setColumns(10);
 		}

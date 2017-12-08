@@ -54,8 +54,8 @@ public class EcranClient extends JFrame {
 
 	public EcranClient() throws IHMException {
 		setTitle("Clients");
-		setBounds(100, 100, 622, 377);
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		setBounds(100, 100, 761, 377);
+		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		getContentPane().setLayout(null);
 		getContentPane().add(getBtnRechercher());
 		getContentPane().add(getBtnAjouter());
@@ -98,7 +98,6 @@ public class EcranClient extends JFrame {
 								frame.setVisible(true);
 
 							} catch (IHMException e) {
-								// TODO Auto-generated catch block
 								e.printStackTrace();
 							}
 
@@ -113,7 +112,7 @@ public class EcranClient extends JFrame {
 		return btnRechercher;
 	}
 	
-	public void recupClient(Client client) {
+	public void recupClient(Client client) throws IHMException {
 		txtCode.setText(String.valueOf(client.getCodeClient()));
 		txtNom.setText(client.getNomClient());
 		txtPrenom.setText(client.getPrenomClient());
@@ -121,7 +120,7 @@ public class EcranClient extends JFrame {
 		txtAdresse02.setText(client.getAdresse2());
 		txtCodePostal.setText(client.getCodePostal());
 		txtVille.setText(client.getVille());
-		this.client = client;
+		mettreAJour();
 
 		
 	}
@@ -129,7 +128,7 @@ public class EcranClient extends JFrame {
 	private JButton getBtnAjouter() {
 		if (btnAjouter == null) {
 			btnAjouter = new JButton("Ajouter");
-			btnAjouter.setBounds(184, 11, 89, 23);
+			btnAjouter.setBounds(266, 11, 89, 23);
 		}
 		return btnAjouter;
 	}
@@ -137,7 +136,7 @@ public class EcranClient extends JFrame {
 	private JButton getBtnSupprimer() {
 		if (btnSupprimer == null) {
 			btnSupprimer = new JButton("Supprimer");
-			btnSupprimer.setBounds(283, 11, 89, 23);
+			btnSupprimer.setBounds(365, 11, 89, 23);
 		}
 		return btnSupprimer;
 	}
@@ -150,7 +149,7 @@ public class EcranClient extends JFrame {
 					
 				}
 			});
-			btnValider.setBounds(408, 11, 89, 23);
+			btnValider.setBounds(547, 11, 89, 23);
 		}
 		return btnValider;
 	}
@@ -158,7 +157,7 @@ public class EcranClient extends JFrame {
 	private JButton getBtnAnnuler() {
 		if (btnAnnuler == null) {
 			btnAnnuler = new JButton("Annuler");
-			btnAnnuler.setBounds(507, 11, 89, 23);
+			btnAnnuler.setBounds(646, 11, 89, 23);
 		}
 		return btnAnnuler;
 	}
@@ -279,7 +278,7 @@ public class EcranClient extends JFrame {
 	private JButton getBtnEditer() {
 		if (btnEditer == null) {
 			btnEditer = new JButton("Editer");
-			btnEditer.setBounds(507, 304, 89, 23);
+			btnEditer.setBounds(646, 304, 89, 23);
 		}
 		return btnEditer;
 	}
@@ -287,7 +286,7 @@ public class EcranClient extends JFrame {
 	private JButton getBtnSupprimer_1() {
 		if (btnSupprimer_1 == null) {
 			btnSupprimer_1 = new JButton("Supprimer");
-			btnSupprimer_1.setBounds(408, 304, 89, 23);
+			btnSupprimer_1.setBounds(547, 304, 89, 23);
 		}
 		return btnSupprimer_1;
 	}
@@ -295,7 +294,7 @@ public class EcranClient extends JFrame {
 	private JButton getBtnAjouter_1() {
 		if (btnAjouter_1 == null) {
 			btnAjouter_1 = new JButton("Ajouter");
-			btnAjouter_1.setBounds(309, 304, 89, 23);
+			btnAjouter_1.setBounds(448, 304, 89, 23);
 		}
 		return btnAjouter_1;
 	}
@@ -319,8 +318,7 @@ public class EcranClient extends JFrame {
 	public void mettreAJour() throws IHMException {
 
 		try {
-			// client = clientManager.getClientByCode(Integer.parseInt(txtCode.getText()));
-			client = clientManager.getClientByCode(1);
+			client = clientManager.getClientByCode(Integer.parseInt(txtCode.getText()));
 			modeleAnimaux.setData(client.getCodeClient());
 
 		} catch (BLLException e) {
@@ -349,7 +347,7 @@ public class EcranClient extends JFrame {
 	private JScrollPane getScrollPane() {
 		if (scrollPane == null) {
 			scrollPane = new JScrollPane(table);
-			scrollPane.setBounds(266, 45, 330, 248);
+			scrollPane.setBounds(266, 45, 469, 248);
 		}
 		return scrollPane;
 	}

@@ -83,7 +83,11 @@ public class EcranResultatsRecherche extends JFrame {
 					public void mouseClicked(MouseEvent event) {
 						int row = table.convertRowIndexToModel(table.rowAtPoint(event.getPoint()));
 						client = liste.get(row);
-						ecranClient.recupClient(client);
+						try {
+							ecranClient.recupClient(client);
+						} catch (IHMException e) {
+							e.printStackTrace();
+						}
 						dispose();
 							
 					}
