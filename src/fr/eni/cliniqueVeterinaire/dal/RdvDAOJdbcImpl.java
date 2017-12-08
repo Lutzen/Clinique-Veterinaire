@@ -69,6 +69,7 @@ public class RdvDAOJdbcImpl implements RdvDAO {
 			ResultSet resultSet = statement.executeQuery();
 			while (resultSet.next()) {
 				rdv.add(getRdvFromResultset(resultSet));
+				System.out.println(rdv);
 			}
 			return rdv;
 		} catch (SQLException e) {
@@ -96,6 +97,7 @@ public class RdvDAOJdbcImpl implements RdvDAO {
 			ResultSet resultSet = statement.executeQuery(sql);
 			while (resultSet.next()) {
 				rdv.add(getRdvFromResultset(resultSet));
+				System.out.println(rdv);
 			}
 			return rdv;
 		} catch (SQLException e) {
@@ -150,6 +152,8 @@ public class RdvDAOJdbcImpl implements RdvDAO {
 		}
 		super.finalize();
 	}
+
+	
 
 
 

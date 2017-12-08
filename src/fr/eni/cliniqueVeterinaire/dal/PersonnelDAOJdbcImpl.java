@@ -109,7 +109,7 @@ public class PersonnelDAOJdbcImpl implements PersonnelDAO {
 	public List<Personnel> selectAll() throws DALException {
 		openConnection();
 
-		String sql = "SELECT Nom,MotPasse,Role FROM Personnels WHERE Archive=0";
+		String sql = "SELECT * FROM Personnels WHERE Archive=0";
 		List<Personnel> personnels = new LinkedList<>();
 
 		try {
