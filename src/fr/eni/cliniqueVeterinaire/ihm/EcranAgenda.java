@@ -13,6 +13,9 @@ import javax.swing.ImageIcon;
 import java.awt.event.ActionListener;
 import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
+import java.beans.PropertyChangeEvent;
+import java.beans.PropertyChangeListener;
+import java.util.Date;
 import java.util.List;
 import java.awt.event.ActionEvent;
 import javax.swing.JScrollPane;
@@ -29,6 +32,8 @@ import fr.eni.cliniqueVeterinaire.bo.Personnel;
 
 import javax.swing.ScrollPaneConstants;
 import javax.swing.SwingUtilities;
+
+import com.toedter.calendar.JCalendar;
 import com.toedter.calendar.JDateChooser;
 
 public class EcranAgenda extends JFrame {
@@ -203,7 +208,15 @@ public class EcranAgenda extends JFrame {
 	}
 	private JDateChooser getDateChooser() {
 		if (dateChooser == null) {
-			dateChooser = new JDateChooser();
+			dateChooser = new JDateChooser(new Date());
+			dateChooser.addPropertyChangeListener(new PropertyChangeListener() {
+			          @Override
+			          public void propertyChange(PropertyChangeEvent evt) {
+			              Date date = dateChooser.getDate();
+			              System.out.println("date: "+date);
+			          }
+			      });
+			      
 			dateChooser.setBounds(277, 8, 124, 20);
 		}
 		return dateChooser;
