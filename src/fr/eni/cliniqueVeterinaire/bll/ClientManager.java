@@ -36,7 +36,7 @@ public class ClientManager {
 
 	}
 	
-	public Client getClientByCode(Long code) throws BLLException {
+	public Client getClientByCode(int code) throws BLLException {
 		try {
 			return clientDAO.selectByCode(code);
 		} catch (Exception e) {

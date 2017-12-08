@@ -141,7 +141,9 @@ public class EcranRdv extends JFrame {
 		if (cBAnimaux == null) {
 			try {
 				cBAnimaux = new JComboBox();
-				List<Animal> animaux = animalManager.getAnimalList(codeClient);
+				
+				Client client = clientManager.getClientByName((String) cBClients.getSelectedItem());
+				List<Animal> animaux = animalManager.getAnimalList(client.getCodeClient());
 				cBAnimaux = new JComboBox(new String[] {});
 				for (int i = 0; i < animaux.size(); i++) {
 					cBAnimaux.addItem(animaux.get(i).getNomAnimal());

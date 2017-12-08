@@ -2,7 +2,7 @@ package fr.eni.cliniqueVeterinaire.bo;
 
 public class Client {
 
-private String codeClient;
+private int codeClient;
 private String nomClient;
 private String prenomClient;
 private String adresse1;
@@ -80,13 +80,13 @@ public void setRemarque(String remarque) {
 public Client() {
 	
 }
-public String getCodeClient() {
+public int getCodeClient() {
 	return codeClient;
 }
-public void setCodeClient(String codeClient) {
+public void setCodeClient(int codeClient) {
 	this.codeClient = codeClient;
 }
-public Client(String codeClient, String nomClient, String prenomClient, String adresse1, String adresse2,
+public Client(int codeClient, String nomClient, String prenomClient, String adresse1, String adresse2,
 		String codePostal, String ville, String numTel, String assurance, String email, String remarque) {
 	super();
 	this.codeClient = codeClient;
