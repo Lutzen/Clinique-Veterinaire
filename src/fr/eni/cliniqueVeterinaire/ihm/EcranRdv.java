@@ -5,6 +5,7 @@ import java.util.List;
 
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JScrollPane;
 import javax.swing.JComboBox;
 import javax.swing.JButton;
 import javax.swing.ImageIcon;
@@ -55,6 +56,7 @@ public class EcranRdv extends JFrame {
 	private ModeleRdv modeleRdv;
 	private Personnel personnel;
 	private Animal animal;
+	private JScrollPane scrollPane;
 
 	/**
 	 * Create the application.
@@ -85,6 +87,7 @@ public class EcranRdv extends JFrame {
 		getContentPane().add(getBtnValider());
 		getContentPane().add(getBtnSupprimer());
 		getContentPane().add(getTable());
+		getContentPane().add(getScrollPane());
 	}
 
 	private JLabel getLblPour() {
@@ -115,8 +118,7 @@ public class EcranRdv extends JFrame {
 					cBClients.addItem(clients.get(i).getNomClient());
 					cBClients.addItemListener(new ItemListener() {
 						public void itemStateChanged(ItemEvent e) {
-							mettreAJour();
-
+							refreshCBAnimaux();
 						}
 					});
 
@@ -136,36 +138,46 @@ public class EcranRdv extends JFrame {
 		}
 		return lblAnimal;
 	}
+	
 
 	private JComboBox getCBAnimaux() {
 		if (cBAnimaux == null) {
-			try {
-				cBAnimaux = new JComboBox();
-				
-				Client client = clientManager.getClientByName((String) cBClients.getSelectedItem());
-				List<Animal> animaux = animalManager.getAnimalList((long) client.getCodeClient());
-				cBAnimaux = new JComboBox(new String[] {});
-				for (int i = 0; i < animaux.size(); i++) {
-					cBAnimaux.addItem(animaux.get(i).getNomAnimal());
-					cBAnimaux.addItemListener(new ItemListener() {
-						public void itemStateChanged(ItemEvent e) {
-							mettreAJour();
+			cBAnimaux = new JComboBox(new String[] {});			
+			refreshCBAnimaux();
+			
 
-						}
-					});
+				cBAnimaux.addItemListener(new ItemListener() {
+					public void itemStateChanged(ItemEvent e) {
 
-				}
-				cBAnimaux.setBounds(30, 100, 131, 20);
-			} catch (BLLException e) {
+					}
+				});
 
-				e.printStackTrace();
-			}
+			
+			cBAnimaux.setBounds(30, 100, 131, 20);
 
 		
 		}
 		return cBAnimaux;
 	}
 
+	
+	private void refreshCBAnimaux() {
+		Client client;
+		try {
+			cBAnimaux.removeAllItems();
+			client = clientManager.getClientByName((String) cBClients.getSelectedItem());
+			List<Animal> animaux = animalManager.getAnimalList( client.getCodeClient());
+			for (int i = 0; i < animaux.size(); i++) {
+				cBAnimaux.addItem(animaux.get(i).getNomAnimal());}
+		} catch (BLLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	
+	}
+	
+	
+	
 	private JButton getBtnNewButton() {
 		if (btnNewButton == null) {
 			btnNewButton = new JButton("");
@@ -263,7 +275,16 @@ public class EcranRdv extends JFrame {
 
 	private JComboBox getCBHeures() {
 		if (cBHeures == null) {
-			cBHeures = new JComboBox();
+			cBHeures = new JComboBox(new Integer[] {});
+			for (int i = 0; i < 24; i++) {
+				cBHeures.addItem(i);
+				cBHeures.addItemListener(new ItemListener() {
+					public void itemStateChanged(ItemEvent e) {
+					
+
+					
+			}
+				});}
 			cBHeures.setBounds(428, 100, 46, 20);
 		}
 		return cBHeures;
@@ -272,14 +293,14 @@ public class EcranRdv extends JFrame {
 	private JLabel getLblH() {
 		if (lblH == null) {
 			lblH = new JLabel("h");
-			lblH.setBounds(484, 103, 6, 14);
+			lblH.setBounds(484, 103, 20, 14);
 		}
 		return lblH;
 	}
 
 	private JComboBox getCBMinutes() {
 		if (cBMinutes == null) {
-			cBMinutes = new JComboBox();
+			cBMinutes = new JComboBox(new Integer[] {00,15,30,45});
 			cBMinutes.setBounds(500, 100, 46, 20);
 		}
 		return cBMinutes;
@@ -341,6 +362,13 @@ public class EcranRdv extends JFrame {
 
 		}
 		return modeleRdv;
+	}
+	private JScrollPane getScrollPane() {
+		if (scrollPane == null) {
+			scrollPane = new JScrollPane(table);
+			scrollPane.setBounds(10, 133, 561, 318);
+		}
+		return scrollPane;
 	}
 
 }
