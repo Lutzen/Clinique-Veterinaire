@@ -207,14 +207,14 @@ private Connection connection = null;
 	public List<Client> selectByMotCle(String nom) throws DALException {
 		openConnection();
 
-		String sql = "select * from Clients WHERE NomClient like ?" ;
+		String sql = "select * from Clients WHERE NomClient like ?";
 		List<Client> client = new LinkedList<>();
 		PreparedStatement statement = null;
 		
 
 		try {
 			statement = connection.prepareStatement(sql);
-			statement.setString(1, nom);
+			statement.setString(1, nom +"%");
 			ResultSet resultSet = statement.executeQuery();
 			while(resultSet.next()) {
 				
