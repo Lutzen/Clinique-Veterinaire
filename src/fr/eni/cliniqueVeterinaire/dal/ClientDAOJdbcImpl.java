@@ -17,6 +17,7 @@ private Connection connection = null;
 	
 	private Client getClientFromResultset(ResultSet resultSet) throws SQLException {
 		Client client = new Client();
+		client.setCodeClient(resultSet.getString("CodeClient"));
 		client.setNomClient(resultSet.getString("NomClient"));
 		client.setPrenomClient(resultSet.getString("PrenomClient"));
 		client.setAdresse1(resultSet.getString("Adresse1"));
@@ -59,7 +60,7 @@ private Connection connection = null;
 
 				openConnection();
 
-				String sql = "SELECT CodeClient,NomClient,PrenomClient,Adresse1,Adresse2,CodePostal,Ville FROM Clients WHERE Archive=0 ";
+				String sql = "SELECT CodeClient,NomClient,PrenomClient,Adresse1,Adresse2,CodePostal,Ville,NumTel FROM Clients WHERE Archive=0 ";
 				List<Client> client = new LinkedList<>();
 
 				try {
