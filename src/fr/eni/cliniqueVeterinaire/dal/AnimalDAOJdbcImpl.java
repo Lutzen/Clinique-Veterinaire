@@ -16,28 +16,28 @@ public class AnimalDAOJdbcImpl implements AnimalDAO {
 	private Connection connection = null;
 	
 	private Animal getAnimalFromResultset(ResultSet resultSet) throws SQLException {
-		Animal animal = new Animal("", "", "", "", "", 0l, "", "");
+		Animal animal = new Animal(0,"", "", "", "", "", 0, "", "");
 		animal.setNomAnimal(resultSet.getString("NomAnimal"));
 		animal.setSexe(resultSet.getString("Sexe"));
 		animal.setCouleur(resultSet.getString("Couleur"));
 		animal.setRace(resultSet.getString("Race"));
 		animal.setEspece(resultSet.getString("Espece"));
-		animal.setCodeClient(resultSet.getLong("CodeClient"));
+		animal.setCodeClient(resultSet.getInt("CodeClient"));
 		animal.setTatouage(resultSet.getString("Tatouage"));
 		animal.setAntecedents(resultSet.getString("Antecedents"));
-
+		animal.setCodeAnimal(resultSet.getInt("CodeAnimal"));
 		
 		return animal;
 	}
 	
 	private void FillStatementFromAnimal(PreparedStatement statement, Animal animal) throws SQLException {
-		statement.setString(1, animal.getCodeAnimal());
+		statement.setInt(1, animal.getCodeAnimal());
 		statement.setString(2, animal.getNomAnimal());
 		statement.setString(3, animal.getSexe());
 		statement.setString(4, animal.getCouleur());
 		statement.setString(5, animal.getRace());
 		statement.setString(6, animal.getEspece());
-		statement.setLong(7, animal.getCodeClient());
+		statement.setInt(7, animal.getCodeClient());
 		statement.setString(8, animal.getTatouage());
 		statement.setString(9, animal.getAntecedents());
 
@@ -54,7 +54,7 @@ public class AnimalDAOJdbcImpl implements AnimalDAO {
 	}
 
 	@Override
-	public List<Animal> selectByClient(Long codeClient) throws DALException {
+	public List<Animal> selectByClient(int codeClient) throws DALException {
 		openConnection();
 
 		String sql = "SELECT * FROM Animaux WHERE CodeClient=? and Archive=0";
@@ -94,7 +94,7 @@ public class AnimalDAOJdbcImpl implements AnimalDAO {
 			PreparedStatement statement = connection.prepareStatement(sql);
 			FillStatementFromAnimal(statement, animal);
 			statement.setInt(1, 1);
-			statement.setString(2, animal.getCodeAnimal());
+			statement.setInt(2, animal.getCodeAnimal());
 			statement.setString(3, animal.getNomAnimal());
 			statement.setString(4, animal.getSexe());
 			statement.setString(5, animal.getCouleur());
@@ -151,7 +151,7 @@ public class AnimalDAOJdbcImpl implements AnimalDAO {
 			statement.setLong(6, animal.getCodeClient());
 			statement.setString(7, animal.getTatouage());
 			statement.setString(8, animal.getAntecedents());
-			statement.setString(9, animal.getCodeAnimal());
+			statement.setInt(9, animal.getCodeAnimal());
 
 			statement.executeUpdate();
 		} catch (SQLException e) {
@@ -161,7 +161,7 @@ public class AnimalDAOJdbcImpl implements AnimalDAO {
 	}
 
 	@Override
-	public Animal selectByCode(Long codeAnimal) throws DALException {
+	public Animal selectByCode(int codeAnimal) throws DALException {
 		openConnection();
 
 		String sql = "SELECT * FROM Animaux WHERE CodeAnimal=? and Archive=0";

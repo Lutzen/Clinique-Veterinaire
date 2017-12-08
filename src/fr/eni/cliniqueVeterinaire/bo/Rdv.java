@@ -3,15 +3,15 @@ package fr.eni.cliniqueVeterinaire.bo;
 import java.sql.Date;
 
 public class Rdv {
-private long codeVeto;
+private int codeVeto;
 private Date dateRdv;
-private long codeAnimal;
+private int codeAnimal;
 
 
-public long getCodeVeto() {
+public int getCodeVeto() {
 	return codeVeto;
 }
-public void setCodeVeto(long codeVeto) {
+public void setCodeVeto(int codeVeto) {
 	this.codeVeto = codeVeto;
 }
 public Date getDateRdv() {
@@ -20,10 +20,10 @@ public Date getDateRdv() {
 public void setDateRdv(Date dateRdv) {
 	this.dateRdv = dateRdv;
 }
-public long getCodeAnimal() {
+public int getCodeAnimal() {
 	return codeAnimal;
 }
-public void setCodeAnimal(long codeAnimal) {
+public void setCodeAnimal(int codeAnimal) {
 	this.codeAnimal = codeAnimal;
 }
 
@@ -31,7 +31,7 @@ public Rdv() {
 	
 }
 
-public Rdv(long codeVeto, Date dateRdv, long codeAnimal) {
+public Rdv(int codeVeto, Date dateRdv, int codeAnimal) {
 	super();
 	this.codeVeto = codeVeto;
 	this.dateRdv = dateRdv;

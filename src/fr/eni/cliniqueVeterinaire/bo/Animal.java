@@ -1,13 +1,13 @@
 package fr.eni.cliniqueVeterinaire.bo;
 
 public class Animal {
-private String codeAnimal;	
+private int codeAnimal;	
 private String nomAnimal;
 private String sexe;
 private String couleur;
 private String race;
 private String espece;
-private Long codeClient;
+private int codeClient;
 private String tatouage;
 private String antecedents;
 
@@ -43,10 +43,10 @@ public String getEspece() {
 public void setEspece(String espece) {
 	this.espece = espece;
 }
-public Long getCodeClient() {
+public int getCodeClient() {
 	return codeClient;
 }
-public void setCodeClient(Long codeClient) {
+public void setCodeClient(int codeClient) {
 	this.codeClient = codeClient;
 }
 public String getTatouage() {
@@ -65,9 +65,11 @@ public void setAntecedents(String antecedents) {
 public Animal() {
 	
 }
-public Animal(String nomAnimal, String sexe, String couleur, String race, String espece, Long codeClient,
+
+public Animal(int codeAnimal, String nomAnimal, String sexe, String couleur, String race, String espece, int codeClient,
 		String tatouage, String antecedents) {
 	super();
+	this.codeAnimal = codeAnimal;
 	this.nomAnimal = nomAnimal;
 	this.sexe = sexe;
 	this.couleur = couleur;
@@ -77,9 +79,14 @@ public Animal(String nomAnimal, String sexe, String couleur, String race, String
 	this.tatouage = tatouage;
 	this.antecedents = antecedents;
 }
-public String getCodeAnimal() {
+public int getCodeAnimal() {
 	return codeAnimal;
 }
+public void setCodeAnimal(int codeAnimal) {
+	this.codeAnimal = codeAnimal;
+}
+
+
 
 
 

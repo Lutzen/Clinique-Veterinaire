@@ -44,7 +44,7 @@ public class ModeleRdv extends AbstractTableModel{
 	public Object getValueAt(int rowIndex, int columnIndex) {
 		Rdv rdv = donnees.get(rowIndex);
 		try {
-			Animal animal = animalManager.getAnimalByCode( rdv.getCodeAnimal());
+			Animal animal = animalManager.getAnimalByCode(rdv.getCodeAnimal());
 			Client client = clientManager.getClientByCode(animal.getCodeClient());
 			
 			

@@ -63,7 +63,7 @@ public class EcranRdv extends JFrame {
 
 		setTitle("Prise de rendez-vous");
 		setBounds(100, 100, 597, 534);
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		getContentPane().setLayout(null);
 		getContentPane().add(getLblPour());
 		getContentPane().add(getLblClient());
@@ -143,7 +143,7 @@ public class EcranRdv extends JFrame {
 				cBAnimaux = new JComboBox();
 				
 				Client client = clientManager.getClientByName((String) cBClients.getSelectedItem());
-				List<Animal> animaux = animalManager.getAnimalList(client.getCodeClient());
+				List<Animal> animaux = animalManager.getAnimalList((long) client.getCodeClient());
 				cBAnimaux = new JComboBox(new String[] {});
 				for (int i = 0; i < animaux.size(); i++) {
 					cBAnimaux.addItem(animaux.get(i).getNomAnimal());
