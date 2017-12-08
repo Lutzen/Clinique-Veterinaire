@@ -4,10 +4,8 @@ import java.util.List;
 
 import javax.swing.table.AbstractTableModel;
 
-import fr.eni.cliniqueVeterinaire.bll.AnimalManager;
 import fr.eni.cliniqueVeterinaire.bll.BLLException;
 import fr.eni.cliniqueVeterinaire.bll.ClientManager;
-import fr.eni.cliniqueVeterinaire.bo.Animal;
 import fr.eni.cliniqueVeterinaire.bo.Client;
 
 public class ModeleClient extends AbstractTableModel {
@@ -58,13 +56,17 @@ public class ModeleClient extends AbstractTableModel {
 		return result;
 	}
 
-	public void setData(String motCle) {
+	public List<Client> setData(String motCle) {
 		try {
+			System.out.println(donnees);
 			this.donnees = clientManager.getClientByMotCle(motCle);
+			super.fireTableDataChanged();
+			
 		} catch (BLLException e) {
 			e.printStackTrace();
 		}
-		super.fireTableDataChanged();
+		return donnees;
+		
 
 	}
 

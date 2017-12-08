@@ -30,17 +30,17 @@ public class EcranClient extends JFrame {
 	private JButton btnAnnuler;
 	private JTextField txtCode;
 	private JTextField txtNom;
-	private JTextField textField_2;
-	private JTextField textField_3;
-	private JTextField textField_4;
-	private JTextField textField_5;
-	private JTextField textField_6;
+	private JTextField txtPrenom;
+	private JTextField txtAdresse1;
+	private JTextField txtAdresse02;
+	private JTextField txtCodePostal;
+	private JTextField txtVille;
 	private JLabel lblCode;
 	private JLabel lblNom;
-	private JLabel txtPrenom;
-	private JLabel txtAdresse;
-	private JLabel txtCodePostal;
-	private JLabel txtVille;
+	private JLabel lblPrenom;
+	private JLabel lblAdresse;
+	private JLabel lblCodePostal;
+	private JLabel lblVille;
 	private JButton btnEditer;
 	private JButton btnSupprimer_1;
 	private JButton btnAjouter_1;
@@ -64,17 +64,17 @@ public class EcranClient extends JFrame {
 		getContentPane().add(getBtnAnnuler());
 		getContentPane().add(getTxtCode());
 		getContentPane().add(getTxtNom());
-		getContentPane().add(getTextField_2());
-		getContentPane().add(getTextField_3());
-		getContentPane().add(getTextField_4());
-		getContentPane().add(getTextField_5());
-		getContentPane().add(getTextField_6());
-		getContentPane().add(getLblCode());
-		getContentPane().add(getLblNom());
 		getContentPane().add(getTxtPrenom());
-		getContentPane().add(getTxtAdresse());
+		getContentPane().add(getTxtAdresse1());
+		getContentPane().add(getTxtAdresse02());
 		getContentPane().add(getTxtCodePostal());
 		getContentPane().add(getTxtVille());
+		getContentPane().add(getLblCode());
+		getContentPane().add(getLblNom());
+		getContentPane().add(getLblPrenom());
+		getContentPane().add(getLblAdresse());
+		getContentPane().add(getLblCodePostal());
+		getContentPane().add(getLblVille());
 		getContentPane().add(getBtnEditer());
 		getContentPane().add(getBtnSupprimer_1());
 		getContentPane().add(getBtnAjouter_1());
@@ -88,29 +88,42 @@ public class EcranClient extends JFrame {
 			btnRechercher = new JButton("Rechercher");
 			btnRechercher.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
-						SwingUtilities.invokeLater(new Runnable() {
+					SwingUtilities.invokeLater(new Runnable() {
 
-							@Override
-							public void run() {
-								EcranResultatsRecherche frame;
-								try {
-									frame = new EcranResultatsRecherche();
-									frame.setVisible(true);
+						@Override
+						public void run() {
+							EcranResultatsRecherche frame;
+							try {
+								frame = new EcranResultatsRecherche(EcranClient.this);
+								frame.setVisible(true);
 
-								} catch (IHMException e) {
-									// TODO Auto-generated catch block
-									e.printStackTrace();
-								}
-								
+							} catch (IHMException e) {
+								// TODO Auto-generated catch block
+								e.printStackTrace();
 							}
-						});
-					
+
+						}
+					});
+
 				}
 			});
 			btnRechercher.setBounds(10, 11, 89, 23);
-			
+
 		}
 		return btnRechercher;
+	}
+	
+	public void recupClient(Client client) {
+		txtCode.setText(String.valueOf(client.getCodeClient()));
+		txtNom.setText(client.getNomClient());
+		txtPrenom.setText(client.getPrenomClient());
+		txtAdresse1.setText(client.getAdresse1());
+		txtAdresse02.setText(client.getAdresse2());
+		txtCodePostal.setText(client.getCodePostal());
+		txtVille.setText(client.getVille());
+		this.client = client;
+
+		
 	}
 
 	private JButton getBtnAjouter() {
@@ -134,7 +147,7 @@ public class EcranClient extends JFrame {
 			btnValider = new JButton("Valider");
 			btnValider.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
-					do_btnValider_actionPerformed(e);
+					
 				}
 			});
 			btnValider.setBounds(408, 11, 89, 23);
@@ -150,8 +163,7 @@ public class EcranClient extends JFrame {
 		return btnAnnuler;
 	}
 
-	protected static void do_btnValider_actionPerformed(ActionEvent e) {
-	}
+	
 
 	private JTextField getTxtCode() {
 		if (txtCode == null) {
@@ -171,49 +183,49 @@ public class EcranClient extends JFrame {
 		return txtNom;
 	}
 
-	private JTextField getTextField_2() {
-		if (textField_2 == null) {
-			textField_2 = new JTextField();
-			textField_2.setColumns(10);
-			textField_2.setBounds(86, 128, 170, 20);
+	private JTextField getTxtPrenom() {
+		if (txtPrenom == null) {
+			txtPrenom = new JTextField();
+			txtPrenom.setColumns(10);
+			txtPrenom.setBounds(86, 128, 170, 20);
 		}
-		return textField_2;
+		return txtPrenom;
 	}
 
-	private JTextField getTextField_3() {
-		if (textField_3 == null) {
-			textField_3 = new JTextField();
-			textField_3.setColumns(10);
-			textField_3.setBounds(86, 159, 170, 20);
+	private JTextField getTxtAdresse1() {
+		if (txtAdresse1 == null) {
+			txtAdresse1 = new JTextField();
+			txtAdresse1.setColumns(10);
+			txtAdresse1.setBounds(86, 159, 170, 20);
 		}
-		return textField_3;
+		return txtAdresse1;
 	}
 
-	private JTextField getTextField_4() {
-		if (textField_4 == null) {
-			textField_4 = new JTextField();
-			textField_4.setColumns(10);
-			textField_4.setBounds(86, 190, 170, 20);
+	private JTextField getTxtAdresse02() {
+		if (txtAdresse02 == null) {
+			txtAdresse02 = new JTextField();
+			txtAdresse02.setColumns(10);
+			txtAdresse02.setBounds(86, 190, 170, 20);
 		}
-		return textField_4;
+		return txtAdresse02;
 	}
 
-	private JTextField getTextField_5() {
-		if (textField_5 == null) {
-			textField_5 = new JTextField();
-			textField_5.setColumns(10);
-			textField_5.setBounds(86, 221, 170, 20);
+	private JTextField getTxtCodePostal() {
+		if (txtCodePostal == null) {
+			txtCodePostal = new JTextField();
+			txtCodePostal.setColumns(10);
+			txtCodePostal.setBounds(86, 221, 170, 20);
 		}
-		return textField_5;
+		return txtCodePostal;
 	}
 
-	private JTextField getTextField_6() {
-		if (textField_6 == null) {
-			textField_6 = new JTextField();
-			textField_6.setColumns(10);
-			textField_6.setBounds(86, 252, 170, 20);
+	private JTextField getTxtVille() {
+		if (txtVille == null) {
+			txtVille = new JTextField();
+			txtVille.setColumns(10);
+			txtVille.setBounds(86, 252, 170, 20);
 		}
-		return textField_6;
+		return txtVille;
 	}
 
 	private JLabel getLblCode() {
@@ -232,36 +244,36 @@ public class EcranClient extends JFrame {
 		return lblNom;
 	}
 
-	private JLabel getTxtPrenom() {
-		if (txtPrenom == null) {
-			txtPrenom = new JLabel("Pr\u00E9nom");
-			txtPrenom.setBounds(10, 131, 46, 14);
+	private JLabel getLblPrenom() {
+		if (lblPrenom == null) {
+			lblPrenom = new JLabel("Pr\u00E9nom");
+			lblPrenom.setBounds(10, 131, 46, 14);
 		}
-		return txtPrenom;
+		return lblPrenom;
 	}
 
-	private JLabel getTxtAdresse() {
-		if (txtAdresse == null) {
-			txtAdresse = new JLabel("Adresse");
-			txtAdresse.setBounds(10, 162, 46, 14);
+	private JLabel getLblAdresse() {
+		if (lblAdresse == null) {
+			lblAdresse = new JLabel("Adresse");
+			lblAdresse.setBounds(10, 162, 46, 14);
 		}
-		return txtAdresse;
+		return lblAdresse;
 	}
 
-	private JLabel getTxtCodePostal() {
-		if (txtCodePostal == null) {
-			txtCodePostal = new JLabel("Code postal");
-			txtCodePostal.setBounds(10, 224, 66, 14);
+	private JLabel getLblCodePostal() {
+		if (lblCodePostal == null) {
+			lblCodePostal = new JLabel("Code postal");
+			lblCodePostal.setBounds(10, 224, 66, 14);
 		}
-		return txtCodePostal;
+		return lblCodePostal;
 	}
 
-	private JLabel getTxtVille() {
-		if (txtVille == null) {
-			txtVille = new JLabel("Ville");
-			txtVille.setBounds(10, 255, 46, 14);
+	private JLabel getLblVille() {
+		if (lblVille == null) {
+			lblVille = new JLabel("Ville");
+			lblVille.setBounds(10, 255, 46, 14);
 		}
-		return txtVille;
+		return lblVille;
 	}
 
 	private JButton getBtnEditer() {

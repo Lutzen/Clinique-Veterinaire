@@ -1,10 +1,10 @@
 package fr.eni.cliniqueVeterinaire.ihm;
 
 import javax.swing.JFrame;
+import javax.swing.JList;
 import javax.swing.JScrollPane;
 import javax.swing.JTextField;
 
-import com.sun.corba.se.impl.ior.iiop.JavaSerializationComponent;
 
 import fr.eni.cliniqueVeterinaire.bll.BLLException;
 import fr.eni.cliniqueVeterinaire.bll.ClientManager;
@@ -14,10 +14,13 @@ import javax.swing.JButton;
 import javax.swing.JTable;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import java.awt.event.ContainerAdapter;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+import java.util.List;
 
 public class EcranResultatsRecherche extends JFrame {
 
-	private JFrame frmResultatsDeLa;
 	private JTextField txtRechercher;
 	private JButton btnRechercher;
 	private JTable table;
@@ -25,8 +28,11 @@ public class EcranResultatsRecherche extends JFrame {
 	private JScrollPane scrollPane;
 	private Client client;
 	private ModeleClient modeleClient;
+	private List<Client> liste;
+	private EcranClient ecranClient;
 
-	public EcranResultatsRecherche() throws IHMException {
+	public EcranResultatsRecherche(EcranClient ecranClient) throws IHMException {
+		this.ecranClient = ecranClient;
 		setTitle("Resultats de la recherche");
 		setBounds(100, 100, 450, 300);
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
@@ -63,12 +69,30 @@ public class EcranResultatsRecherche extends JFrame {
 		}
 		return btnRechercher;
 	}
+	
+	
+
 
 	private JTable getTable() throws IHMException {
 		if (table == null) {
 			try {
 				table = new JTable(getModeleClient());
-			} catch (IHMException e) {
+				liste = clientManager.getClientList();
+				table.addMouseListener(new MouseAdapter() {
+					@Override
+					public void mouseClicked(MouseEvent event) {
+						int row = table.convertRowIndexToModel(table.rowAtPoint(event.getPoint()));
+						client = liste.get(row);
+						ecranClient.recupClient(client);
+						dispose();
+							
+					}
+				});
+			
+				
+				
+				
+			} catch (Exception e) {
 				e.printStackTrace();
 				throw new IHMException("Erreur à l'appel getTable ", e);
 
@@ -80,7 +104,7 @@ public class EcranResultatsRecherche extends JFrame {
 
 	public void mettreAJour() throws IHMException {
 
-		modeleClient.setData(btnRechercher.getText());
+	liste = modeleClient.setData(txtRechercher.getText());
 	}
 
 	private ModeleClient getModeleClient() throws IHMException {
@@ -102,8 +126,14 @@ public class EcranResultatsRecherche extends JFrame {
 	private JScrollPane getScrollPane() {
 		if (scrollPane == null) {
 			scrollPane = new JScrollPane(table);
+			scrollPane.addContainerListener(new ContainerAdapter() {
+			
+			});
 			scrollPane.setBounds(10, 45, 414, 205);
 		}
 		return scrollPane;
 	}
+	
+	
+
 }
