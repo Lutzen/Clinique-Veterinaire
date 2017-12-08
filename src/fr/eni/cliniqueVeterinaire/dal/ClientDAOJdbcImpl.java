@@ -203,6 +203,37 @@ private Connection connection = null;
 		return null;
 	}
 
+	@Override
+	public List<Client> selectByMotCle(String nom) throws DALException {
+		openConnection();
+
+		String sql = "select * from Clients WHERE NomClient like ?" ;
+		List<Client> client = new LinkedList<>();
+		PreparedStatement statement = null;
+		
+
+		try {
+			statement = connection.prepareStatement(sql);
+			statement.setString(1, nom);
+			ResultSet resultSet = statement.executeQuery();
+			while(resultSet.next()) {
+				
+				client.add(getClientFromResultset(resultSet));
+			}
+			return client;
+		} catch (SQLException e) {
+			throw new DALException("Erreur à la récupération des clients par mot clé"+ nom, e);
+		} finally {
+			try {
+				if (statement != null)
+					statement.close();
+			} catch (SQLException e) {
+				throw new DALException("Erreur à la récupération des clients par mot clé"+ nom, e);
+			}
+		}
+		//return null;
+	}
+
 
 	
 

@@ -19,6 +19,8 @@ public interface ClientDAO {
 	
 	Client selectByCode(int codeClient) throws DALException;
 	
+	List<Client> selectByMotCle(String nom) throws DALException;
+	
 
 
 }
