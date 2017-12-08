@@ -36,6 +36,15 @@ public class ClientManager {
 
 	}
 	
+	public List<Client> getClientByMotCle(String string) throws BLLException {
+		try {
+			return clientDAO.selectByMotCle(string);
+		} catch (Exception e) {
+			throw new BLLException("getClientList", e);
+		}
+
+	}
+	
 	public Client getClientByCode(int code) throws BLLException {
 		try {
 			return clientDAO.selectByCode(code);
