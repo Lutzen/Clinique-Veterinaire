@@ -5,6 +5,7 @@ import java.awt.EventQueue;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JList;
+import javax.swing.JOptionPane;
 import javax.swing.JFormattedTextField;
 import javax.swing.JTextArea;
 import javax.swing.JButton;
@@ -23,6 +24,7 @@ import fr.eni.cliniqueVeterinaire.bll.BLLException;
 import fr.eni.cliniqueVeterinaire.bll.ClientManager;
 import fr.eni.cliniqueVeterinaire.bll.PersonnelManager;
 import fr.eni.cliniqueVeterinaire.bll.RdvManager;
+import fr.eni.cliniqueVeterinaire.bo.Client;
 import fr.eni.cliniqueVeterinaire.bo.Personnel;
 
 import javax.swing.ScrollPaneConstants;
@@ -121,17 +123,34 @@ public class EcranAgenda extends JFrame {
 			btnDossierMedical = new JButton("Dossier Medical");
 			btnDossierMedical.addActionListener(new ActionListener(){	@Override
 			public void actionPerformed(ActionEvent e) {
-				SwingUtilities.invokeLater(new Runnable() {
-					
-					@Override
-					public void run() {
+				
 						int row = table.getSelectedRow();
-						String nom = (String) table.getValueAt(row, 1);
-						//Client client =c
-						EcranDossierMedical frame = new EcranDossierMedical();
-						frame.setVisible(true);
-					}
-				});
+						System.out.println("row:"+ row);
+						
+						
+						if (row  == -1) {
+							JOptionPane.showMessageDialog(null, "Selectionnez un client");
+						}
+						else {
+							SwingUtilities.invokeLater(new Runnable() {
+								
+								@Override
+								public void run() {
+						 try {
+							Client client ;
+							String nom = (String) table.getValueAt(row, 1);
+							client = clientManager.getClientByName(nom);
+							 EcranDossierMedical frame = new EcranDossierMedical(client);
+								frame.setVisible(true);
+						} catch (BLLException e) {
+							// TODO Auto-generated catch block
+							e.printStackTrace();
+						}
+						
+								}});
+						}
+						
+				
 			}
 			});
 			
