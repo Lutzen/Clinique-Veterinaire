@@ -41,6 +41,10 @@ public class EcranAgenda extends JFrame {
 	private ModeleRdv modeleRdv;
 	private JTable table_1;
 	private JDateChooser dateChooser;
+	private JScrollPane scrollPane;
+	
+
+	
 
 	
 	/**
@@ -63,6 +67,8 @@ public class EcranAgenda extends JFrame {
 		getContentPane().add(getComboBoxVeto());
 		getContentPane().add(getTable());
 		getContentPane().add(getDateChooser());
+		getContentPane().add(getScrollPane());
+
 		
 
 		
@@ -83,7 +89,7 @@ public class EcranAgenda extends JFrame {
 						}});
 
 				}
-				comboBoxVeto.setBounds(79, 8, 97, 20);
+				comboBoxVeto.setBounds(79, 8, 136, 20);
 				
 			} catch (BLLException e) {
 				
@@ -104,7 +110,7 @@ public class EcranAgenda extends JFrame {
 	private JLabel getLblDate() {
 		if (lblDate == null) {
 			lblDate = new JLabel("Date");
-			lblDate.setBounds(196, 11, 32, 14);
+			lblDate.setBounds(235, 11, 32, 14);
 		}
 		return lblDate;
 	}
@@ -174,8 +180,15 @@ public class EcranAgenda extends JFrame {
 	private JDateChooser getDateChooser() {
 		if (dateChooser == null) {
 			dateChooser = new JDateChooser();
-			dateChooser.setBounds(238, 8, 124, 20);
+			dateChooser.setBounds(277, 8, 124, 20);
 		}
 		return dateChooser;
+	}
+	private JScrollPane getScrollPane() {
+		if (scrollPane == null) {
+			scrollPane = new JScrollPane(table);
+			scrollPane.setBounds(10, 36, 418, 273);
+		}
+		return scrollPane;
 	}
 }

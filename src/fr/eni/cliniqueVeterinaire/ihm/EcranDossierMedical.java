@@ -168,7 +168,7 @@ public class EcranDossierMedical extends JFrame {
 	private JLabel getLblAntcdentsconsultations() {
 		if (lblAntcdentsconsultations == null) {
 			lblAntcdentsconsultations = new JLabel("Ant\u00E9c\u00E9dents/consultations");
-			lblAntcdentsconsultations.setBounds(247, 54, 133, 14);
+			lblAntcdentsconsultations.setBounds(247, 54, 193, 14);
 		}
 		return lblAntcdentsconsultations;
 	}
