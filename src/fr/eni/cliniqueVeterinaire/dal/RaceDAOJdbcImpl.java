@@ -11,24 +11,9 @@ import fr.eni.cliniqueVeterinaire.bo.Races;
 
 public class RaceDAOJdbcImpl implements RaceDAO{
 	
-	
-	
+
 	private Connection connection = null;
-	
-	private Races getRaceFromResultset(ResultSet resultSet) throws SQLException {
-		Races espece = new Races("", "");
-		espece.setEspece(resultSet.getString("Espece"));
-		return espece;
-	}
-	
-	private void FillStatementFromRace(PreparedStatement statement, Races race) throws SQLException {
-		statement.setString(1, race.getEspece());
-		statement.setString(2, race.getRace());
 
-
-
-	}
-	
 	private void openConnection() throws DALException {
 		try {
 			if (connection == null)
@@ -51,8 +36,11 @@ public class RaceDAOJdbcImpl implements RaceDAO{
 			statement = connection.prepareStatement(sql);
 			statement.setString(1, espece);
 			ResultSet resultSet = statement.executeQuery();
+			Races espece1 = new Races("", "");
+
 			while(resultSet.next()) {
-				race.add(getRaceFromResultset(resultSet));
+				espece1.setRace(resultSet.getString("Race"));
+				race.add(espece1);
 			}
 			return race;
 		} catch (SQLException e) {
@@ -79,8 +67,11 @@ public class RaceDAOJdbcImpl implements RaceDAO{
 		try {
 			statement = connection.prepareStatement(sql);
 			ResultSet resultSet = statement.executeQuery();
+			Races espece2 = new Races("", "");
+
 			while(resultSet.next()) {
-				espece.add(getRaceFromResultset(resultSet));
+				espece2.setEspece(resultSet.getString("Espece"));
+				espece.add(espece2);
 			}
 			return espece;
 		} catch (SQLException e) {
