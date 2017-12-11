@@ -51,6 +51,7 @@ public class EcranAnimaux extends JFrame {
 	private String nomClient;
 	private EcranRdv ecranRdv;
 	private EcranClient ecranClient;
+	private Animal animal;
 
 	public EcranAnimaux(String nomClient, EcranRdv ecran) {
 		this.nomClient = nomClient;
@@ -100,6 +101,46 @@ public class EcranAnimaux extends JFrame {
 		getContentPane().add(getLblTatouage());
 	}
 
+	public EcranAnimaux(String nomClient, int codeAnimal, EcranClient ecran) {
+		ecranClient = (EcranClient) ecran;
+		this.nomClient = nomClient;
+		setTitle("Animaux");
+		setBounds(100, 100, 496, 223);
+		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+		getContentPane().setLayout(null);
+		getContentPane().add(getBtnAnnuler());
+		getContentPane().add(getBtnValider());
+		getContentPane().add(getLblClient());
+		getContentPane().add(getLblClientNom());
+		getContentPane().add(getTxtNom());
+		getContentPane().add(getTxtCouleur());
+		getContentPane().add(getLblNom());
+		getContentPane().add(getLblCouleur());
+		getContentPane().add(getCBSexe());
+		getContentPane().add(getLblEspce());
+		getContentPane().add(getCBEspece());
+		getContentPane().add(getLblRace());
+		getContentPane().add(getCBRace());
+		getContentPane().add(getTxtTatouage());
+		getContentPane().add(getLblTatouage());
+		try {
+			animal = animalManager.getAnimalByCode(codeAnimal);
+			txtNom.setText(animal.getNomAnimal());
+			txtCouleur.setText(animal.getCouleur());
+			txtTatouage.setText(animal.getTatouage());
+			cBEspece.setSelectedItem(animal.getEspece());
+			cBRace.setSelectedItem(animal.getRace());
+			if (animal.getSexe() == "M")
+				cBSexe.setSelectedIndex(0);
+			else
+				cBSexe.setSelectedItem(1);
+		} catch (BLLException e) {
+			e.printStackTrace();
+		}
+	
+
+	}
+
 	private JButton getBtnAnnuler() {
 		if (btnAnnuler == null) {
 			btnAnnuler = new JButton("Annuler");
@@ -113,11 +154,13 @@ public class EcranAnimaux extends JFrame {
 			btnValider = new JButton("Valider");
 			btnValider.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent arg0) {
+
 					if (txtNom.getText().isEmpty())
 						JOptionPane.showMessageDialog(null, "Remplissez les champs");
 					else {
 						Client client = new Client();
 						Animal animal = new Animal();
+
 						try {
 							client = clientManager.getClientByName(lblClientNom.getText());
 							animal.setCodeClient(client.getCodeClient());
@@ -130,15 +173,24 @@ public class EcranAnimaux extends JFrame {
 								animal.setSexe("M");
 							else
 								animal.setSexe("F");
-							animalManager.addAnimal(animal);
+
+							if (animal.getCodeAnimal() == 0)
+
+								animalManager.addAnimal(animal);
+
+							else
+								animalManager.updateAnimal(animal);
+
 							if (ecranClient != null)
 								ecranClient.mettreAJour();
 							else
 								ecranRdv.refreshCBAnimaux();
 							dispose();
 						} catch (Exception e) {
+							// TODO Auto-generated catch block
 							e.printStackTrace();
 						}
+
 					}
 				}
 			});

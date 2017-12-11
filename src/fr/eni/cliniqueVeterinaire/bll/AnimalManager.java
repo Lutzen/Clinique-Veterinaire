@@ -55,7 +55,7 @@ public class AnimalManager {
 
 		}
 
-		public void updatePersonnel(Animal animal) throws BLLException {
+		public void updateAnimal(Animal animal) throws BLLException {
 			try {
 				animalDAO.update(animal);
 

@@ -32,7 +32,7 @@ public class EcranAjoutClient extends JFrame {
 	private JLabel lblCodePostal;
 	private JLabel lblVille;
 	private EcranClient ecranClient;
-	private ClientManager clientManager = ClientManager.getInstance(); 
+	private ClientManager clientManager = ClientManager.getInstance();
 
 	public EcranAjoutClient(EcranClient ecran) {
 		ecranClient = ecran;
@@ -58,6 +58,16 @@ public class EcranAjoutClient extends JFrame {
 	private JButton getBtnAnnuler() {
 		if (btnAnnuler == null) {
 			btnAnnuler = new JButton("Annuler");
+			btnAnnuler.addActionListener(new ActionListener() {
+				public void actionPerformed(ActionEvent e) {
+					txtNom.setText("");
+					txtPrenom.setText("");
+					txtAdresse.setText("");
+					txtAdresse2.setText("");
+					txtVille.setText("");
+					txtCodePostal.setText("");
+				}
+			});
 			btnAnnuler.setBounds(231, 11, 89, 23);
 		}
 		return btnAnnuler;
@@ -69,31 +79,33 @@ public class EcranAjoutClient extends JFrame {
 			btnValider.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
 					try {
-					Client client = new Client();
-					client.setAdresse1(txtAdresse.getText());
-					client.setAdresse2(txtAdresse2.getText());
-					client.setCodePostal(txtCodePostal.getText());
-					client.setNomClient(txtNom.getText());
-					client.setPrenomClient(getTxtPrenom().getText());
-					client.setVille(txtVille.getText());
-					
-					clientManager.addClient(client);
-					JOptionPane.showMessageDialog(null, "Client ajouté avec succès");
-					ecranClient.recupClient(client);
-					dispose();
+						if (txtNom.getText().isEmpty() & txtVille.getText().isEmpty()) {
+							JOptionPane.showMessageDialog(null, "Remplissez tout les champs!");
+						} else {
+							Client client = new Client();
+							client.setAdresse1(txtAdresse.getText());
+							client.setAdresse2(txtAdresse2.getText());
+							client.setCodePostal(txtCodePostal.getText());
+							client.setNomClient(txtNom.getText());
+							client.setPrenomClient(getTxtPrenom().getText());
+							client.setVille(txtVille.getText());
+							clientManager.addClient(client);
+							JOptionPane.showMessageDialog(null, "Client ajouté avec succès");
+							client = clientManager.getClientByName(client.getNomClient());
+							ecranClient.recupClient(client);
+							dispose();
+						}
 
 					} catch (Exception e1) {
 						e1.printStackTrace();
 					}
-					
+
 				}
 			});
 			btnValider.setBounds(133, 11, 89, 23);
 		}
 		return btnValider;
 	}
-
-
 
 	private JTextField getTxtNom() {
 		if (txtNom == null) {
@@ -188,4 +200,5 @@ public class EcranAjoutClient extends JFrame {
 		}
 		return lblVille;
 	}
+
 }

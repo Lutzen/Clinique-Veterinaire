@@ -23,13 +23,11 @@ import javax.swing.JTextArea;
 
 public class EcranClient extends JFrame {
 
-	private JFrame frmClients;
 	private JButton btnRechercher;
 	private JButton btnAjouterClient;
 	private JButton btnSupprimerClient;
-	private JButton btnValider;
+	private JButton btnEditerClient;
 	private JButton btnAnnuler;
-	private JTextField txtCode;
 	private JTextField txtNom;
 	private JTextField txtPrenom;
 	private JTextField txtAdresse1;
@@ -49,22 +47,21 @@ public class EcranClient extends JFrame {
 	private AnimalManager animalManager = AnimalManager.getInstance();
 	private ClientManager clientManager = ClientManager.getInstance();
 	private Client client;
-	private Animal animal;
 	private JScrollPane scrollPane;
 	private ModeleAnimaux modeleAnimaux;
 	private JLabel lblAnimaux;
+	private JLabel lblCodeClient;
 
 	public EcranClient() throws IHMException {
 		setTitle("Clients");
-		setBounds(100, 100, 761, 377);
+		setBounds(100, 100, 853, 498);
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		getContentPane().setLayout(null);
 		getContentPane().add(getBtnRechercher());
 		getContentPane().add(getBtnAjouterClient());
 		getContentPane().add(getBtnSupprimerClient());
-		getContentPane().add(getBtnValider());
+		getContentPane().add(getBtnEditerClient());
 		getContentPane().add(getBtnAnnuler());
-		getContentPane().add(getTxtCode());
 		getContentPane().add(getTxtNom());
 		getContentPane().add(getTxtPrenom());
 		getContentPane().add(getTxtAdresse1());
@@ -83,6 +80,7 @@ public class EcranClient extends JFrame {
 		getContentPane().add(getTable());
 		getContentPane().add(getScrollPane());
 		getContentPane().add(getLblAnimaux());
+		getContentPane().add(getLblCodeClient());
 
 	}
 
@@ -116,14 +114,15 @@ public class EcranClient extends JFrame {
 	}
 
 	public void recupClient(Client client) throws IHMException {
-		txtCode.setText(String.valueOf(client.getCodeClient()));
+		lblCodeClient.setText(String.valueOf(client.getCodeClient()));
 		txtNom.setText(client.getNomClient());
 		txtPrenom.setText(client.getPrenomClient());
 		txtAdresse1.setText(client.getAdresse1());
 		txtAdresse02.setText(client.getAdresse2());
 		txtCodePostal.setText(client.getCodePostal());
 		txtVille.setText(client.getVille());
-		mettreAJour();
+		if (client.getCodeClient() != 0)
+			mettreAJour();
 
 	}
 
@@ -155,9 +154,16 @@ public class EcranClient extends JFrame {
 			btnSupprimerClient.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
 					try {
-					
-						clientManager.deleteClient(Integer.parseInt(txtCode.getText()));
-					} catch (BLLException e1) {
+						if (lblCodeClient.getText() != "" & lblCodeClient.getText() != "0" & lblCodeClient.getText()!= null) {
+							clientManager.deleteClient(Integer.parseInt(lblCodeClient.getText()));
+							JOptionPane.showMessageDialog(null, "Client supprimé avec succès");
+							Client client = new Client();
+							recupClient(client);
+						} else {
+							JOptionPane.showMessageDialog(null, "Aucun client selectionné");
+						}
+
+					} catch (Exception e1) {
 						// TODO Auto-generated catch block
 						e1.printStackTrace();
 					}
@@ -168,34 +174,46 @@ public class EcranClient extends JFrame {
 		return btnSupprimerClient;
 	}
 
-	private JButton getBtnValider() {
-		if (btnValider == null) {
-			btnValider = new JButton("Valider");
-			btnValider.addActionListener(new ActionListener() {
+	private JButton getBtnEditerClient() {
+		if (btnEditerClient == null) {
+			btnEditerClient = new JButton("Editer");
+			btnEditerClient.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
+					try {
+						if (lblCodeClient.getText() != "" & lblCodeClient.getText() != "0") {
+							Client client = new Client();
+							client.setCodeClient(Integer.parseInt(lblCodeClient.getText()));
+							client.setNomClient(txtNom.getText());
+							client.setPrenomClient(txtPrenom.getText());
+							client.setVille(txtVille.getText());
+							client.setAdresse1(txtAdresse1.getText());
+							client.setAdresse2(txtAdresse02.getText());
+							client.setCodePostal(txtCodePostal.getText());
+							clientManager.updateClient(client);
+							JOptionPane.showMessageDialog(null, "Client modifié avec succès");
+
+						} else {
+							JOptionPane.showMessageDialog(null, "Aucun client selectionné");
+						}
+
+					} catch (BLLException e1) {
+						// TODO Auto-generated catch block
+						e1.printStackTrace();
+					}
 
 				}
 			});
-			btnValider.setBounds(547, 11, 89, 23);
+			btnEditerClient.setBounds(464, 11, 89, 23);
 		}
-		return btnValider;
+		return btnEditerClient;
 	}
 
 	private JButton getBtnAnnuler() {
 		if (btnAnnuler == null) {
 			btnAnnuler = new JButton("Annuler");
-			btnAnnuler.setBounds(646, 11, 89, 23);
+			btnAnnuler.setBounds(738, 11, 89, 23);
 		}
 		return btnAnnuler;
-	}
-
-	private JTextField getTxtCode() {
-		if (txtCode == null) {
-			txtCode = new JTextField();
-			txtCode.setBounds(86, 66, 170, 20);
-			txtCode.setColumns(10);
-		}
-		return txtCode;
 	}
 
 	private JTextField getTxtNom() {
@@ -303,7 +321,24 @@ public class EcranClient extends JFrame {
 	private JButton getBtnEditerAnimal() {
 		if (btnEditerAnimal == null) {
 			btnEditerAnimal = new JButton("Editer");
-			btnEditerAnimal.setBounds(646, 304, 89, 23);
+			btnEditerAnimal.addActionListener(new ActionListener() {
+				public void actionPerformed(ActionEvent e) {
+					SwingUtilities.invokeLater(new Runnable() {
+
+						@Override
+						public void run() {
+							if (txtNom.getText().isEmpty() || table.getSelectedRow()==-1)
+								JOptionPane.showMessageDialog(null, "Aucun animal/client selectionné");
+							else {
+								EcranAnimaux frame = new EcranAnimaux(txtNom.getText(),(int)table.getValueAt(table.getSelectedRow(), 0), EcranClient.this);
+								frame.setVisible(true);
+							}
+						}
+					});
+				
+				}
+			});
+			btnEditerAnimal.setBounds(738, 425, 89, 23);
 		}
 		return btnEditerAnimal;
 	}
@@ -314,11 +349,15 @@ public class EcranClient extends JFrame {
 			btnSupprimerAnimal.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
 					try {
-						int row = table.convertRowIndexToModel(table.getSelectedRow());
-						int codeAnimal = (int) table.getValueAt(row, 0);
-						animalManager.deleteAnimal(codeAnimal);
-						JOptionPane.showMessageDialog(null, "Animal supprimé avec succès");
-						mettreAJour();
+						if (table.getRowCount() != 0 &  table.getSelectedRow() != -1) {
+							int row = table.convertRowIndexToModel(table.getSelectedRow());
+							int codeAnimal = (int) table.getValueAt(row, 0);
+							animalManager.deleteAnimal(codeAnimal);
+							JOptionPane.showMessageDialog(null, "Animal supprimé avec succès");
+							mettreAJour();
+						} else {
+							JOptionPane.showMessageDialog(null, "Aucun animal selectionné");
+						}
 
 					} catch (Exception e1) {
 						e1.printStackTrace();
@@ -327,7 +366,7 @@ public class EcranClient extends JFrame {
 
 				}
 			});
-			btnSupprimerAnimal.setBounds(547, 304, 89, 23);
+			btnSupprimerAnimal.setBounds(639, 425, 89, 23);
 		}
 		return btnSupprimerAnimal;
 	}
@@ -342,14 +381,18 @@ public class EcranClient extends JFrame {
 
 						@Override
 						public void run() {
-							EcranAnimaux frame = new EcranAnimaux(txtNom.getText(), EcranClient.this);
-							frame.setVisible(true);
+							if (txtNom.getText().isEmpty())
+								JOptionPane.showMessageDialog(null, "Aucun client selectionné");
+							else {
+								EcranAnimaux frame = new EcranAnimaux(txtNom.getText(), EcranClient.this);
+								frame.setVisible(true);
+							}
 						}
 					});
 				}
 
 			});
-			btnAjouterAnimal.setBounds(448, 304, 89, 23);
+			btnAjouterAnimal.setBounds(540, 425, 89, 23);
 		}
 		return btnAjouterAnimal;
 	}
@@ -373,7 +416,7 @@ public class EcranClient extends JFrame {
 	public void mettreAJour() throws IHMException {
 
 		try {
-			client = clientManager.getClientByCode(Integer.parseInt(txtCode.getText()));
+			client = clientManager.getClientByCode(Integer.parseInt(lblCodeClient.getText()));
 			modeleAnimaux.setData(client.getCodeClient());
 
 		} catch (BLLException e) {
@@ -402,7 +445,7 @@ public class EcranClient extends JFrame {
 	private JScrollPane getScrollPane() {
 		if (scrollPane == null) {
 			scrollPane = new JScrollPane(table);
-			scrollPane.setBounds(266, 66, 469, 227);
+			scrollPane.setBounds(266, 97, 561, 317);
 		}
 		return scrollPane;
 	}
@@ -410,9 +453,17 @@ public class EcranClient extends JFrame {
 	private JLabel getLblAnimaux() {
 		if (lblAnimaux == null) {
 			lblAnimaux = new JLabel("Animaux");
-			lblAnimaux.setBounds(276, 45, 46, 14);
+			lblAnimaux.setBounds(278, 69, 46, 14);
 		}
 		return lblAnimaux;
+	}
+
+	private JLabel getLblCodeClient() {
+		if (lblCodeClient == null) {
+			lblCodeClient = new JLabel("");
+			lblCodeClient.setBounds(86, 69, 89, 14);
+		}
+		return lblCodeClient;
 	}
 
 }
