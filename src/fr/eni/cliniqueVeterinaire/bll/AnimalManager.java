@@ -65,9 +65,9 @@ public class AnimalManager {
 
 		}
 
-		public void deleteAnimal(Animal animal) throws BLLException {
+		public void deleteAnimal(int codeAnimal) throws BLLException {
 			try {
-				animalDAO.delete(animal);
+				animalDAO.delete(codeAnimal);
 			} catch (Exception e) {
 				throw new BLLException("deleteAnimal", e);
 			}

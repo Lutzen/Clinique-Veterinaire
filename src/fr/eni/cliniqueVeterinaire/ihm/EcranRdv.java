@@ -30,7 +30,6 @@ import java.awt.event.ActionEvent;
 
 public class EcranRdv extends JFrame {
 
-	private JFrame frmPriseDeRendezvous;
 	private JLabel lblPour;
 	private JLabel lblClient;
 	private JComboBox cBClients;
@@ -162,7 +161,7 @@ public class EcranRdv extends JFrame {
 	}
 
 	
-	private void refreshCBAnimaux() {
+	public void refreshCBAnimaux() {
 		Client client;
 		try {
 			cBAnimaux.removeAllItems();
@@ -218,7 +217,7 @@ public class EcranRdv extends JFrame {
 
 						@Override
 						public void run() {
-							EcranAnimaux frame = new EcranAnimaux(cBClients.getSelectedItem().toString());
+							EcranAnimaux frame = new EcranAnimaux(cBClients.getSelectedItem().toString(),EcranRdv.this);
 							frame.setVisible(true);
 						}
 					});

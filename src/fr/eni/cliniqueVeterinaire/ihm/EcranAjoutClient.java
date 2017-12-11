@@ -7,7 +7,13 @@ import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import javax.swing.JTextField;
+
+import fr.eni.cliniqueVeterinaire.bll.BLLException;
+import fr.eni.cliniqueVeterinaire.bll.ClientManager;
+import fr.eni.cliniqueVeterinaire.bo.Client;
+
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 
 public class EcranAjoutClient extends JFrame {
 
@@ -25,8 +31,11 @@ public class EcranAjoutClient extends JFrame {
 	private JLabel lblAdresse;
 	private JLabel lblCodePostal;
 	private JLabel lblVille;
+	private EcranClient ecranClient;
+	private ClientManager clientManager = ClientManager.getInstance(); 
 
-	public EcranAjoutClient() {
+	public EcranAjoutClient(EcranClient ecran) {
+		ecranClient = ecran;
 		setTitle("Ajout d'un client");
 		setBounds(100, 100, 346, 267);
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
@@ -59,7 +68,24 @@ public class EcranAjoutClient extends JFrame {
 			btnValider = new JButton("Valider");
 			btnValider.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
-					do_btnValider_actionPerformed(e);
+					try {
+					Client client = new Client();
+					client.setAdresse1(txtAdresse.getText());
+					client.setAdresse2(txtAdresse2.getText());
+					client.setCodePostal(txtCodePostal.getText());
+					client.setNomClient(txtNom.getText());
+					client.setPrenomClient(getTxtPrenom().getText());
+					client.setVille(txtVille.getText());
+					
+					clientManager.addClient(client);
+					JOptionPane.showMessageDialog(null, "Client ajouté avec succès");
+					ecranClient.recupClient(client);
+					dispose();
+
+					} catch (Exception e1) {
+						e1.printStackTrace();
+					}
+					
 				}
 			});
 			btnValider.setBounds(133, 11, 89, 23);
@@ -67,8 +93,7 @@ public class EcranAjoutClient extends JFrame {
 		return btnValider;
 	}
 
-	protected static void do_btnValider_actionPerformed(ActionEvent e) {
-	}
+
 
 	private JTextField getTxtNom() {
 		if (txtNom == null) {

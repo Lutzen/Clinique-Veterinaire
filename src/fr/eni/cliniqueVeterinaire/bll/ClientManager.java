@@ -83,9 +83,9 @@ public class ClientManager {
 
 	}
 
-	public void deleteClient(Client client) throws BLLException {
+	public void deleteClient(int codeClient) throws BLLException {
 		try {
-			clientDAO.delete(client);
+			clientDAO.delete(codeClient);
 		} catch (Exception e) {
 			throw new BLLException("deleteClient", e);
 		}

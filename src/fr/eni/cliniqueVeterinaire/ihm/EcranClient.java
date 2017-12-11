@@ -16,6 +16,7 @@ import fr.eni.cliniqueVeterinaire.bo.Animal;
 import fr.eni.cliniqueVeterinaire.bo.Client;
 
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.JTextArea;
@@ -24,8 +25,8 @@ public class EcranClient extends JFrame {
 
 	private JFrame frmClients;
 	private JButton btnRechercher;
-	private JButton btnAjouter;
-	private JButton btnSupprimer;
+	private JButton btnAjouterClient;
+	private JButton btnSupprimerClient;
 	private JButton btnValider;
 	private JButton btnAnnuler;
 	private JTextField txtCode;
@@ -41,9 +42,9 @@ public class EcranClient extends JFrame {
 	private JLabel lblAdresse;
 	private JLabel lblCodePostal;
 	private JLabel lblVille;
-	private JButton btnEditer;
-	private JButton btnSupprimer_1;
-	private JButton btnAjouter_1;
+	private JButton btnEditerAnimal;
+	private JButton btnSupprimerAnimal;
+	private JButton btnAjouterAnimal;
 	private JTable table;
 	private AnimalManager animalManager = AnimalManager.getInstance();
 	private ClientManager clientManager = ClientManager.getInstance();
@@ -51,6 +52,7 @@ public class EcranClient extends JFrame {
 	private Animal animal;
 	private JScrollPane scrollPane;
 	private ModeleAnimaux modeleAnimaux;
+	private JLabel lblAnimaux;
 
 	public EcranClient() throws IHMException {
 		setTitle("Clients");
@@ -58,8 +60,8 @@ public class EcranClient extends JFrame {
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		getContentPane().setLayout(null);
 		getContentPane().add(getBtnRechercher());
-		getContentPane().add(getBtnAjouter());
-		getContentPane().add(getBtnSupprimer());
+		getContentPane().add(getBtnAjouterClient());
+		getContentPane().add(getBtnSupprimerClient());
 		getContentPane().add(getBtnValider());
 		getContentPane().add(getBtnAnnuler());
 		getContentPane().add(getTxtCode());
@@ -75,11 +77,12 @@ public class EcranClient extends JFrame {
 		getContentPane().add(getLblAdresse());
 		getContentPane().add(getLblCodePostal());
 		getContentPane().add(getLblVille());
-		getContentPane().add(getBtnEditer());
-		getContentPane().add(getBtnSupprimer_1());
-		getContentPane().add(getBtnAjouter_1());
+		getContentPane().add(getBtnEditerAnimal());
+		getContentPane().add(getBtnSupprimerAnimal());
+		getContentPane().add(getBtnAjouterAnimal());
 		getContentPane().add(getTable());
 		getContentPane().add(getScrollPane());
+		getContentPane().add(getLblAnimaux());
 
 	}
 
@@ -111,7 +114,7 @@ public class EcranClient extends JFrame {
 		}
 		return btnRechercher;
 	}
-	
+
 	public void recupClient(Client client) throws IHMException {
 		txtCode.setText(String.valueOf(client.getCodeClient()));
 		txtNom.setText(client.getNomClient());
@@ -122,23 +125,47 @@ public class EcranClient extends JFrame {
 		txtVille.setText(client.getVille());
 		mettreAJour();
 
-		
 	}
 
-	private JButton getBtnAjouter() {
-		if (btnAjouter == null) {
-			btnAjouter = new JButton("Ajouter");
-			btnAjouter.setBounds(266, 11, 89, 23);
+	private JButton getBtnAjouterClient() {
+		if (btnAjouterClient == null) {
+			btnAjouterClient = new JButton("Ajouter");
+			btnAjouterClient.addActionListener(new ActionListener() {
+				public void actionPerformed(ActionEvent arg0) {
+
+					SwingUtilities.invokeLater(new Runnable() {
+
+						@Override
+						public void run() {
+							EcranAjoutClient frame = new EcranAjoutClient(EcranClient.this);
+							frame.setVisible(true);
+						}
+					});
+				}
+
+			});
+			btnAjouterClient.setBounds(266, 11, 89, 23);
 		}
-		return btnAjouter;
+		return btnAjouterClient;
 	}
 
-	private JButton getBtnSupprimer() {
-		if (btnSupprimer == null) {
-			btnSupprimer = new JButton("Supprimer");
-			btnSupprimer.setBounds(365, 11, 89, 23);
+	private JButton getBtnSupprimerClient() {
+		if (btnSupprimerClient == null) {
+			btnSupprimerClient = new JButton("Supprimer");
+			btnSupprimerClient.addActionListener(new ActionListener() {
+				public void actionPerformed(ActionEvent e) {
+					try {
+					
+						clientManager.deleteClient(Integer.parseInt(txtCode.getText()));
+					} catch (BLLException e1) {
+						// TODO Auto-generated catch block
+						e1.printStackTrace();
+					}
+				}
+			});
+			btnSupprimerClient.setBounds(365, 11, 89, 23);
 		}
-		return btnSupprimer;
+		return btnSupprimerClient;
 	}
 
 	private JButton getBtnValider() {
@@ -146,7 +173,7 @@ public class EcranClient extends JFrame {
 			btnValider = new JButton("Valider");
 			btnValider.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
-					
+
 				}
 			});
 			btnValider.setBounds(547, 11, 89, 23);
@@ -161,8 +188,6 @@ public class EcranClient extends JFrame {
 		}
 		return btnAnnuler;
 	}
-
-	
 
 	private JTextField getTxtCode() {
 		if (txtCode == null) {
@@ -275,28 +300,58 @@ public class EcranClient extends JFrame {
 		return lblVille;
 	}
 
-	private JButton getBtnEditer() {
-		if (btnEditer == null) {
-			btnEditer = new JButton("Editer");
-			btnEditer.setBounds(646, 304, 89, 23);
+	private JButton getBtnEditerAnimal() {
+		if (btnEditerAnimal == null) {
+			btnEditerAnimal = new JButton("Editer");
+			btnEditerAnimal.setBounds(646, 304, 89, 23);
 		}
-		return btnEditer;
+		return btnEditerAnimal;
 	}
 
-	private JButton getBtnSupprimer_1() {
-		if (btnSupprimer_1 == null) {
-			btnSupprimer_1 = new JButton("Supprimer");
-			btnSupprimer_1.setBounds(547, 304, 89, 23);
+	private JButton getBtnSupprimerAnimal() {
+		if (btnSupprimerAnimal == null) {
+			btnSupprimerAnimal = new JButton("Supprimer");
+			btnSupprimerAnimal.addActionListener(new ActionListener() {
+				public void actionPerformed(ActionEvent e) {
+					try {
+						int row = table.convertRowIndexToModel(table.getSelectedRow());
+						int codeAnimal = (int) table.getValueAt(row, 0);
+						animalManager.deleteAnimal(codeAnimal);
+						JOptionPane.showMessageDialog(null, "Animal supprimé avec succès");
+						mettreAJour();
+
+					} catch (Exception e1) {
+						e1.printStackTrace();
+
+					}
+
+				}
+			});
+			btnSupprimerAnimal.setBounds(547, 304, 89, 23);
 		}
-		return btnSupprimer_1;
+		return btnSupprimerAnimal;
 	}
 
-	private JButton getBtnAjouter_1() {
-		if (btnAjouter_1 == null) {
-			btnAjouter_1 = new JButton("Ajouter");
-			btnAjouter_1.setBounds(448, 304, 89, 23);
+	private JButton getBtnAjouterAnimal() {
+		if (btnAjouterAnimal == null) {
+			btnAjouterAnimal = new JButton("Ajouter");
+			btnAjouterAnimal.addActionListener(new ActionListener() {
+				public void actionPerformed(ActionEvent arg0) {
+
+					SwingUtilities.invokeLater(new Runnable() {
+
+						@Override
+						public void run() {
+							EcranAnimaux frame = new EcranAnimaux(txtNom.getText(), EcranClient.this);
+							frame.setVisible(true);
+						}
+					});
+				}
+
+			});
+			btnAjouterAnimal.setBounds(448, 304, 89, 23);
 		}
-		return btnAjouter_1;
+		return btnAjouterAnimal;
 	}
 
 	private JTable getTable() throws IHMException {
@@ -347,9 +402,17 @@ public class EcranClient extends JFrame {
 	private JScrollPane getScrollPane() {
 		if (scrollPane == null) {
 			scrollPane = new JScrollPane(table);
-			scrollPane.setBounds(266, 45, 469, 248);
+			scrollPane.setBounds(266, 66, 469, 227);
 		}
 		return scrollPane;
+	}
+
+	private JLabel getLblAnimaux() {
+		if (lblAnimaux == null) {
+			lblAnimaux = new JLabel("Animaux");
+			lblAnimaux.setBounds(276, 45, 46, 14);
+		}
+		return lblAnimaux;
 	}
 
 }

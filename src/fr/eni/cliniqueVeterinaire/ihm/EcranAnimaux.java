@@ -33,7 +33,7 @@ public class EcranAnimaux extends JFrame {
 	private JButton btnAnnuler;
 	private JButton btnValider;
 	private JLabel lblClient;
-	private JTextField txtClient;
+	private JLabel lblClientNom;
 	private JTextField txtNom;
 	private JTextField txtCouleur;
 	private JLabel lblNom;
@@ -49,9 +49,12 @@ public class EcranAnimaux extends JFrame {
 	private ClientManager clientManager = ClientManager.getInstance();
 	private RacesManager racesManager = RacesManager.getInstance();
 	private String nomClient;
+	private EcranRdv ecranRdv;
+	private EcranClient ecranClient;
 
-	public EcranAnimaux(String nomClient) {
+	public EcranAnimaux(String nomClient, EcranRdv ecran) {
 		this.nomClient = nomClient;
+		ecranRdv = (EcranRdv) ecran;
 		setTitle("Animaux");
 		setBounds(100, 100, 496, 223);
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
@@ -59,7 +62,31 @@ public class EcranAnimaux extends JFrame {
 		getContentPane().add(getBtnAnnuler());
 		getContentPane().add(getBtnValider());
 		getContentPane().add(getLblClient());
-		getContentPane().add(getTxtClient());
+		getContentPane().add(getLblClientNom());
+		getContentPane().add(getTxtNom());
+		getContentPane().add(getTxtCouleur());
+		getContentPane().add(getLblNom());
+		getContentPane().add(getLblCouleur());
+		getContentPane().add(getCBSexe());
+		getContentPane().add(getLblEspce());
+		getContentPane().add(getCBEspece());
+		getContentPane().add(getLblRace());
+		getContentPane().add(getCBRace());
+		getContentPane().add(getTxtTatouage());
+		getContentPane().add(getLblTatouage());
+	}
+
+	public EcranAnimaux(String nomClient, EcranClient ecran) {
+		this.nomClient = nomClient;
+		ecranClient = (EcranClient) ecran;
+		setTitle("Animaux");
+		setBounds(100, 100, 496, 223);
+		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+		getContentPane().setLayout(null);
+		getContentPane().add(getBtnAnnuler());
+		getContentPane().add(getBtnValider());
+		getContentPane().add(getLblClient());
+		getContentPane().add(getLblClientNom());
 		getContentPane().add(getTxtNom());
 		getContentPane().add(getTxtCouleur());
 		getContentPane().add(getLblNom());
@@ -87,12 +114,12 @@ public class EcranAnimaux extends JFrame {
 			btnValider.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent arg0) {
 					if (txtNom.getText().isEmpty())
-						JOptionPane.showMessageDialog(null, "Mot de passe incorrect");
+						JOptionPane.showMessageDialog(null, "Remplissez les champs");
 					else {
 						Client client = new Client();
 						Animal animal = new Animal();
 						try {
-							client = clientManager.getClientByName(txtClient.getText());
+							client = clientManager.getClientByName(lblClientNom.getText());
 							animal.setCodeClient(client.getCodeClient());
 							animal.setCouleur(txtCouleur.getText());
 							animal.setNomAnimal(txtNom.getText());
@@ -104,8 +131,12 @@ public class EcranAnimaux extends JFrame {
 							else
 								animal.setSexe("F");
 							animalManager.addAnimal(animal);
+							if (ecranClient != null)
+								ecranClient.mettreAJour();
+							else
+								ecranRdv.refreshCBAnimaux();
 							dispose();
-						} catch (BLLException e) {
+						} catch (Exception e) {
 							e.printStackTrace();
 						}
 					}
@@ -119,19 +150,19 @@ public class EcranAnimaux extends JFrame {
 	private JLabel getLblClient() {
 		if (lblClient == null) {
 			lblClient = new JLabel("Client :");
-			lblClient.setBounds(10, 15, 46, 14);
+			lblClient.setBounds(10, 27, 46, 14);
 		}
 		return lblClient;
 	}
 
-	private JTextField getTxtClient() {
-		if (txtClient == null) {
-			txtClient = new JTextField();
-			txtClient.setText(nomClient);
-			txtClient.setBounds(10, 30, 244, 20);
-			txtClient.setColumns(10);
+	private JLabel getLblClientNom() {
+		if (lblClientNom == null) {
+			lblClientNom = new JLabel();
+			lblClientNom.setText(nomClient);
+			lblClientNom.setBounds(87, 24, 196, 20);
+
 		}
-		return txtClient;
+		return lblClientNom;
 	}
 
 	private JTextField getTxtNom() {
