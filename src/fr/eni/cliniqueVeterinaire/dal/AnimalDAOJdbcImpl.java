@@ -41,6 +41,7 @@ public class AnimalDAOJdbcImpl implements AnimalDAO {
 		statement.setString(8, animal.getAntecedents());
 
 
+
 	}
 	
 	private void openConnection() throws DALException {
@@ -112,21 +113,21 @@ public class AnimalDAOJdbcImpl implements AnimalDAO {
 	public void insert(Animal animal) throws DALException {
 		openConnection();
 
-		String sql = "INSERT INTO Animaux ([NomAnimal],[Sexe],[Couleur],[Race],[Espece],[CodeClient],[Tatouage],[Antecedents])"
-				+ " VALUES " + "(?,?,?,?,?,?,?,?)";
+		String sql = "INSERT INTO Animaux ([NomAnimal],[Sexe],[Couleur],[Race],[Espece],[CodeClient],[Tatouage],[Antecedents],[Archive])"
+				+ " VALUES " + "(?,?,?,?,?,?,?,?,0)";
 		PreparedStatement statement = null;
 		try {
 			statement = connection.prepareStatement(sql);
 			FillStatementFromAnimal(statement, animal);
 			statement.executeUpdate();
 		} catch (SQLException e) {
-			throw new DALException("Erreur à l'insertion d'un membre du personnel : " + animal, e);
+			throw new DALException("Erreur à l'insertion d'un animal : " + animal, e);
 		} finally {
 			try {
 				if (statement != null)
 					statement.close();
 			} catch (SQLException e) {
-				throw new DALException("Erreur à l'insertion d'un membre du personnel: " + animal, e);
+				throw new DALException("Erreur à l'insertion d'un animal: " + animal, e);
 			}
 		}
 		
