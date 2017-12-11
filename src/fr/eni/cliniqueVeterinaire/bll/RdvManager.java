@@ -34,6 +34,15 @@ public class RdvManager {
 			}
 
 		}
+		
+		public List<Rdv> getAgendaDate(int codeVeto,String date) throws BLLException {
+			try {
+				return rdvDAO.selectByIdDate(codeVeto, date);
+			} catch (Exception e) {
+				throw new BLLException("getAgendaDate", e);
+			}
+
+		}
 
 		public void addRdv(Rdv rdv) throws BLLException {
 			try {
