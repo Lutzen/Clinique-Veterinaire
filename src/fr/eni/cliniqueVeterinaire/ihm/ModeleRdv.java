@@ -88,7 +88,7 @@ public class ModeleRdv extends AbstractTableModel{
 	}
 	
 	private String dateToString(Date date) {
-		SimpleDateFormat dateFormat = new SimpleDateFormat("hh:mm");
+		SimpleDateFormat dateFormat = new SimpleDateFormat("HH:mm");
 		String startDateString = dateFormat.format(date);
 		return startDateString;
 		
