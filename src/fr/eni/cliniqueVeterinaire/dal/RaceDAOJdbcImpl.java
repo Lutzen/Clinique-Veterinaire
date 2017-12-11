@@ -16,10 +16,9 @@ public class RaceDAOJdbcImpl implements RaceDAO{
 	private Connection connection = null;
 	
 	private Races getRaceFromResultset(ResultSet resultSet) throws SQLException {
-		Races race = new Races("", "");
-		race.setEspece(resultSet.getString("Espece"));
-		race.setRace(resultSet.getString("Race"));
-		return race;
+		Races espece = new Races("", "");
+		espece.setEspece(resultSet.getString("Espece"));
+		return espece;
 	}
 	
 	private void FillStatementFromRace(PreparedStatement statement, Races race) throws SQLException {
@@ -72,26 +71,26 @@ public class RaceDAOJdbcImpl implements RaceDAO{
 	public List<Races> selectAll() throws DALException {
 		openConnection();
 
-		String sql = "select  distinct Espece from Races   ";
+		String sql = "select distinct Espece from Races   ";
 		PreparedStatement statement = null;
-		List<Races> race1 = new LinkedList<>();
+		List<Races> espece = new LinkedList<>();
 		
 
 		try {
 			statement = connection.prepareStatement(sql);
 			ResultSet resultSet = statement.executeQuery();
 			while(resultSet.next()) {
-				race1.add(getRaceFromResultset(resultSet));
+				espece.add(getRaceFromResultset(resultSet));
 			}
-			return race1;
+			return espece;
 		} catch (SQLException e) {
-			throw new DALException("Erreur à la récupération de toutes les races et espèces", e);
+			throw new DALException("Erreur à la récupération des espèces", e);
 		} finally {
 			try {
 				if (statement != null)
 					statement.close();
 			} catch (SQLException e) {
-				throw new DALException("Erreur à la récupération de toutes les races et espèces", e);
+				throw new DALException("Erreur à la récupération des espèces", e);
 			}
 		}
 	}
