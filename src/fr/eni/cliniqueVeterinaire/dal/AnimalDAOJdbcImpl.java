@@ -92,7 +92,6 @@ public class AnimalDAOJdbcImpl implements AnimalDAO {
 
 		try {
 			PreparedStatement statement = connection.prepareStatement(sql);
-			FillStatementFromAnimal(statement, animal);
 			statement.setInt(1, 1);
 			statement.setInt(2, animal.getCodeAnimal());
 			statement.executeUpdate();
