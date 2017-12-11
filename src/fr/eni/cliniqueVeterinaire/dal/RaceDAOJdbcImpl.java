@@ -72,7 +72,7 @@ public class RaceDAOJdbcImpl implements RaceDAO{
 	public List<Races> selectAll() throws DALException {
 		openConnection();
 
-		String sql = "SELECT * FROM Races  ";
+		String sql = "select  distinct Espece from Races   ";
 		PreparedStatement statement = null;
 		List<Races> race1 = new LinkedList<>();
 		
