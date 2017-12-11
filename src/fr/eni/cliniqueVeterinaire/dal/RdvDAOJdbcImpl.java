@@ -155,6 +155,28 @@ public class RdvDAOJdbcImpl implements RdvDAO {
 		super.finalize();
 	}
 
+	@Override
+	public List<Rdv> selectByIdDate(int codeVeto, String date) throws DALException {
+		openConnection();
+
+		String sql = "SELECT * FROM Agendas WHERE CodeVeto=? and cast(DateRdv as date)=? order by DateRdv ASC";
+		List<Rdv> rdv = new LinkedList<>();
+
+		try {
+			PreparedStatement statement = connection.prepareStatement(sql);
+			statement.setInt(1, codeVeto);
+			statement.setString(2, date);
+			ResultSet resultSet = statement.executeQuery();
+			while (resultSet.next()) {
+				rdv.add(getRdvFromResultset(resultSet));
+				//System.out.println(rdv);
+			}
+			return rdv;
+		} catch (SQLException e) {
+			throw new DALException("Erreur à la récupération d'un code veterinaire par date : " + codeVeto + " " + date, e);
+		}
+	}
+
 	
 
 

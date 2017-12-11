@@ -12,6 +12,8 @@ public interface RdvDAO {
 
 
 	List<Rdv> selectById(int codeVeto) throws DALException;
+	
+	List<Rdv> selectByIdDate(int codeVeto,String date) throws DALException;
 
 	void insert(Rdv rdv) throws DALException;
 
