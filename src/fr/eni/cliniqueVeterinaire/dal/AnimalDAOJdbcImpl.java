@@ -88,7 +88,7 @@ public class AnimalDAOJdbcImpl implements AnimalDAO {
 		openConnection();
 
 		String sql = "UPDATE Animaux SET Archive=?"
-				+ " WHERE CodeAnimal=? and NomAnimal=? and Sexe=? and Couleur=? and Race=? and Espece=? and CodeClient=? and Tatouage=? and Antecedents=?";
+				+ " WHERE CodeAnimal=? and NomAnimal=? and Sexe=? and Couleur=? and Race=? and Espece=? and CodeClient=? and Tatouage=? ";
 
 		try {
 			PreparedStatement statement = connection.prepareStatement(sql);
@@ -102,7 +102,7 @@ public class AnimalDAOJdbcImpl implements AnimalDAO {
 			statement.setString(7, animal.getEspece());
 			statement.setLong(8, animal.getCodeClient());
 			statement.setString(9, animal.getTatouage());
-			statement.setString(10, animal.getAntecedents());
+			//statement.setString(10, animal.getAntecedents());
 			statement.executeUpdate();
 		} catch (SQLException e) {
 			throw new DALException("Erreur lors de l'archivage d'un animal : " + animal, e);
