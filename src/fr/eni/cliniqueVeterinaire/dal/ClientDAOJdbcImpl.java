@@ -38,10 +38,7 @@ private Connection connection = null;
 		statement.setString(4, client.getAdresse2());
 		statement.setString(5, client.getCodePostal());
 		statement.setString(6, client.getVille());
-		statement.setString(7, client.getNumTel());
-		statement.setString(8, client.getAssurance());
-		statement.setString(9, client.getEmail());
-		statement.setString(10, client.getRemarque());
+
 
 
 	}
@@ -104,26 +101,20 @@ private Connection connection = null;
 	}
 
 	@Override
-	public void delete(Client client) throws DALException {
+	public void delete(int codeClient) throws DALException {
 		openConnection();
 
 		String sql = "UPDATE Personnel SET Archive=?"
-				+ " WHERE CodeClient=? and NomClient=? and PrenomClient=? and Adresse1=? and Adresse2=? and CodePostal=? and Ville=?";
+				+ " WHERE CodeClient=? ";
 
 		try {
 			PreparedStatement statement = connection.prepareStatement(sql);
-			FillStatementFromClient(statement, client);
 			statement.setInt(1, 1);
-			statement.setInt(2, client.getCodeClient());
-			statement.setString(3, client.getNomClient());
-			statement.setString(4, client.getPrenomClient());
-			statement.setString(5, client.getAdresse1());
-			statement.setString(6, client.getAdresse2());
-			statement.setString(7, client.getCodePostal());
-			statement.setString(8, client.getVille());
+			statement.setInt(2, codeClient);
+		
 			statement.executeUpdate();
 		} catch (SQLException e) {
-			throw new DALException("Erreur lors de l'archivage d'un client : " + client, e);
+			throw new DALException("Erreur lors de l'archivage d'un client : " + codeClient, e);
 		}
 		
 	}
@@ -162,13 +153,7 @@ private Connection connection = null;
 		try {
 			PreparedStatement statement = connection.prepareStatement(sql);
 			FillStatementFromClient(statement, client);
-			statement.setString(1, client.getNomClient());
-			statement.setString(2, client.getPrenomClient());
-			statement.setString(3, client.getAdresse1());
-			statement.setString(4, client.getAdresse2());
-			statement.setString(5, client.getCodePostal());
-			statement.setString(6, client.getVille());
-			statement.executeUpdate();
+				statement.executeUpdate();
 		} catch (SQLException e) {
 			throw new DALException("Erreur lors de la mise à jour du client: " + client, e);
 		}

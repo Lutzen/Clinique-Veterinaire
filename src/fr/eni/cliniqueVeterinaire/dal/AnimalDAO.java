@@ -10,7 +10,7 @@ public interface AnimalDAO {
 
 	List<Animal> selectByClient(int codeClient) throws DALException;
 	
-	void delete(Animal animal) throws DALException;
+	void delete(int codeAnimal) throws DALException;
 	
 	void insert(Animal animal)  throws DALException;
 	

@@ -84,7 +84,7 @@ public class AnimalDAOJdbcImpl implements AnimalDAO {
 
 
 	@Override
-	public void delete(Animal animal) throws DALException {
+	public void delete(int codeAnimal) throws DALException {
 		openConnection();
 
 		String sql = "UPDATE Animaux SET Archive=?"
@@ -93,10 +93,10 @@ public class AnimalDAOJdbcImpl implements AnimalDAO {
 		try {
 			PreparedStatement statement = connection.prepareStatement(sql);
 			statement.setInt(1, 1);
-			statement.setInt(2, animal.getCodeAnimal());
+			statement.setInt(2, codeAnimal);
 			statement.executeUpdate();
 		} catch (SQLException e) {
-			throw new DALException("Erreur lors de l'archivage d'un animal : " + animal, e);
+			throw new DALException("Erreur lors de l'archivage d'un animal : " + codeAnimal, e);
 		}		
 	}
 

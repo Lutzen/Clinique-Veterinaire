@@ -11,7 +11,7 @@ public interface ClientDAO {
 	
 	Client selectByNom(String nom) throws DALException;
 	
-	void delete(Client client) throws DALException;
+	void delete(int codeClient) throws DALException;
 	
 	void insert(Client client)  throws DALException;
 	
