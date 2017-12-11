@@ -1,6 +1,7 @@
 package fr.eni.cliniqueVeterinaire.ihm;
 
 import java.awt.EventQueue;
+import java.util.Date;
 import java.util.List;
 
 import javax.swing.JFrame;
@@ -26,7 +27,11 @@ import javax.swing.JTable;
 import java.awt.event.ActionListener;
 import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
+import java.beans.PropertyChangeEvent;
+import java.beans.PropertyChangeListener;
+import java.text.SimpleDateFormat;
 import java.awt.event.ActionEvent;
+import com.toedter.calendar.JDateChooser;
 
 public class EcranRdv extends JFrame {
 
@@ -42,7 +47,6 @@ public class EcranRdv extends JFrame {
 	private JComboBox cBVetos;
 	private JLabel lblQuand;
 	private JLabel lblDate;
-	private JFormattedTextField txtDate;
 	private JLabel lblHeure;
 	private JComboBox cBHeures;
 	private JLabel lblH;
@@ -57,6 +61,7 @@ public class EcranRdv extends JFrame {
 	private Personnel personnel;
 	private Animal animal;
 	private JScrollPane scrollPane;
+	private JDateChooser dateChooser;
 
 	/**
 	 * Create the application.
@@ -79,15 +84,16 @@ public class EcranRdv extends JFrame {
 		getContentPane().add(getCBVetos());
 		getContentPane().add(getLblQuand());
 		getContentPane().add(getLblDate());
-		getContentPane().add(getTxtDate());
 		getContentPane().add(getLblHeure());
 		getContentPane().add(getCBHeures());
 		getContentPane().add(getLblH());
 		getContentPane().add(getCBMinutes());
 		getContentPane().add(getBtnValider());
 		getContentPane().add(getBtnSupprimer());
+		getContentPane().add(getDateChooser());
 		getContentPane().add(getTable());
 		getContentPane().add(getScrollPane());
+		
 	}
 
 	private JLabel getLblPour() {
@@ -289,15 +295,6 @@ public class EcranRdv extends JFrame {
 		return lblDate;
 	}
 
-	private JFormattedTextField getTxtDate() {
-		if (txtDate == null) {
-			txtDate = new JFormattedTextField();
-			txtDate.setText("  /  /    ");
-			txtDate.setBounds(428, 51, 92, 20);
-		}
-		return txtDate;
-	}
-
 	private JLabel getLblHeure() {
 		if (lblHeure == null) {
 			lblHeure = new JLabel("Heure");
@@ -309,7 +306,7 @@ public class EcranRdv extends JFrame {
 	private JComboBox getCBHeures() {
 		if (cBHeures == null) {
 			cBHeures = new JComboBox(new Integer[] {});
-			for (int i = 0; i < 24; i++) {
+			for (int i = 6; i <= 20; i++) {
 				cBHeures.addItem(i);
 				cBHeures.addItemListener(new ItemListener() {
 					public void itemStateChanged(ItemEvent e) {
@@ -333,7 +330,7 @@ public class EcranRdv extends JFrame {
 
 	private JComboBox getCBMinutes() {
 		if (cBMinutes == null) {
-			cBMinutes = new JComboBox(new Integer[] {00,15,30,45});
+			cBMinutes = new JComboBox(new String[] {"00","15","30","45"});
 			cBMinutes.setBounds(500, 100, 46, 20);
 		}
 		return cBMinutes;
@@ -373,7 +370,7 @@ public class EcranRdv extends JFrame {
 
 		try {
 			personnel = personnelManager.getPersonnelByNom((String) cBVetos.getSelectedItem());
-			modeleRdv.setData(personnel.getCodePers());
+			modeleRdv.setData(personnel.getCodePers(),dateToString(dateChooser.getDate()));
 
 		} catch (BLLException e) {
 
@@ -395,6 +392,13 @@ public class EcranRdv extends JFrame {
 		}
 		return modeleRdv;
 	}
+	
+	private String dateToString(Date date) {
+		SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+		String startDateString = dateFormat.format(date);
+		return startDateString;
+	}
+	
 	private JScrollPane getScrollPane() {
 		if (scrollPane == null) {
 			scrollPane = new JScrollPane(table);
@@ -402,6 +406,23 @@ public class EcranRdv extends JFrame {
 		}
 		return scrollPane;
 	}
-
-
+	private JDateChooser getDateChooser() {
+		if (dateChooser == null) {
+			dateChooser = new JDateChooser(new Date());
+			dateChooser.setDate(new Date());
+			dateChooser.addPropertyChangeListener(new PropertyChangeListener() {
+			          @Override
+			          public void propertyChange(PropertyChangeEvent evt) {
+			              Date date = dateChooser.getDate();
+			              System.out.println("date: "+date);
+			              mettreAJour();
+			            
+			          }
+			      });
+			      
+			dateChooser.setBounds(428, 50, 118, 20);
+		}
+			
+		return dateChooser;
+	}
 }

@@ -15,6 +15,8 @@ import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 import java.awt.event.ActionEvent;
@@ -68,14 +70,14 @@ public class EcranAgenda extends JFrame {
 
 		setTitle("Agenda");
 		setBounds(100, 100, 454, 390);
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		getContentPane().setLayout(null);
 		getContentPane().add(getLblVeto());
 		getContentPane().add(getLblDate());
 		getContentPane().add(getBtnDossierMedical());
 		getContentPane().add(getComboBoxVeto());
-		getContentPane().add(getTable());
 		getContentPane().add(getDateChooser());
+		getContentPane().add(getTable());
 		getContentPane().add(getScrollPane());
 
 		
@@ -184,13 +186,15 @@ public class EcranAgenda extends JFrame {
 
 		try {
 			personnel = personnelManager.getPersonnelByNom((String) comboBoxVeto.getSelectedItem());
-			modeleRdv.setData(personnel.getCodePers());
+			modeleRdv.setData(personnel.getCodePers(),dateToString(dateChooser.getDate()));
 
 		} catch (BLLException e) {
 
 			e.printStackTrace();
 		}
 	}
+	
+
 
 	private ModeleRdv getModeleRdv() {
 		if (modeleRdv == null) {
@@ -198,7 +202,11 @@ public class EcranAgenda extends JFrame {
 				personnel = personnelManager.getPersonnelByNom((String) comboBoxVeto.getSelectedItem());
 				
 				System.out.println(personnel);
-				modeleRdv = new ModeleRdv(personnel.getCodePers());
+				SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+				String startDateString = dateFormat.format(new Date());
+				System.out.println(startDateString);
+				//String date2 = "2017-12-12";
+				modeleRdv = new ModeleRdv(personnel.getCodePers(),startDateString);
 			} catch (BLLException e) {
 				e.printStackTrace();
 			}
@@ -206,14 +214,25 @@ public class EcranAgenda extends JFrame {
 		}
 		return modeleRdv;
 	}
+	
+	private String dateToString(Date date) {
+		SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+		String startDateString = dateFormat.format(date);
+		return startDateString;
+		
+	}
+	
 	private JDateChooser getDateChooser() {
 		if (dateChooser == null) {
 			dateChooser = new JDateChooser(new Date());
+			dateChooser.setDate(new Date());
 			dateChooser.addPropertyChangeListener(new PropertyChangeListener() {
 			          @Override
 			          public void propertyChange(PropertyChangeEvent evt) {
 			              Date date = dateChooser.getDate();
 			              System.out.println("date: "+date);
+			              mettreAJour();
+			            
 			          }
 			      });
 			      

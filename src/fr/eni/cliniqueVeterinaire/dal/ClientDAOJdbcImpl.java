@@ -147,11 +147,13 @@ private Connection connection = null;
 		openConnection();
 
 		String sql = "UPDATE Clients SET NomClient=?,PrenomClient=?,Adresse1=?,Adresse2=?,CodePostal=?,Ville=?"
-				+ " WHERE Nom=? and MotPasse=? and Role=?";
+				+ " WHERE CodeClient=?";
 
 		try {
 			PreparedStatement statement = connection.prepareStatement(sql);
 			FillStatementFromClient(statement, client);
+			statement.setInt(7, client.getCodeClient());
+
 				statement.executeUpdate();
 		} catch (SQLException e) {
 			throw new DALException("Erreur lors de la mise à jour du client: " + client, e);

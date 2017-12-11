@@ -1,8 +1,12 @@
 package fr.eni.cliniqueVeterinaire.ihm;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 
 import javax.swing.table.AbstractTableModel;
+
+import com.toedter.calendar.JDateChooser;
 
 import fr.eni.cliniqueVeterinaire.bll.AnimalManager;
 import fr.eni.cliniqueVeterinaire.bll.BLLException;
@@ -26,6 +30,12 @@ public class ModeleRdv extends AbstractTableModel{
 	public ModeleRdv(int codeVeto) {
 		super();
 		setData(codeVeto);
+	
+	}
+	
+	public ModeleRdv(int codeVeto,String date) {
+		super();
+		setData(codeVeto,date);
 	
 	}
 
@@ -52,7 +62,7 @@ public class ModeleRdv extends AbstractTableModel{
 			
 			switch(columnIndex) {
 			case 0:
-				result= rdv.getDateRdv();
+				result= dateToString(rdv.getDateRdv());
 				break;
 			case 1:
 				result= client.getNomClient();
@@ -77,9 +87,28 @@ public class ModeleRdv extends AbstractTableModel{
 		
 	}
 	
+	private String dateToString(Date date) {
+		SimpleDateFormat dateFormat = new SimpleDateFormat("hh:mm");
+		String startDateString = dateFormat.format(date);
+		return startDateString;
+		
+	}
+	
+	
 	public void setData(int codeVeto) {
 		try {
 			this.donnees = rdvManager.getAgenda(codeVeto);
+	
+		} catch (BLLException e) {
+			e.printStackTrace();
+		}
+		fireTableDataChanged();
+		
+	}
+	
+	public void setData(int codeVeto,String date) {
+		try {
+			this.donnees = rdvManager.getAgendaDate(codeVeto, date);
 	
 		} catch (BLLException e) {
 			e.printStackTrace();
