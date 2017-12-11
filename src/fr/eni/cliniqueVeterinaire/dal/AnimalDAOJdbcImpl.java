@@ -31,15 +31,14 @@ public class AnimalDAOJdbcImpl implements AnimalDAO {
 	}
 	
 	private void FillStatementFromAnimal(PreparedStatement statement, Animal animal) throws SQLException {
-		statement.setInt(1, animal.getCodeAnimal());
-		statement.setString(2, animal.getNomAnimal());
-		statement.setString(3, animal.getSexe());
-		statement.setString(4, animal.getCouleur());
-		statement.setString(5, animal.getRace());
-		statement.setString(6, animal.getEspece());
-		statement.setInt(7, animal.getCodeClient());
-		statement.setString(8, animal.getTatouage());
-		statement.setString(9, animal.getAntecedents());
+		statement.setString(1, animal.getNomAnimal());
+		statement.setString(2, animal.getSexe());
+		statement.setString(3, animal.getCouleur());
+		statement.setString(4, animal.getRace());
+		statement.setString(5, animal.getEspece());
+		statement.setInt(6, animal.getCodeClient());
+		statement.setString(7, animal.getTatouage());
+		statement.setString(8, animal.getAntecedents());
 
 
 	}
