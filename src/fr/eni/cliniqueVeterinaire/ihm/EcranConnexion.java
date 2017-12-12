@@ -9,6 +9,8 @@ import com.sun.corba.se.impl.oa.poa.ActiveObjectMap.Key;
 
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
+import javax.swing.JPasswordField;
+
 import fr.eni.cliniqueVeterinaire.bll.BLLException;
 import fr.eni.cliniqueVeterinaire.bll.PersonnelManager;
 import fr.eni.cliniqueVeterinaire.bo.Personnel;
@@ -17,12 +19,13 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
+import java.awt.Cursor;
 
 public class EcranConnexion {
 
 	private JFrame frmConnexion;
 	private JTextField txtNom;
-	private JTextField txtMotDePasse;
+	private JPasswordField txtMotDePasse;
 	private JLabel lblNom;
 	private JLabel lblMotDePasse;
 	private JButton btnValider;
@@ -57,6 +60,7 @@ public class EcranConnexion {
 	 */
 	private void initialize() {
 		frmConnexion = new JFrame();
+		frmConnexion.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		frmConnexion.setTitle("Connexion");
 		frmConnexion.setBounds(100, 100, 292, 146);
 		frmConnexion.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -79,9 +83,9 @@ public class EcranConnexion {
 		return txtNom;
 	}
 
-	private JTextField getTxtMotDePasse() {
+	private JPasswordField getTxtMotDePasse() {
 		if (txtMotDePasse == null) {
-			txtMotDePasse = new JTextField();
+			txtMotDePasse = new JPasswordField();
 			txtMotDePasse.setBounds(82, 42, 184, 20);
 			txtMotDePasse.setColumns(10);
 		}
@@ -110,10 +114,9 @@ public class EcranConnexion {
 			btnValider.addKeyListener(new KeyAdapter() {
 				@Override
 				public void keyPressed(KeyEvent e) {
-				if(e.getKeyCode()==KeyEvent.VK_ENTER)
-				{
-					btnValider.doClick();
-				}
+					if (e.getKeyCode() == KeyEvent.VK_ENTER) {
+						btnValider.doClick();
+					}
 				}
 			});
 			btnValider.addActionListener(new ActionListener() {
@@ -123,42 +126,47 @@ public class EcranConnexion {
 						Personnel personnel;
 
 						personnel = personnelManager.getPersonnelByNom(getTxtNom().getText());
+						String pass = String.valueOf(getTxtMotDePasse().getPassword());
 
-						if (getTxtMotDePasse().getText().equals(personnel.getPass())) {
-							if (personnel.getRole().equals("adm")) {
-								SwingUtilities.invokeLater(new Runnable() {
+						if (personnel == null)
+							JOptionPane.showMessageDialog(null, "Utilisateur inconnu");
+						else {
+							if (pass.equals(personnel.getPass())) {
+								if (personnel.getRole().equals("adm")) {
+									SwingUtilities.invokeLater(new Runnable() {
 
-									@Override
-									public void run() {
-										EcranGestionPersonnel frame = new EcranGestionPersonnel();
-										frame.setVisible(true);
-									}
-								});
-							}
-							if (personnel.getRole().equals("sec")) {
-								SwingUtilities.invokeLater(new Runnable() {
+										@Override
+										public void run() {
+											EcranGestionPersonnel frame = new EcranGestionPersonnel();
+											frame.setVisible(true);
+										}
+									});
+								}
+								if (personnel.getRole().equals("sec")) {
+									SwingUtilities.invokeLater(new Runnable() {
 
-									@Override
-									public void run() {
-										EcranRdv frame = new EcranRdv();
-										frame.setVisible(true);
-									}
-								});
-							}
+										@Override
+										public void run() {
+											EcranRdv frame = new EcranRdv();
+											frame.setVisible(true);
+										}
+									});
+								}
 
-							if (personnel.getRole().equals("vet")) {
-								SwingUtilities.invokeLater(new Runnable() {
+								if (personnel.getRole().equals("vet")) {
+									SwingUtilities.invokeLater(new Runnable() {
 
-									@Override
-									public void run() {
-										EcranAgenda frame = new EcranAgenda();
-										frame.setVisible(true);
-									}
-								});
-							}
-						
-						} else
-							JOptionPane.showMessageDialog(null, "Mot de passe incorrect");
+										@Override
+										public void run() {
+											EcranAgenda frame = new EcranAgenda();
+											frame.setVisible(true);
+										}
+									});
+								}
+
+							} else
+								JOptionPane.showMessageDialog(null, "Mot de passe incorrect");
+						}
 					} catch (BLLException e1) {
 						e1.printStackTrace();
 					}
@@ -169,6 +177,5 @@ public class EcranConnexion {
 		}
 		return btnValider;
 	}
-
 
 }

@@ -5,9 +5,6 @@ import java.util.Date;
 import java.util.List;
 
 import javax.swing.table.AbstractTableModel;
-
-import com.toedter.calendar.JDateChooser;
-
 import fr.eni.cliniqueVeterinaire.bll.AnimalManager;
 import fr.eni.cliniqueVeterinaire.bll.BLLException;
 import fr.eni.cliniqueVeterinaire.bll.ClientManager;

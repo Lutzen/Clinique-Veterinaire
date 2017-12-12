@@ -52,77 +52,32 @@ public class EcranAnimaux extends JFrame {
 	private EcranRdv ecranRdv;
 	private EcranClient ecranClient;
 	private Animal animal;
+	private Client client;
 
+	/**
+	 * @wbp.parser.constructor
+	 */
 	public EcranAnimaux(String nomClient, EcranRdv ecran) {
 		this.nomClient = nomClient;
 		ecranRdv = (EcranRdv) ecran;
-		setTitle("Animaux");
-		setBounds(100, 100, 496, 223);
-		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-		getContentPane().setLayout(null);
-		getContentPane().add(getBtnAnnuler());
-		getContentPane().add(getBtnValider());
-		getContentPane().add(getLblClient());
-		getContentPane().add(getLblClientNom());
-		getContentPane().add(getTxtNom());
-		getContentPane().add(getTxtCouleur());
-		getContentPane().add(getLblNom());
-		getContentPane().add(getLblCouleur());
-		getContentPane().add(getCBSexe());
-		getContentPane().add(getLblEspce());
-		getContentPane().add(getCBEspece());
-		getContentPane().add(getLblRace());
-		getContentPane().add(getCBRace());
-		getContentPane().add(getTxtTatouage());
-		getContentPane().add(getLblTatouage());
+		animal = new Animal();
+		initialize();
+
 	}
 
 	public EcranAnimaux(String nomClient, EcranClient ecran) {
 		this.nomClient = nomClient;
 		ecranClient = (EcranClient) ecran;
-		setTitle("Animaux");
-		setBounds(100, 100, 496, 223);
-		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-		getContentPane().setLayout(null);
-		getContentPane().add(getBtnAnnuler());
-		getContentPane().add(getBtnValider());
-		getContentPane().add(getLblClient());
-		getContentPane().add(getLblClientNom());
-		getContentPane().add(getTxtNom());
-		getContentPane().add(getTxtCouleur());
-		getContentPane().add(getLblNom());
-		getContentPane().add(getLblCouleur());
-		getContentPane().add(getCBSexe());
-		getContentPane().add(getLblEspce());
-		getContentPane().add(getCBEspece());
-		getContentPane().add(getLblRace());
-		getContentPane().add(getCBRace());
-		getContentPane().add(getTxtTatouage());
-		getContentPane().add(getLblTatouage());
+		animal = new Animal();
+		initialize();
+
 	}
 
 	public EcranAnimaux(String nomClient, int codeAnimal, EcranClient ecran) {
 		ecranClient = (EcranClient) ecran;
 		this.nomClient = nomClient;
-		setTitle("Animaux");
-		setBounds(100, 100, 496, 223);
-		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-		getContentPane().setLayout(null);
-		getContentPane().add(getBtnAnnuler());
-		getContentPane().add(getBtnValider());
-		getContentPane().add(getLblClient());
-		getContentPane().add(getLblClientNom());
-		getContentPane().add(getTxtNom());
-		getContentPane().add(getTxtCouleur());
-		getContentPane().add(getLblNom());
-		getContentPane().add(getLblCouleur());
-		getContentPane().add(getCBSexe());
-		getContentPane().add(getLblEspce());
-		getContentPane().add(getCBEspece());
-		getContentPane().add(getLblRace());
-		getContentPane().add(getCBRace());
-		getContentPane().add(getTxtTatouage());
-		getContentPane().add(getLblTatouage());
+		animal = new Animal();
+		initialize();
 		try {
 			animal = animalManager.getAnimalByCode(codeAnimal);
 			txtNom.setText(animal.getNomAnimal());
@@ -137,13 +92,39 @@ public class EcranAnimaux extends JFrame {
 		} catch (BLLException e) {
 			e.printStackTrace();
 		}
-	
 
+	}
+
+	private void initialize() {
+		setTitle("Animaux");
+		setBounds(100, 100, 496, 223);
+		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+		getContentPane().setLayout(null);
+		getContentPane().add(getBtnAnnuler());
+		getContentPane().add(getBtnValider());
+		getContentPane().add(getLblClient());
+		getContentPane().add(getLblClientNom());
+		getContentPane().add(getTxtNom());
+		getContentPane().add(getTxtCouleur());
+		getContentPane().add(getLblNom());
+		getContentPane().add(getLblCouleur());
+		getContentPane().add(getCBSexe());
+		getContentPane().add(getLblEspce());
+		getContentPane().add(getCBEspece());
+		getContentPane().add(getLblRace());
+		getContentPane().add(getCBRace());
+		getContentPane().add(getTxtTatouage());
+		getContentPane().add(getLblTatouage());
 	}
 
 	private JButton getBtnAnnuler() {
 		if (btnAnnuler == null) {
 			btnAnnuler = new JButton("Annuler");
+			btnAnnuler.addActionListener(new ActionListener() {
+				public void actionPerformed(ActionEvent arg0) {
+					dispose();
+				}
+			});
 			btnAnnuler.setBounds(379, 11, 89, 23);
 		}
 		return btnAnnuler;
@@ -158,11 +139,9 @@ public class EcranAnimaux extends JFrame {
 					if (txtNom.getText().isEmpty())
 						JOptionPane.showMessageDialog(null, "Remplissez les champs");
 					else {
-						Client client = new Client();
-						Animal animal = new Animal();
 
 						try {
-							client = clientManager.getClientByName(lblClientNom.getText());
+							client = clientManager.getClientByName(nomClient);
 							animal.setCodeClient(client.getCodeClient());
 							animal.setCouleur(txtCouleur.getText());
 							animal.setNomAnimal(txtNom.getText());
@@ -174,12 +153,15 @@ public class EcranAnimaux extends JFrame {
 							else
 								animal.setSexe("F");
 
-							if (animal.getCodeAnimal() == 0)
-
+							if (animal.getCodeAnimal() == 0) {
+								JOptionPane.showMessageDialog(null, "Animal ajouté avec succès");
 								animalManager.addAnimal(animal);
+							}
 
-							else
+							else {
+								JOptionPane.showMessageDialog(null, "Animal mis à jour avec succès");
 								animalManager.updateAnimal(animal);
+							}
 
 							if (ecranClient != null)
 								ecranClient.mettreAJour();
@@ -339,5 +321,6 @@ public class EcranAnimaux extends JFrame {
 		}
 		return lblTatouage;
 	}
+
 
 }

@@ -114,6 +114,7 @@ public class EcranClient extends JFrame {
 	}
 
 	public void recupClient(Client client) throws IHMException {
+		this.client = client;
 		lblCodeClient.setText(String.valueOf(client.getCodeClient()));
 		txtNom.setText(client.getNomClient());
 		txtPrenom.setText(client.getPrenomClient());
@@ -211,6 +212,15 @@ public class EcranClient extends JFrame {
 	private JButton getBtnAnnuler() {
 		if (btnAnnuler == null) {
 			btnAnnuler = new JButton("Annuler");
+			btnAnnuler.addActionListener(new ActionListener() {
+				public void actionPerformed(ActionEvent e) {
+					try {
+						recupClient(client);
+					} catch (IHMException e1) {
+						e1.printStackTrace();
+					}
+				}
+			});
 			btnAnnuler.setBounds(738, 11, 89, 23);
 		}
 		return btnAnnuler;
@@ -465,5 +475,6 @@ public class EcranClient extends JFrame {
 		}
 		return lblCodeClient;
 	}
+
 
 }
