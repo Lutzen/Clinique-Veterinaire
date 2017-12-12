@@ -207,8 +207,8 @@ public class EcranRdv extends JFrame {
 						});
 					}
 			});
-			btnAjoutClient.setIcon(new ImageIcon(EcranRdv.class
-					.getResource("/com/sun/javafx/scene/control/skin/modena/HTMLEditor-Indent-Black-rtl.png")));
+			//btnAjoutClient.setIcon(new ImageIcon("C:\\Users\\aphommaline2017\\Desktop\\projet\\BonProjet\\Clinique-Veterinaire\\resources\\AddButton.png"));
+			btnAjoutClient.setIcon(new ImageIcon("resources\\AddButton.png"));
 			btnAjoutClient.setBounds(171, 50, 36, 23);
 		}
 		return btnAjoutClient;
@@ -229,8 +229,7 @@ public class EcranRdv extends JFrame {
 					});
 				}
 			});
-			btnAjoutAnimal.setIcon(new ImageIcon(EcranRdv.class
-					.getResource("/com/sun/javafx/scene/control/skin/modena/HTMLEditor-Indent-Black-rtl.png")));
+			btnAjoutAnimal.setIcon(new ImageIcon("resources\\AddButton.png"));
 			
 			btnAjoutAnimal.setBounds(171, 99, 36, 23);
 		}
