@@ -128,12 +128,11 @@ public class AnimalDAOJdbcImpl implements AnimalDAO {
 	public void update(Animal animal) throws DALException {
 		openConnection();
 
-		String sql = "UPDATE Personnels SET NomAnimal=?,Sexe=?,Couleur=?,Race=?,Espece=?,CodeClient=?,Tatouage=?,Antecedents=?"
+		String sql = "UPDATE Animaux SET NomAnimal=?,Sexe=?,Couleur=?,Race=?,Espece=?,CodeClient=?,Tatouage=?,Antecedents=?"
 				+ " WHERE CodeAnimal=?";
 
 		try {
 			PreparedStatement statement = connection.prepareStatement(sql);
-			FillStatementFromAnimal(statement, animal);
 			statement.setString(1, animal.getNomAnimal());
 			statement.setString(2, animal.getSexe());
 			statement.setString(3, animal.getCouleur());
