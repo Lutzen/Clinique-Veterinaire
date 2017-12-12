@@ -16,6 +16,8 @@ import fr.eni.cliniqueVeterinaire.bo.Personnel;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import java.awt.Font;
+import java.awt.Frame;
 
 public class EcranInitPass extends JFrame{
 
@@ -31,7 +33,7 @@ public class EcranInitPass extends JFrame{
 	public EcranInitPass(Personnel personnel) {
 		personne = personnel;
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-		setBounds(100, 100, 186, 162);
+		setBounds(100, 100, 210, 169);
 		getContentPane().setLayout(null);
 		getContentPane().add(getLblNouveauMotDe());
 		getContentPane().add(getTxtNewPass());
@@ -43,14 +45,15 @@ public class EcranInitPass extends JFrame{
 	private JLabel getLblNouveauMotDe() {
 		if (lblNouveauMotDe == null) {
 			lblNouveauMotDe = new JLabel("Nouveau mot de passe pour");
-			lblNouveauMotDe.setBounds(10, 11, 144, 14);
+			lblNouveauMotDe.setFont(new Font("SansSerif", Font.BOLD, 12));
+			lblNouveauMotDe.setBounds(10, 11, 230, 14);
 		}
 		return lblNouveauMotDe;
 	}
 	private JTextField getTxtNewPass() {
 		if (txtNewPass == null) {
 			txtNewPass = new JTextField();
-			txtNewPass.setBounds(10, 58, 144, 20);
+			txtNewPass.setBounds(10, 58, 172, 28);
 			txtNewPass.setColumns(10);
 		}
 		return txtNewPass;
@@ -70,7 +73,7 @@ public class EcranInitPass extends JFrame{
 					}
 				}
 			});
-			btnNewButton.setBounds(71, 89, 89, 23);
+			btnNewButton.setBounds(93, 92, 89, 28);
 			
 		}
 		return btnNewButton;

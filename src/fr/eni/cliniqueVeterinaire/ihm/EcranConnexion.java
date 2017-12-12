@@ -4,6 +4,8 @@ import java.awt.EventQueue;
 import javax.swing.JFrame;
 import javax.swing.JTextField;
 import javax.swing.SwingUtilities;
+import javax.swing.UIManager;
+import javax.swing.UnsupportedLookAndFeelException;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPasswordField;
@@ -16,6 +18,7 @@ import java.awt.event.ActionListener;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.awt.Cursor;
+import java.awt.Font;
 
 public class EcranConnexion {
 
@@ -48,7 +51,14 @@ public class EcranConnexion {
 	}
 
 	private void initialize() {
+		try {
+			UIManager.setLookAndFeel("javax.swing.plaf.nimbus.NimbusLookAndFeel");
+		} catch (ClassNotFoundException | InstantiationException | IllegalAccessException
+				| UnsupportedLookAndFeelException e) {
+			e.printStackTrace();
+		}
 		frmConnexion = new JFrame();
+		frmConnexion.setResizable(false);
 		frmConnexion.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		frmConnexion.setTitle("Connexion");
 		frmConnexion.setBounds(100, 100, 292, 153);
@@ -84,6 +94,7 @@ public class EcranConnexion {
 	private JLabel getLblNom() {
 		if (lblNom == null) {
 			lblNom = new JLabel("Nom");
+			lblNom.setFont(new Font("SansSerif", Font.BOLD, 12));
 			lblNom.setBounds(10, 18, 46, 14);
 		}
 		return lblNom;
@@ -92,6 +103,7 @@ public class EcranConnexion {
 	private JLabel getLblMotDePasse() {
 		if (lblMotDePasse == null) {
 			lblMotDePasse = new JLabel("Mot de passe");
+			lblMotDePasse.setFont(new Font("SansSerif", Font.BOLD, 12));
 			lblMotDePasse.setBounds(10, 49, 79, 14);
 		}
 		return lblMotDePasse;

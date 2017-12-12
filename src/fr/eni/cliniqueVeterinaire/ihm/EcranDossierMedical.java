@@ -22,6 +22,20 @@ import fr.eni.cliniqueVeterinaire.bo.Client;
 import fr.eni.cliniqueVeterinaire.bo.Personnel;
 
 import javax.swing.JComboBox;
+import javax.swing.border.LineBorder;
+import java.awt.Color;
+import javax.swing.border.SoftBevelBorder;
+import javax.swing.border.BevelBorder;
+import javax.swing.border.TitledBorder;
+import javax.swing.border.EtchedBorder;
+import java.awt.Component;
+import javax.swing.SwingConstants;
+import javax.swing.border.MatteBorder;
+import javax.swing.border.EmptyBorder;
+import javax.swing.UIManager;
+import javax.swing.border.CompoundBorder;
+import java.awt.Font;
+import java.awt.Dimension;
 
 public class EcranDossierMedical extends JFrame {
 
@@ -49,6 +63,9 @@ public class EcranDossierMedical extends JFrame {
 	private JLabel lblNewLabel_2;
 
 	public EcranDossierMedical(Client clientTemp, String nomAnimal) {
+		setResizable(false);
+		getContentPane().setFont(new Font("Segoe Script", Font.PLAIN, 12));
+		getContentPane().setForeground(new Color(255, 255, 255));
 		this.client = clientTemp;
 		setTitle("Dossier Medical");
 		setBounds(100, 100, 741, 482);
@@ -109,7 +126,7 @@ public class EcranDossierMedical extends JFrame {
 					}
 				}
 			});
-			btnValider.setBounds(527, 11, 89, 23);
+			btnValider.setBounds(527, 11, 89, 30);
 		}
 		return btnValider;
 	}
@@ -122,7 +139,7 @@ public class EcranDossierMedical extends JFrame {
 					textAntecedents.setText(animal.getAntecedents());
 				}
 			});
-			btnAnnuler.setBounds(626, 11, 89, 23);
+			btnAnnuler.setBounds(626, 11, 89, 30);
 		}
 		return btnAnnuler;
 	}
@@ -130,7 +147,8 @@ public class EcranDossierMedical extends JFrame {
 	private JLabel getLblClient() {
 		if (lblClient == null) {
 			lblClient = new JLabel("Client :");
-			lblClient.setBounds(10, 54, 67, 14);
+			lblClient.setFont(new Font("SansSerif", Font.BOLD, 12));
+			lblClient.setBounds(8, 38, 67, 14);
 		}
 		return lblClient;
 	}
@@ -138,7 +156,8 @@ public class EcranDossierMedical extends JFrame {
 	private JLabel getLblAnimal() {
 		if (lblAnimal == null) {
 			lblAnimal = new JLabel("Code animal :");
-			lblAnimal.setBounds(10, 93, 81, 14);
+			lblAnimal.setFont(new Font("SansSerif", Font.BOLD, 12));
+			lblAnimal.setBounds(8, 73, 81, 14);
 		}
 		return lblAnimal;
 	}
@@ -147,7 +166,7 @@ public class EcranDossierMedical extends JFrame {
 		if (textCodeAnimal == null) {
 			textCodeAnimal = new JTextField();
 			textCodeAnimal.setEditable(false);
-			textCodeAnimal.setBounds(87, 90, 133, 20);
+			textCodeAnimal.setBounds(87, 66, 133, 30);
 			textCodeAnimal.setColumns(10);
 		}
 		return textCodeAnimal;
@@ -157,7 +176,7 @@ public class EcranDossierMedical extends JFrame {
 		if (textNomAnimal == null) {
 			textNomAnimal = new JTextField();
 			textNomAnimal.setEditable(false);
-			textNomAnimal.setBounds(87, 118, 133, 20);
+			textNomAnimal.setBounds(87, 109, 133, 30);
 			textNomAnimal.setColumns(10);
 		}
 		return textNomAnimal;
@@ -167,7 +186,7 @@ public class EcranDossierMedical extends JFrame {
 		if (textSexe == null) {
 			textSexe = new JTextField();
 			textSexe.setEditable(false);
-			textSexe.setBounds(87, 149, 133, 20);
+			textSexe.setBounds(87, 152, 133, 30);
 			textSexe.setColumns(10);
 		}
 		return textSexe;
@@ -177,7 +196,7 @@ public class EcranDossierMedical extends JFrame {
 		if (textCouleur == null) {
 			textCouleur = new JTextField();
 			textCouleur.setEditable(false);
-			textCouleur.setBounds(87, 180, 133, 20);
+			textCouleur.setBounds(87, 195, 133, 30);
 			textCouleur.setColumns(10);
 		}
 		return textCouleur;
@@ -187,7 +206,7 @@ public class EcranDossierMedical extends JFrame {
 		if (textRace == null) {
 			textRace = new JTextField();
 			textRace.setEditable(false);
-			textRace.setBounds(87, 242, 133, 20);
+			textRace.setBounds(87, 281, 133, 30);
 			textRace.setColumns(10);
 		}
 		return textRace;
@@ -197,7 +216,7 @@ public class EcranDossierMedical extends JFrame {
 		if (textEspece == null) {
 			textEspece = new JTextField();
 			textEspece.setEditable(false);
-			textEspece.setBounds(87, 211, 133, 20);
+			textEspece.setBounds(87, 238, 133, 30);
 			textEspece.setColumns(10);
 		}
 		return textEspece;
@@ -206,7 +225,10 @@ public class EcranDossierMedical extends JFrame {
 	private JLabel getLblAntcdentsconsultations() {
 		if (lblAntcdentsconsultations == null) {
 			lblAntcdentsconsultations = new JLabel("Ant\u00E9c\u00E9dents/consultations");
-			lblAntcdentsconsultations.setBounds(247, 54, 193, 14);
+			lblAntcdentsconsultations.setHorizontalAlignment(SwingConstants.CENTER);
+			lblAntcdentsconsultations.setFont(new Font("SansSerif", Font.BOLD | Font.ITALIC, 16));
+			lblAntcdentsconsultations.setHorizontalTextPosition(SwingConstants.CENTER);
+			lblAntcdentsconsultations.setBounds(226, 29, 214, 28);
 		}
 		return lblAntcdentsconsultations;
 	}
@@ -214,7 +236,7 @@ public class EcranDossierMedical extends JFrame {
 	private JTextPane getTextAntecedents() {
 		if (textAntecedents == null) {
 			textAntecedents = new JTextPane();
-			textAntecedents.setBounds(230, 79, 485, 353);
+			textAntecedents.setBounds(230, 66, 485, 366);
 		}
 		return textAntecedents;
 	}
@@ -222,7 +244,7 @@ public class EcranDossierMedical extends JFrame {
 	private JLabel getLblNomClient() {
 		if (lblNomClient == null) {
 			lblNomClient = new JLabel("");
-			lblNomClient.setBounds(87, 54, 133, 14);
+			lblNomClient.setBounds(87, 38, 133, 14);
 		}
 		return lblNomClient;
 	}
@@ -230,7 +252,8 @@ public class EcranDossierMedical extends JFrame {
 	private JLabel getLblNewLabel() {
 		if (lblNewLabel == null) {
 			lblNewLabel = new JLabel("Nom");
-			lblNewLabel.setBounds(10, 121, 67, 14);
+			lblNewLabel.setFont(new Font("SansSerif", Font.BOLD, 12));
+			lblNewLabel.setBounds(8, 117, 81, 14);
 		}
 		return lblNewLabel;
 	}
@@ -238,7 +261,8 @@ public class EcranDossierMedical extends JFrame {
 	private JLabel getLblSexe() {
 		if (lblSexe == null) {
 			lblSexe = new JLabel("Sexe");
-			lblSexe.setBounds(10, 152, 67, 14);
+			lblSexe.setFont(new Font("SansSerif", Font.BOLD, 12));
+			lblSexe.setBounds(8, 160, 81, 14);
 		}
 		return lblSexe;
 	}
@@ -246,7 +270,8 @@ public class EcranDossierMedical extends JFrame {
 	private JLabel getLblNewLabel_1() {
 		if (lblNewLabel_1 == null) {
 			lblNewLabel_1 = new JLabel("Couleur");
-			lblNewLabel_1.setBounds(10, 183, 67, 14);
+			lblNewLabel_1.setFont(new Font("SansSerif", Font.BOLD, 12));
+			lblNewLabel_1.setBounds(8, 203, 81, 14);
 		}
 		return lblNewLabel_1;
 	}
@@ -254,7 +279,8 @@ public class EcranDossierMedical extends JFrame {
 	private JLabel getLblEspce() {
 		if (lblEspce == null) {
 			lblEspce = new JLabel("Esp\u00E8ce");
-			lblEspce.setBounds(10, 214, 67, 14);
+			lblEspce.setFont(new Font("SansSerif", Font.BOLD, 12));
+			lblEspce.setBounds(8, 246, 81, 14);
 		}
 		return lblEspce;
 	}
@@ -262,7 +288,8 @@ public class EcranDossierMedical extends JFrame {
 	private JLabel getLblNewLabel_2() {
 		if (lblNewLabel_2 == null) {
 			lblNewLabel_2 = new JLabel("Race");
-			lblNewLabel_2.setBounds(10, 245, 67, 14);
+			lblNewLabel_2.setFont(new Font("SansSerif", Font.BOLD, 12));
+			lblNewLabel_2.setBounds(8, 289, 81, 14);
 		}
 		return lblNewLabel_2;
 	}

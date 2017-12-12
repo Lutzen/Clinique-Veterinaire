@@ -34,7 +34,7 @@ public class EcranResultatsRecherche extends JFrame {
 	public EcranResultatsRecherche(EcranClient ecranClient) throws IHMException {
 		this.ecranClient = ecranClient;
 		setTitle("Resultats de la recherche");
-		setBounds(100, 100, 450, 300);
+		setBounds(100, 100, 475, 380);
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		getContentPane().setLayout(null);
 		getContentPane().add(getTxtRechercher());
@@ -46,7 +46,7 @@ public class EcranResultatsRecherche extends JFrame {
 	private JTextField getTxtRechercher() {
 		if (txtRechercher == null) {
 			txtRechercher = new JTextField();
-			txtRechercher.setBounds(10, 11, 252, 20);
+			txtRechercher.setBounds(10, 11, 252, 28);
 			txtRechercher.setColumns(10);
 		}
 		return txtRechercher;
@@ -65,7 +65,7 @@ public class EcranResultatsRecherche extends JFrame {
 					}
 				}
 			});
-			btnRechercher.setBounds(272, 10, 89, 23);
+			btnRechercher.setBounds(274, 11, 100, 28);
 		}
 		return btnRechercher;
 	}
@@ -133,7 +133,7 @@ public class EcranResultatsRecherche extends JFrame {
 			scrollPane.addContainerListener(new ContainerAdapter() {
 			
 			});
-			scrollPane.setBounds(10, 45, 414, 205);
+			scrollPane.setBounds(10, 52, 437, 276);
 		}
 		return scrollPane;
 	}

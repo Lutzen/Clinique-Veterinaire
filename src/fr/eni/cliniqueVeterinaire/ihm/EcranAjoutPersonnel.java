@@ -16,6 +16,7 @@ import javax.swing.JButton;
 import javax.swing.JComboBox;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import java.awt.Font;
 
 
 
@@ -38,8 +39,9 @@ public class EcranAjoutPersonnel extends JFrame {
 	 * Create the application.
 	 */
 	public EcranAjoutPersonnel(EcranGestionPersonnel ecranGestion) {
+		setResizable(false);
 		setTitle("Ajout d'un employé");
-		setBounds(100, 100, 261, 195);
+		setBounds(100, 100, 263, 231);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		getContentPane().setLayout(null);
 		getContentPane().add(getLblNom());
@@ -59,6 +61,7 @@ public class EcranAjoutPersonnel extends JFrame {
 	private JLabel getLblNom() {
 		if (lblNom == null) {
 			lblNom = new JLabel("Nom");
+			lblNom.setFont(new Font("SansSerif", Font.BOLD, 12));
 			lblNom.setBounds(10, 11, 77, 14);
 		}
 		return lblNom;
@@ -66,28 +69,31 @@ public class EcranAjoutPersonnel extends JFrame {
 	private JLabel getLblPrenom() {
 		if (lblPrenom == null) {
 			lblPrenom = new JLabel("Prenom");
-			lblPrenom.setBounds(10, 36, 77, 14);
+			lblPrenom.setFont(new Font("SansSerif", Font.BOLD, 12));
+			lblPrenom.setBounds(10, 49, 77, 14);
 		}
 		return lblPrenom;
 	}
 	private JLabel getLblPoste() {
 		if (lblPoste == null) {
 			lblPoste = new JLabel("Poste");
-			lblPoste.setBounds(10, 61, 77, 14);
+			lblPoste.setFont(new Font("SansSerif", Font.BOLD, 12));
+			lblPoste.setBounds(10, 87, 77, 14);
 		}
 		return lblPoste;
 	}
 	private JLabel getLblMotDePasse() {
 		if (lblMotDePasse == null) {
 			lblMotDePasse = new JLabel("Mot de passe");
-			lblMotDePasse.setBounds(10, 86, 77, 14);
+			lblMotDePasse.setFont(new Font("SansSerif", Font.BOLD, 12));
+			lblMotDePasse.setBounds(10, 126, 77, 14);
 		}
 		return lblMotDePasse;
 	}
 	private JTextField getTxtNom() {
 		if (txtNom == null) {
 			txtNom = new JTextField();
-			txtNom.setBounds(97, 8, 120, 20);
+			txtNom.setBounds(99, 5, 136, 26);
 			txtNom.setColumns(10);
 		}
 		return txtNom;
@@ -95,7 +101,7 @@ public class EcranAjoutPersonnel extends JFrame {
 	private JTextField getTxtPrenom() {
 		if (txtPrenom == null) {
 			txtPrenom = new JTextField();
-			txtPrenom.setBounds(97, 33, 120, 20);
+			txtPrenom.setBounds(99, 43, 136, 26);
 			txtPrenom.setColumns(10);
 		}
 		return txtPrenom;
@@ -103,7 +109,7 @@ public class EcranAjoutPersonnel extends JFrame {
 	private JTextField getTxtMdp() {
 		if (txtMdp == null) {
 			txtMdp = new JTextField();
-			txtMdp.setBounds(97, 83, 120, 20);
+			txtMdp.setBounds(99, 120, 136, 26);
 			txtMdp.setColumns(10);
 		}
 		return txtMdp;
@@ -145,14 +151,14 @@ public class EcranAjoutPersonnel extends JFrame {
 					}
 				}
 			});
-			btnValider.setBounds(128, 122, 89, 23);
+			btnValider.setBounds(146, 158, 89, 28);
 		}
 		return btnValider;
 	}
 	private JComboBox getComboBox() {
 		if (comboBox == null) {
 			comboBox = new JComboBox(new String[] { "Vétérinaire", "Secrétaire", "Assistant", "Stagiaire"});
-			comboBox.setBounds(97, 58, 120, 20);
+			comboBox.setBounds(99, 81, 136, 26);
 		}
 		return comboBox;
 	}

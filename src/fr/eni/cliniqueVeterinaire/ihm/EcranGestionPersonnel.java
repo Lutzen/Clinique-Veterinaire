@@ -27,9 +27,10 @@ public class EcranGestionPersonnel extends JFrame {
 	private ModelePersonnel modelPersonnel;
 
 	public EcranGestionPersonnel() {
+		setResizable(false);
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		setTitle("Gestion du Personnel");
-		setBounds(100, 100, 450, 300);
+		setBounds(100, 100, 541, 415);
 		getContentPane().setLayout(null);
 		getContentPane().add(getBtnAjouter());
 		getContentPane().add(getBtnSuppr());
@@ -54,7 +55,7 @@ public class EcranGestionPersonnel extends JFrame {
 
 				}
 			});
-			btnAjouter.setBounds(10, 11, 89, 23);
+			btnAjouter.setBounds(10, 11, 89, 28);
 		}
 		return btnAjouter;
 	}
@@ -82,7 +83,7 @@ public class EcranGestionPersonnel extends JFrame {
 
 				}
 			});
-			btnSuppr.setBounds(109, 11, 89, 23);
+			btnSuppr.setBounds(109, 11, 89, 28);
 
 		}
 		return btnSuppr;
@@ -115,7 +116,7 @@ public class EcranGestionPersonnel extends JFrame {
 					}
 				}
 			});
-			btnReinit.setBounds(208, 11, 89, 23);
+			btnReinit.setBounds(208, 11, 102, 28);
 		}
 		return btnReinit;
 	}
@@ -153,7 +154,7 @@ public class EcranGestionPersonnel extends JFrame {
 	private JScrollPane getScrollPane() {
 		if (scrollPane == null) {
 			scrollPane = new JScrollPane(list);
-			scrollPane.setBounds(10, 45, 414, 205);
+			scrollPane.setBounds(10, 45, 509, 325);
 		}
 		return scrollPane;
 	}

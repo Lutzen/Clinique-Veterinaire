@@ -14,6 +14,7 @@ import fr.eni.cliniqueVeterinaire.bo.Client;
 
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
+import java.awt.Font;
 
 public class EcranAjoutClient extends JFrame {
 
@@ -35,9 +36,10 @@ public class EcranAjoutClient extends JFrame {
 	private ClientManager clientManager = ClientManager.getInstance();
 
 	public EcranAjoutClient(EcranClient ecran) {
+		setResizable(false);
 		ecranClient = ecran;
 		setTitle("Ajout d'un client");
-		setBounds(100, 100, 346, 267);
+		setBounds(100, 100, 347, 343);
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		getContentPane().setLayout(null);
 		getContentPane().add(getBtnAnnuler());
@@ -68,7 +70,7 @@ public class EcranAjoutClient extends JFrame {
 					txtCodePostal.setText("");
 				}
 			});
-			btnAnnuler.setBounds(231, 11, 89, 23);
+			btnAnnuler.setBounds(231, 265, 89, 29);
 		}
 		return btnAnnuler;
 	}
@@ -102,7 +104,7 @@ public class EcranAjoutClient extends JFrame {
 
 				}
 			});
-			btnValider.setBounds(133, 11, 89, 23);
+			btnValider.setBounds(130, 265, 89, 29);
 		}
 		return btnValider;
 	}
@@ -111,7 +113,7 @@ public class EcranAjoutClient extends JFrame {
 		if (txtNom == null) {
 			txtNom = new JTextField();
 			txtNom.setColumns(10);
-			txtNom.setBounds(85, 45, 235, 20);
+			txtNom.setBounds(85, 13, 235, 28);
 		}
 		return txtNom;
 	}
@@ -120,7 +122,7 @@ public class EcranAjoutClient extends JFrame {
 		if (txtPrenom == null) {
 			txtPrenom = new JTextField();
 			txtPrenom.setColumns(10);
-			txtPrenom.setBounds(85, 76, 235, 20);
+			txtPrenom.setBounds(85, 54, 235, 28);
 		}
 		return txtPrenom;
 	}
@@ -129,7 +131,7 @@ public class EcranAjoutClient extends JFrame {
 		if (txtAdresse == null) {
 			txtAdresse = new JTextField();
 			txtAdresse.setColumns(10);
-			txtAdresse.setBounds(85, 107, 235, 20);
+			txtAdresse.setBounds(85, 95, 235, 28);
 		}
 		return txtAdresse;
 	}
@@ -138,7 +140,7 @@ public class EcranAjoutClient extends JFrame {
 		if (txtAdresse2 == null) {
 			txtAdresse2 = new JTextField();
 			txtAdresse2.setColumns(10);
-			txtAdresse2.setBounds(85, 138, 235, 20);
+			txtAdresse2.setBounds(85, 135, 235, 28);
 		}
 		return txtAdresse2;
 	}
@@ -147,7 +149,7 @@ public class EcranAjoutClient extends JFrame {
 		if (txtCodePostal == null) {
 			txtCodePostal = new JTextField();
 			txtCodePostal.setColumns(10);
-			txtCodePostal.setBounds(85, 169, 235, 20);
+			txtCodePostal.setBounds(85, 176, 235, 28);
 		}
 		return txtCodePostal;
 	}
@@ -156,7 +158,7 @@ public class EcranAjoutClient extends JFrame {
 		if (txtVille == null) {
 			txtVille = new JTextField();
 			txtVille.setColumns(10);
-			txtVille.setBounds(85, 200, 235, 20);
+			txtVille.setBounds(85, 217, 235, 28);
 		}
 		return txtVille;
 	}
@@ -164,7 +166,8 @@ public class EcranAjoutClient extends JFrame {
 	private JLabel getLblNom() {
 		if (lblNom == null) {
 			lblNom = new JLabel("Nom");
-			lblNom.setBounds(10, 48, 46, 14);
+			lblNom.setFont(new Font("SansSerif", Font.BOLD, 12));
+			lblNom.setBounds(10, 20, 46, 14);
 		}
 		return lblNom;
 	}
@@ -172,7 +175,8 @@ public class EcranAjoutClient extends JFrame {
 	private JLabel getLblPrnom() {
 		if (lblPrnom == null) {
 			lblPrnom = new JLabel("Pr\u00E9nom");
-			lblPrnom.setBounds(10, 79, 46, 14);
+			lblPrnom.setFont(new Font("SansSerif", Font.BOLD, 12));
+			lblPrnom.setBounds(10, 61, 46, 14);
 		}
 		return lblPrnom;
 	}
@@ -180,7 +184,8 @@ public class EcranAjoutClient extends JFrame {
 	private JLabel getLblAdresse() {
 		if (lblAdresse == null) {
 			lblAdresse = new JLabel("Adresse");
-			lblAdresse.setBounds(10, 110, 46, 14);
+			lblAdresse.setFont(new Font("SansSerif", Font.BOLD, 12));
+			lblAdresse.setBounds(10, 102, 63, 14);
 		}
 		return lblAdresse;
 	}
@@ -188,7 +193,8 @@ public class EcranAjoutClient extends JFrame {
 	private JLabel getLblCodePostal() {
 		if (lblCodePostal == null) {
 			lblCodePostal = new JLabel("Code postal");
-			lblCodePostal.setBounds(10, 172, 65, 14);
+			lblCodePostal.setFont(new Font("SansSerif", Font.BOLD, 12));
+			lblCodePostal.setBounds(10, 183, 74, 14);
 		}
 		return lblCodePostal;
 	}
@@ -196,7 +202,8 @@ public class EcranAjoutClient extends JFrame {
 	private JLabel getLblVille() {
 		if (lblVille == null) {
 			lblVille = new JLabel("Ville");
-			lblVille.setBounds(10, 203, 46, 14);
+			lblVille.setFont(new Font("SansSerif", Font.BOLD, 12));
+			lblVille.setBounds(10, 224, 46, 14);
 		}
 		return lblVille;
 	}

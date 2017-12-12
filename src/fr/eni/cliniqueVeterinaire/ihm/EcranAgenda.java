@@ -34,9 +34,12 @@ import fr.eni.cliniqueVeterinaire.bo.Personnel;
 
 import javax.swing.ScrollPaneConstants;
 import javax.swing.SwingUtilities;
+import javax.swing.UIManager;
+import javax.swing.UnsupportedLookAndFeelException;
 
 import com.toedter.calendar.JCalendar;
 import com.toedter.calendar.JDateChooser;
+import java.awt.Font;
 
 public class EcranAgenda extends JFrame {
 
@@ -62,6 +65,7 @@ public class EcranAgenda extends JFrame {
 	 * Create the application.
 	 */
 	public EcranAgenda() {
+	
 		setResizable(false);
 
 		setTitle("Agenda");
@@ -107,6 +111,7 @@ public class EcranAgenda extends JFrame {
 	private JLabel getLblVeto() {
 		if (lblVeto == null) {
 			lblVeto = new JLabel("Vétérinaire");
+			lblVeto.setFont(new Font("SansSerif", Font.BOLD, 12));
 			lblVeto.setBounds(10, 15, 69, 14);
 		}
 		return lblVeto;
@@ -115,6 +120,7 @@ public class EcranAgenda extends JFrame {
 	private JLabel getLblDate() {
 		if (lblDate == null) {
 			lblDate = new JLabel("Date");
+			lblDate.setFont(new Font("SansSerif", Font.BOLD, 12));
 			lblDate.setBounds(275, 15, 49, 14);
 		}
 		return lblDate;
@@ -156,7 +162,7 @@ public class EcranAgenda extends JFrame {
 
 			btnDossierMedical.setIcon(
 					new ImageIcon(EcranAgenda.class.getResource("/javax/swing/plaf/metal/icons/ocean/directory.gif")));
-			btnDossierMedical.setBounds(499, 395, 151, 28);
+			btnDossierMedical.setBounds(499, 393, 151, 30);
 		}
 		return btnDossierMedical;
 	}
