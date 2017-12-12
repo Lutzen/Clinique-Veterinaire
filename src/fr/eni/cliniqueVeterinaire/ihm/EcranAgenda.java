@@ -53,23 +53,19 @@ public class EcranAgenda extends JFrame {
 	private JTable table_1;
 	private JDateChooser dateChooser;
 	private JScrollPane scrollPane;
-	
 
-	
-
-	
 	/**
 	 * Launch the application.
 	 */
-
 
 	/**
 	 * Create the application.
 	 */
 	public EcranAgenda() {
+		setResizable(false);
 
 		setTitle("Agenda");
-		setBounds(100, 100, 454, 390);
+		setBounds(100, 100, 668, 465);
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		getContentPane().setLayout(null);
 		getContentPane().add(getLblVeto());
@@ -80,33 +76,30 @@ public class EcranAgenda extends JFrame {
 		getContentPane().add(getTable());
 		getContentPane().add(getScrollPane());
 
-		
-
-		
 	}
 
-	
 	private JComboBox getComboBoxVeto() {
 		if (comboBoxVeto == null) {
 			try {
-				List<Personnel> personnel =personnelManager.getPersonnelByRole("vet");
-				comboBoxVeto= new JComboBox(new String[]{});
+				List<Personnel> personnel = personnelManager.getPersonnelByRole("vet");
+				comboBoxVeto = new JComboBox(new String[] {});
 				for (int i = 0; i < personnel.size(); i++) {
 					comboBoxVeto.addItem(personnel.get(i).getNom());
 					comboBoxVeto.addItemListener(new ItemListener() {
 						public void itemStateChanged(ItemEvent e) {
 							mettreAJour();
 
-						}});
+						}
+					});
 
 				}
-				comboBoxVeto.setBounds(79, 8, 136, 20);
-				
+				comboBoxVeto.setBounds(79, 8, 136, 28);
+
 			} catch (BLLException e) {
-				
+
 				e.printStackTrace();
 			}
-			
+
 		}
 		return comboBoxVeto;
 	}
@@ -114,59 +107,60 @@ public class EcranAgenda extends JFrame {
 	private JLabel getLblVeto() {
 		if (lblVeto == null) {
 			lblVeto = new JLabel("Vétérinaire");
-			lblVeto.setBounds(10, 11, 59, 14);
+			lblVeto.setBounds(10, 15, 69, 14);
 		}
 		return lblVeto;
 	}
+
 	private JLabel getLblDate() {
 		if (lblDate == null) {
 			lblDate = new JLabel("Date");
-			lblDate.setBounds(235, 11, 32, 14);
+			lblDate.setBounds(275, 15, 49, 14);
 		}
 		return lblDate;
 	}
+
 	private JButton getBtnDossierMedical() {
 		if (btnDossierMedical == null) {
 			btnDossierMedical = new JButton("Dossier Medical");
-			btnDossierMedical.addActionListener(new ActionListener(){	@Override
-			public void actionPerformed(ActionEvent e) {
-				
-						int row = table.getSelectedRow();
-						System.out.println("row:"+ row);
-						
-						
-						if (row  == -1) {
-							JOptionPane.showMessageDialog(null, "Selectionnez un client");
-						}
-						else {
-							SwingUtilities.invokeLater(new Runnable() {
-								
-								@Override
-								public void run() {
-						 try {
-							Client client ;
-							String nom = (String) table.getValueAt(row, 1);
-							client = clientManager.getClientByName(nom);
-							 EcranDossierMedical frame = new EcranDossierMedical(client);
-								frame.setVisible(true);
-						} catch (BLLException e) {
-							// TODO Auto-generated catch block
-							e.printStackTrace();
-						}
-						
-								}});
-						}
-						
-				
-			}
+			btnDossierMedical.addActionListener(new ActionListener() {
+				@Override
+				public void actionPerformed(ActionEvent e) {
+
+					int row = table.getSelectedRow();
+					if (row == -1) {
+						JOptionPane.showMessageDialog(null, "Selectionnez un rendez-vous");
+					} else {
+						SwingUtilities.invokeLater(new Runnable() {
+
+							@Override
+							public void run() {
+								try {
+									Client client;
+									String nom = (String) table.getValueAt(row, 1);
+									client = clientManager.getClientByName(nom);
+									String nomAnimal = (String) table.getValueAt(row, 2);
+									EcranDossierMedical frame = new EcranDossierMedical(client, nomAnimal);
+									frame.setVisible(true);
+								} catch (BLLException e) {
+									// TODO Auto-generated catch block
+									e.printStackTrace();
+								}
+
+							}
+						});
+					}
+
+				}
 			});
-			
-			
-			btnDossierMedical.setIcon(new ImageIcon(EcranAgenda.class.getResource("/javax/swing/plaf/metal/icons/ocean/directory.gif")));
-			btnDossierMedical.setBounds(277, 317, 151, 23);
+
+			btnDossierMedical.setIcon(
+					new ImageIcon(EcranAgenda.class.getResource("/javax/swing/plaf/metal/icons/ocean/directory.gif")));
+			btnDossierMedical.setBounds(499, 395, 151, 28);
 		}
 		return btnDossierMedical;
 	}
+
 	private JTable getTable() {
 		if (table == null) {
 
@@ -186,27 +180,25 @@ public class EcranAgenda extends JFrame {
 
 		try {
 			personnel = personnelManager.getPersonnelByNom((String) comboBoxVeto.getSelectedItem());
-			modeleRdv.setData(personnel.getCodePers(),dateToString(dateChooser.getDate()));
+			modeleRdv.setData(personnel.getCodePers(), dateToString(dateChooser.getDate()));
 
 		} catch (BLLException e) {
 
 			e.printStackTrace();
 		}
 	}
-	
-
 
 	private ModeleRdv getModeleRdv() {
 		if (modeleRdv == null) {
 			try {
 				personnel = personnelManager.getPersonnelByNom((String) comboBoxVeto.getSelectedItem());
-				
+
 				System.out.println(personnel);
 				SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
 				String startDateString = dateFormat.format(new Date());
 				System.out.println(startDateString);
-				//String date2 = "2017-12-12";
-				modeleRdv = new ModeleRdv(personnel.getCodePers(),startDateString);
+				// String date2 = "2017-12-12";
+				modeleRdv = new ModeleRdv(personnel.getCodePers(), startDateString);
 			} catch (BLLException e) {
 				e.printStackTrace();
 			}
@@ -214,36 +206,37 @@ public class EcranAgenda extends JFrame {
 		}
 		return modeleRdv;
 	}
-	
+
 	private String dateToString(Date date) {
 		SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
 		String startDateString = dateFormat.format(date);
 		return startDateString;
-		
+
 	}
-	
+
 	private JDateChooser getDateChooser() {
 		if (dateChooser == null) {
 			dateChooser = new JDateChooser(new Date());
 			dateChooser.setDate(new Date());
 			dateChooser.addPropertyChangeListener(new PropertyChangeListener() {
-			          @Override
-			          public void propertyChange(PropertyChangeEvent evt) {
-			              Date date = dateChooser.getDate();
-			              System.out.println("date: "+date);
-			              mettreAJour();
-			            
-			          }
-			      });
-			      
-			dateChooser.setBounds(277, 8, 124, 20);
+				@Override
+				public void propertyChange(PropertyChangeEvent evt) {
+					Date date = dateChooser.getDate();
+					System.out.println("date: " + date);
+					mettreAJour();
+
+				}
+			});
+
+			dateChooser.setBounds(324, 8, 145, 28);
 		}
 		return dateChooser;
 	}
+
 	private JScrollPane getScrollPane() {
 		if (scrollPane == null) {
 			scrollPane = new JScrollPane(table);
-			scrollPane.setBounds(10, 36, 418, 273);
+			scrollPane.setBounds(10, 51, 640, 330);
 		}
 		return scrollPane;
 	}
