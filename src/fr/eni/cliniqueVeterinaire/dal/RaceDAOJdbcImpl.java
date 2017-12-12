@@ -36,9 +36,10 @@ public class RaceDAOJdbcImpl implements RaceDAO{
 			statement = connection.prepareStatement(sql);
 			statement.setString(1, espece);
 			ResultSet resultSet = statement.executeQuery();
-			Races espece1 = new Races("", "");
+			
 
 			while(resultSet.next()) {
+				Races espece1 = new Races("", "");
 				espece1.setRace(resultSet.getString("Race"));
 				race.add(espece1);
 			}
@@ -67,11 +68,13 @@ public class RaceDAOJdbcImpl implements RaceDAO{
 		try {
 			statement = connection.prepareStatement(sql);
 			ResultSet resultSet = statement.executeQuery();
-			Races espece2 = new Races("", "");
+			
 
 			while(resultSet.next()) {
+				Races espece2 = new Races("", "");
 				espece2.setEspece(resultSet.getString("Espece"));
 				espece.add(espece2);
+			
 			}
 			return espece;
 		} catch (SQLException e) {
