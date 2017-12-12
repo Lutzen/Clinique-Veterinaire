@@ -20,6 +20,10 @@ import javax.swing.JOptionPane;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.JTextArea;
+import java.awt.Font;
+import java.awt.Color;
+import javax.swing.ImageIcon;
+import javax.swing.SwingConstants;
 
 public class EcranClient extends JFrame {
 
@@ -51,9 +55,12 @@ public class EcranClient extends JFrame {
 	private ModeleAnimaux modeleAnimaux;
 	private JLabel lblAnimaux;
 	private JLabel lblCodeClient;
+	private JLabel lblClient;
+	private JLabel lblAnimal;
 
 	public EcranClient() throws IHMException {
-		setTitle("Clients");
+		getContentPane().setFont(new Font("Tahoma", Font.PLAIN, 12));
+		setTitle("CLIENTS");
 		setBounds(100, 100, 853, 498);
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		getContentPane().setLayout(null);
@@ -81,12 +88,16 @@ public class EcranClient extends JFrame {
 		getContentPane().add(getScrollPane());
 		getContentPane().add(getLblAnimaux());
 		getContentPane().add(getLblCodeClient());
+		getContentPane().add(getLblClient());
+		getContentPane().add(getLblAnimal());
 
 	}
 
 	private JButton getBtnRechercher() {
 		if (btnRechercher == null) {
-			btnRechercher = new JButton("Rechercher");
+			btnRechercher = new JButton("rechercher");
+			btnRechercher.setToolTipText("");
+			btnRechercher.setIcon(new ImageIcon("C:\\Users\\aphommaline2017\\Desktop\\projet\\BonProjet\\Clinique-Veterinaire\\resources\\vet\\searchClient32.png"));
 			btnRechercher.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
 					SwingUtilities.invokeLater(new Runnable() {
@@ -107,7 +118,7 @@ public class EcranClient extends JFrame {
 
 				}
 			});
-			btnRechercher.setBounds(10, 11, 89, 23);
+			btnRechercher.setBounds(103, 11, 130, 44);
 
 		}
 		return btnRechercher;
@@ -129,7 +140,8 @@ public class EcranClient extends JFrame {
 
 	private JButton getBtnAjouterClient() {
 		if (btnAjouterClient == null) {
-			btnAjouterClient = new JButton("Ajouter");
+			btnAjouterClient = new JButton("");
+			btnAjouterClient.setIcon(new ImageIcon("C:\\Users\\aphommaline2017\\Desktop\\projet\\BonProjet\\Clinique-Veterinaire\\resources\\vet\\addAnimal.png"));
 			btnAjouterClient.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent arg0) {
 
@@ -144,14 +156,15 @@ public class EcranClient extends JFrame {
 				}
 
 			});
-			btnAjouterClient.setBounds(266, 11, 89, 23);
+			btnAjouterClient.setBounds(86, 405, 32, 32);
 		}
 		return btnAjouterClient;
 	}
 
 	private JButton getBtnSupprimerClient() {
 		if (btnSupprimerClient == null) {
-			btnSupprimerClient = new JButton("Supprimer");
+			btnSupprimerClient = new JButton("");
+			btnSupprimerClient.setIcon(new ImageIcon("C:\\Users\\aphommaline2017\\Desktop\\projet\\BonProjet\\Clinique-Veterinaire\\resources\\delete.png"));
 			btnSupprimerClient.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
 					try {
@@ -170,14 +183,15 @@ public class EcranClient extends JFrame {
 					}
 				}
 			});
-			btnSupprimerClient.setBounds(365, 11, 89, 23);
+			btnSupprimerClient.setBounds(143, 405, 32, 32);
 		}
 		return btnSupprimerClient;
 	}
 
 	private JButton getBtnEditerClient() {
 		if (btnEditerClient == null) {
-			btnEditerClient = new JButton("Editer");
+			btnEditerClient = new JButton("");
+			btnEditerClient.setIcon(new ImageIcon("C:\\Users\\aphommaline2017\\Desktop\\projet\\BonProjet\\Clinique-Veterinaire\\resources\\EditButton.png"));
 			btnEditerClient.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
 					try {
@@ -204,7 +218,7 @@ public class EcranClient extends JFrame {
 
 				}
 			});
-			btnEditerClient.setBounds(464, 11, 89, 23);
+			btnEditerClient.setBounds(201, 405, 32, 32);
 		}
 		return btnEditerClient;
 	}
@@ -221,7 +235,7 @@ public class EcranClient extends JFrame {
 					}
 				}
 			});
-			btnAnnuler.setBounds(738, 11, 89, 23);
+			btnAnnuler.setBounds(127, 302, 89, 23);
 		}
 		return btnAnnuler;
 	}
@@ -330,7 +344,8 @@ public class EcranClient extends JFrame {
 
 	private JButton getBtnEditerAnimal() {
 		if (btnEditerAnimal == null) {
-			btnEditerAnimal = new JButton("Editer");
+			btnEditerAnimal = new JButton("");
+			btnEditerAnimal.setIcon(new ImageIcon("C:\\Users\\aphommaline2017\\Desktop\\projet\\BonProjet\\Clinique-Veterinaire\\resources\\EditButton.png"));
 			btnEditerAnimal.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
 					SwingUtilities.invokeLater(new Runnable() {
@@ -348,14 +363,15 @@ public class EcranClient extends JFrame {
 				
 				}
 			});
-			btnEditerAnimal.setBounds(738, 425, 89, 23);
+			btnEditerAnimal.setBounds(783, 405, 32, 32);
 		}
 		return btnEditerAnimal;
 	}
 
 	private JButton getBtnSupprimerAnimal() {
 		if (btnSupprimerAnimal == null) {
-			btnSupprimerAnimal = new JButton("Supprimer");
+			btnSupprimerAnimal = new JButton("");
+			btnSupprimerAnimal.setIcon(new ImageIcon("C:\\Users\\aphommaline2017\\Desktop\\projet\\BonProjet\\Clinique-Veterinaire\\resources\\delete.png"));
 			btnSupprimerAnimal.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
 					try {
@@ -376,14 +392,15 @@ public class EcranClient extends JFrame {
 
 				}
 			});
-			btnSupprimerAnimal.setBounds(639, 425, 89, 23);
+			btnSupprimerAnimal.setBounds(727, 405, 32, 32);
 		}
 		return btnSupprimerAnimal;
 	}
 
 	private JButton getBtnAjouterAnimal() {
 		if (btnAjouterAnimal == null) {
-			btnAjouterAnimal = new JButton("Ajouter");
+			btnAjouterAnimal = new JButton("");
+			btnAjouterAnimal.setIcon(new ImageIcon("C:\\Users\\aphommaline2017\\Desktop\\projet\\BonProjet\\Clinique-Veterinaire\\resources\\vet\\addAnimal.png"));
 			btnAjouterAnimal.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent arg0) {
 
@@ -402,7 +419,7 @@ public class EcranClient extends JFrame {
 				}
 
 			});
-			btnAjouterAnimal.setBounds(540, 425, 89, 23);
+			btnAjouterAnimal.setBounds(674, 405, 32, 32);
 		}
 		return btnAjouterAnimal;
 	}
@@ -455,15 +472,15 @@ public class EcranClient extends JFrame {
 	private JScrollPane getScrollPane() {
 		if (scrollPane == null) {
 			scrollPane = new JScrollPane(table);
-			scrollPane.setBounds(266, 97, 561, 317);
+			scrollPane.setBounds(266, 97, 561, 287);
 		}
 		return scrollPane;
 	}
 
 	private JLabel getLblAnimaux() {
 		if (lblAnimaux == null) {
-			lblAnimaux = new JLabel("Animaux");
-			lblAnimaux.setBounds(278, 69, 46, 14);
+			lblAnimaux = new JLabel("LISTE DES ANIMAUX:");
+			lblAnimaux.setBounds(287, 69, 129, 14);
 		}
 		return lblAnimaux;
 	}
@@ -475,6 +492,19 @@ public class EcranClient extends JFrame {
 		}
 		return lblCodeClient;
 	}
-
-
+	private JLabel getLblClient() {
+		if (lblClient == null) {
+			lblClient = new JLabel("CLIENT :");
+			lblClient.setBackground(Color.LIGHT_GRAY);
+			lblClient.setBounds(21, 405, 55, 14);
+		}
+		return lblClient;
+	}
+	private JLabel getLblAnimal() {
+		if (lblAnimal == null) {
+			lblAnimal = new JLabel("ANIMAL :");
+			lblAnimal.setBounds(607, 405, 55, 14);
+		}
+		return lblAnimal;
+	}
 }

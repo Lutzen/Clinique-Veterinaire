@@ -103,7 +103,7 @@ public class EcranRdv extends JFrame {
 
 	private JLabel getLblPour() {
 		if (lblPour == null) {
-			lblPour = new JLabel("Pour");
+			lblPour = new JLabel("Pour :");
 			lblPour.setBounds(10, 11, 46, 14);
 		}
 		return lblPour;
@@ -186,6 +186,8 @@ public class EcranRdv extends JFrame {
 	private JButton getBtnAjoutClient() {
 		if (btnAjoutClient == null) {
 			btnAjoutClient = new JButton("");
+			btnAjoutClient.setBorderPainted(false);
+			btnAjoutClient.setContentAreaFilled(false);
 			btnAjoutClient.addActionListener(new ActionListener() {
 
 				public void actionPerformed(ActionEvent e) {
@@ -208,8 +210,8 @@ public class EcranRdv extends JFrame {
 			});
 			// btnAjoutClient.setIcon(new
 			// ImageIcon("C:\\Users\\aphommaline2017\\Desktop\\projet\\BonProjet\\Clinique-Veterinaire\\resources\\AddButton.png"));
-			btnAjoutClient.setIcon(new ImageIcon("resources\\AddButton.png"));
-			btnAjoutClient.setBounds(171, 50, 36, 23);
+			btnAjoutClient.setIcon(new ImageIcon("C:\\Users\\aphommaline2017\\Desktop\\projet\\BonProjet\\Clinique-Veterinaire\\resources\\vet\\addAnimal.png"));
+			btnAjoutClient.setBounds(171, 36, 36, 37);
 		}
 		return btnAjoutClient;
 	}
@@ -217,6 +219,8 @@ public class EcranRdv extends JFrame {
 	private JButton getBtnAjoutAnimal() {
 		if (btnAjoutAnimal == null) {
 			btnAjoutAnimal = new JButton("");
+			btnAjoutAnimal.setContentAreaFilled(false);
+			btnAjoutAnimal.setBorderPainted(false);
 			btnAjoutAnimal.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
 					SwingUtilities.invokeLater(new Runnable() {
@@ -230,16 +234,16 @@ public class EcranRdv extends JFrame {
 					});
 				}
 			});
-			btnAjoutAnimal.setIcon(new ImageIcon("resources\\AddButton.png"));
+			btnAjoutAnimal.setIcon(new ImageIcon("C:\\Users\\aphommaline2017\\Desktop\\projet\\BonProjet\\Clinique-Veterinaire\\resources\\vet\\addAnimal.png"));
 
-			btnAjoutAnimal.setBounds(171, 99, 36, 23);
+			btnAjoutAnimal.setBounds(171, 82, 36, 40);
 		}
 		return btnAjoutAnimal;
 	}
 
 	private JLabel getLblPar() {
 		if (lblPar == null) {
-			lblPar = new JLabel("Par");
+			lblPar = new JLabel("Par :");
 			lblPar.setBounds(236, 11, 46, 14);
 		}
 		return lblPar;
@@ -281,7 +285,7 @@ public class EcranRdv extends JFrame {
 
 	private JLabel getLblQuand() {
 		if (lblQuand == null) {
-			lblQuand = new JLabel("Quand");
+			lblQuand = new JLabel("Quand :");
 			lblQuand.setBounds(408, 11, 46, 14);
 		}
 		return lblQuand;
