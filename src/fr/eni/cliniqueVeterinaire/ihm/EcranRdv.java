@@ -6,6 +6,7 @@ import java.util.List;
 
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JScrollPane;
 import javax.swing.JComboBox;
 import javax.swing.JButton;
@@ -22,6 +23,7 @@ import fr.eni.cliniqueVeterinaire.bll.RdvManager;
 import fr.eni.cliniqueVeterinaire.bo.Animal;
 import fr.eni.cliniqueVeterinaire.bo.Client;
 import fr.eni.cliniqueVeterinaire.bo.Personnel;
+import fr.eni.cliniqueVeterinaire.bo.Rdv;
 
 import javax.swing.JTable;
 import java.awt.event.ActionListener;
@@ -29,6 +31,8 @@ import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
+import java.text.DateFormat;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.awt.event.ActionEvent;
 import com.toedter.calendar.JDateChooser;
@@ -57,6 +61,7 @@ public class EcranRdv extends JFrame {
 	private PersonnelManager personnelManager = PersonnelManager.getInstance();
 	private AnimalManager animalManager = AnimalManager.getInstance();
 	private ClientManager clientManager = ClientManager.getInstance();
+	private RdvManager rdvManager = RdvManager.getInstance();
 	private ModeleRdv modeleRdv;
 	private Personnel personnel;
 	private Animal animal;
@@ -93,7 +98,7 @@ public class EcranRdv extends JFrame {
 		getContentPane().add(getDateChooser());
 		getContentPane().add(getTable());
 		getContentPane().add(getScrollPane());
-		
+
 	}
 
 	private JLabel getLblPour() {
@@ -114,8 +119,7 @@ public class EcranRdv extends JFrame {
 
 	private JComboBox getCBClients() {
 		if (cBClients == null) {
-			
-		
+
 			try {
 				cBClients = new JComboBox();
 				List<Client> clients = clientManager.getClientList();
@@ -129,7 +133,8 @@ public class EcranRdv extends JFrame {
 					});
 
 				}
-				cBClients.setBounds(30, 51, 131, 20);			} catch (BLLException e) {
+				cBClients.setBounds(30, 51, 131, 20);
+			} catch (BLLException e) {
 
 				e.printStackTrace();
 			}
@@ -144,70 +149,65 @@ public class EcranRdv extends JFrame {
 		}
 		return lblAnimal;
 	}
-	
 
 	private JComboBox getCBAnimaux() {
 		if (cBAnimaux == null) {
-			cBAnimaux = new JComboBox(new String[] {});			
+			cBAnimaux = new JComboBox(new String[] {});
 			refreshCBAnimaux();
-			
 
-				cBAnimaux.addItemListener(new ItemListener() {
-					public void itemStateChanged(ItemEvent e) {
+			cBAnimaux.addItemListener(new ItemListener() {
+				public void itemStateChanged(ItemEvent e) {
 
-					}
-				});
+				}
+			});
 
-			
 			cBAnimaux.setBounds(30, 100, 131, 20);
 
-		
 		}
 		return cBAnimaux;
 	}
 
-	
 	public void refreshCBAnimaux() {
 		Client client;
 		try {
 			cBAnimaux.removeAllItems();
 			client = clientManager.getClientByName((String) cBClients.getSelectedItem());
-			List<Animal> animaux = animalManager.getAnimalList( client.getCodeClient());
+			List<Animal> animaux = animalManager.getAnimalList(client.getCodeClient());
 			for (int i = 0; i < animaux.size(); i++) {
-				cBAnimaux.addItem(animaux.get(i).getNomAnimal());}
+				cBAnimaux.addItem(animaux.get(i).getNomAnimal());
+			}
 		} catch (BLLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-	
+
 	}
-	
-	
-	
+
 	private JButton getBtnAjoutClient() {
 		if (btnAjoutClient == null) {
 			btnAjoutClient = new JButton("");
 			btnAjoutClient.addActionListener(new ActionListener() {
-				
-					public void actionPerformed(ActionEvent e) {
-						SwingUtilities.invokeLater(new Runnable() {
 
-							@Override
-							public void run() {
-								EcranClient frame;
-								try {
-									frame = new EcranClient();
-									frame.setVisible(true);
-								} catch (IHMException e) {
-									e.printStackTrace();
-									
-								}
-								
+				public void actionPerformed(ActionEvent e) {
+					SwingUtilities.invokeLater(new Runnable() {
+
+						@Override
+						public void run() {
+							EcranClient frame;
+							try {
+								frame = new EcranClient();
+								frame.setVisible(true);
+							} catch (IHMException e) {
+								e.printStackTrace();
+
 							}
-						});
-					}
+
+						}
+					});
+				}
 			});
-			//btnAjoutClient.setIcon(new ImageIcon("C:\\Users\\aphommaline2017\\Desktop\\projet\\BonProjet\\Clinique-Veterinaire\\resources\\AddButton.png"));
+			// btnAjoutClient.setIcon(new
+			// ImageIcon("C:\\Users\\aphommaline2017\\Desktop\\projet\\BonProjet\\Clinique-Veterinaire\\resources\\AddButton.png"));
 			btnAjoutClient.setIcon(new ImageIcon("resources\\AddButton.png"));
 			btnAjoutClient.setBounds(171, 50, 36, 23);
 		}
@@ -223,14 +223,15 @@ public class EcranRdv extends JFrame {
 
 						@Override
 						public void run() {
-							EcranAnimaux frame = new EcranAnimaux(cBClients.getSelectedItem().toString(),EcranRdv.this);
+							EcranAnimaux frame = new EcranAnimaux(cBClients.getSelectedItem().toString(),
+									EcranRdv.this);
 							frame.setVisible(true);
 						}
 					});
 				}
 			});
 			btnAjoutAnimal.setIcon(new ImageIcon("resources\\AddButton.png"));
-			
+
 			btnAjoutAnimal.setBounds(171, 99, 36, 23);
 		}
 		return btnAjoutAnimal;
@@ -309,11 +310,10 @@ public class EcranRdv extends JFrame {
 				cBHeures.addItem(i);
 				cBHeures.addItemListener(new ItemListener() {
 					public void itemStateChanged(ItemEvent e) {
-					
 
-					
+					}
+				});
 			}
-				});}
 			cBHeures.setBounds(428, 100, 46, 20);
 		}
 		return cBHeures;
@@ -329,7 +329,7 @@ public class EcranRdv extends JFrame {
 
 	private JComboBox getCBMinutes() {
 		if (cBMinutes == null) {
-			cBMinutes = new JComboBox(new String[] {"00","15","30","45"});
+			cBMinutes = new JComboBox(new String[] { "00", "15", "30", "45" });
 			cBMinutes.setBounds(500, 100, 46, 20);
 		}
 		return cBMinutes;
@@ -338,14 +338,97 @@ public class EcranRdv extends JFrame {
 	private JButton getBtnValider() {
 		if (btnValider == null) {
 			btnValider = new JButton("Valider");
+
+			btnValider.addActionListener(new ActionListener() {
+				public void actionPerformed(ActionEvent e) {
+					String heure = String.valueOf(cBHeures.getSelectedItem() + ":" + cBMinutes.getSelectedItem());
+					for (int i = 0; i < table.getRowCount(); i++) {
+						if (heure.equals(table.getValueAt(i, 0))) {
+							JOptionPane.showMessageDialog(null, "Selectionnez un autre créneau horaire");
+							return;
+						}
+					}
+					Personnel personne;
+					try {
+
+						personne = personnelManager.getPersonnelByNom((String) cBVetos.getSelectedItem());
+
+						Client client = clientManager.getClientByName((String) cBClients.getSelectedItem());
+						List<Animal> animaux = animalManager.getAnimalList(client.getCodeClient());
+						for (Animal animalList : animaux) {
+							if (animalList.getNomAnimal().equals((String) cBAnimaux.getSelectedItem()))
+								;
+							animal = animalList;
+						}
+						String dateText = dateToString(dateChooser.getDate()) + " " + heure + ":00";
+						Date dateRdv = stringToDate(dateText);
+						System.out.println(dateRdv);
+						Rdv rdv = new Rdv(personne.getCodePers(), dateRdv, animal.getCodeAnimal());
+						rdvManager.rdvDAO.insert(rdv);
+						mettreAJour();
+
+					} catch (Exception e1) {
+						// TODO Auto-generated catch block
+						e1.printStackTrace();
+					}
+
+				}
+
+			});
+
 			btnValider.setBounds(385, 462, 89, 23);
+
 		}
+
 		return btnValider;
 	}
 
 	private JButton getBtnSupprimer() {
 		if (btnSupprimer == null) {
 			btnSupprimer = new JButton("Supprimer");
+
+			btnSupprimer.addActionListener(new ActionListener() {
+				public void actionPerformed(ActionEvent e) {
+					try {
+						if (table.getSelectedRow() == -1)
+							JOptionPane.showMessageDialog(null, "Selectionnez un Rdv");
+						else {
+							JOptionPane.showMessageDialog(null, "Rdv supprimé avec succès");
+							
+							Personnel personne = personnelManager.getPersonnelByNom((String) cBVetos.getSelectedItem());
+							System.out.println(personne);
+							
+							String heure = (String) table.getValueAt(table.getSelectedRow(), 0);
+							String dateText = dateToString(dateChooser.getDate()) + " " + heure + ":00";
+							Date dateRdv = stringToDate(dateText);
+							System.out.println(dateRdv);
+							
+							
+							int row = table.getSelectedRow();
+							Client client = clientManager.getClientByName((String) table.getValueAt(row, 1));
+							List<Animal> animaux = animalManager.getAnimalList(client.getCodeClient());
+							for (Animal animalList : animaux) {
+								if (animalList.getNomAnimal().equals((String) cBAnimaux.getSelectedItem()))
+									;
+								animal = animalList;
+							}
+							System.out.println(animal);
+							
+							Rdv rdv = new Rdv(personne.getCodePers(), dateRdv, animal.getCodeAnimal());
+							System.out.println(rdv);
+							rdvManager.rdvDAO.delete(rdv);
+							mettreAJour();
+						}
+					} catch (Exception e1) {
+						// TODO Auto-generated catch block
+						e1.printStackTrace();
+					}
+				
+
+				}
+
+			});
+
 			btnSupprimer.setBounds(482, 462, 89, 23);
 		}
 		return btnSupprimer;
@@ -369,7 +452,7 @@ public class EcranRdv extends JFrame {
 
 		try {
 			personnel = personnelManager.getPersonnelByNom((String) cBVetos.getSelectedItem());
-			modeleRdv.setData(personnel.getCodePers(),dateToString(dateChooser.getDate()));
+			modeleRdv.setData(personnel.getCodePers(), dateToString(dateChooser.getDate()));
 
 		} catch (BLLException e) {
 
@@ -381,7 +464,7 @@ public class EcranRdv extends JFrame {
 		if (modeleRdv == null) {
 			try {
 				personnel = personnelManager.getPersonnelByNom((String) cBVetos.getSelectedItem());
-				
+
 				System.out.println(personnel);
 				modeleRdv = new ModeleRdv(personnel.getCodePers());
 			} catch (BLLException e) {
@@ -391,13 +474,19 @@ public class EcranRdv extends JFrame {
 		}
 		return modeleRdv;
 	}
-	
+
 	private String dateToString(Date date) {
 		SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
 		String startDateString = dateFormat.format(date);
 		return startDateString;
 	}
-	
+
+	private Date stringToDate(String dateText) throws ParseException {
+		DateFormat dateformat = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
+		Date newDate = dateformat.parse(dateText);
+		return newDate;
+	}
+
 	private JScrollPane getScrollPane() {
 		if (scrollPane == null) {
 			scrollPane = new JScrollPane(table);
@@ -405,23 +494,24 @@ public class EcranRdv extends JFrame {
 		}
 		return scrollPane;
 	}
+
 	private JDateChooser getDateChooser() {
 		if (dateChooser == null) {
 			dateChooser = new JDateChooser(new Date());
 			dateChooser.setDate(new Date());
 			dateChooser.addPropertyChangeListener(new PropertyChangeListener() {
-			          @Override
-			          public void propertyChange(PropertyChangeEvent evt) {
-			              Date date = dateChooser.getDate();
-			              System.out.println("date: "+date);
-			              mettreAJour();
-			            
-			          }
-			      });
-			      
+				@Override
+				public void propertyChange(PropertyChangeEvent evt) {
+					Date date = dateChooser.getDate();
+					System.out.println("date: " + date);
+					mettreAJour();
+
+				}
+			});
+
 			dateChooser.setBounds(428, 50, 118, 20);
 		}
-			
+
 		return dateChooser;
 	}
 }
