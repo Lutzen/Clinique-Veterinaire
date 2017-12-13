@@ -36,6 +36,7 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.awt.event.ActionEvent;
 import com.toedter.calendar.JDateChooser;
+import java.awt.Font;
 
 public class EcranRdv extends JFrame {
 
@@ -98,6 +99,7 @@ public class EcranRdv extends JFrame {
 		getContentPane().add(getDateChooser());
 		getContentPane().add(getTable());
 		getContentPane().add(getScrollPane());
+		
 
 	}
 
@@ -111,7 +113,8 @@ public class EcranRdv extends JFrame {
 
 	private JLabel getLblClient() {
 		if (lblClient == null) {
-			lblClient = new JLabel("Client");
+			lblClient = new JLabel(" Client");
+			lblClient.setFont(new Font("SansSerif", Font.BOLD, 12));
 			lblClient.setBounds(30, 36, 46, 14);
 		}
 		return lblClient;
@@ -133,7 +136,7 @@ public class EcranRdv extends JFrame {
 					});
 
 				}
-				cBClients.setBounds(30, 51, 131, 20);
+				cBClients.setBounds(30, 51, 131, 26);
 			} catch (BLLException e) {
 
 				e.printStackTrace();
@@ -144,7 +147,8 @@ public class EcranRdv extends JFrame {
 
 	private JLabel getLblAnimal() {
 		if (lblAnimal == null) {
-			lblAnimal = new JLabel("Animal");
+			lblAnimal = new JLabel(" Animal");
+			lblAnimal.setFont(new Font("SansSerif", Font.BOLD, 12));
 			lblAnimal.setBounds(30, 82, 46, 14);
 		}
 		return lblAnimal;
@@ -161,7 +165,7 @@ public class EcranRdv extends JFrame {
 				}
 			});
 
-			cBAnimaux.setBounds(30, 100, 131, 20);
+			cBAnimaux.setBounds(30, 100, 131, 26);
 
 		}
 		return cBAnimaux;
@@ -187,7 +191,6 @@ public class EcranRdv extends JFrame {
 		if (btnAjoutClient == null) {
 			btnAjoutClient = new JButton("");
 			btnAjoutClient.setBorderPainted(false);
-			btnAjoutClient.setContentAreaFilled(false);
 			btnAjoutClient.addActionListener(new ActionListener() {
 
 				public void actionPerformed(ActionEvent e) {
@@ -210,8 +213,8 @@ public class EcranRdv extends JFrame {
 			});
 			// btnAjoutClient.setIcon(new
 			// ImageIcon("C:\\Users\\aphommaline2017\\Desktop\\projet\\BonProjet\\Clinique-Veterinaire\\resources\\AddButton.png"));
-			btnAjoutClient.setIcon(new ImageIcon("C:\\Users\\aphommaline2017\\Desktop\\projet\\BonProjet\\Clinique-Veterinaire\\resources\\vet\\addAnimal.png"));
-			btnAjoutClient.setBounds(171, 36, 36, 37);
+			btnAjoutClient.setIcon(new ImageIcon("C:\\Users\\aphommaline2017\\Desktop\\projet\\BonProjet\\Clinique-Veterinaire\\resources\\vet\\addAnimal32.png"));
+			btnAjoutClient.setBounds(171, 36, 40, 40);
 		}
 		return btnAjoutClient;
 	}
@@ -219,7 +222,6 @@ public class EcranRdv extends JFrame {
 	private JButton getBtnAjoutAnimal() {
 		if (btnAjoutAnimal == null) {
 			btnAjoutAnimal = new JButton("");
-			btnAjoutAnimal.setContentAreaFilled(false);
 			btnAjoutAnimal.setBorderPainted(false);
 			btnAjoutAnimal.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
@@ -234,9 +236,9 @@ public class EcranRdv extends JFrame {
 					});
 				}
 			});
-			btnAjoutAnimal.setIcon(new ImageIcon("C:\\Users\\aphommaline2017\\Desktop\\projet\\BonProjet\\Clinique-Veterinaire\\resources\\vet\\addAnimal.png"));
+			btnAjoutAnimal.setIcon(new ImageIcon("C:\\Users\\aphommaline2017\\Desktop\\projet\\BonProjet\\Clinique-Veterinaire\\resources\\vet\\addAnimal32.png"));
 
-			btnAjoutAnimal.setBounds(171, 82, 36, 40);
+			btnAjoutAnimal.setBounds(171, 82, 40, 40);
 		}
 		return btnAjoutAnimal;
 	}
@@ -251,7 +253,8 @@ public class EcranRdv extends JFrame {
 
 	private JLabel getLblVtrinaire() {
 		if (lblVtrinaire == null) {
-			lblVtrinaire = new JLabel("V\u00E9t\u00E9rinaire");
+			lblVtrinaire = new JLabel(" V\u00E9t\u00E9rinaire");
+			lblVtrinaire.setFont(new Font("SansSerif", Font.BOLD, 12));
 			lblVtrinaire.setBounds(256, 36, 82, 14);
 		}
 		return lblVtrinaire;
@@ -272,7 +275,7 @@ public class EcranRdv extends JFrame {
 					});
 
 				}
-				cBVetos.setBounds(256, 51, 131, 20);
+				cBVetos.setBounds(256, 51, 131, 26);
 
 			} catch (BLLException e) {
 
@@ -293,7 +296,8 @@ public class EcranRdv extends JFrame {
 
 	private JLabel getLblDate() {
 		if (lblDate == null) {
-			lblDate = new JLabel("Date");
+			lblDate = new JLabel(" Date");
+			lblDate.setFont(new Font("SansSerif", Font.BOLD, 12));
 			lblDate.setBounds(428, 36, 46, 14);
 		}
 		return lblDate;
@@ -301,7 +305,8 @@ public class EcranRdv extends JFrame {
 
 	private JLabel getLblHeure() {
 		if (lblHeure == null) {
-			lblHeure = new JLabel("Heure");
+			lblHeure = new JLabel(" Heure");
+			lblHeure.setFont(new Font("SansSerif", Font.BOLD, 12));
 			lblHeure.setBounds(428, 82, 46, 14);
 		}
 		return lblHeure;
@@ -318,7 +323,7 @@ public class EcranRdv extends JFrame {
 					}
 				});
 			}
-			cBHeures.setBounds(428, 100, 46, 20);
+			cBHeures.setBounds(428, 100, 46, 26);
 		}
 		return cBHeures;
 	}
@@ -334,7 +339,7 @@ public class EcranRdv extends JFrame {
 	private JComboBox getCBMinutes() {
 		if (cBMinutes == null) {
 			cBMinutes = new JComboBox(new String[] { "00", "15", "30", "45" });
-			cBMinutes.setBounds(500, 100, 46, 20);
+			cBMinutes.setBounds(500, 100, 46, 26);
 		}
 		return cBMinutes;
 	}
@@ -380,7 +385,7 @@ public class EcranRdv extends JFrame {
 
 			});
 
-			btnValider.setBounds(385, 462, 89, 23);
+			btnValider.setBounds(385, 459, 89, 26);
 
 		}
 
@@ -433,7 +438,7 @@ public class EcranRdv extends JFrame {
 
 			});
 
-			btnSupprimer.setBounds(482, 462, 89, 23);
+			btnSupprimer.setBounds(482, 459, 89, 26);
 		}
 		return btnSupprimer;
 	}
@@ -513,7 +518,7 @@ public class EcranRdv extends JFrame {
 				}
 			});
 
-			dateChooser.setBounds(428, 50, 118, 20);
+			dateChooser.setBounds(428, 51, 138, 26);
 		}
 
 		return dateChooser;
