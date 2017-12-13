@@ -347,30 +347,27 @@ public class EcranRdv extends JFrame {
 						if (table.getSelectedRow() == -1)
 							JOptionPane.showMessageDialog(null, "Selectionnez un Rdv");
 						else {
-							JOptionPane.showMessageDialog(null, "Rdv supprimé avec succès");
-
-							Personnel personne = personnelManager.getPersonnelByNom((String) cBVetos.getSelectedItem());
-							System.out.println(personne);
-
-							String heure = (String) table.getValueAt(table.getSelectedRow(), 0);
-							String dateText = dateToString(dateChooser.getDate()) + " " + heure + ":00";
-							Date dateRdv = stringToDate(dateText);
-							System.out.println(dateRdv);
-
-							int row = table.getSelectedRow();
-							Client client = clientManager.getClientByName((String) table.getValueAt(row, 1));
-							List<Animal> animaux = animalManager.getAnimalList(client.getCodeClient());
-							for (Animal animalList : animaux) {
-								if (animalList.getNomAnimal().equals((String) cBAnimaux.getSelectedItem()))
-									;
-								animal = animalList;
+							int result = JOptionPane.showConfirmDialog(null,"Voulez-vous vraiment supprimer ?");
+							if (result == 0) {
+								JOptionPane.showMessageDialog(null, "Rdv supprimé avec succès");
+								Personnel personne = personnelManager.getPersonnelByNom((String) cBVetos.getSelectedItem());
+								String heure = (String) table.getValueAt(table.getSelectedRow(), 0);
+								String dateText = dateToString(dateChooser.getDate()) + " " + heure + ":00";
+								Date dateRdv = stringToDate(dateText);
+								int row = table.getSelectedRow();
+								Client client = clientManager.getClientByName((String) table.getValueAt(row, 1));
+								List<Animal> animaux = animalManager.getAnimalList(client.getCodeClient());
+								for (Animal animalList : animaux) {
+									if (animalList.getNomAnimal().equals((String) cBAnimaux.getSelectedItem()))
+										;
+									animal = animalList;
+								}
+								Rdv rdv = new Rdv(personne.getCodePers(), dateRdv, animal.getCodeAnimal());
+								rdvManager.rdvDAO.delete(rdv);
+								mettreAJour();
+							} else {
 							}
-							System.out.println(animal);
-
-							Rdv rdv = new Rdv(personne.getCodePers(), dateRdv, animal.getCodeAnimal());
-							System.out.println(rdv);
-							rdvManager.rdvDAO.delete(rdv);
-							mettreAJour();
+							
 						}
 					} catch (Exception e1) {
 						// TODO Auto-generated catch block
