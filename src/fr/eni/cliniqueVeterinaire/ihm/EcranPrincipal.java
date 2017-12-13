@@ -14,6 +14,9 @@ import java.awt.Font;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import java.awt.Window.Type;
+import javax.swing.JLabel;
+import javax.swing.ImageIcon;
+import javax.swing.SwingConstants;
 
 public class EcranPrincipal {
 
@@ -22,6 +25,8 @@ public class EcranPrincipal {
 	private JButton btnGestionRDV;
 	private JButton btnAgenda;
 	private JButton btnGestionPersonnel;
+	private JLabel label;
+	private JLabel lblNewLabel;
 
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
@@ -62,6 +67,8 @@ public class EcranPrincipal {
 		btnGestionRDV.setEnabled(false);
 		btnAgenda.setEnabled(false);
 		btnDeco.setEnabled(false);
+		frmLaCliniqueDu.getContentPane().add(getLabel());
+		frmLaCliniqueDu.getContentPane().add(getLblNewLabel());
 		EcranConnexion();
 	}
 
@@ -173,7 +180,22 @@ public class EcranPrincipal {
 		}
 		return btnGestionPersonnel;
 	}
-
-
-	
+	private JLabel getLabel() {
+		if (label == null) {
+			label = new JLabel("");
+			label.setVerticalAlignment(SwingConstants.BOTTOM);
+			label.setIcon(new ImageIcon("C:\\Users\\aphommaline2017\\Desktop\\projet\\BonProjet\\Clinique-Veterinaire\\resources\\vet\\basDePage2.png"));
+			label.setBounds(10, 476, 1555, 361);
+		}
+		return label;
+	}
+	private JLabel getLblNewLabel() {
+		if (lblNewLabel == null) {
+			lblNewLabel = new JLabel("");
+			lblNewLabel.setVerticalAlignment(SwingConstants.TOP);
+			lblNewLabel.setIcon(new ImageIcon("C:\\Users\\aphommaline2017\\Desktop\\projet\\BonProjet\\Clinique-Veterinaire\\resources\\vet\\CroixAnimaux.png"));
+			lblNewLabel.setBounds(688, 289, 225, 187);
+		}
+		return lblNewLabel;
+	}
 }

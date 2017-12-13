@@ -220,12 +220,12 @@ public class EcranAgenda extends JFrame {
 			dateChooser = new JDateChooser(new Date());
 			//dateChooser.setDate(new Date());
 			dateChooser.addPropertyChangeListener(new PropertyChangeListener() {
-				@Override
+			@Override
 				public void propertyChange(PropertyChangeEvent evt) {
-					Date date = dateChooser.getDate();
-					System.out.println("date: " + date);
+//					Date date = dateChooser.getDate();
+//					System.out.println("date: " + date);
 					mettreAJour();
-
+//
 				}
 			});
 
