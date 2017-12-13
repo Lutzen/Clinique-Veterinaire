@@ -20,6 +20,8 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
+import java.awt.event.WindowEvent;
+import java.awt.event.WindowListener;
 import java.awt.Cursor;
 import java.awt.Dimension;
 import java.awt.Font;
@@ -46,7 +48,6 @@ public class EcranConnexion extends JFrame {
 		ecranPrincipal = ecran;
 		setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		setTitle("Connexion");
-		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		getContentPane().setLayout(null);
 		getContentPane().add(getTxtNom());
 		getContentPane().add(getTxtMotDePasse());
@@ -54,7 +55,58 @@ public class EcranConnexion extends JFrame {
 		getContentPane().add(getLblMotDePasse());
 		getContentPane().add(getBtnValider());
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		
+//		addWindowListener(new WindowListener() {
+//			
+//			@Override
+//			public void windowOpened(WindowEvent e) {
+//				// TODO Auto-generated method stub
+//				
+//			}
+//			
+//			@Override
+//			public void windowIconified(WindowEvent e) {
+//				// TODO Auto-generated method stub
+//				
+//			}
+//			
+//			@Override
+//			public void windowDeiconified(WindowEvent e) {
+//				
+//			}
+//		
+//			
+//			@Override
+//			public void windowClosing(WindowEvent e) {
+//				int result = JOptionPane.showConfirmDialog(null,"Voulez-vous vraiment quitter ce super programme ?");
+//				if (result == 0) {
+//					setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+//				}
+//				
+//			}
+//
+//			@Override
+//			public void windowActivated(WindowEvent e) {
+//				// TODO Auto-generated method stub
+//				
+//			}
+//
+//			@Override
+//			public void windowClosed(WindowEvent e) {
+//				// TODO Auto-generated method stub
+//				
+//			}
+//
+//			@Override
+//			public void windowDeactivated(WindowEvent e) {
+//				// TODO Auto-generated method stub
+//				
+//			}
+//	
+//		});
 	}
+
+
 
 	private JTextField getTxtNom() {
 		if (txtNom == null) {
