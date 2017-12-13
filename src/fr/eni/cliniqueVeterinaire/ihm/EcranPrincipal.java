@@ -112,8 +112,8 @@ public class EcranPrincipal {
 					EcranConnexion();
 				}
 			});
-			btnDeco.setFont(new Font("SansSerif", Font.BOLD, 20));
-			btnDeco.setBounds(1315, 12, 263, 125);
+			btnDeco.setFont(new Font("SansSerif", Font.BOLD, 28));
+			btnDeco.setBounds(1315, 12, 263, 99);
 		}
 		return btnDeco;
 	}
@@ -133,8 +133,8 @@ public class EcranPrincipal {
 					});
 				}
 			});
-			btnGestionRDV.setFont(new Font("SansSerif", Font.BOLD, 20));
-			btnGestionRDV.setBounds(10, 11, 425, 125);
+			btnGestionRDV.setFont(new Font("SansSerif", Font.BOLD, 28));
+			btnGestionRDV.setBounds(10, 11, 425, 100);
 		}
 		return btnGestionRDV;
 	}
@@ -154,8 +154,8 @@ public class EcranPrincipal {
 					});
 				}
 			});
-			btnAgenda.setFont(new Font("SansSerif", Font.BOLD, 20));
-			btnAgenda.setBounds(445, 11, 425, 125);
+			btnAgenda.setFont(new Font("SansSerif", Font.BOLD, 28));
+			btnAgenda.setBounds(445, 11, 425, 100);
 		}
 		return btnAgenda;
 	}
@@ -175,8 +175,8 @@ public class EcranPrincipal {
 					});
 				}
 			});
-			btnGestionPersonnel.setFont(new Font("SansSerif", Font.BOLD, 20));
-			btnGestionPersonnel.setBounds(880, 11, 425, 125);
+			btnGestionPersonnel.setFont(new Font("SansSerif", Font.BOLD, 28));
+			btnGestionPersonnel.setBounds(880, 11, 425, 100);
 		}
 		return btnGestionPersonnel;
 	}

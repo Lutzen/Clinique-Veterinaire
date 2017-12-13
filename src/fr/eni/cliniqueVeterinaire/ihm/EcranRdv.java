@@ -162,7 +162,7 @@ public class EcranRdv extends JFrame {
 						public void run() {
 							EcranClient frame;
 							try {
-								frame = new EcranClient();
+								frame = new EcranClient(EcranRdv.this);
 								frame.setVisible(true);
 							} catch (IHMException e) {
 								e.printStackTrace();
@@ -347,10 +347,11 @@ public class EcranRdv extends JFrame {
 						if (table.getSelectedRow() == -1)
 							JOptionPane.showMessageDialog(null, "Selectionnez un Rdv");
 						else {
-							int result = JOptionPane.showConfirmDialog(null,"Voulez-vous vraiment supprimer ?");
+							int result = JOptionPane.showConfirmDialog(null, "Voulez-vous vraiment supprimer ?");
 							if (result == 0) {
 								JOptionPane.showMessageDialog(null, "Rdv supprimé avec succès");
-								Personnel personne = personnelManager.getPersonnelByNom((String) cBVetos.getSelectedItem());
+								Personnel personne = personnelManager
+										.getPersonnelByNom((String) cBVetos.getSelectedItem());
 								String heure = (String) table.getValueAt(table.getSelectedRow(), 0);
 								String dateText = dateToString(dateChooser.getDate()) + " " + heure + ":00";
 								Date dateRdv = stringToDate(dateText);
@@ -367,7 +368,7 @@ public class EcranRdv extends JFrame {
 								mettreAJour();
 							} else {
 							}
-							
+
 						}
 					} catch (Exception e1) {
 						// TODO Auto-generated catch block
@@ -520,28 +521,33 @@ public class EcranRdv extends JFrame {
 
 	private JComboBox getCBClients() {
 		if (cBClients == null) {
-
-			try {
-				cBClients = new JComboBox();
-				List<Client> clients = clientManager.getClientList();
-				cBClients = new JComboBox(new String[] {});
-				for (int i = 0; i < clients.size(); i++) {
-					cBClients.addItem(clients.get(i).getNomClient());
-					cBClients.addItemListener(new ItemListener() {
-						public void itemStateChanged(ItemEvent e) {
-							refreshCBAnimaux();
-						}
-					});
-
+			cBClients = new JComboBox(new String[] {});
+			RefreshCBClients();
+			cBClients.addItemListener(new ItemListener() {
+				public void itemStateChanged(ItemEvent e) {
+					if (cBClients.getSelectedItem() != null)
+						refreshCBAnimaux();
 				}
-
-			} catch (BLLException e) {
-
-				e.printStackTrace();
-			}
+			});
 		}
 		cBClients.setBounds(6, 33, 150, 26);
 		return cBClients;
+	}
+
+	public void RefreshCBClients() {
+		List<Client> clients;
+		try {
+
+			cBClients.removeAllItems();
+			clients = clientManager.getClientList();
+			for (int i = 0; i < clients.size(); i++)
+				cBClients.addItem(clients.get(i).getNomClient());
+
+		} catch (BLLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
 	}
 
 }

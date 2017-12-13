@@ -53,8 +53,10 @@ public class EcranClient extends JFrame {
 	private JLabel lblAnimaux;
 	private JLabel lblCodeClient;
 	private JLabel lblClient;
+	private EcranRdv ecranRdv;
 
-	public EcranClient() throws IHMException {
+	public EcranClient(EcranRdv ecran) throws IHMException {
+		ecranRdv = ecran;
 		getContentPane().setFont(new Font("Tahoma", Font.PLAIN, 12));
 		setTitle("CLIENTS");
 		setBounds(500, 300, 853, 407);
@@ -140,15 +142,29 @@ public class EcranClient extends JFrame {
 			btnAjouterClient.setIcon(new ImageIcon("resources\\vet\\addAnimal32.png"));
 			btnAjouterClient.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent arg0) {
-
-					SwingUtilities.invokeLater(new Runnable() {
-
-						@Override
-						public void run() {
-							EcranAjoutClient frame = new EcranAjoutClient(EcranClient.this);
-							frame.setVisible(true);
+					try {
+						if (txtNom.getText().isEmpty() || txtPrenom.getText().isEmpty()
+								|| txtVille.getText().isEmpty()) {
+							JOptionPane.showMessageDialog(null, "Remplissez tout les champs!");
+						} else {
+							Client client = new Client();
+							client.setAdresse1(txtAdresse1.getText());
+							client.setAdresse2(txtAdresse02.getText());
+							client.setCodePostal(txtCodePostal.getText());
+							client.setNomClient(txtNom.getText());
+							client.setPrenomClient(getTxtPrenom().getText());
+							client.setVille(txtVille.getText());
+							clientManager.addClient(client);
+							JOptionPane.showMessageDialog(null, "Client ajouté avec succès");
+							client = clientManager.getClientByName(client.getNomClient());
+							lblCodeClient.setText(String.valueOf(client.getCodeClient()));
+							ecranRdv.RefreshCBClients();
+							mettreAJour();
 						}
-					});
+
+					} catch (Exception e1) {
+						e1.printStackTrace();
+					}
 				}
 
 			});
@@ -175,6 +191,8 @@ public class EcranClient extends JFrame {
 								JOptionPane.showMessageDialog(null, "Client supprimé avec succès");
 								Client client = new Client();
 								recupClient(client);
+								ecranRdv.RefreshCBClients();
+								mettreAJour();
 							} else {
 							}
 
@@ -201,7 +219,8 @@ public class EcranClient extends JFrame {
 			btnEditerClient.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
 					try {
-						if (lblCodeClient.getText() != "" & lblCodeClient.getText() != "0") {
+						if (lblCodeClient.getText() != "" & lblCodeClient.getText() != "0" & txtNom.getText().isEmpty()
+								& txtPrenom.getText().isEmpty() & txtVille.getText().isEmpty()) {
 							Client client = new Client();
 							client.setCodeClient(Integer.parseInt(lblCodeClient.getText()));
 							client.setNomClient(txtNom.getText());
@@ -509,8 +528,8 @@ public class EcranClient extends JFrame {
 
 	private JLabel getLblCodeClient() {
 		if (lblCodeClient == null) {
-			lblCodeClient = new JLabel("");
-			lblCodeClient.setBounds(88, 51, 95, 20);
+			lblCodeClient = new JLabel("Nouveau Client");
+			lblCodeClient.setBounds(88, 48, 95, 20);
 		}
 		return lblCodeClient;
 	}
