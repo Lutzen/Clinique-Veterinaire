@@ -55,9 +55,7 @@ public class EcranAnimaux extends JFrame {
 	private Animal animal;
 	private Client client;
 
-	/**
-	 * @wbp.parser.constructor
-	 */
+	
 	public EcranAnimaux(String nomClient, EcranRdv ecran) {
 		this.nomClient = nomClient;
 		ecranRdv = (EcranRdv) ecran;
@@ -98,7 +96,7 @@ public class EcranAnimaux extends JFrame {
 
 	private void initialize() {
 		setTitle("Animaux");
-		setBounds(100, 100, 360, 309);
+		setBounds(850, 300, 360, 309);
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		getContentPane().setLayout(null);
 		getContentPane().add(getBtnAnnuler());

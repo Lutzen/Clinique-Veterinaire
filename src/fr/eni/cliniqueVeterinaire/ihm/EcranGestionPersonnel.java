@@ -30,7 +30,7 @@ public class EcranGestionPersonnel extends JFrame {
 		setResizable(false);
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		setTitle("Gestion du Personnel");
-		setBounds(100, 100, 541, 415);
+		setBounds(500, 200, 541, 415);
 		getContentPane().setLayout(null);
 		getContentPane().add(getBtnAjouter());
 		getContentPane().add(getBtnSuppr());

@@ -75,7 +75,7 @@ public class EcranRdv extends JFrame {
 	public EcranRdv() {
 
 		setTitle("Prise de rendez-vous");
-		setBounds(100, 100, 596, 534);
+		setBounds(450, 200, 596, 534);
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		getContentPane().setLayout(null);
 		getContentPane().add(getLblPour());

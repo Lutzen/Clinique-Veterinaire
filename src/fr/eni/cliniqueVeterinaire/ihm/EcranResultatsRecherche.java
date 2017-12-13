@@ -34,7 +34,7 @@ public class EcranResultatsRecherche extends JFrame {
 	public EcranResultatsRecherche(EcranClient ecranClient) throws IHMException {
 		this.ecranClient = ecranClient;
 		setTitle("Resultats de la recherche");
-		setBounds(100, 100, 475, 380);
+		setBounds(700, 300, 475, 380);
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		getContentPane().setLayout(null);
 		getContentPane().add(getTxtRechercher());

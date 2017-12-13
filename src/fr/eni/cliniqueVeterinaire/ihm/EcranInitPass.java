@@ -33,7 +33,7 @@ public class EcranInitPass extends JFrame{
 	public EcranInitPass(Personnel personnel) {
 		personne = personnel;
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-		setBounds(100, 100, 210, 169);
+		setBounds(650, 250, 210, 169);
 		getContentPane().setLayout(null);
 		getContentPane().add(getLblNouveauMotDe());
 		getContentPane().add(getTxtNewPass());

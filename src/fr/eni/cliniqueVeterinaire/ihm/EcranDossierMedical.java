@@ -68,7 +68,7 @@ public class EcranDossierMedical extends JFrame {
 		getContentPane().setForeground(new Color(255, 255, 255));
 		this.client = clientTemp;
 		setTitle("Dossier Medical");
-		setBounds(100, 100, 741, 482);
+		setBounds(500, 200, 741, 482);
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		getContentPane().setLayout(null);
 		getContentPane().add(getBtnValider());

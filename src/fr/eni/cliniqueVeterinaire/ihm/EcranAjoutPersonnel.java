@@ -17,6 +17,7 @@ import javax.swing.JComboBox;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import java.awt.Font;
+import java.awt.Rectangle;
 
 
 
@@ -39,9 +40,10 @@ public class EcranAjoutPersonnel extends JFrame {
 	 * Create the application.
 	 */
 	public EcranAjoutPersonnel(EcranGestionPersonnel ecranGestion) {
+		
 		setResizable(false);
 		setTitle("Ajout d'un employé");
-		setBounds(100, 100, 263, 231);
+		setBounds(600, 300, 263, 231);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		getContentPane().setLayout(null);
 		getContentPane().add(getLblNom());
@@ -120,6 +122,9 @@ public class EcranAjoutPersonnel extends JFrame {
 			btnValider.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
 					try {
+						if(txtNom.getText().isEmpty() || txtPrenom.getText().isEmpty() || txtMdp.getText().isEmpty())
+							JOptionPane.showMessageDialog(null, "Remplissez tout les champs");
+						else {
 					Personnel personnel = new Personnel();
 					personnel.setNom(txtNom.getText()+ " " + txtPrenom.getText());
 					personnel.setPass(txtMdp.getText());
@@ -144,7 +149,7 @@ public class EcranAjoutPersonnel extends JFrame {
 
 					ecranGestion.mettreAJour();
 					
-					dispose();
+					dispose();}
 					} catch (BLLException e1) {
 						// TODO Auto-generated catch block
 						e1.printStackTrace();

@@ -61,7 +61,7 @@ public class EcranClient extends JFrame {
 	public EcranClient() throws IHMException {
 		getContentPane().setFont(new Font("Tahoma", Font.PLAIN, 12));
 		setTitle("CLIENTS");
-		setBounds(100, 100, 853, 498);
+		setBounds(500, 300, 853, 498);
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		getContentPane().setLayout(null);
 		getContentPane().add(getBtnRechercher());

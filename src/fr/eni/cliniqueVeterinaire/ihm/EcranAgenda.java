@@ -63,7 +63,7 @@ public class EcranAgenda extends JFrame {
 		setResizable(false);
 
 		setTitle("Agenda");
-		setBounds(100, 100, 668, 465);
+		setBounds(500, 200, 668, 465);
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		getContentPane().setLayout(null);
 		getContentPane().add(getLblVeto());

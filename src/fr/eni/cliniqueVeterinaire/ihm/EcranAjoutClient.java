@@ -39,7 +39,7 @@ public class EcranAjoutClient extends JFrame {
 		setResizable(false);
 		ecranClient = ecran;
 		setTitle("Ajout d'un client");
-		setBounds(100, 100, 347, 343);
+		setBounds(700, 300, 347, 343);
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		getContentPane().setLayout(null);
 		getContentPane().add(getBtnAnnuler());
