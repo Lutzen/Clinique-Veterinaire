@@ -184,7 +184,7 @@ public class EcranPrincipal {
 		if (label == null) {
 			label = new JLabel("");
 			label.setVerticalAlignment(SwingConstants.BOTTOM);
-			label.setIcon(new ImageIcon("C:\\Users\\aphommaline2017\\Desktop\\projet\\BonProjet\\Clinique-Veterinaire\\resources\\vet\\basDePage2.png"));
+			label.setIcon(new ImageIcon("resources\\vet\\basDePage2.png"));
 			label.setBounds(10, 476, 1555, 361);
 		}
 		return label;
@@ -193,7 +193,7 @@ public class EcranPrincipal {
 		if (lblNewLabel == null) {
 			lblNewLabel = new JLabel("");
 			lblNewLabel.setVerticalAlignment(SwingConstants.TOP);
-			lblNewLabel.setIcon(new ImageIcon("C:\\Users\\aphommaline2017\\Desktop\\projet\\BonProjet\\Clinique-Veterinaire\\resources\\vet\\CroixAnimaux.png"));
+			lblNewLabel.setIcon(new ImageIcon("resources\\vet\\CroixAnimaux.png"));
 			lblNewLabel.setBounds(688, 289, 225, 187);
 		}
 		return lblNewLabel;
