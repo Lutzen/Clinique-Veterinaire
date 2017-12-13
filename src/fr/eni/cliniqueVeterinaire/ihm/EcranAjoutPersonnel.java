@@ -122,7 +122,7 @@ public class EcranAjoutPersonnel extends JFrame {
 			btnValider.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
 					try {
-						if(txtNom.getText().isEmpty() || txtPrenom.getText().isEmpty() || txtMdp.getText().isEmpty())
+						if(txtNom.getText().isEmpty() || txtMdp.getText().isEmpty())
 							JOptionPane.showMessageDialog(null, "Remplissez tout les champs");
 						else {
 					Personnel personnel = new Personnel();

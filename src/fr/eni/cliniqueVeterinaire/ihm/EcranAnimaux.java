@@ -30,7 +30,6 @@ import java.awt.Font;
 
 public class EcranAnimaux extends JFrame {
 
-	private JFrame frmAnimaux;
 	private JButton btnAnnuler;
 	private JButton btnValider;
 	private JLabel lblClient;
@@ -54,8 +53,13 @@ public class EcranAnimaux extends JFrame {
 	private EcranClient ecranClient;
 	private Animal animal;
 	private Client client;
+	private JLabel lblSexe;
 
 	
+	/**
+	 * @wbp.parser.constructor
+	
+	 */
 	public EcranAnimaux(String nomClient, EcranRdv ecran) {
 		this.nomClient = nomClient;
 		ecranRdv = (EcranRdv) ecran;
@@ -96,7 +100,7 @@ public class EcranAnimaux extends JFrame {
 
 	private void initialize() {
 		setTitle("Animaux");
-		setBounds(850, 300, 360, 309);
+		setBounds(850, 300, 313, 375);
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		getContentPane().setLayout(null);
 		getContentPane().add(getBtnAnnuler());
@@ -114,6 +118,7 @@ public class EcranAnimaux extends JFrame {
 		getContentPane().add(getCBRace());
 		getContentPane().add(getTxtTatouage());
 		getContentPane().add(getLblTatouage());
+		getContentPane().add(getLblSexe());
 	}
 
 	private JButton getBtnAnnuler() {
@@ -124,7 +129,7 @@ public class EcranAnimaux extends JFrame {
 					dispose();
 				}
 			});
-			btnAnnuler.setBounds(246, 229, 89, 30);
+			btnAnnuler.setBounds(198, 300, 89, 30);
 		}
 		return btnAnnuler;
 	}
@@ -149,8 +154,10 @@ public class EcranAnimaux extends JFrame {
 							animal.setRace((String) cBRace.getSelectedItem());
 							if (cBSexe.getSelectedItem() == "Mâle")
 								animal.setSexe("M");
-							else
+							if (cBSexe.getSelectedItem() == "Femelle")
 								animal.setSexe("F");
+							else
+								animal.setSexe("H");
 
 							if (animal.getCodeAnimal() == 0) {
 								JOptionPane.showMessageDialog(null, "Animal ajouté avec succès");
@@ -175,7 +182,7 @@ public class EcranAnimaux extends JFrame {
 					}
 				}
 			});
-			btnValider.setBounds(149, 229, 89, 30);
+			btnValider.setBounds(97, 300, 89, 30);
 		}
 		return btnValider;
 	}
@@ -202,7 +209,7 @@ public class EcranAnimaux extends JFrame {
 	private JTextField getTxtNom() {
 		if (txtNom == null) {
 			txtNom = new JTextField();
-			txtNom.setBounds(87, 61, 167, 30);
+			txtNom.setBounds(87, 61, 200, 30);
 			txtNom.setColumns(10);
 		}
 		return txtNom;
@@ -211,7 +218,7 @@ public class EcranAnimaux extends JFrame {
 	private JTextField getTxtCouleur() {
 		if (txtCouleur == null) {
 			txtCouleur = new JTextField();
-			txtCouleur.setBounds(87, 92, 167, 30);
+			txtCouleur.setBounds(87, 92, 200, 30);
 			txtCouleur.setColumns(10);
 		}
 		return txtCouleur;
@@ -237,8 +244,8 @@ public class EcranAnimaux extends JFrame {
 
 	private JComboBox getCBSexe() {
 		if (cBSexe == null) {
-			cBSexe = new JComboBox(new String[] { "Mâle", "Femelle" });
-			cBSexe.setBounds(264, 61, 71, 30);
+			cBSexe = new JComboBox(new String[] { "Mâle", "Femelle","Hermaphrodite" });
+			cBSexe.setBounds(87, 247, 200, 30);
 		}
 		return cBSexe;
 	}
@@ -247,7 +254,7 @@ public class EcranAnimaux extends JFrame {
 		if (lblEspce == null) {
 			lblEspce = new JLabel("Esp\u00E8ce");
 			lblEspce.setFont(new Font("SansSerif", Font.BOLD, 12));
-			lblEspce.setBounds(10, 162, 46, 14);
+			lblEspce.setBounds(10, 171, 46, 14);
 		}
 		return lblEspce;
 	}
@@ -259,8 +266,8 @@ public class EcranAnimaux extends JFrame {
 				races = racesManager.getRacesList();
 
 				cBEspece = new JComboBox(new String[] {});
-				cBEspece.setLocation(87, 154);
-				cBEspece.setSize(167, 30);
+				cBEspece.setBounds(87, 163, 200, 30);
+
 				for (int i = 0; i < races.size(); i++) {
 					cBEspece.addItem(races.get(i).getEspece());
 					cBEspece.addItemListener(new ItemListener() {
@@ -270,7 +277,6 @@ public class EcranAnimaux extends JFrame {
 
 					});
 
-					cBEspece.setBounds(87, 154, 167, 20);
 				}
 			} catch (BLLException e1) {
 				e1.printStackTrace();
@@ -283,7 +289,7 @@ public class EcranAnimaux extends JFrame {
 		if (lblRace == null) {
 			lblRace = new JLabel("Race");
 			lblRace.setFont(new Font("SansSerif", Font.BOLD, 12));
-			lblRace.setBounds(10, 194, 46, 14);
+			lblRace.setBounds(10, 213, 46, 14);
 		}
 		return lblRace;
 	}
@@ -291,7 +297,7 @@ public class EcranAnimaux extends JFrame {
 	private JComboBox getCBRace() {
 		if (cBRace == null) {
 			cBRace = new JComboBox();
-			cBRace.setBounds(87, 186, 167, 30);
+			cBRace.setBounds(87, 205, 200, 30);
 			refreshCBRace();
 		}
 		return cBRace;
@@ -315,7 +321,7 @@ public class EcranAnimaux extends JFrame {
 		if (txtTatouage == null) {
 			txtTatouage = new JTextField();
 			txtTatouage.setColumns(10);
-			txtTatouage.setBounds(87, 123, 167, 30);
+			txtTatouage.setBounds(87, 123, 200, 30);
 		}
 		return txtTatouage;
 	}
@@ -328,6 +334,12 @@ public class EcranAnimaux extends JFrame {
 		}
 		return lblTatouage;
 	}
-
-
+	private JLabel getLblSexe() {
+		if (lblSexe == null) {
+			lblSexe = new JLabel("Sexe");
+			lblSexe.setFont(new Font("SansSerif", Font.BOLD, 12));
+			lblSexe.setBounds(10, 254, 65, 16);
+		}
+		return lblSexe;
+	}
 }

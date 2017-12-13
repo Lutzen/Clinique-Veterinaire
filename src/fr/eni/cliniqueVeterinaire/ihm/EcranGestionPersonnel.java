@@ -67,14 +67,20 @@ public class EcranGestionPersonnel extends JFrame {
 
 				public void actionPerformed(ActionEvent arg0) {
 					try {
+
 						if (list.getSelectedRow() == -1)
 							JOptionPane.showMessageDialog(null, "Selectionnez un personnel");
 						else {
-							JOptionPane.showMessageDialog(null, "Personnel supprimé avec succès");
 							String nom = (String) list.getValueAt(list.getSelectedRow(), 0);
 							Personnel personnel = personnelManager.getPersonnelByNom(nom);
-							personnelManager.deletePersonnel(personnel);
-							mettreAJour();
+							int result = JOptionPane.showConfirmDialog(null,
+									"Voulez-vous vraiment archiver " + personnel.getNom());
+							if (result == 0) {
+								JOptionPane.showMessageDialog(null, "Personnel archivé avec succès");
+								personnelManager.deletePersonnel(personnel);
+								mettreAJour();
+							} else {
+							}
 						}
 					} catch (BLLException e) {
 						// TODO Auto-generated catch block
@@ -150,7 +156,7 @@ public class EcranGestionPersonnel extends JFrame {
 		}
 		return modelPersonnel;
 	}
-	
+
 	private JScrollPane getScrollPane() {
 		if (scrollPane == null) {
 			scrollPane = new JScrollPane(list);
