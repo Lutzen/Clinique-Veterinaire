@@ -218,7 +218,7 @@ public class EcranAgenda extends JFrame {
 	private JDateChooser getDateChooser() {
 		if (dateChooser == null) {
 			dateChooser = new JDateChooser(new Date());
-			dateChooser.setDate(new Date());
+			//dateChooser.setDate(new Date());
 			dateChooser.addPropertyChangeListener(new PropertyChangeListener() {
 				@Override
 				public void propertyChange(PropertyChangeEvent evt) {
