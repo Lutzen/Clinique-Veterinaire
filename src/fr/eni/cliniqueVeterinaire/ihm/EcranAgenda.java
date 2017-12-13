@@ -57,13 +57,7 @@ public class EcranAgenda extends JFrame {
 	private JDateChooser dateChooser;
 	private JScrollPane scrollPane;
 
-	/**
-	 * Launch the application.
-	 */
 
-	/**
-	 * Create the application.
-	 */
 	public EcranAgenda() {
 	
 		setResizable(false);
