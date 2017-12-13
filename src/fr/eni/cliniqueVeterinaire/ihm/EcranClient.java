@@ -97,7 +97,7 @@ public class EcranClient extends JFrame {
 		if (btnRechercher == null) {
 			btnRechercher = new JButton("rechercher");
 			btnRechercher.setToolTipText("");
-			btnRechercher.setIcon(new ImageIcon("C:\\Users\\aphommaline2017\\Desktop\\projet\\BonProjet\\Clinique-Veterinaire\\resources\\vet\\searchClient32.png"));
+			btnRechercher.setIcon(new ImageIcon("resources\\vet\\searchClient32.png"));
 			btnRechercher.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
 					SwingUtilities.invokeLater(new Runnable() {
@@ -141,7 +141,7 @@ public class EcranClient extends JFrame {
 	private JButton getBtnAjouterClient() {
 		if (btnAjouterClient == null) {
 			btnAjouterClient = new JButton("");
-			btnAjouterClient.setIcon(new ImageIcon("C:\\Users\\aphommaline2017\\Desktop\\projet\\BonProjet\\Clinique-Veterinaire\\resources\\vet\\addAnimal32.png"));
+			btnAjouterClient.setIcon(new ImageIcon("resources\\vet\\addAnimal32.png"));
 			btnAjouterClient.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent arg0) {
 
@@ -164,7 +164,7 @@ public class EcranClient extends JFrame {
 	private JButton getBtnSupprimerClient() {
 		if (btnSupprimerClient == null) {
 			btnSupprimerClient = new JButton("");
-			btnSupprimerClient.setIcon(new ImageIcon("C:\\Users\\aphommaline2017\\Desktop\\projet\\BonProjet\\Clinique-Veterinaire\\resources\\vet\\delete32.png"));
+			btnSupprimerClient.setIcon(new ImageIcon("resources\\vet\\delete32.png"));
 			btnSupprimerClient.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
 					try {
@@ -191,7 +191,7 @@ public class EcranClient extends JFrame {
 	private JButton getBtnEditerClient() {
 		if (btnEditerClient == null) {
 			btnEditerClient = new JButton("");
-			btnEditerClient.setIcon(new ImageIcon("C:\\Users\\aphommaline2017\\Desktop\\projet\\BonProjet\\Clinique-Veterinaire\\resources\\vet\\edit32.png"));
+			btnEditerClient.setIcon(new ImageIcon("resources\\vet\\edit32.png"));
 			btnEditerClient.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
 					try {
@@ -377,7 +377,7 @@ public class EcranClient extends JFrame {
 	private JButton getBtnSupprimerAnimal() {
 		if (btnSupprimerAnimal == null) {
 			btnSupprimerAnimal = new JButton("");
-			btnSupprimerAnimal.setIcon(new ImageIcon("C:\\Users\\aphommaline2017\\Desktop\\projet\\BonProjet\\Clinique-Veterinaire\\resources\\vet\\delete32.png"));
+			btnSupprimerAnimal.setIcon(new ImageIcon("resources\\vet\\delete32.png"));
 			btnSupprimerAnimal.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
 					try {
@@ -406,7 +406,7 @@ public class EcranClient extends JFrame {
 	private JButton getBtnAjouterAnimal() {
 		if (btnAjouterAnimal == null) {
 			btnAjouterAnimal = new JButton("");
-			btnAjouterAnimal.setIcon(new ImageIcon("C:\\Users\\aphommaline2017\\Desktop\\projet\\BonProjet\\Clinique-Veterinaire\\resources\\vet\\addAnimal32.png"));
+			btnAjouterAnimal.setIcon(new ImageIcon("resources\\vet\\addAnimal32.png"));
 			btnAjouterAnimal.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent arg0) {
 

@@ -211,9 +211,8 @@ public class EcranRdv extends JFrame {
 					});
 				}
 			});
-			// btnAjoutClient.setIcon(new
-			// ImageIcon("C:\\Users\\aphommaline2017\\Desktop\\projet\\BonProjet\\Clinique-Veterinaire\\resources\\AddButton.png"));
-			btnAjoutClient.setIcon(new ImageIcon("C:\\Users\\aphommaline2017\\Desktop\\projet\\BonProjet\\Clinique-Veterinaire\\resources\\vet\\addAnimal32.png"));
+			
+			btnAjoutClient.setIcon(new ImageIcon("resources\\vet\\addAnimal32.png"));
 			btnAjoutClient.setBounds(171, 36, 40, 40);
 		}
 		return btnAjoutClient;
@@ -236,7 +235,7 @@ public class EcranRdv extends JFrame {
 					});
 				}
 			});
-			btnAjoutAnimal.setIcon(new ImageIcon("C:\\Users\\aphommaline2017\\Desktop\\projet\\BonProjet\\Clinique-Veterinaire\\resources\\vet\\addAnimal32.png"));
+			btnAjoutAnimal.setIcon(new ImageIcon("resources\\vet\\addAnimal32.png"));
 
 			btnAjoutAnimal.setBounds(171, 82, 40, 40);
 		}
