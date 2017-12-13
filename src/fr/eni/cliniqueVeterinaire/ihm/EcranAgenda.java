@@ -122,7 +122,8 @@ public class EcranAgenda extends JFrame {
 
 	private JButton getBtnDossierMedical() {
 		if (btnDossierMedical == null) {
-			btnDossierMedical = new JButton("Dossier Medical");
+			btnDossierMedical = new JButton("Dossier m\u00E9dical");
+			btnDossierMedical.setFont(new Font("SansSerif", Font.BOLD, 12));
 			btnDossierMedical.addActionListener(new ActionListener() {
 				@Override
 				public void actionPerformed(ActionEvent e) {
@@ -155,8 +156,8 @@ public class EcranAgenda extends JFrame {
 			});
 
 			btnDossierMedical.setIcon(
-					new ImageIcon(EcranAgenda.class.getResource("/javax/swing/plaf/metal/icons/ocean/directory.gif")));
-			btnDossierMedical.setBounds(499, 393, 151, 30);
+					new ImageIcon("C:\\Users\\aphommaline2017\\Desktop\\projet\\BonProjet\\Clinique-Veterinaire\\resources\\vet\\medicalHistory32.png"));
+			btnDossierMedical.setBounds(476, 385, 164, 40);
 		}
 		return btnDossierMedical;
 	}

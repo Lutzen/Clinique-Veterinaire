@@ -213,7 +213,7 @@ public class EcranRdv extends JFrame {
 			});
 			
 			btnAjoutClient.setIcon(new ImageIcon("resources\\vet\\addAnimal32.png"));
-			btnAjoutClient.setBounds(171, 36, 40, 40);
+			btnAjoutClient.setBounds(173, 36, 40, 40);
 		}
 		return btnAjoutClient;
 	}
@@ -237,7 +237,7 @@ public class EcranRdv extends JFrame {
 			});
 			btnAjoutAnimal.setIcon(new ImageIcon("resources\\vet\\addAnimal32.png"));
 
-			btnAjoutAnimal.setBounds(171, 82, 40, 40);
+			btnAjoutAnimal.setBounds(173, 86, 40, 40);
 		}
 		return btnAjoutAnimal;
 	}

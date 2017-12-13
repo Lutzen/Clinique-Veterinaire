@@ -351,7 +351,7 @@ public class EcranClient extends JFrame {
 	private JButton getBtnEditerAnimal() {
 		if (btnEditerAnimal == null) {
 			btnEditerAnimal = new JButton("");
-			btnEditerAnimal.setIcon(new ImageIcon("C:\\Users\\aphommaline2017\\Desktop\\projet\\BonProjet\\Clinique-Veterinaire\\resources\\vet\\edit32.png"));
+			btnEditerAnimal.setIcon(new ImageIcon("resources\\vet\\edit32.png"));
 			btnEditerAnimal.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
 					SwingUtilities.invokeLater(new Runnable() {
