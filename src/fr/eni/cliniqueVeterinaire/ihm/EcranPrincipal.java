@@ -184,7 +184,7 @@ public class EcranPrincipal {
 		if (label == null) {
 			label = new JLabel("");
 			label.setVerticalAlignment(SwingConstants.BOTTOM);
-			label.setIcon(new ImageIcon("C:\\Users\\aphommaline2017\\Desktop\\projet\\BonProjet\\Clinique-Veterinaire\\resources\\vet\\basDePage3.png"));
+			label.setIcon(new ImageIcon("resources\\vet\\basDePage3.png"));
 			label.setBounds(10, 476, 1555, 361);
 		}
 		return label;
