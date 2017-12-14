@@ -135,7 +135,6 @@ public class EcranRdv extends JFrame {
 				cBAnimaux.addItem(animaux.get(i).getNomAnimal());
 			}
 		} catch (BLLException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 

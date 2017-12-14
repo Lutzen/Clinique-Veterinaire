@@ -137,7 +137,7 @@ public class EcranAgenda extends JFrame {
 			});
 
 			btnDossierMedical.setIcon(new ImageIcon(
-					"C:\\Users\\aphommaline2017\\Desktop\\projet\\BonProjet\\Clinique-Veterinaire\\resources\\vet\\medicalHistory32.png"));
+					"resources\\vet\\medicalHistory32.png"));
 			btnDossierMedical.setBounds(476, 385, 164, 40);
 		}
 		return btnDossierMedical;
