@@ -1,6 +1,6 @@
 package fr.eni.cliniqueVeterinaire.ihm;
 
-import java.awt.EventQueue;
+
 import java.util.Date;
 import java.util.List;
 
@@ -11,8 +11,7 @@ import javax.swing.JScrollPane;
 import javax.swing.JComboBox;
 import javax.swing.JButton;
 import javax.swing.ImageIcon;
-import javax.swing.JFormattedTextField;
-import javax.swing.JTextArea;
+
 import javax.swing.SwingUtilities;
 
 import fr.eni.cliniqueVeterinaire.bll.AnimalManager;
@@ -38,11 +37,6 @@ import java.awt.event.ActionEvent;
 import com.toedter.calendar.JDateChooser;
 import java.awt.Font;
 import javax.swing.JPanel;
-import javax.swing.border.LineBorder;
-import java.awt.Color;
-import javax.swing.border.SoftBevelBorder;
-import javax.swing.border.BevelBorder;
-import javax.swing.border.TitledBorder;
 import java.awt.SystemColor;
 
 public class EcranRdv extends JFrame {

@@ -28,8 +28,6 @@ public class RdvDAOJdbcImpl implements RdvDAO {
 	private void FillStatementFromRdv(PreparedStatement statement, Rdv rdv) throws SQLException {
 		statement.setLong(1, rdv.getCodeVeto());
 		statement.setTimestamp (2,new java.sql.Timestamp(rdv.getDateRdv().getTime()));
-		//java.sql.Timestamp  sqlDate = new java.sql.Timestamp(rdv.getDateRdv().getTime());
-		//statement.setTimestamp(2, sqlDate);
 		statement.setLong(3, rdv.getCodeAnimal());
 
 

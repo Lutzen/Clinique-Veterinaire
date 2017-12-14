@@ -14,7 +14,7 @@ public class IHMException extends Exception {
 		super(message, exception);
 	}
 
-	//MÃ©thodes
+	//Méthodes
 	@Override
 	public String getMessage() {
 		StringBuffer sb = new StringBuffer("Couche IHM - ");

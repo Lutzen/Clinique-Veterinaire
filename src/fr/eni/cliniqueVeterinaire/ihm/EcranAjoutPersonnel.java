@@ -1,6 +1,6 @@
 package fr.eni.cliniqueVeterinaire.ihm;
 
-import java.awt.EventQueue;
+
 
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -10,7 +10,7 @@ import fr.eni.cliniqueVeterinaire.bll.BLLException;
 import fr.eni.cliniqueVeterinaire.bll.PersonnelManager;
 import fr.eni.cliniqueVeterinaire.bo.Personnel;
 
-import javax.swing.JList;
+
 import javax.swing.JOptionPane;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
@@ -18,7 +18,7 @@ import java.awt.event.ActionListener;
 import java.awt.event.KeyAdapter;
 import java.awt.event.ActionEvent;
 import java.awt.Font;
-import java.awt.Rectangle;
+
 
 
 

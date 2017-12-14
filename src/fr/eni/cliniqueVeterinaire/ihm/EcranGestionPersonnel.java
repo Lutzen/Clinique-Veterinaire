@@ -83,7 +83,7 @@ public class EcranGestionPersonnel extends JFrame {
 							}
 						}
 					} catch (BLLException e) {
-						// TODO Auto-generated catch block
+						
 						e.printStackTrace();
 					}
 
@@ -117,7 +117,7 @@ public class EcranGestionPersonnel extends JFrame {
 						}
 
 					} catch (BLLException e1) {
-						// TODO Auto-generated catch block
+						
 						e1.printStackTrace();
 					}
 				}
@@ -132,7 +132,7 @@ public class EcranGestionPersonnel extends JFrame {
 	}
 
 	public JTable getList() {
-		// if (list == null) {
+
 
 		try {
 
@@ -142,7 +142,7 @@ public class EcranGestionPersonnel extends JFrame {
 		} catch (Exception e) {
 		}
 
-		// }
+		
 		return list;
 	}
 

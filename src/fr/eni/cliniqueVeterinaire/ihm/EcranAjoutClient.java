@@ -1,7 +1,5 @@
 package fr.eni.cliniqueVeterinaire.ihm;
 
-import java.awt.EventQueue;
-
 import javax.swing.JFrame;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
@@ -9,7 +7,6 @@ import java.awt.event.KeyAdapter;
 import java.awt.event.ActionEvent;
 import javax.swing.JTextField;
 
-import fr.eni.cliniqueVeterinaire.bll.BLLException;
 import fr.eni.cliniqueVeterinaire.bll.ClientManager;
 import fr.eni.cliniqueVeterinaire.bo.Client;
 

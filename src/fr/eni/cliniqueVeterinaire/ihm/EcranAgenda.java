@@ -1,13 +1,8 @@
 package fr.eni.cliniqueVeterinaire.ihm;
 
-import java.awt.EventQueue;
-
 import javax.swing.JFrame;
 import javax.swing.JLabel;
-import javax.swing.JList;
 import javax.swing.JOptionPane;
-import javax.swing.JFormattedTextField;
-import javax.swing.JTextArea;
 import javax.swing.JButton;
 import javax.swing.ImageIcon;
 import java.awt.event.ActionListener;
@@ -15,7 +10,6 @@ import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
-import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
@@ -23,7 +17,6 @@ import java.awt.event.ActionEvent;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.JComboBox;
-import javax.swing.border.BevelBorder;
 
 import fr.eni.cliniqueVeterinaire.bll.BLLException;
 import fr.eni.cliniqueVeterinaire.bll.ClientManager;
@@ -32,12 +25,7 @@ import fr.eni.cliniqueVeterinaire.bll.RdvManager;
 import fr.eni.cliniqueVeterinaire.bo.Client;
 import fr.eni.cliniqueVeterinaire.bo.Personnel;
 
-import javax.swing.ScrollPaneConstants;
 import javax.swing.SwingUtilities;
-import javax.swing.UIManager;
-import javax.swing.UnsupportedLookAndFeelException;
-
-import com.toedter.calendar.JCalendar;
 import com.toedter.calendar.JDateChooser;
 import java.awt.Font;
 
@@ -218,14 +206,10 @@ public class EcranAgenda extends JFrame {
 	private JDateChooser getDateChooser() {
 		if (dateChooser == null) {
 			dateChooser = new JDateChooser(new Date());
-			//dateChooser.setDate(new Date());
 			dateChooser.addPropertyChangeListener(new PropertyChangeListener() {
 			@Override
 				public void propertyChange(PropertyChangeEvent evt) {
-//					Date date = dateChooser.getDate();
-//					System.out.println("date: " + date);
 					mettreAJour();
-//
 				}
 			});
 

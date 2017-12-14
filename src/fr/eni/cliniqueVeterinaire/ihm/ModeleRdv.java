@@ -75,7 +75,7 @@ public class ModeleRdv extends AbstractTableModel{
 			return result;
 
 		} catch (BLLException e) {
-			// TODO Auto-generated catch block
+			
 			e.printStackTrace();
 		}
 	
