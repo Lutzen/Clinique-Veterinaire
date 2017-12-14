@@ -287,6 +287,7 @@ public class EcranRdv extends JFrame {
 	private JButton getBtnValider() {
 		if (btnValider == null) {
 			btnValider = new JButton("Valider");
+			btnValider.setToolTipText("Cr\u00E9er le rdv");
 
 			btnValider.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
@@ -344,6 +345,7 @@ public class EcranRdv extends JFrame {
 	private JButton getBtnSupprimer() {
 		if (btnSupprimer == null) {
 			btnSupprimer = new JButton("Supprimer");
+			btnSupprimer.setToolTipText("Supprimer le rdv s\u00E9lectionn\u00E9");
 
 			btnSupprimer.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
