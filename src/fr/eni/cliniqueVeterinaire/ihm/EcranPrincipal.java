@@ -102,6 +102,7 @@ public class EcranPrincipal {
 	private JButton getBtnDeco() {
 		if (btnDeco == null) {
 			btnDeco = new JButton("Deconnexion");
+			btnDeco.setIcon(new ImageIcon("resources\\vet\\deconnexion.png"));
 			btnDeco.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
 					btnGestionPersonnel.setEnabled(false);
@@ -112,7 +113,7 @@ public class EcranPrincipal {
 				}
 			});
 			btnDeco.setFont(new Font("SansSerif", Font.BOLD, 28));
-			btnDeco.setBounds(1315, 12, 263, 99);
+			btnDeco.setBounds(1287, 12, 291, 99);
 		}
 		return btnDeco;
 	}
@@ -120,6 +121,7 @@ public class EcranPrincipal {
 	private JButton getBtnGestionRDV() {
 		if (btnGestionRDV == null) {
 			btnGestionRDV = new JButton("Gestion des RDV");
+			btnGestionRDV.setIcon(new ImageIcon("resources\\vet\\calendarRdv.png"));
 			btnGestionRDV.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent arg0) {
 					SwingUtilities.invokeLater(new Runnable() {
@@ -133,7 +135,7 @@ public class EcranPrincipal {
 				}
 			});
 			btnGestionRDV.setFont(new Font("SansSerif", Font.BOLD, 28));
-			btnGestionRDV.setBounds(10, 11, 425, 100);
+			btnGestionRDV.setBounds(10, 11, 400, 100);
 		}
 		return btnGestionRDV;
 	}
@@ -141,6 +143,7 @@ public class EcranPrincipal {
 	private JButton getBtnAgenda() {
 		if (btnAgenda == null) {
 			btnAgenda = new JButton("Agenda");
+			btnAgenda.setIcon(new ImageIcon("resources\\vet\\calendarAgenda.png"));
 			btnAgenda.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
 					SwingUtilities.invokeLater(new Runnable() {
@@ -154,7 +157,7 @@ public class EcranPrincipal {
 				}
 			});
 			btnAgenda.setFont(new Font("SansSerif", Font.BOLD, 28));
-			btnAgenda.setBounds(445, 11, 425, 100);
+			btnAgenda.setBounds(433, 11, 400, 100);
 		}
 		return btnAgenda;
 	}
@@ -162,6 +165,7 @@ public class EcranPrincipal {
 	private JButton getBtnGestionPersonnel() {
 		if (btnGestionPersonnel == null) {
 			btnGestionPersonnel = new JButton("Gestion du Personnel");
+			btnGestionPersonnel.setIcon(new ImageIcon("resources\\vet\\employees.png"));
 			btnGestionPersonnel.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
 					SwingUtilities.invokeLater(new Runnable() {
@@ -175,7 +179,7 @@ public class EcranPrincipal {
 				}
 			});
 			btnGestionPersonnel.setFont(new Font("SansSerif", Font.BOLD, 28));
-			btnGestionPersonnel.setBounds(880, 11, 425, 100);
+			btnGestionPersonnel.setBounds(858, 11, 400, 100);
 		}
 		return btnGestionPersonnel;
 	}

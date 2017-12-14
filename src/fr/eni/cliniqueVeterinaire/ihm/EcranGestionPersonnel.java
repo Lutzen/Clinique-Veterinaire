@@ -13,6 +13,7 @@ import javax.swing.SwingUtilities;
 
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import javax.swing.ImageIcon;
 
 public class EcranGestionPersonnel extends JFrame {
 
@@ -42,6 +43,7 @@ public class EcranGestionPersonnel extends JFrame {
 	private JButton getBtnAjouter() {
 		if (btnAjouter == null) {
 			btnAjouter = new JButton("Ajouter");
+			btnAjouter.setIcon(new ImageIcon("resources\\vet\\addEmploye.png"));
 			btnAjouter.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
 					SwingUtilities.invokeLater(new Runnable() {
@@ -55,7 +57,7 @@ public class EcranGestionPersonnel extends JFrame {
 
 				}
 			});
-			btnAjouter.setBounds(10, 11, 89, 28);
+			btnAjouter.setBounds(10, 11, 117, 28);
 		}
 		return btnAjouter;
 	}
@@ -63,6 +65,7 @@ public class EcranGestionPersonnel extends JFrame {
 	private JButton getBtnSuppr() {
 		if (btnSuppr == null) {
 			btnSuppr = new JButton("Supprimer");
+			btnSuppr.setIcon(new ImageIcon("resources\\vet\\deleteEmploye.png"));
 			btnSuppr.addActionListener(new ActionListener() {
 
 				public void actionPerformed(ActionEvent arg0) {
@@ -89,7 +92,7 @@ public class EcranGestionPersonnel extends JFrame {
 
 				}
 			});
-			btnSuppr.setBounds(109, 11, 89, 28);
+			btnSuppr.setBounds(139, 11, 117, 28);
 
 		}
 		return btnSuppr;
@@ -97,7 +100,8 @@ public class EcranGestionPersonnel extends JFrame {
 
 	private JButton getBtnReinit() {
 		if (btnReinit == null) {
-			btnReinit = new JButton("Reinitialiser");
+			btnReinit = new JButton(" Reinitialiser");
+			btnReinit.setIcon(new ImageIcon("resources\\vet\\key16.png"));
 			btnReinit.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
 					try {
@@ -122,7 +126,7 @@ public class EcranGestionPersonnel extends JFrame {
 					}
 				}
 			});
-			btnReinit.setBounds(208, 11, 102, 28);
+			btnReinit.setBounds(268, 11, 117, 28);
 		}
 		return btnReinit;
 	}
