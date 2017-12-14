@@ -17,14 +17,11 @@ import java.awt.event.ActionEvent;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.JComboBox;
-
 import fr.eni.cliniqueVeterinaire.bll.BLLException;
 import fr.eni.cliniqueVeterinaire.bll.ClientManager;
 import fr.eni.cliniqueVeterinaire.bll.PersonnelManager;
-import fr.eni.cliniqueVeterinaire.bll.RdvManager;
 import fr.eni.cliniqueVeterinaire.bo.Client;
 import fr.eni.cliniqueVeterinaire.bo.Personnel;
-
 import javax.swing.SwingUtilities;
 import com.toedter.calendar.JDateChooser;
 import java.awt.Font;
@@ -36,18 +33,15 @@ public class EcranAgenda extends JFrame {
 	private JButton btnDossierMedical;
 	private JComboBox comboBoxVeto;
 	private PersonnelManager personnelManager = PersonnelManager.getInstance();
-	private RdvManager rdvManager = RdvManager.getInstance();
 	private ClientManager clientManager = ClientManager.getInstance();
 	private JTable table;
 	private Personnel personnel;
 	private ModeleRdv modeleRdv;
-	private JTable table_1;
 	private JDateChooser dateChooser;
 	private JScrollPane scrollPane;
 
-
 	public EcranAgenda() {
-	
+
 		setResizable(false);
 
 		setTitle("Agenda");
@@ -132,7 +126,6 @@ public class EcranAgenda extends JFrame {
 									EcranDossierMedical frame = new EcranDossierMedical(client, nomAnimal);
 									frame.setVisible(true);
 								} catch (BLLException e) {
-									// TODO Auto-generated catch block
 									e.printStackTrace();
 								}
 
@@ -143,8 +136,8 @@ public class EcranAgenda extends JFrame {
 				}
 			});
 
-			btnDossierMedical.setIcon(
-					new ImageIcon("C:\\Users\\aphommaline2017\\Desktop\\projet\\BonProjet\\Clinique-Veterinaire\\resources\\vet\\medicalHistory32.png"));
+			btnDossierMedical.setIcon(new ImageIcon(
+					"C:\\Users\\aphommaline2017\\Desktop\\projet\\BonProjet\\Clinique-Veterinaire\\resources\\vet\\medicalHistory32.png"));
 			btnDossierMedical.setBounds(476, 385, 164, 40);
 		}
 		return btnDossierMedical;
@@ -185,8 +178,6 @@ public class EcranAgenda extends JFrame {
 				System.out.println(personnel);
 				SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
 				String startDateString = dateFormat.format(new Date());
-				System.out.println(startDateString);
-				// String date2 = "2017-12-12";
 				modeleRdv = new ModeleRdv(personnel.getCodePers(), startDateString);
 			} catch (BLLException e) {
 				e.printStackTrace();
@@ -207,7 +198,7 @@ public class EcranAgenda extends JFrame {
 		if (dateChooser == null) {
 			dateChooser = new JDateChooser(new Date());
 			dateChooser.addPropertyChangeListener(new PropertyChangeListener() {
-			@Override
+				@Override
 				public void propertyChange(PropertyChangeEvent evt) {
 					mettreAJour();
 				}

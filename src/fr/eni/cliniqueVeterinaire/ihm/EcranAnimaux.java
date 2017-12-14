@@ -1,21 +1,14 @@
 package fr.eni.cliniqueVeterinaire.ihm;
 
-import java.awt.EventQueue;
 import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
 import java.awt.event.KeyAdapter;
 import java.util.List;
-
 import javax.swing.JFrame;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
-import javax.swing.JScrollPane;
-import javax.swing.JTable;
 import javax.swing.JTextField;
-
-import com.sun.corba.se.impl.logging.OMGSystemException;
-
 import fr.eni.cliniqueVeterinaire.bll.AnimalManager;
 import fr.eni.cliniqueVeterinaire.bll.BLLException;
 import fr.eni.cliniqueVeterinaire.bll.ClientManager;
@@ -23,7 +16,6 @@ import fr.eni.cliniqueVeterinaire.bll.RacesManager;
 import fr.eni.cliniqueVeterinaire.bo.Animal;
 import fr.eni.cliniqueVeterinaire.bo.Client;
 import fr.eni.cliniqueVeterinaire.bo.Races;
-
 import javax.swing.JComboBox;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
@@ -58,9 +50,7 @@ public class EcranAnimaux extends JFrame {
 
 	
 	
-	/**
-	 * @wbp.parser.constructor
-	 */
+	
 	public EcranAnimaux(String nomClient, EcranRdv ecran) {
 		this.nomClient = nomClient;
 		ecranRdv = (EcranRdv) ecran;
@@ -186,7 +176,6 @@ public class EcranAnimaux extends JFrame {
 								ecranRdv.refreshCBAnimaux();
 							dispose();
 						} catch (Exception e) {
-							// TODO Auto-generated catch block
 							e.printStackTrace();
 						}
 

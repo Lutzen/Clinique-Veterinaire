@@ -1,7 +1,5 @@
 package fr.eni.cliniqueVeterinaire.ihm;
 
-import java.awt.EventQueue;
-
 import javax.swing.JFrame;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
@@ -9,12 +7,10 @@ import java.awt.event.KeyAdapter;
 import java.awt.event.ActionEvent;
 import javax.swing.JTextField;
 import javax.swing.SwingUtilities;
-
 import fr.eni.cliniqueVeterinaire.bll.AnimalManager;
 import fr.eni.cliniqueVeterinaire.bll.BLLException;
 import fr.eni.cliniqueVeterinaire.bll.ClientManager;
 import fr.eni.cliniqueVeterinaire.bo.Client;
-
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JScrollPane;
@@ -187,7 +183,6 @@ public class EcranClient extends JFrame {
 						}
 
 					} catch (Exception e1) {
-						// TODO Auto-generated catch block
 						e1.printStackTrace();
 					}
 				}
@@ -223,7 +218,6 @@ public class EcranClient extends JFrame {
 						}
 
 					} catch (BLLException e1) {
-						// TODO Auto-generated catch block
 						e1.printStackTrace();
 					}
 
