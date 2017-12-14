@@ -6,7 +6,6 @@ import java.util.List;
 
 import fr.eni.cliniqueVeterinaire.bo.Rdv;
 
-//import cliniqueVeterinaire.bo.Article;
 
 public interface RdvDAO {
 

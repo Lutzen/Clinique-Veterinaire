@@ -1,23 +1,17 @@
 package fr.eni.cliniqueVeterinaire.ihm;
 
-import java.awt.EventQueue;
-
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JTextField;
-
-import com.sun.java.swing.plaf.windows.resources.windows;
-
 import fr.eni.cliniqueVeterinaire.bll.BLLException;
 import fr.eni.cliniqueVeterinaire.bll.PersonnelManager;
 import fr.eni.cliniqueVeterinaire.bo.Personnel;
-
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import java.awt.Font;
-import java.awt.Frame;
+
 
 public class EcranInitPass extends JFrame{
 
@@ -68,7 +62,7 @@ public class EcranInitPass extends JFrame{
 						JOptionPane.showMessageDialog(null, "Mot de passe modifié");
 						dispose();
 					} catch (BLLException e1) {
-						// TODO Auto-generated catch block
+						
 						e1.printStackTrace();
 					}
 				}

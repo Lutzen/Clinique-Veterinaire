@@ -219,7 +219,6 @@ private Connection connection = null;
 				throw new DALException("Erreur à la récupération des clients par mot clé"+ nom, e);
 			}
 		}
-		//return null;
 	}
 
 

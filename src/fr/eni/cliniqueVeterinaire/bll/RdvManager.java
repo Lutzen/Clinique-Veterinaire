@@ -72,42 +72,7 @@ public class RdvManager {
 
 		}
 
-//		public void validerArticle(Article a) throws BLLException {
-//			try {
-//			
-//				if (a instanceof Stylo) {
-//					if (empty(((Stylo) a).getCouleur()))
-//						throw new BLLException("Couleur manquante");
-//				}
-//				if (a instanceof Ramette) {
-//					if (((Ramette) a).getGrammage() <= 0)
-//						throw new BLLException("Grammage manquant");
-//				}
-//				if(empty(a.getMarque())) 
-//					throw new BLLException("Marque manquante");
-//				if(empty(a.getDesignation())) 
-//					throw new BLLException("Designation manquante");
-//				if(empty(a.getReference())) 
-//					throw new BLLException("Reference manquante");
-//				if(a.getPrixUnitaire() <= 0) 
-//					throw new BLLException("Prix unitaire manquant");
-//				if(a.getQteStock() <= 0) 
-//					throw new BLLException("Quantite stock manquante");
-//				
-//				
-//			} catch (Exception e) {
-//				throw new BLLException("validerArticle", e);
-//
-//			}
-//
-//		}
 
-	
-		
-		public static boolean empty( String s ) {
-			  // Null-safe, short-circuit evaluation.
-			  return s == null || s.trim().isEmpty();
-			}
 
 	}
 

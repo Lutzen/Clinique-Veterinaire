@@ -6,36 +6,18 @@ import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 import java.awt.event.ActionListener;
-import java.awt.event.ItemEvent;
-import java.awt.event.ItemListener;
 import java.util.List;
 import java.awt.event.ActionEvent;
 import javax.swing.JTextPane;
-import javax.swing.SwingUtilities;
-
 import fr.eni.cliniqueVeterinaire.bll.AnimalManager;
 import fr.eni.cliniqueVeterinaire.bll.BLLException;
 import fr.eni.cliniqueVeterinaire.bll.ClientManager;
-import fr.eni.cliniqueVeterinaire.bll.PersonnelManager;
 import fr.eni.cliniqueVeterinaire.bo.Animal;
 import fr.eni.cliniqueVeterinaire.bo.Client;
-import fr.eni.cliniqueVeterinaire.bo.Personnel;
-
-import javax.swing.JComboBox;
-import javax.swing.border.LineBorder;
 import java.awt.Color;
-import javax.swing.border.SoftBevelBorder;
-import javax.swing.border.BevelBorder;
-import javax.swing.border.TitledBorder;
-import javax.swing.border.EtchedBorder;
-import java.awt.Component;
 import javax.swing.SwingConstants;
-import javax.swing.border.MatteBorder;
-import javax.swing.border.EmptyBorder;
-import javax.swing.UIManager;
-import javax.swing.border.CompoundBorder;
 import java.awt.Font;
-import java.awt.Dimension;
+
 
 public class EcranDossierMedical extends JFrame {
 

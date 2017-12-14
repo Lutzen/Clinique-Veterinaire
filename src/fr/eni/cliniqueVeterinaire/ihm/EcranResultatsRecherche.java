@@ -1,7 +1,6 @@
 package fr.eni.cliniqueVeterinaire.ihm;
 
 import javax.swing.JFrame;
-import javax.swing.JList;
 import javax.swing.JScrollPane;
 import javax.swing.JTextField;
 

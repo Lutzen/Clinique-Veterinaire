@@ -1,6 +1,6 @@
 package fr.eni.cliniqueVeterinaire.ihm;
 
-import java.awt.EventQueue;
+
 import java.util.Date;
 import java.util.List;
 
@@ -11,8 +11,7 @@ import javax.swing.JScrollPane;
 import javax.swing.JComboBox;
 import javax.swing.JButton;
 import javax.swing.ImageIcon;
-import javax.swing.JFormattedTextField;
-import javax.swing.JTextArea;
+
 import javax.swing.SwingUtilities;
 
 import fr.eni.cliniqueVeterinaire.bll.AnimalManager;
@@ -38,11 +37,6 @@ import java.awt.event.ActionEvent;
 import com.toedter.calendar.JDateChooser;
 import java.awt.Font;
 import javax.swing.JPanel;
-import javax.swing.border.LineBorder;
-import java.awt.Color;
-import javax.swing.border.SoftBevelBorder;
-import javax.swing.border.BevelBorder;
-import javax.swing.border.TitledBorder;
 import java.awt.SystemColor;
 
 public class EcranRdv extends JFrame {
@@ -295,37 +289,46 @@ public class EcranRdv extends JFrame {
 
 			btnValider.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
-					String heure = String.valueOf(cBHeures.getSelectedItem() + ":" + cBMinutes.getSelectedItem());
+					String heure;
+					if ((int)cBHeures.getSelectedItem()<10 && 0<(int)cBHeures.getSelectedItem() ) {
+						
+						 heure = "0"+String.valueOf(cBHeures.getSelectedItem() + ":" + cBMinutes.getSelectedItem());
+						
+					}else {
+					 heure = String.valueOf(cBHeures.getSelectedItem() + ":" + cBMinutes.getSelectedItem());
+					}
 					for (int i = 0; i < table.getRowCount(); i++) {
 						if (heure.equals(table.getValueAt(i, 0))) {
 							JOptionPane.showMessageDialog(null, "Selectionnez un autre créneau horaire");
 							return;
+				
 						}
-					}
-					Personnel personne;
-					try {
+							 }
+							Personnel personne;
+							try {
 
-						personne = personnelManager.getPersonnelByNom((String) cBVetos.getSelectedItem());
+								personne = personnelManager.getPersonnelByNom((String) cBVetos.getSelectedItem());
 
-						Client client = clientManager.getClientByName((String) cBClients.getSelectedItem());
-						List<Animal> animaux = animalManager.getAnimalList(client.getCodeClient());
-						for (Animal animalList : animaux) {
-							if (animalList.getNomAnimal().equals((String) cBAnimaux.getSelectedItem()))
-								;
-							animal = animalList;
-						}
-						String dateText = dateToString(dateChooser.getDate()) + " " + heure + ":00";
-						Date dateRdv = stringToDate(dateText);
-						System.out.println(dateRdv);
-						Rdv rdv = new Rdv(personne.getCodePers(), dateRdv, animal.getCodeAnimal());
-						rdvManager.rdvDAO.insert(rdv);
-						mettreAJour();
+								Client client = clientManager.getClientByName((String) cBClients.getSelectedItem());
+								List<Animal> animaux = animalManager.getAnimalList(client.getCodeClient());
+								for (Animal animalList : animaux) {
+									if (animalList.getNomAnimal().equals((String) cBAnimaux.getSelectedItem()))
+										;
+									animal = animalList;
+								}
+								String dateText = dateToString(dateChooser.getDate()) + " " + heure + ":00";
+								Date dateRdv = stringToDate(dateText);
+								System.out.println(dateRdv);
+								Rdv rdv = new Rdv(personne.getCodePers(), dateRdv, animal.getCodeAnimal());
+								rdvManager.rdvDAO.insert(rdv);
+								mettreAJour();
 
-					} catch (Exception e1) {
-						// TODO Auto-generated catch block
-						e1.printStackTrace();
-					}
-
+							} catch (Exception e1) {
+								
+								e1.printStackTrace();
+							}
+						
+					
 				}
 
 			});
@@ -371,7 +374,7 @@ public class EcranRdv extends JFrame {
 
 						}
 					} catch (Exception e1) {
-						// TODO Auto-generated catch block
+						
 						e1.printStackTrace();
 					}
 
@@ -432,7 +435,7 @@ public class EcranRdv extends JFrame {
 	}
 
 	private Date stringToDate(String dateText) throws ParseException {
-		DateFormat dateformat = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
+		DateFormat dateformat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 		Date newDate = dateformat.parse(dateText);
 		return newDate;
 	}
@@ -537,14 +540,13 @@ public class EcranRdv extends JFrame {
 	public void RefreshCBClients() {
 		List<Client> clients;
 		try {
-
 			cBClients.removeAllItems();
 			clients = clientManager.getClientList();
 			for (int i = 0; i < clients.size(); i++)
 				cBClients.addItem(clients.get(i).getNomClient());
 
 		} catch (BLLException e) {
-			// TODO Auto-generated catch block
+			
 			e.printStackTrace();
 		}
 
