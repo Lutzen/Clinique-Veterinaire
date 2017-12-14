@@ -64,8 +64,6 @@ public class EcranClient extends JFrame {
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		getContentPane().setLayout(null);
 		getContentPane().add(getTable());
-		getContentPane().add(getScrollPane());
-		getContentPane().add(getLblAnimaux());
 		getContentPane().add(getPanel());
 		getContentPane().add(getPanel_1());
 
@@ -75,7 +73,7 @@ public class EcranClient extends JFrame {
 		if (btnRechercher == null) {
 			btnRechercher = new JButton("Rechercher");
 			btnRechercher.setBounds(139, 10, 148, 40);
-			btnRechercher.setToolTipText("");
+			btnRechercher.setToolTipText("Chercher parmis les clients existants");
 			btnRechercher.setIcon(new ImageIcon("resources\\vet\\searchClient32.png"));
 			btnRechercher.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
@@ -230,6 +228,7 @@ public class EcranClient extends JFrame {
 	private JButton getBtnAnnuler() {
 		if (btnAnnuler == null) {
 			btnAnnuler = new JButton("Annuler");
+			btnAnnuler.setToolTipText("Revenir aux valeurs initiales");
 			btnAnnuler.setBounds(98, 342, 85, 40);
 			btnAnnuler.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
@@ -542,7 +541,7 @@ public class EcranClient extends JFrame {
 	private JScrollPane getScrollPane() {
 		if (scrollPane == null) {
 			scrollPane = new JScrollPane(table);
-			scrollPane.setBounds(367, 70, 450, 270);
+			scrollPane.setBounds(6, 66, 459, 264);
 		}
 		return scrollPane;
 	}
@@ -550,8 +549,8 @@ public class EcranClient extends JFrame {
 	private JLabel getLblAnimaux() {
 		if (lblAnimaux == null) {
 			lblAnimaux = new JLabel("Animaux");
-			lblAnimaux.setFont(new Font("Andalus", Font.BOLD, 25));
-			lblAnimaux.setBounds(374, 10, 191, 28);
+			lblAnimaux.setBounds(16, 16, 191, 28);
+			lblAnimaux.setFont(new Font("Dialog", Font.BOLD, 22));
 		}
 		return lblAnimaux;
 	}
@@ -567,8 +566,8 @@ public class EcranClient extends JFrame {
 	private JLabel getLblClient() {
 		if (lblClient == null) {
 			lblClient = new JLabel("Client");
-			lblClient.setBounds(25, 16, 102, 27);
-			lblClient.setFont(new Font("Consolas", Font.BOLD, 25));
+			lblClient.setBounds(6, 13, 102, 27);
+			lblClient.setFont(new Font("Dialog", Font.BOLD, 22));
 			lblClient.setBackground(Color.LIGHT_GRAY);
 		}
 		return lblClient;
@@ -604,12 +603,14 @@ public class EcranClient extends JFrame {
 	private JPanel getPanel_1() {
 		if (panel_1 == null) {
 			panel_1 = new JPanel();
-			panel_1.setBackground(new Color(230, 230, 250));
+			panel_1.setBackground(new Color(153, 204, 204));
 			panel_1.setBounds(363, 6, 471, 388);
 			panel_1.setLayout(null);
 			panel_1.add(getBtnEditerAnimal());
 			panel_1.add(getBtnSupprimerAnimal());
 			panel_1.add(getBtnAjouterAnimal());
+			panel_1.add(getLblAnimaux());
+			panel_1.add(getScrollPane());
 		}
 		return panel_1;
 	}

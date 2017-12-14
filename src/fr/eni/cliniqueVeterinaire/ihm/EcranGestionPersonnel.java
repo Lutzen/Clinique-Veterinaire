@@ -98,6 +98,7 @@ public class EcranGestionPersonnel extends JFrame {
 	private JButton getBtnReinit() {
 		if (btnReinit == null) {
 			btnReinit = new JButton("Reinitialiser");
+			btnReinit.setToolTipText("Changer le mot de passe du personnel s\u00E9lectionn\u00E9");
 			btnReinit.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
 					try {

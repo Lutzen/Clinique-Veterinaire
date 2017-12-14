@@ -33,9 +33,9 @@ public class EcranConnexion extends JFrame {
 	private EcranPrincipal ecranPrincipal;
 
 	public EcranConnexion(EcranPrincipal ecran) {
+		setResizable(false);
 		setBounds(100, 100, 292, 153);
 		setType(Type.UTILITY);
-		setResizable(false);
 		setAlwaysOnTop(true);
 		Dimension dim = Toolkit.getDefaultToolkit().getScreenSize();
 		setLocation(dim.width / 2 - this.getSize().width / 2, dim.height / 2 - this.getSize().height / 2);

@@ -51,6 +51,9 @@ public class EcranAnimaux extends JFrame {
 	
 	
 	
+	/**
+	 * @wbp.parser.constructor
+	 */
 	public EcranAnimaux(String nomClient, EcranRdv ecran) {
 		this.nomClient = nomClient;
 		ecranRdv = (EcranRdv) ecran;
