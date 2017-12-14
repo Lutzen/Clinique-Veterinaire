@@ -35,6 +35,8 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.awt.event.ActionEvent;
 import com.toedter.calendar.JDateChooser;
+import com.toedter.calendar.JTextFieldDateEditor;
+
 import java.awt.Font;
 import javax.swing.JPanel;
 import java.awt.SystemColor;
@@ -452,6 +454,10 @@ public class EcranRdv extends JFrame {
 	private JDateChooser getDateChooser() {
 		if (dateChooser == null) {
 			dateChooser = new JDateChooser(new Date());
+			
+			JTextFieldDateEditor editor = (JTextFieldDateEditor) dateChooser.getDateEditor();
+			editor.setEditable(false);
+			
 			dateChooser.setBounds(6, 34, 138, 26);
 			dateChooser.setDate(new Date());
 			dateChooser.addPropertyChangeListener(new PropertyChangeListener() {

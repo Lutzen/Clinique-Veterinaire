@@ -24,6 +24,8 @@ import fr.eni.cliniqueVeterinaire.bo.Client;
 import fr.eni.cliniqueVeterinaire.bo.Personnel;
 import javax.swing.SwingUtilities;
 import com.toedter.calendar.JDateChooser;
+import com.toedter.calendar.JTextFieldDateEditor;
+
 import java.awt.Font;
 
 public class EcranAgenda extends JFrame {
@@ -197,6 +199,10 @@ public class EcranAgenda extends JFrame {
 	private JDateChooser getDateChooser() {
 		if (dateChooser == null) {
 			dateChooser = new JDateChooser(new Date());
+			
+			JTextFieldDateEditor editor = (JTextFieldDateEditor) dateChooser.getDateEditor();
+			editor.setEditable(false);
+			
 			dateChooser.addPropertyChangeListener(new PropertyChangeListener() {
 				@Override
 				public void propertyChange(PropertyChangeEvent evt) {
