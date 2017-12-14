@@ -5,6 +5,7 @@ import java.awt.EventQueue;
 import javax.swing.JFrame;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
+import java.awt.event.KeyAdapter;
 import java.awt.event.ActionEvent;
 import javax.swing.JTextField;
 import javax.swing.SwingUtilities;
@@ -268,6 +269,14 @@ public class EcranClient extends JFrame {
 	private JTextField getTxtNom() {
 		if (txtNom == null) {
 			txtNom = new JTextField();
+			
+			txtNom.addKeyListener(new KeyAdapter() {
+			    public void keyTyped(java.awt.event.KeyEvent e) { 
+			        if (txtNom.getText().length() >= 20 )
+			            e.consume(); 
+			    }  
+			});
+			
 			txtNom.setColumns(10);
 			txtNom.setBounds(88, 77, 245, 28);
 		}
@@ -277,6 +286,14 @@ public class EcranClient extends JFrame {
 	private JTextField getTxtPrenom() {
 		if (txtPrenom == null) {
 			txtPrenom = new JTextField();
+			
+			txtPrenom.addKeyListener(new KeyAdapter() {
+			    public void keyTyped(java.awt.event.KeyEvent e) { 
+			        if (txtPrenom.getText().length() >= 20 )
+			            e.consume(); 
+			    }  
+			});
+			
 			txtPrenom.setColumns(10);
 			txtPrenom.setBounds(88, 117, 245, 28);
 		}
@@ -286,6 +303,14 @@ public class EcranClient extends JFrame {
 	private JTextField getTxtAdresse1() {
 		if (txtAdresse1 == null) {
 			txtAdresse1 = new JTextField();
+			
+			txtAdresse1.addKeyListener(new KeyAdapter() {
+			    public void keyTyped(java.awt.event.KeyEvent e) { 
+			        if (txtAdresse1.getText().length() >= 30 )
+			            e.consume(); 
+			    }  
+			});
+			
 			txtAdresse1.setColumns(10);
 			txtAdresse1.setBounds(88, 157, 245, 28);
 		}
@@ -295,6 +320,14 @@ public class EcranClient extends JFrame {
 	private JTextField getTxtAdresse02() {
 		if (txtAdresse02 == null) {
 			txtAdresse02 = new JTextField();
+			
+			txtAdresse02.addKeyListener(new KeyAdapter() {
+			    public void keyTyped(java.awt.event.KeyEvent e) { 
+			        if (txtAdresse02.getText().length() >= 30 )
+			            e.consume(); 
+			    }  
+			});
+			
 			txtAdresse02.setColumns(10);
 			txtAdresse02.setBounds(88, 197, 245, 28);
 		}
@@ -304,6 +337,14 @@ public class EcranClient extends JFrame {
 	private JTextField getTxtCodePostal() {
 		if (txtCodePostal == null) {
 			txtCodePostal = new JTextField();
+			
+			txtCodePostal.addKeyListener(new KeyAdapter() {
+			    public void keyTyped(java.awt.event.KeyEvent e) { 
+			        if (txtCodePostal.getText().length() >= 6 )
+			            e.consume(); 
+			    }  
+			});
+			
 			txtCodePostal.setColumns(10);
 			txtCodePostal.setBounds(88, 237, 245, 28);
 		}
@@ -313,6 +354,14 @@ public class EcranClient extends JFrame {
 	private JTextField getTxtVille() {
 		if (txtVille == null) {
 			txtVille = new JTextField();
+			
+			txtVille.addKeyListener(new KeyAdapter() {
+			    public void keyTyped(java.awt.event.KeyEvent e) { 
+			        if (txtVille.getText().length() >= 25 )
+			            e.consume(); 
+			    }  
+			});
+			
 			txtVille.setColumns(10);
 			txtVille.setBounds(88, 277, 245, 28);
 		}

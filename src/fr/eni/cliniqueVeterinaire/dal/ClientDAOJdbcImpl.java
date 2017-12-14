@@ -104,13 +104,15 @@ private Connection connection = null;
 	public void delete(int codeClient) throws DALException {
 		openConnection();
 
-		String sql = "UPDATE Clients SET Archive=?"
-				+ " WHERE CodeClient=? ";
+		String sql = " UPDATE Clients SET Archive=? WHERE CodeClient=? ; "
+				+ " UPDATE Animaux SET Archive=? WHERE CodeClient=? "; 
 
 		try {
 			PreparedStatement statement = connection.prepareStatement(sql);
 			statement.setInt(1, 1);
 			statement.setInt(2, codeClient);
+			statement.setInt(3, 1);
+			statement.setInt(4, codeClient);
 			statement.executeUpdate();
 		} catch (SQLException e) {
 			throw new DALException("Erreur lors de l'archivage d'un client : " + codeClient, e);

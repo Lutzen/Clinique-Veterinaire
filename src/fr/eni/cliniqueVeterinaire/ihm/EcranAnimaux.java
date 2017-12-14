@@ -3,6 +3,7 @@ package fr.eni.cliniqueVeterinaire.ihm;
 import java.awt.EventQueue;
 import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
+import java.awt.event.KeyAdapter;
 import java.util.List;
 
 import javax.swing.JFrame;
@@ -209,6 +210,14 @@ public class EcranAnimaux extends JFrame {
 	private JTextField getTxtNom() {
 		if (txtNom == null) {
 			txtNom = new JTextField();
+			
+			txtNom.addKeyListener(new KeyAdapter() {
+			    public void keyTyped(java.awt.event.KeyEvent e) { 
+			        if (txtNom.getText().length() >= 30 )
+			            e.consume(); 
+			    }  
+			});
+			
 			txtNom.setBounds(87, 61, 200, 30);
 			txtNom.setColumns(10);
 		}
@@ -218,6 +227,14 @@ public class EcranAnimaux extends JFrame {
 	private JTextField getTxtCouleur() {
 		if (txtCouleur == null) {
 			txtCouleur = new JTextField();
+			
+			txtCouleur.addKeyListener(new KeyAdapter() {
+			    public void keyTyped(java.awt.event.KeyEvent e) { 
+			        if (txtCouleur.getText().length() >= 20 )
+			            e.consume(); 
+			    }  
+			});
+			
 			txtCouleur.setBounds(87, 92, 200, 30);
 			txtCouleur.setColumns(10);
 		}
@@ -320,6 +337,14 @@ public class EcranAnimaux extends JFrame {
 	private JTextField getTxtTatouage() {
 		if (txtTatouage == null) {
 			txtTatouage = new JTextField();
+			
+			txtTatouage.addKeyListener(new KeyAdapter() {
+			    public void keyTyped(java.awt.event.KeyEvent e) { 
+			        if (txtTatouage.getText().length() >= 10 )
+			            e.consume(); 
+			    }  
+			});
+			
 			txtTatouage.setColumns(10);
 			txtTatouage.setBounds(87, 123, 200, 30);
 		}

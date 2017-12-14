@@ -15,6 +15,7 @@ import javax.swing.JOptionPane;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import java.awt.event.ActionListener;
+import java.awt.event.KeyAdapter;
 import java.awt.event.ActionEvent;
 import java.awt.Font;
 import java.awt.Rectangle;
@@ -57,6 +58,8 @@ public class EcranAjoutPersonnel extends JFrame {
 		getContentPane().add(getComboBox());
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		
+
+		
 		this.ecranGestion = ecranGestion;
 	}
 
@@ -95,6 +98,14 @@ public class EcranAjoutPersonnel extends JFrame {
 	private JTextField getTxtNom() {
 		if (txtNom == null) {
 			txtNom = new JTextField();
+			
+			txtNom.addKeyListener(new KeyAdapter() {
+			    public void keyTyped(java.awt.event.KeyEvent e) { 
+			        if (txtNom.getText().length() >= 15 )
+			            e.consume(); 
+			    }  
+			});
+			
 			txtNom.setBounds(99, 5, 136, 26);
 			txtNom.setColumns(10);
 		}
@@ -103,6 +114,14 @@ public class EcranAjoutPersonnel extends JFrame {
 	private JTextField getTxtPrenom() {
 		if (txtPrenom == null) {
 			txtPrenom = new JTextField();
+			
+			txtPrenom.addKeyListener(new KeyAdapter() {
+			    public void keyTyped(java.awt.event.KeyEvent e1) { 
+			        if (txtPrenom.getText().length() >= 14 )
+			            e1.consume(); 
+			    }  
+			});
+			
 			txtPrenom.setBounds(99, 43, 136, 26);
 			txtPrenom.setColumns(10);
 		}
@@ -111,6 +130,14 @@ public class EcranAjoutPersonnel extends JFrame {
 	private JTextField getTxtMdp() {
 		if (txtMdp == null) {
 			txtMdp = new JTextField();
+			
+			txtMdp.addKeyListener(new KeyAdapter() {
+			    public void keyTyped(java.awt.event.KeyEvent e) { 
+			        if (txtMdp.getText().length() >= 10 )
+			            e.consume(); 
+			    }  
+			});
+			
 			txtMdp.setBounds(99, 120, 136, 26);
 			txtMdp.setColumns(10);
 		}
