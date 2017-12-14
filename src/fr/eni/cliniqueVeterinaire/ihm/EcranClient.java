@@ -22,6 +22,8 @@ import javax.swing.JTable;
 import java.awt.Font;
 import java.awt.Color;
 import javax.swing.ImageIcon;
+import javax.swing.JPanel;
+import java.awt.SystemColor;
 
 public class EcranClient extends JFrame {
 
@@ -55,45 +57,28 @@ public class EcranClient extends JFrame {
 	private JLabel lblCodeClient;
 	private JLabel lblClient;
 	private EcranRdv ecranRdv;
+	private JPanel panel;
+	private JPanel panel_1;
 
 	public EcranClient(EcranRdv ecran) throws IHMException {
 		ecranRdv = ecran;
 		getContentPane().setFont(new Font("Tahoma", Font.PLAIN, 12));
 		setTitle("CLIENTS");
-		setBounds(500, 300, 853, 407);
+		setBounds(500, 300, 856, 439);
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		getContentPane().setLayout(null);
-		getContentPane().add(getBtnRechercher());
-		getContentPane().add(getBtnAjouterClient());
-		getContentPane().add(getBtnSupprimerClient());
-		getContentPane().add(getBtnEditerClient());
-		getContentPane().add(getBtnAnnuler());
-		getContentPane().add(getTxtNom());
-		getContentPane().add(getTxtPrenom());
-		getContentPane().add(getTxtAdresse1());
-		getContentPane().add(getTxtAdresse02());
-		getContentPane().add(getTxtCodePostal());
-		getContentPane().add(getTxtVille());
-		getContentPane().add(getLblCode());
-		getContentPane().add(getLblNom());
-		getContentPane().add(getLblPrenom());
-		getContentPane().add(getLblAdresse());
-		getContentPane().add(getLblCodePostal());
-		getContentPane().add(getLblVille());
-		getContentPane().add(getBtnEditerAnimal());
-		getContentPane().add(getBtnSupprimerAnimal());
-		getContentPane().add(getBtnAjouterAnimal());
 		getContentPane().add(getTable());
 		getContentPane().add(getScrollPane());
 		getContentPane().add(getLblAnimaux());
-		getContentPane().add(getLblCodeClient());
-		getContentPane().add(getLblClient());
+		getContentPane().add(getPanel());
+		getContentPane().add(getPanel_1());
 
 	}
 
 	private JButton getBtnRechercher() {
 		if (btnRechercher == null) {
 			btnRechercher = new JButton("Rechercher");
+			btnRechercher.setBounds(139, 10, 148, 40);
 			btnRechercher.setToolTipText("");
 			btnRechercher.setIcon(new ImageIcon("resources\\vet\\searchClient32.png"));
 			btnRechercher.addActionListener(new ActionListener() {
@@ -116,7 +101,6 @@ public class EcranClient extends JFrame {
 
 				}
 			});
-			btnRechercher.setBounds(133, 8, 148, 40);
 
 		}
 		return btnRechercher;
@@ -139,6 +123,7 @@ public class EcranClient extends JFrame {
 	private JButton getBtnAjouterClient() {
 		if (btnAjouterClient == null) {
 			btnAjouterClient = new JButton("");
+			btnAjouterClient.setBounds(195, 342, 40, 40);
 			btnAjouterClient.setToolTipText("Ajouter un client");
 			btnAjouterClient.setIcon(new ImageIcon("resources\\vet\\addAnimal32.png"));
 			btnAjouterClient.addActionListener(new ActionListener() {
@@ -169,7 +154,6 @@ public class EcranClient extends JFrame {
 				}
 
 			});
-			btnAjouterClient.setBounds(189, 317, 40, 40);
 		}
 		return btnAjouterClient;
 	}
@@ -177,6 +161,7 @@ public class EcranClient extends JFrame {
 	private JButton getBtnSupprimerClient() {
 		if (btnSupprimerClient == null) {
 			btnSupprimerClient = new JButton("");
+			btnSupprimerClient.setBounds(247, 342, 40, 40);
 			btnSupprimerClient.setToolTipText("Supprimer un client");
 			btnSupprimerClient.setIcon(new ImageIcon("resources\\vet\\delete32.png"));
 			btnSupprimerClient.addActionListener(new ActionListener() {
@@ -189,11 +174,11 @@ public class EcranClient extends JFrame {
 									"Voulez-vous vraiment archiver ce client?");
 							if (result == 0) {
 								clientManager.deleteClient(Integer.parseInt(lblCodeClient.getText()));
-								JOptionPane.showMessageDialog(null, "Client supprimé avec succès");
-								Client client = new Client();
+								client = new Client();
 								recupClient(client);
-								ecranRdv.RefreshCBClients();
 								mettreAJour();
+								ecranRdv.RefreshCBClients();
+								JOptionPane.showMessageDialog(null, "Client supprimé avec succès");
 							} else {
 							}
 
@@ -207,7 +192,6 @@ public class EcranClient extends JFrame {
 					}
 				}
 			});
-			btnSupprimerClient.setBounds(241, 317, 40, 40);
 		}
 		return btnSupprimerClient;
 	}
@@ -215,6 +199,7 @@ public class EcranClient extends JFrame {
 	private JButton getBtnEditerClient() {
 		if (btnEditerClient == null) {
 			btnEditerClient = new JButton("");
+			btnEditerClient.setBounds(299, 342, 40, 40);
 			btnEditerClient.setToolTipText("Editer un client");
 			btnEditerClient.setIcon(new ImageIcon("resources\\vet\\edit32.png"));
 			btnEditerClient.addActionListener(new ActionListener() {
@@ -244,7 +229,6 @@ public class EcranClient extends JFrame {
 
 				}
 			});
-			btnEditerClient.setBounds(293, 317, 40, 40);
 		}
 		return btnEditerClient;
 	}
@@ -252,6 +236,7 @@ public class EcranClient extends JFrame {
 	private JButton getBtnAnnuler() {
 		if (btnAnnuler == null) {
 			btnAnnuler = new JButton("Annuler");
+			btnAnnuler.setBounds(98, 342, 85, 40);
 			btnAnnuler.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
 					try {
@@ -261,7 +246,6 @@ public class EcranClient extends JFrame {
 					}
 				}
 			});
-			btnAnnuler.setBounds(88, 317, 85, 40);
 		}
 		return btnAnnuler;
 	}
@@ -269,16 +253,16 @@ public class EcranClient extends JFrame {
 	private JTextField getTxtNom() {
 		if (txtNom == null) {
 			txtNom = new JTextField();
-			
+			txtNom.setBounds(94, 102, 245, 28);
+
 			txtNom.addKeyListener(new KeyAdapter() {
-			    public void keyTyped(java.awt.event.KeyEvent e) { 
-			        if (txtNom.getText().length() >= 20 )
-			            e.consume(); 
-			    }  
+				public void keyTyped(java.awt.event.KeyEvent e) {
+					if (txtNom.getText().length() >= 20)
+						e.consume();
+				}
 			});
-			
+
 			txtNom.setColumns(10);
-			txtNom.setBounds(88, 77, 245, 28);
 		}
 		return txtNom;
 	}
@@ -286,16 +270,16 @@ public class EcranClient extends JFrame {
 	private JTextField getTxtPrenom() {
 		if (txtPrenom == null) {
 			txtPrenom = new JTextField();
-			
+			txtPrenom.setBounds(94, 142, 245, 28);
+
 			txtPrenom.addKeyListener(new KeyAdapter() {
-			    public void keyTyped(java.awt.event.KeyEvent e) { 
-			        if (txtPrenom.getText().length() >= 20 )
-			            e.consume(); 
-			    }  
+				public void keyTyped(java.awt.event.KeyEvent e) {
+					if (txtPrenom.getText().length() >= 20)
+						e.consume();
+				}
 			});
-			
+
 			txtPrenom.setColumns(10);
-			txtPrenom.setBounds(88, 117, 245, 28);
 		}
 		return txtPrenom;
 	}
@@ -303,16 +287,16 @@ public class EcranClient extends JFrame {
 	private JTextField getTxtAdresse1() {
 		if (txtAdresse1 == null) {
 			txtAdresse1 = new JTextField();
-			
+			txtAdresse1.setBounds(94, 182, 245, 28);
+
 			txtAdresse1.addKeyListener(new KeyAdapter() {
-			    public void keyTyped(java.awt.event.KeyEvent e) { 
-			        if (txtAdresse1.getText().length() >= 30 )
-			            e.consume(); 
-			    }  
+				public void keyTyped(java.awt.event.KeyEvent e) {
+					if (txtAdresse1.getText().length() >= 30)
+						e.consume();
+				}
 			});
-			
+
 			txtAdresse1.setColumns(10);
-			txtAdresse1.setBounds(88, 157, 245, 28);
 		}
 		return txtAdresse1;
 	}
@@ -320,16 +304,16 @@ public class EcranClient extends JFrame {
 	private JTextField getTxtAdresse02() {
 		if (txtAdresse02 == null) {
 			txtAdresse02 = new JTextField();
-			
+			txtAdresse02.setBounds(94, 222, 245, 28);
+
 			txtAdresse02.addKeyListener(new KeyAdapter() {
-			    public void keyTyped(java.awt.event.KeyEvent e) { 
-			        if (txtAdresse02.getText().length() >= 30 )
-			            e.consume(); 
-			    }  
+				public void keyTyped(java.awt.event.KeyEvent e) {
+					if (txtAdresse02.getText().length() >= 30)
+						e.consume();
+				}
 			});
-			
+
 			txtAdresse02.setColumns(10);
-			txtAdresse02.setBounds(88, 197, 245, 28);
 		}
 		return txtAdresse02;
 	}
@@ -337,16 +321,16 @@ public class EcranClient extends JFrame {
 	private JTextField getTxtCodePostal() {
 		if (txtCodePostal == null) {
 			txtCodePostal = new JTextField();
-			
+			txtCodePostal.setBounds(94, 262, 245, 28);
+
 			txtCodePostal.addKeyListener(new KeyAdapter() {
-			    public void keyTyped(java.awt.event.KeyEvent e) { 
-			        if (txtCodePostal.getText().length() >= 6 )
-			            e.consume(); 
-			    }  
+				public void keyTyped(java.awt.event.KeyEvent e) {
+					if (txtCodePostal.getText().length() >= 6)
+						e.consume();
+				}
 			});
-			
+
 			txtCodePostal.setColumns(10);
-			txtCodePostal.setBounds(88, 237, 245, 28);
 		}
 		return txtCodePostal;
 	}
@@ -354,16 +338,16 @@ public class EcranClient extends JFrame {
 	private JTextField getTxtVille() {
 		if (txtVille == null) {
 			txtVille = new JTextField();
-			
+			txtVille.setBounds(94, 302, 245, 28);
+
 			txtVille.addKeyListener(new KeyAdapter() {
-			    public void keyTyped(java.awt.event.KeyEvent e) { 
-			        if (txtVille.getText().length() >= 25 )
-			            e.consume(); 
-			    }  
+				public void keyTyped(java.awt.event.KeyEvent e) {
+					if (txtVille.getText().length() >= 25)
+						e.consume();
+				}
 			});
-			
+
 			txtVille.setColumns(10);
-			txtVille.setBounds(88, 277, 245, 28);
 		}
 		return txtVille;
 	}
@@ -371,8 +355,8 @@ public class EcranClient extends JFrame {
 	private JLabel getLblCode() {
 		if (lblCode == null) {
 			lblCode = new JLabel("Code");
+			lblCode.setBounds(6, 65, 46, 14);
 			lblCode.setFont(new Font("SansSerif", Font.BOLD, 12));
-			lblCode.setBounds(10, 51, 46, 14);
 		}
 		return lblCode;
 	}
@@ -380,8 +364,8 @@ public class EcranClient extends JFrame {
 	private JLabel getLblNom() {
 		if (lblNom == null) {
 			lblNom = new JLabel("Nom");
+			lblNom.setBounds(6, 102, 46, 28);
 			lblNom.setFont(new Font("SansSerif", Font.BOLD, 12));
-			lblNom.setBounds(10, 77, 46, 28);
 		}
 		return lblNom;
 	}
@@ -389,8 +373,8 @@ public class EcranClient extends JFrame {
 	private JLabel getLblPrenom() {
 		if (lblPrenom == null) {
 			lblPrenom = new JLabel("Pr\u00E9nom");
+			lblPrenom.setBounds(6, 142, 46, 28);
 			lblPrenom.setFont(new Font("SansSerif", Font.BOLD, 12));
-			lblPrenom.setBounds(10, 117, 46, 28);
 		}
 		return lblPrenom;
 	}
@@ -398,8 +382,8 @@ public class EcranClient extends JFrame {
 	private JLabel getLblAdresse() {
 		if (lblAdresse == null) {
 			lblAdresse = new JLabel("Adresse");
+			lblAdresse.setBounds(6, 182, 62, 28);
 			lblAdresse.setFont(new Font("SansSerif", Font.BOLD, 12));
-			lblAdresse.setBounds(10, 157, 62, 28);
 		}
 		return lblAdresse;
 	}
@@ -407,8 +391,8 @@ public class EcranClient extends JFrame {
 	private JLabel getLblCodePostal() {
 		if (lblCodePostal == null) {
 			lblCodePostal = new JLabel("Code postal");
+			lblCodePostal.setBounds(6, 262, 75, 28);
 			lblCodePostal.setFont(new Font("SansSerif", Font.BOLD, 12));
-			lblCodePostal.setBounds(10, 237, 75, 28);
 		}
 		return lblCodePostal;
 	}
@@ -416,8 +400,8 @@ public class EcranClient extends JFrame {
 	private JLabel getLblVille() {
 		if (lblVille == null) {
 			lblVille = new JLabel("Ville");
+			lblVille.setBounds(6, 302, 46, 28);
 			lblVille.setFont(new Font("SansSerif", Font.BOLD, 12));
-			lblVille.setBounds(10, 277, 46, 28);
 		}
 		return lblVille;
 	}
@@ -425,6 +409,7 @@ public class EcranClient extends JFrame {
 	private JButton getBtnEditerAnimal() {
 		if (btnEditerAnimal == null) {
 			btnEditerAnimal = new JButton("");
+			btnEditerAnimal.setBounds(425, 342, 40, 40);
 			btnEditerAnimal.setToolTipText("Editer un animal");
 			btnEditerAnimal.setIcon(new ImageIcon("resources\\vet\\edit32.png"));
 			btnEditerAnimal.addActionListener(new ActionListener() {
@@ -445,7 +430,6 @@ public class EcranClient extends JFrame {
 
 				}
 			});
-			btnEditerAnimal.setBounds(783, 317, 40, 40);
 		}
 		return btnEditerAnimal;
 	}
@@ -453,6 +437,7 @@ public class EcranClient extends JFrame {
 	private JButton getBtnSupprimerAnimal() {
 		if (btnSupprimerAnimal == null) {
 			btnSupprimerAnimal = new JButton("");
+			btnSupprimerAnimal.setBounds(373, 342, 40, 40);
 			btnSupprimerAnimal.setToolTipText("Supprimer un animal");
 			btnSupprimerAnimal.setIcon(new ImageIcon("resources\\vet\\delete32.png"));
 			btnSupprimerAnimal.addActionListener(new ActionListener() {
@@ -480,7 +465,6 @@ public class EcranClient extends JFrame {
 
 				}
 			});
-			btnSupprimerAnimal.setBounds(731, 317, 40, 40);
 		}
 		return btnSupprimerAnimal;
 	}
@@ -488,6 +472,7 @@ public class EcranClient extends JFrame {
 	private JButton getBtnAjouterAnimal() {
 		if (btnAjouterAnimal == null) {
 			btnAjouterAnimal = new JButton("");
+			btnAjouterAnimal.setBounds(321, 342, 40, 40);
 			btnAjouterAnimal.setToolTipText("Ajouter un animal");
 			btnAjouterAnimal.setIcon(new ImageIcon("resources\\vet\\addAnimal32.png"));
 			btnAjouterAnimal.addActionListener(new ActionListener() {
@@ -508,7 +493,6 @@ public class EcranClient extends JFrame {
 				}
 
 			});
-			btnAjouterAnimal.setBounds(679, 317, 40, 40);
 		}
 		return btnAjouterAnimal;
 	}
@@ -532,8 +516,11 @@ public class EcranClient extends JFrame {
 	public void mettreAJour() throws IHMException {
 
 		try {
-			client = clientManager.getClientByCode(Integer.parseInt(lblCodeClient.getText()));
-			modeleAnimaux.setData(client.getCodeClient());
+			if (Integer.parseInt(lblCodeClient.getText()) > 0) {
+				client = clientManager.getClientByCode(Integer.parseInt(lblCodeClient.getText()));
+				modeleAnimaux.setData(client.getCodeClient());
+			} else
+				modeleAnimaux.setData(0);
 
 		} catch (BLLException e) {
 			e.printStackTrace();
@@ -561,7 +548,7 @@ public class EcranClient extends JFrame {
 	private JScrollPane getScrollPane() {
 		if (scrollPane == null) {
 			scrollPane = new JScrollPane(table);
-			scrollPane.setBounds(367, 47, 456, 258);
+			scrollPane.setBounds(367, 70, 450, 270);
 		}
 		return scrollPane;
 	}
@@ -569,8 +556,8 @@ public class EcranClient extends JFrame {
 	private JLabel getLblAnimaux() {
 		if (lblAnimaux == null) {
 			lblAnimaux = new JLabel("Animaux");
-			lblAnimaux.setFont(new Font("SansSerif", Font.BOLD | Font.ITALIC, 18));
-			lblAnimaux.setBounds(378, 12, 191, 28);
+			lblAnimaux.setFont(new Font("Andalus", Font.BOLD, 25));
+			lblAnimaux.setBounds(374, 10, 191, 28);
 		}
 		return lblAnimaux;
 	}
@@ -578,7 +565,7 @@ public class EcranClient extends JFrame {
 	private JLabel getLblCodeClient() {
 		if (lblCodeClient == null) {
 			lblCodeClient = new JLabel("Nouveau Client");
-			lblCodeClient.setBounds(88, 48, 95, 20);
+			lblCodeClient.setBounds(98, 62, 95, 20);
 		}
 		return lblCodeClient;
 	}
@@ -586,10 +573,50 @@ public class EcranClient extends JFrame {
 	private JLabel getLblClient() {
 		if (lblClient == null) {
 			lblClient = new JLabel("Client");
-			lblClient.setFont(new Font("SansSerif", Font.BOLD | Font.ITALIC, 18));
+			lblClient.setBounds(25, 16, 102, 27);
+			lblClient.setFont(new Font("Consolas", Font.BOLD, 25));
 			lblClient.setBackground(Color.LIGHT_GRAY);
-			lblClient.setBounds(38, 12, 102, 27);
 		}
 		return lblClient;
+	}
+	private JPanel getPanel() {
+		if (panel == null) {
+			panel = new JPanel();
+			panel.setBackground(SystemColor.inactiveCaption);
+			panel.setBounds(10, 6, 345, 388);
+			panel.setLayout(null);
+			panel.add(getLblClient());
+			panel.add(getBtnEditerClient());
+			panel.add(getBtnSupprimerClient());
+			panel.add(getBtnAjouterClient());
+			panel.add(getBtnAnnuler());
+			panel.add(getTxtVille());
+			panel.add(getTxtCodePostal());
+			panel.add(getTxtAdresse02());
+			panel.add(getTxtAdresse1());
+			panel.add(getTxtPrenom());
+			panel.add(getTxtNom());
+			panel.add(getLblVille());
+			panel.add(getLblCodePostal());
+			panel.add(getLblAdresse());
+			panel.add(getLblPrenom());
+			panel.add(getLblNom());
+			panel.add(getLblCode());
+			panel.add(getLblCodeClient());
+			panel.add(getBtnRechercher());
+		}
+		return panel;
+	}
+	private JPanel getPanel_1() {
+		if (panel_1 == null) {
+			panel_1 = new JPanel();
+			panel_1.setBackground(new Color(230, 230, 250));
+			panel_1.setBounds(363, 6, 471, 388);
+			panel_1.setLayout(null);
+			panel_1.add(getBtnEditerAnimal());
+			panel_1.add(getBtnSupprimerAnimal());
+			panel_1.add(getBtnAjouterAnimal());
+		}
+		return panel_1;
 	}
 }

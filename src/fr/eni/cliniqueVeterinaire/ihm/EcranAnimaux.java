@@ -57,9 +57,9 @@ public class EcranAnimaux extends JFrame {
 	private JLabel lblSexe;
 
 	
+	
 	/**
 	 * @wbp.parser.constructor
-	
 	 */
 	public EcranAnimaux(String nomClient, EcranRdv ecran) {
 		this.nomClient = nomClient;
@@ -82,6 +82,11 @@ public class EcranAnimaux extends JFrame {
 		this.nomClient = nomClient;
 		animal = new Animal();
 		initialize();
+		FillTxtFields(codeAnimal);
+
+	}
+	
+	private void FillTxtFields(int codeAnimal) {
 		try {
 			animal = animalManager.getAnimalByCode(codeAnimal);
 			txtNom.setText(animal.getNomAnimal());
@@ -96,7 +101,6 @@ public class EcranAnimaux extends JFrame {
 		} catch (BLLException e) {
 			e.printStackTrace();
 		}
-
 	}
 
 	private void initialize() {
@@ -127,7 +131,13 @@ public class EcranAnimaux extends JFrame {
 			btnAnnuler = new JButton("Annuler");
 			btnAnnuler.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent arg0) {
-					dispose();
+					if(animal.getCodeAnimal()==0)
+					{txtCouleur.setText(null);
+					txtNom.setText(null);
+					txtTatouage.setText(null);
+					}else
+						FillTxtFields(animal.getCodeAnimal());
+
 				}
 			});
 			btnAnnuler.setBounds(198, 300, 89, 30);

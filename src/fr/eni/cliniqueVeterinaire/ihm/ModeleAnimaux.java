@@ -72,7 +72,7 @@ public class ModeleAnimaux extends AbstractTableModel {
 
 	public void setData(int codeClient) {
 		try {
-			this.donnees = animalManager.getAnimalList(codeClient);
+				this.donnees = animalManager.getAnimalList(codeClient);
 		} catch (BLLException e) {
 			e.printStackTrace();
 		}
